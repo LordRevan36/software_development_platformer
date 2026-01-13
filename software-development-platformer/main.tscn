@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://0innvfg1noyr"]
+
+[ext_resource type="PackedScene" uid="uid://cy1vyx88wgg4v" path="res://player.tscn" id="1_ig7tw"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0xm2m"]
+distance = -285.0
+
+[node name="Main" type="Node"]
+
+[node name="Player" parent="." instance=ExtResource("1_ig7tw")]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("WorldBoundaryShape2D_0xm2m")
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D"]
+offset_left = -182.0
+offset_top = 284.0
+offset_right = 255.0
+offset_bottom = 324.0
