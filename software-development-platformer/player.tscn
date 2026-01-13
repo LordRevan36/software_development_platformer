@@ -286,17 +286,18 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
-size = Vector2(20, 128)
+size = Vector2(58, 128)
 
 [node name="Player" type="CharacterBody2D"]
+position = Vector2(52, 12)
 script = ExtResource("1_onrkg")
+metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_sh265")
-animation = &"idle"
-frame = 1
-frame_progress = 0.621265
+animation = &"backflip"
+frame_progress = 0.802535
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 80)
+position = Vector2(-2, 80)
 shape = SubResource("RectangleShape2D_onrkg")
