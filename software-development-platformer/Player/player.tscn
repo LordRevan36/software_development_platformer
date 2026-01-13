@@ -1,7 +1,10 @@
-[gd_scene load_steps=42 format=3 uid="uid://cy1vyx88wgg4v"]
+[gd_scene load_steps=44 format=3 uid="uid://cy1vyx88wgg4v"]
 
 [ext_resource type="Texture2D" uid="uid://b7vl6tat5lwlq" path="res://Assets/char2TestingSpritesheet.png" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://bangw8dvmuyod" path="res://Player/player.gd" id="1_onrkg"]
+[ext_resource type="Texture2D" uid="uid://b7vl6tat5lwlq" path="res://char2TestingSpritesheet.png" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://bangw8dvmuyod" path="res://player.gd" id="1_onrkg"]
+[ext_resource type="Texture2D" uid="uid://c821cxx05xi70" path="res://Temp Slash.png" id="2_i3pqv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_onrkg"]
 atlas = ExtResource("1_4flbx")
@@ -154,31 +157,31 @@ region = Rect2(1120, 288, 224, 288)
 [sub_resource type="SpriteFrames" id="SpriteFrames_sh265"]
 animations = [{
 "frames": [{
-"duration": 1.0,
+"duration": 0.75,
 "texture": SubResource("AtlasTexture_onrkg")
 }, {
-"duration": 1.0,
+"duration": 0.75,
 "texture": SubResource("AtlasTexture_i3pqv")
 }, {
-"duration": 1.0,
+"duration": 0.75,
 "texture": SubResource("AtlasTexture_hqtel")
 }, {
-"duration": 1.0,
+"duration": 0.75,
 "texture": SubResource("AtlasTexture_sweqy")
 }, {
-"duration": 1.0,
+"duration": 0.75,
 "texture": SubResource("AtlasTexture_2hs0m")
 }, {
-"duration": 1.0,
+"duration": 0.75,
 "texture": SubResource("AtlasTexture_1jxqw")
 }, {
-"duration": 1.0,
+"duration": 0.75,
 "texture": SubResource("AtlasTexture_dw050")
 }, {
-"duration": 1.0,
+"duration": 0.75,
 "texture": SubResource("AtlasTexture_b26j0")
 }, {
-"duration": 1.0,
+"duration": 0.75,
 "texture": SubResource("AtlasTexture_n7ghd")
 }],
 "loop": false,
@@ -288,14 +291,31 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
 size = Vector2(58, 128)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i3pqv"]
+size = Vector2(33, 48)
+
 [node name="Player" type="CharacterBody2D"]
+position = Vector2(60, 9)
 script = ExtResource("1_onrkg")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_sh265")
-animation = &"backflip"
+animation = &"attack"
+autoplay = "idle"
+frame = 8
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-2, 80)
 shape = SubResource("RectangleShape2D_onrkg")
+
+[node name="Slash" type="Sprite2D" parent="."]
+position = Vector2(127, 74)
+scale = Vector2(2, 2)
+texture = ExtResource("2_i3pqv")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(129, 78)
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_i3pqv")
