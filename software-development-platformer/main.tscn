@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://0innvfg1noyr"]
+[gd_scene load_steps=4 format=3 uid="uid://0innvfg1noyr"]
 
 [ext_resource type="PackedScene" uid="uid://cy1vyx88wgg4v" path="res://player.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://c6lcnacw8vw5s" path="res://platform.tscn" id="2_0xm2m"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0xm2m"]
 distance = -285.0
@@ -19,3 +20,6 @@ offset_left = -182.0
 offset_top = 284.0
 offset_right = 255.0
 offset_bottom = 324.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Platform" parent="." instance=ExtResource("2_0xm2m")]
