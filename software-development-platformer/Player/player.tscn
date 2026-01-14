@@ -168,10 +168,6 @@ region = Rect2(896, 576, 224, 288)
 atlas = ExtResource("1_4flbx")
 region = Rect2(1120, 576, 224, 288)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_pisgm"]
-atlas = ExtResource("1_4flbx")
-region = Rect2(1344, 576, 224, 288)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_b1ygp"]
 atlas = ExtResource("1_4flbx")
 region = Rect2(0, 1152, 224, 288)
@@ -179,6 +175,10 @@ region = Rect2(0, 1152, 224, 288)
 [sub_resource type="AtlasTexture" id="AtlasTexture_o28un"]
 atlas = ExtResource("1_4flbx")
 region = Rect2(224, 1152, 224, 288)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pisgm"]
+atlas = ExtResource("1_4flbx")
+region = Rect2(1344, 576, 224, 288)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j2n6q"]
 atlas = ExtResource("1_4flbx")
@@ -363,7 +363,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_i4o1l")
 }],
-"loop": true,
+"loop": false,
 "name": &"frontflip",
 "speed": 12.0
 }, {
@@ -392,15 +392,21 @@ animations = [{
 "texture": SubResource("AtlasTexture_lfmf2")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_pisgm")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_b1ygp")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_o28un")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_pisgm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o28un")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b1ygp")
 }],
-"loop": true,
+"loop": false,
 "name": &"jump",
 "speed": 12.0
 }, {
@@ -414,7 +420,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jp1hh")
 }],
-"loop": true,
+"loop": false,
 "name": &"land",
 "speed": 12.0
 }, {
@@ -473,7 +479,7 @@ metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_sh265")
-animation = &"land"
+animation = &"jump"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
