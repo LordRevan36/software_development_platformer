@@ -7,9 +7,9 @@ const JUMP_VELOCITY = -450.0
 var activeAction = false #variable for when player shouldn't be able to do other things, like when attacking or flipping
 var tempVelocityStorage = 0
 var facing = 1 #1 for right, -1 for left
+var hardLand = false #used to do landing animation after a large fall, but not tiny gaps
 
 func _physics_process(delta: float) -> void:
-	
 	if (AnimSprite.animation == "attack") or (AnimSprite.animation == "backflip") or (AnimSprite.animation == "frontflip")  or (AnimSprite.animation == "crouch"):
 		activeAction = true
 	else:
@@ -33,6 +33,7 @@ func _physics_process(delta: float) -> void:
 			velocity.y = JUMP_VELOCITY
 			AnimSprite.play("jump")
 			await AnimSprite.animation_finished
+			hardLand = true
 			AnimSprite.play("fall")
 		if Input.is_action_just_pressed("FlipLeft"):
 			velocity.x /= 2
@@ -43,12 +44,14 @@ func _physics_process(delta: float) -> void:
 				velocity.x = -SPEED
 				AnimSprite.play("backflip")
 				await AnimSprite.animation_finished
+				hardLand = true
 				AnimSprite.play("fall")
 			elif facing == -1:
 				velocity.y = JUMP_VELOCITY*1.1
 				velocity.x = -SPEED*1.75
 				AnimSprite.play("frontflip")
 				await AnimSprite.animation_finished
+				hardLand = true
 				AnimSprite.play("fall")
 		elif Input.is_action_just_pressed("FlipRight"):
 			velocity.x /= 2
@@ -59,12 +62,14 @@ func _physics_process(delta: float) -> void:
 				velocity.x = SPEED
 				AnimSprite.play("backflip")
 				await AnimSprite.animation_finished
+				hardLand = true
 				AnimSprite.play("fall")
 			elif facing == 1:
 				velocity.y = JUMP_VELOCITY*1.1
 				velocity.x = SPEED*1.75
 				AnimSprite.play("frontflip")
 				await AnimSprite.animation_finished
+				hardLand = true
 				AnimSprite.play("fall")
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -102,7 +107,12 @@ func _physics_process(delta: float) -> void:
 			AnimSprite.flip_h = true
 			facing = -1
 			AnimSprite.play("run")
+		elif hardLand:
+			AnimSprite.play("land")
+			await AnimSprite.animation_finished
+			hardLand = false
 		else:
 			AnimSprite.play("idle")
+				
 	if AnimSprite.animation == "attack":
 		$Slash.show()
