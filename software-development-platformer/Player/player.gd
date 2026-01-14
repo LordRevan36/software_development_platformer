@@ -1,45 +1,86 @@
 extends CharacterBody2D
+@onready var AnimSprite: AnimatedSprite2D = $AnimatedSprite2D #just makes code look better, easier to change later if file paths change
+#if you ever want to do this, drag in the node you're referencing, then hold command/ctrl while releasing
 
-
-const SPEED = 300.0
+const SPEED = 288.0
 const JUMP_VELOCITY = -400.0
-
+var activeAction = false #variable for when player shouldn't be able to do other things, like when attacking or flipping
+var tempVelocityStorage = 0
+var facing = 1 #1 for right, -1 for left
 
 func _physics_process(delta: float) -> void:
+	
+	if (AnimSprite.animation == "attack") or (AnimSprite.animation == "backflip"):
+		activeAction = true
+	else:
+		activeAction = false
+			
 	$Slash.hide()
 	# Add the gravity.
 	if not is_on_floor():
-		velocity += get_gravity() * delta
+		if AnimSprite.animation == "attack":
+			velocity += get_gravity() * delta / 2
+		else:
+			velocity += get_gravity() * delta
 
 	# Handle jump.
-	if Input.is_action_just_pressed("Up") and is_on_floor():
-		$AnimatedSprite2D.play("backflip")
-		velocity.y = JUMP_VELOCITY
+	if is_on_floor() and !activeAction:
+		if Input.is_action_just_pressed("Up"):
+			velocity.y = JUMP_VELOCITY
+			AnimSprite.play("jump")
+			await AnimSprite.animation_finished
+			AnimSprite.play("fall")
+		if Input.is_action_just_pressed("FlipLeft"):
+			if facing == 1:
+				velocity.y = JUMP_VELOCITY*1.5
+				velocity.x = -SPEED
+				AnimSprite.play("backflip")
+				await AnimSprite.animation_finished
+				AnimSprite.play("fall")
+			elif facing == -1:
+				velocity.y = JUMP_VELOCITY
+				velocity.x = SPEED*1.5
+				AnimSprite.play("frontflip")
+				await AnimSprite.animation_finished
+				AnimSprite.play("fall")
+
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction := Input.get_axis("Left", "Right")
-	if direction:
-		velocity.x = direction * SPEED
+	if !activeAction:
+		var direction := Input.get_axis("Left", "Right")
+		if direction:
+			velocity.x = direction * SPEED
+		else:
+			velocity.x = move_toward(velocity.x, 0, SPEED/2)
+			
+	#making attack slow you in air
+	if AnimSprite.animation == "attack":
+		tempVelocityStorage = velocity.y * 0.99
+		velocity.y /= 2
+		move_and_slide()
+		velocity.y = tempVelocityStorage
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-
-	move_and_slide()
+		move_and_slide()
+		
 	
 	#Animations
 	#Checks first to see if you are attacking
 	if Input.is_action_just_pressed("Attack 1"):
-		$AnimatedSprite2D.play("attack")
-		await $AnimatedSprite2D.animation_finished
-		$AnimatedSprite2D.play("idle")
+		velocity.x /= 2
+		AnimSprite.play("attack")
+		await AnimSprite.animation_finished
+		AnimSprite.play("idle")
 		#if not it allows for other animations to play
-	if $AnimatedSprite2D.animation != "attack" and is_on_floor():
+	if !activeAction and is_on_floor():
 		if Input.is_action_pressed("Right"):
-			$AnimatedSprite2D.flip_h = false
-			$AnimatedSprite2D.play("run")
+			AnimSprite.flip_h = false
+			facing = 1
+			AnimSprite.play("run")
 		elif Input.is_action_pressed("Left"):
-			$AnimatedSprite2D.flip_h = true
-			$AnimatedSprite2D.play("run")
+			AnimSprite.flip_h = true
+			facing = -1
+			AnimSprite.play("run")
 		else:
-			$AnimatedSprite2D.play("idle")
-	if $AnimatedSprite2D.animation == "attack":
+			AnimSprite.play("idle")
+	if AnimSprite.animation == "attack":
 		$Slash.show()

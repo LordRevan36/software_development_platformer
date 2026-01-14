@@ -10,4 +10,4 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	offset = offset.lerp(player.velocity/2+Vector2(0,-50), delta * lerp_speed)
+	offset = offset.lerp(player.velocity+Vector2(0,-50), delta * lerp_speed)
