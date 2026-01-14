@@ -1,14 +1,39 @@
-[gd_scene load_steps=6 format=3 uid="uid://0innvfg1noyr"]
+[gd_scene load_steps=9 format=3 uid="uid://0innvfg1noyr"]
 
 [ext_resource type="PackedScene" uid="uid://cy1vyx88wgg4v" path="res://Player/player.tscn" id="1_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://c6lcnacw8vw5s" path="res://platform.tscn" id="2_8gbba"]
 [ext_resource type="Script" uid="uid://do5bugkt41qkv" path="res://camera.gd" id="2_jjvhh"]
 [ext_resource type="Texture2D" uid="uid://davcfmie0bbc2" path="res://Assets/Parallax.png" id="3_8gbba"]
+[ext_resource type="Texture2D" uid="uid://c2fn1ck4bikb1" path="res://Assets/Forest/Grass.png" id="4_272bh"]
+[ext_resource type="Texture2D" uid="uid://46oxramfmd6m" path="res://Assets/Forest/FrontTree.png" id="5_7mycd"]
+[ext_resource type="Texture2D" uid="uid://dok7ls8ld3g3u" path="res://Assets/Forest/FrontGround.png" id="6_272bh"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0xm2m"]
 distance = -285.0
 
 [node name="Main" type="Node"]
+
+[node name="BackParallax" type="Node2D" parent="."]
+
+[node name="BackMidground" type="Parallax2D" parent="BackParallax"]
+scroll_scale = Vector2(0.95, 0.95)
+scroll_offset = Vector2(1, 18)
+repeat_size = Vector2(2560, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="BackParallax/BackMidground"]
+modulate = Color(3.6413581, 2.464391, 0.89682823, 1)
+position = Vector2(-1140, -104)
+texture = ExtResource("4_272bh")
+
+[node name="ColorRect2" type="ColorRect" parent="BackParallax/BackMidground"]
+offset_left = -1321.0
+offset_top = 306.0
+offset_right = 1222.0
+offset_bottom = 365.0
+scale = Vector2(1.6800048, 9.080003)
+color = Color(1, 1, 0.33333334, 1)
+metadata/_edit_use_anchors_ = true
 
 [node name="Player" parent="." instance=ExtResource("1_bo1nx")]
 
@@ -20,43 +45,90 @@ script = ExtResource("2_jjvhh")
 
 [node name="Platform" parent="." instance=ExtResource("2_8gbba")]
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="FrontParallax" type="Node2D" parent="."]
 
-[node name="Midground" type="Parallax2D" parent="Node2D"]
-scroll_offset = Vector2(0, 17)
+[node name="BackMidground" type="Parallax2D" parent="FrontParallax"]
+scroll_offset = Vector2(-2156, 23)
 repeat_size = Vector2(2560, 0)
 repeat_times = 3
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Node2D/Midground"]
+[node name="Sprite2D" type="Sprite2D" parent="FrontParallax/BackMidground"]
+modulate = Color(1.3285676, 0.9534372, 0.4952448, 1)
+position = Vector2(-1140, -116)
+texture = ExtResource("4_272bh")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Midground/StaticBody2D"]
-shape = SubResource("WorldBoundaryShape2D_0xm2m")
-
-[node name="Sprite2D" type="Sprite2D" parent="Node2D/Midground/StaticBody2D"]
-modulate = Color(3.6413581, 2.464391, 0.89682823, 1)
-position = Vector2(-1139, -40)
-texture = ExtResource("3_8gbba")
-
-[node name="ColorRect2" type="ColorRect" parent="Node2D/Midground/StaticBody2D"]
+[node name="ColorRect2" type="ColorRect" parent="FrontParallax/BackMidground"]
 offset_left = -1321.0
-offset_top = 307.0
+offset_top = 294.0
 offset_right = 1222.0
-offset_bottom = 366.0
+offset_bottom = 353.0
 scale = Vector2(1.6800048, 9.080003)
-color = Color(0.24139148, 0.1546655, 0.11655944, 1)
+color = Color(1, 0.8784314, 0.1882353, 1)
 metadata/_edit_use_anchors_ = true
 
-[node name="Foreground" type="Parallax2D" parent="Node2D"]
-scroll_scale = Vector2(1.2, 1.2)
+[node name="BackMidground2" type="Parallax2D" parent="FrontParallax"]
+scroll_scale = Vector2(1.05, 1.05)
+scroll_offset = Vector2(-1825, 26)
 repeat_size = Vector2(2560, 0)
 repeat_times = 3
 
-[node name="ColorRect" type="ColorRect" parent="Node2D/Foreground"]
+[node name="Sprite2D" type="Sprite2D" parent="FrontParallax/BackMidground2"]
+modulate = Color(1.1146151, 0.8355388, 0.10425563, 1)
+position = Vector2(-1140, -116)
+texture = ExtResource("4_272bh")
+
+[node name="ColorRect2" type="ColorRect" parent="FrontParallax/BackMidground2"]
+offset_left = -1321.0
+offset_top = 294.0
+offset_right = 1222.0
+offset_bottom = 353.0
+scale = Vector2(1.6800048, 9.080003)
+color = Color(1, 0.76862746, 0.039215688, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Midground" type="Parallax2D" parent="FrontParallax"]
+scroll_scale = Vector2(1.1, 1.1)
+scroll_offset = Vector2(0, 9)
+repeat_size = Vector2(2560, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="FrontParallax/Midground"]
+modulate = Color(7.9196444, 4.613426, 0.00014847389, 1)
+position = Vector2(-1139, -31)
+texture = ExtResource("3_8gbba")
+
+[node name="ColorRect2" type="ColorRect" parent="FrontParallax/Midground"]
+offset_left = -1321.0
+offset_top = 328.0
+offset_right = 1222.0
+offset_bottom = 387.0
+scale = Vector2(1.6800048, 9.080003)
+color = Color(0.5882353, 0.36078432, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Foreground" type="Parallax2D" parent="FrontParallax"]
+scroll_scale = Vector2(1.25, 1.25)
+scroll_offset = Vector2(0, -29)
+repeat_size = Vector2(2560, 0)
+repeat_times = 3
+
+[node name="ColorRect" type="ColorRect" parent="FrontParallax/Foreground"]
 offset_left = -1266.0
 offset_top = 359.0
 offset_right = 1298.0
 offset_bottom = 892.0
 color = Color(0.07450981, 0.078431375, 0.16470589, 1)
 
-[node name="Sprite2D" type="Sprite2D" parent="Node2D/Foreground"]
-texture = ExtResource("3_8gbba")
+[node name="Ground" type="Sprite2D" parent="FrontParallax/Foreground"]
+position = Vector2(-3, -176)
+texture = ExtResource("6_272bh")
+
+[node name="Tree" type="Sprite2D" parent="FrontParallax/Foreground"]
+position = Vector2(375, -175)
+texture = ExtResource("5_7mycd")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(0, 12)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("WorldBoundaryShape2D_0xm2m")

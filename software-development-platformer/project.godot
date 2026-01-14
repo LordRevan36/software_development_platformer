@@ -25,6 +25,7 @@ window/stretch/mode="viewport"
 
 folder_colors={
 "res://Assets/": "orange",
+"res://Enemies/": "red",
 "res://Player/": "purple"
 }
 
