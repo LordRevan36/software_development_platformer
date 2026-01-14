@@ -18,33 +18,45 @@ zoom = Vector2(1.3, 1.3)
 position_smoothing_enabled = true
 script = ExtResource("2_jjvhh")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-shape = SubResource("WorldBoundaryShape2D_0xm2m")
-
-[node name="ColorRect" type="ColorRect" parent="StaticBody2D"]
-offset_left = -1268.0
-offset_top = 284.0
-offset_right = 1275.0
-offset_bottom = 343.0
-color = Color(0.54453874, 0.29770333, 0.11101388, 1)
-
 [node name="Platform" parent="." instance=ExtResource("2_8gbba")]
 
 [node name="Node2D" type="Node2D" parent="."]
 
-[node name="Parallax2D" type="Parallax2D" parent="Node2D"]
-scroll_scale = Vector2(1.1, 1.1)
+[node name="Midground" type="Parallax2D" parent="Node2D"]
+scroll_offset = Vector2(0, 17)
 repeat_size = Vector2(2560, 0)
 repeat_times = 3
 
-[node name="ColorRect" type="ColorRect" parent="Node2D/Parallax2D"]
+[node name="StaticBody2D" type="StaticBody2D" parent="Node2D/Midground"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Midground/StaticBody2D"]
+shape = SubResource("WorldBoundaryShape2D_0xm2m")
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D/Midground/StaticBody2D"]
+modulate = Color(3.6413581, 2.464391, 0.89682823, 1)
+position = Vector2(-1139, -40)
+texture = ExtResource("3_8gbba")
+
+[node name="ColorRect2" type="ColorRect" parent="Node2D/Midground/StaticBody2D"]
+offset_left = -1321.0
+offset_top = 307.0
+offset_right = 1222.0
+offset_bottom = 366.0
+scale = Vector2(1.6800048, 9.080003)
+color = Color(0.24139148, 0.1546655, 0.11655944, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Foreground" type="Parallax2D" parent="Node2D"]
+scroll_scale = Vector2(1.2, 1.2)
+repeat_size = Vector2(2560, 0)
+repeat_times = 3
+
+[node name="ColorRect" type="ColorRect" parent="Node2D/Foreground"]
 offset_left = -1266.0
 offset_top = 359.0
 offset_right = 1298.0
 offset_bottom = 892.0
 color = Color(0.07450981, 0.078431375, 0.16470589, 1)
 
-[node name="Sprite2D" type="Sprite2D" parent="Node2D/Parallax2D"]
+[node name="Sprite2D" type="Sprite2D" parent="Node2D/Foreground"]
 texture = ExtResource("3_8gbba")

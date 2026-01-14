@@ -3,9 +3,9 @@ extends CharacterBody2D
 #if you ever want to do this, drag in the node you're referencing, then hold command/ctrl while releasing
 
 const SPEED = 288.0
-const JUMP_VELOCITY = -450.0
+const JUMP_VELOCITY = -500.0
 var activeAction = false #variable for when player shouldn't be able to do other things, like when attacking or flipping
-var tempVelocityStorage = 0
+var tempYVelocityStorage = 0
 var facing = 1 #1 for right, -1 for left
 var hardLand = false #used to do landing animation after a large fall, but not tiny gaps
 
@@ -40,15 +40,15 @@ func _physics_process(delta: float) -> void:
 			AnimSprite.play("crouch")
 			await AnimSprite.animation_finished
 			if facing == 1:
-				velocity.y = JUMP_VELOCITY*1.4
+				velocity.y = JUMP_VELOCITY*1.3
 				velocity.x = -SPEED
 				AnimSprite.play("backflip")
 				await AnimSprite.animation_finished
 				hardLand = true
 				AnimSprite.play("fall")
 			elif facing == -1:
-				velocity.y = JUMP_VELOCITY*1.1
-				velocity.x = -SPEED*1.75
+				velocity.y = JUMP_VELOCITY*0.8
+				velocity.x = -SPEED*1.8
 				AnimSprite.play("frontflip")
 				await AnimSprite.animation_finished
 				hardLand = true
@@ -58,15 +58,15 @@ func _physics_process(delta: float) -> void:
 			AnimSprite.play("crouch")
 			await AnimSprite.animation_finished
 			if facing == -1:
-				velocity.y = JUMP_VELOCITY*1.4
+				velocity.y = JUMP_VELOCITY*1.3
 				velocity.x = SPEED
 				AnimSprite.play("backflip")
 				await AnimSprite.animation_finished
 				hardLand = true
 				AnimSprite.play("fall")
 			elif facing == 1:
-				velocity.y = JUMP_VELOCITY*1.1
-				velocity.x = SPEED*1.75
+				velocity.y = JUMP_VELOCITY*0.8
+				velocity.x = SPEED*1.8
 				AnimSprite.play("frontflip")
 				await AnimSprite.animation_finished
 				hardLand = true
@@ -75,17 +75,21 @@ func _physics_process(delta: float) -> void:
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	if !activeAction:
 		var direction := Input.get_axis("Left", "Right")
-		if direction:
+		if !is_on_floor():
+			
+			velocity.x *= 0.99
+			
+		elif direction:
 			velocity.x = direction * SPEED
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED/2)
 			
 	#making attack slow you in air
 	if AnimSprite.animation == "attack":
-		tempVelocityStorage = velocity.y * 0.99
+		tempYVelocityStorage = velocity.y * 0.99
 		velocity.y /= 2
 		move_and_slide()
-		velocity.y = tempVelocityStorage
+		velocity.y = tempYVelocityStorage
 	else:
 		move_and_slide()
 		

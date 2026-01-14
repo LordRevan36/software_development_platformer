@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://cy1vyx88wgg4v"]
+[gd_scene load_steps=58 format=3 uid="uid://cy1vyx88wgg4v"]
 
 [ext_resource type="Script" uid="uid://bangw8dvmuyod" path="res://Player/player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://bvtijhwqlx01u" path="res://Assets/Ivy.png" id="2_gwnis"]
@@ -71,10 +71,6 @@ region = Rect2(896, 1120, 224, 224)
 [sub_resource type="AtlasTexture" id="AtlasTexture_gwnis"]
 atlas = ExtResource("2_gwnis")
 region = Rect2(1120, 1120, 224, 224)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_b1ygp"]
-atlas = ExtResource("2_gwnis")
-region = Rect2(0, 0, 224, 224)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_efx54"]
 atlas = ExtResource("2_gwnis")
@@ -282,9 +278,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_b1ygp")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_efx54")
 }, {
 "duration": 1.0,
@@ -430,10 +423,8 @@ metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_sh265")
-animation = &"land"
+animation = &"backflip"
 autoplay = "idle"
-frame = 2
-frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-7.5, 63.5)

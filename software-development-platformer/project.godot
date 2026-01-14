@@ -83,3 +83,4 @@ FlipLeft={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+environment/defaults/default_clear_color=Color(0.9211927, 0.83087313, 0.34372523, 1)
