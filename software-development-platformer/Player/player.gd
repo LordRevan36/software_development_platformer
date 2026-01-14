@@ -3,19 +3,20 @@ extends CharacterBody2D
 #if you ever want to do this, drag in the node you're referencing, then hold command/ctrl while releasing
 
 const SPEED = 288.0
-const JUMP_VELOCITY = -400.0
+const JUMP_VELOCITY = -450.0
 var activeAction = false #variable for when player shouldn't be able to do other things, like when attacking or flipping
 var tempVelocityStorage = 0
 var facing = 1 #1 for right, -1 for left
 
 func _physics_process(delta: float) -> void:
 	
-	if (AnimSprite.animation == "attack") or (AnimSprite.animation == "backflip"):
+	if (AnimSprite.animation == "attack") or (AnimSprite.animation == "backflip") or (AnimSprite.animation == "frontflip")  or (AnimSprite.animation == "crouch"):
 		activeAction = true
 	else:
 		activeAction = false
 			
 	$Slash.hide()
+	
 	# Add the gravity.
 	if not is_on_floor():
 		if AnimSprite.animation == "attack":
@@ -23,27 +24,48 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity += get_gravity() * delta
 
-	# Handle jump.
+	# Handles jumps and flips. THIS IS VERY LARGE SORRY. kinda spaghetty
 	if is_on_floor() and !activeAction:
 		if Input.is_action_just_pressed("Up"):
+			velocity.x /= 2
+			AnimSprite.play("crouch")
+			await AnimSprite.animation_finished
 			velocity.y = JUMP_VELOCITY
 			AnimSprite.play("jump")
 			await AnimSprite.animation_finished
 			AnimSprite.play("fall")
 		if Input.is_action_just_pressed("FlipLeft"):
+			velocity.x /= 2
+			AnimSprite.play("crouch")
+			await AnimSprite.animation_finished
 			if facing == 1:
-				velocity.y = JUMP_VELOCITY*1.5
+				velocity.y = JUMP_VELOCITY*1.4
 				velocity.x = -SPEED
 				AnimSprite.play("backflip")
 				await AnimSprite.animation_finished
 				AnimSprite.play("fall")
 			elif facing == -1:
-				velocity.y = JUMP_VELOCITY
-				velocity.x = SPEED*1.5
+				velocity.y = JUMP_VELOCITY*1.1
+				velocity.x = -SPEED*1.75
 				AnimSprite.play("frontflip")
 				await AnimSprite.animation_finished
 				AnimSprite.play("fall")
-
+		elif Input.is_action_just_pressed("FlipRight"):
+			velocity.x /= 2
+			AnimSprite.play("crouch")
+			await AnimSprite.animation_finished
+			if facing == -1:
+				velocity.y = JUMP_VELOCITY*1.4
+				velocity.x = SPEED
+				AnimSprite.play("backflip")
+				await AnimSprite.animation_finished
+				AnimSprite.play("fall")
+			elif facing == 1:
+				velocity.y = JUMP_VELOCITY*1.1
+				velocity.x = SPEED*1.75
+				AnimSprite.play("frontflip")
+				await AnimSprite.animation_finished
+				AnimSprite.play("fall")
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	if !activeAction:

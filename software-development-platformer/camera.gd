@@ -1,5 +1,5 @@
 extends Camera2D
-var lerp_speed = 0.95
+var lerp_speed = 0.97
 
 @onready var player: CharacterBody2D = $".."
 
@@ -10,4 +10,4 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	offset = offset.lerp(player.velocity+Vector2(0,-50), delta * lerp_speed)
+	offset = offset.lerp(player.velocity/1.5+Vector2(0,-50), delta * lerp_speed)

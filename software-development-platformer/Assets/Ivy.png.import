@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7vl6tat5lwlq"
-path="res://.godot/imported/char2TestingSpritesheet.png-dea04072f20dd23df0f46bc891341f1f.ctex"
+uid="uid://bvtijhwqlx01u"
+path="res://.godot/imported/Ivy.png-b408a616de91238b428c60d05a9d55c8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/char2TestingSpritesheet.png"
-dest_files=["res://.godot/imported/char2TestingSpritesheet.png-dea04072f20dd23df0f46bc891341f1f.ctex"]
+source_file="res://Assets/Ivy.png"
+dest_files=["res://.godot/imported/Ivy.png-b408a616de91238b428c60d05a9d55c8.ctex"]
 
 [params]
 
