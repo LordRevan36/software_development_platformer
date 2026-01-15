@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://0innvfg1noyr"]
+[gd_scene load_steps=10 format=3 uid="uid://0innvfg1noyr"]
 
+[ext_resource type="Script" uid="uid://cvsfgv5p5udvj" path="res://main.gd" id="1_5vw27"]
 [ext_resource type="PackedScene" uid="uid://cy1vyx88wgg4v" path="res://Player/player.tscn" id="1_bo1nx"]
-[ext_resource type="PackedScene" uid="uid://c6lcnacw8vw5s" path="res://platform.tscn" id="2_8gbba"]
+[ext_resource type="PackedScene" uid="uid://c6lcnacw8vw5s" path="res://Platform/platform.tscn" id="2_8gbba"]
 [ext_resource type="Script" uid="uid://do5bugkt41qkv" path="res://camera.gd" id="2_jjvhh"]
 [ext_resource type="Texture2D" uid="uid://davcfmie0bbc2" path="res://Assets/Parallax.png" id="3_8gbba"]
 [ext_resource type="Texture2D" uid="uid://c2fn1ck4bikb1" path="res://Assets/Forest/Grass.png" id="4_272bh"]
@@ -12,6 +13,8 @@
 distance = -285.0
 
 [node name="Main" type="Node"]
+script = ExtResource("1_5vw27")
+platform_scene = ExtResource("2_8gbba")
 
 [node name="BackParallax" type="Node2D" parent="."]
 
@@ -43,7 +46,7 @@ zoom = Vector2(1.3, 1.3)
 position_smoothing_enabled = true
 script = ExtResource("2_jjvhh")
 
-[node name="Platform" parent="." instance=ExtResource("2_8gbba")]
+[node name="Platforms" type="Node2D" parent="."]
 
 [node name="FrontParallax" type="Node2D" parent="."]
 
@@ -132,3 +135,9 @@ position = Vector2(0, 12)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("WorldBoundaryShape2D_0xm2m")
+
+[node name="PlatformTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[connection signal="timeout" from="PlatformTimer" to="." method="_on_platform_timer_timeout"]

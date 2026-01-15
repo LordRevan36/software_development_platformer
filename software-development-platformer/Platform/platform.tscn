@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6lcnacw8vw5s"]
+
+[ext_resource type="Script" uid="uid://6hfsroor2sbh" path="res://Platform/platform.gd" id="1_0v4dy"]
+[ext_resource type="Texture2D" uid="uid://b7i07nnvxbon6" path="res://icon.svg" id="2_g263t"]
+
+[node name="Platform" type="StaticBody2D"]
+script = ExtResource("1_0v4dy")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-5, 1, 5, 1, 5, -1, -5, -1)
+
+[node name="BorderPolygon2D" type="Polygon2D" parent="."]
+texture_repeat = 2
+texture = ExtResource("2_g263t")
