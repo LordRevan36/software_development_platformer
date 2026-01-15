@@ -10,12 +10,11 @@ var facing = 1 #1 for right, -1 for left
 var hardLand = false #used to do landing animation after a large fall, but not tiny gaps
 
 func _physics_process(delta: float) -> void:
-	if (AnimSprite.animation == "attack") or (AnimSprite.animation == "backflip") or (AnimSprite.animation == "frontflip")  or (AnimSprite.animation == "crouch"):
+	if (AnimSprite.animation == "attack") or (AnimSprite.animation == "backflip") or (AnimSprite.animation == "frontflip")  or (AnimSprite.animation == "crouch") or (AnimSprite.animation == "land"):
 		activeAction = true
 	else:
 		activeAction = false
 			
-	$Slash.hide()
 	
 	# Add the gravity.
 	if not is_on_floor():
@@ -76,14 +75,12 @@ func _physics_process(delta: float) -> void:
 	if !activeAction:
 		var direction := Input.get_axis("Left", "Right")
 		if !is_on_floor():
-			
 			velocity.x *= 0.99
-			
 		elif direction:
 			velocity.x = direction * SPEED
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED/2)
-			
+		
 	#making attack slow you in air
 	if AnimSprite.animation == "attack":
 		tempYVelocityStorage = velocity.y * 0.99
@@ -98,9 +95,20 @@ func _physics_process(delta: float) -> void:
 	#Checks first to see if you are attacking
 	if Input.is_action_just_pressed("Attack 1"):
 		velocity.x /= 2
+		if facing > 0:
+			$Slash.flip_h = false
+			$Slash.position = Vector2(120,40)
+		else:
+			$Slash.flip_h = true
+			$Slash.position = Vector2(-120,40)
 		AnimSprite.play("attack")
+		$Slash.show()
 		await AnimSprite.animation_finished
-		AnimSprite.play("idle")
+		$Slash.hide()
+		if !is_on_floor():
+			AnimSprite.play("fall")
+		else:
+			AnimSprite.play("idle")
 		#if not it allows for other animations to play
 	if !activeAction and is_on_floor():
 		if Input.is_action_pressed("Right"):
@@ -115,8 +123,6 @@ func _physics_process(delta: float) -> void:
 			AnimSprite.play("land")
 			await AnimSprite.animation_finished
 			hardLand = false
+			AnimSprite.play("idle")
 		else:
 			AnimSprite.play("idle")
-				
-	if AnimSprite.animation == "attack":
-		$Slash.show()
