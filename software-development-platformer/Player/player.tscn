@@ -136,6 +136,10 @@ region = Rect2(448, 0, 224, 224)
 atlas = ExtResource("2_gwnis")
 region = Rect2(672, 0, 224, 224)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_pisgm"]
+atlas = ExtResource("2_gwnis")
+region = Rect2(0, 0, 224, 224)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_dkpta"]
 atlas = ExtResource("2_gwnis")
 region = Rect2(1344, 1120, 224, 224)
@@ -143,10 +147,6 @@ region = Rect2(1344, 1120, 224, 224)
 [sub_resource type="AtlasTexture" id="AtlasTexture_lfmf2"]
 atlas = ExtResource("2_gwnis")
 region = Rect2(0, 1344, 224, 224)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pisgm"]
-atlas = ExtResource("2_gwnis")
-region = Rect2(0, 0, 224, 224)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_maysp"]
 atlas = ExtResource("2_gwnis")
@@ -211,31 +211,31 @@ region = Rect2(448, 448, 224, 224)
 [sub_resource type="SpriteFrames" id="SpriteFrames_sh265"]
 animations = [{
 "frames": [{
-"duration": 1.0,
+"duration": 0.75,
 "texture": SubResource("AtlasTexture_k53q1")
 }, {
-"duration": 1.0,
+"duration": 0.75,
 "texture": SubResource("AtlasTexture_fhl08")
 }, {
-"duration": 1.0,
+"duration": 0.75,
 "texture": SubResource("AtlasTexture_vtle1")
 }, {
-"duration": 1.0,
+"duration": 0.75,
 "texture": SubResource("AtlasTexture_od3ui")
 }, {
-"duration": 1.0,
+"duration": 0.75,
 "texture": SubResource("AtlasTexture_00tjw")
 }, {
-"duration": 1.0,
+"duration": 0.75,
 "texture": SubResource("AtlasTexture_x3vf3")
 }, {
-"duration": 1.0,
+"duration": 0.75,
 "texture": SubResource("AtlasTexture_apopc")
 }, {
-"duration": 1.0,
+"duration": 0.75,
 "texture": SubResource("AtlasTexture_5htga")
 }, {
-"duration": 1.0,
+"duration": 0.75,
 "texture": SubResource("AtlasTexture_p5o4e")
 }],
 "loop": false,
@@ -341,13 +341,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_pisgm")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_dkpta")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_lfmf2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pisgm")
 }],
 "loop": false,
 "name": &"jump",
@@ -422,9 +422,8 @@ metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_sh265")
-animation = &"fall"
+animation = &"land"
 autoplay = "idle"
-speed_scale = 1.25
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-7.5, 47.5)
