@@ -1,13 +1,18 @@
-[gd_scene load_steps=10 format=3 uid="uid://0innvfg1noyr"]
+[gd_scene load_steps=15 format=3 uid="uid://0innvfg1noyr"]
 
 [ext_resource type="Texture2D" uid="uid://ctk8ibr44c642" path="res://Assets/Forest/Bush.png" id="1_5vw27"]
 [ext_resource type="PackedScene" uid="uid://cy1vyx88wgg4v" path="res://Player/player.tscn" id="1_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://c6lcnacw8vw5s" path="res://platform.tscn" id="2_8gbba"]
+[ext_resource type="Texture2D" uid="uid://bud8q02b7boe8" path="res://Assets/Forest/BackGrass.png" id="2_efxa6"]
 [ext_resource type="Script" uid="uid://do5bugkt41qkv" path="res://camera.gd" id="2_jjvhh"]
-[ext_resource type="Texture2D" uid="uid://davcfmie0bbc2" path="res://Assets/Parallax.png" id="3_8gbba"]
+[ext_resource type="Texture2D" uid="uid://cc5t6dk5qt08y" path="res://Assets/Forest/Tree1.png" id="3_4c57u"]
 [ext_resource type="Texture2D" uid="uid://c2fn1ck4bikb1" path="res://Assets/Forest/Grass.png" id="4_272bh"]
-[ext_resource type="Texture2D" uid="uid://46oxramfmd6m" path="res://Assets/Forest/FrontTree.png" id="5_7mycd"]
+[ext_resource type="Texture2D" uid="uid://dg6umr23h26yn" path="res://Assets/Forest/Tree2.png" id="4_efxa6"]
+[ext_resource type="Script" uid="uid://cg30muddd7db1" path="res://parallaxfix.gd" id="5_dg77c"]
+[ext_resource type="Texture2D" uid="uid://kcitspqg4mfr" path="res://Assets/Forest/Tree3.png" id="5_ycdy4"]
 [ext_resource type="Texture2D" uid="uid://dok7ls8ld3g3u" path="res://Assets/Forest/FrontGround.png" id="6_272bh"]
+[ext_resource type="Texture2D" uid="uid://d15b6nmtxas3j" path="res://Assets/Forest/BushyGrass.png" id="7_5vw27"]
+[ext_resource type="Texture2D" uid="uid://cq7cgkb2e5fi8" path="res://Assets/Forest/BigTree.png" id="9_kek77"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0xm2m"]
 distance = -285.0
@@ -17,99 +22,459 @@ distance = -285.0
 [node name="BackParallax" type="Node2D" parent="."]
 
 [node name="Background" type="Node2D" parent="BackParallax"]
+position = Vector2(-5, 192)
 
-[node name="Parallax2d" type="Parallax2D" parent="BackParallax/Background"]
+[node name="Repeating" type="Parallax2D" parent="BackParallax/Background"]
 scroll_scale = Vector2(0.3, 0.3)
-scroll_offset = Vector2(-5, 192)
 repeat_size = Vector2(2560, 0)
 repeat_times = 3
 
-[node name="Canopy" type="Sprite2D" parent="BackParallax/Background/Parallax2d"]
+[node name="Canopy" type="Sprite2D" parent="BackParallax/Background/Repeating"]
 modulate = Color(3.1915548, 2.999711, 1.2243794, 1)
-position = Vector2(-192, -145)
+position = Vector2(-192, -87)
 scale = Vector2(-1, -1)
 texture = ExtResource("1_5vw27")
 
-[node name="Background2" type="Node2D" parent="BackParallax"]
+[node name="BackGrass" type="Sprite2D" parent="BackParallax/Background/Repeating"]
+modulate = Color(0.8372715, 0.8572721, 0.44480607, 1)
+position = Vector2(-191, 302)
+texture = ExtResource("2_efxa6")
 
-[node name="Parallax2d" type="Parallax2D" parent="BackParallax/Background2"]
+[node name="Props" type="Parallax2D" parent="BackParallax/Background"]
+scroll_scale = Vector2(0.3, 0.3)
+
+[node name="Tree" type="Sprite2D" parent="BackParallax/Background/Props"]
+modulate = Color(0.8753016, 0.7071762, 0.296279, 1)
+position = Vector2(-482.99994, 120.00003)
+rotation = 3.1415925
+scale = Vector2(-1, -1)
+texture = ExtResource("3_4c57u")
+
+[node name="Tree2" type="Sprite2D" parent="BackParallax/Background/Props"]
+modulate = Color(0.8753016, 0.7071762, 0.296279, 1)
+position = Vector2(963.00006, 52.00003)
+rotation = 3.1415925
+scale = Vector2(-1, -1)
+texture = ExtResource("4_efxa6")
+
+[node name="Tree3" type="Sprite2D" parent="BackParallax/Background/Props"]
+modulate = Color(0.8753016, 0.7071762, 0.296279, 1)
+position = Vector2(1761, 52.00003)
+rotation = 3.1415925
+scale = Vector2(-1, -1)
+texture = ExtResource("4_efxa6")
+
+[node name="Tree4" type="Sprite2D" parent="BackParallax/Background/Props"]
+modulate = Color(0.8753016, 0.7071762, 0.296279, 1)
+position = Vector2(2668, 91.00003)
+rotation = 3.1415925
+scale = Vector2(-1, -1)
+texture = ExtResource("3_4c57u")
+
+[node name="Tree5" type="Sprite2D" parent="BackParallax/Background/Props"]
+modulate = Color(0.8753016, 0.7071762, 0.296279, 1)
+position = Vector2(17.000061, 101.00003)
+rotation = 3.1415925
+scale = Vector2(-1, -1)
+texture = ExtResource("5_ycdy4")
+
+[node name="Tree6" type="Sprite2D" parent="BackParallax/Background/Props"]
+modulate = Color(0.8753016, 0.7071762, 0.296279, 1)
+position = Vector2(1463, 82.00003)
+rotation = 3.1415925
+scale = Vector2(-1, -1)
+texture = ExtResource("3_4c57u")
+
+[node name="Tree7" type="Sprite2D" parent="BackParallax/Background/Props"]
+modulate = Color(0.8753016, 0.7071762, 0.296279, 1)
+position = Vector2(-971.99994, 18.00003)
+rotation = 3.1415925
+scale = Vector2(-1, -1)
+texture = ExtResource("4_efxa6")
+
+[node name="Tree8" type="Sprite2D" parent="BackParallax/Background/Props"]
+modulate = Color(0.8753016, 0.7071762, 0.296279, 1)
+position = Vector2(585.00006, -0.9999695)
+rotation = 3.1415925
+scale = Vector2(-1, -1)
+texture = ExtResource("4_efxa6")
+
+[node name="Tree9" type="Sprite2D" parent="BackParallax/Background/Props"]
+modulate = Color(0.8753016, 0.7071762, 0.296279, 1)
+position = Vector2(-1212.9999, 127.00003)
+rotation = 3.1415925
+scale = Vector2(-1, -1)
+texture = ExtResource("3_4c57u")
+
+[node name="Tree10" type="Sprite2D" parent="BackParallax/Background/Props"]
+modulate = Color(0.8753016, 0.7071762, 0.296279, 1)
+position = Vector2(233.00018, 59.00003)
+rotation = 3.1415925
+scale = Vector2(-1, -1)
+texture = ExtResource("4_efxa6")
+
+[node name="Tree11" type="Sprite2D" parent="BackParallax/Background/Props"]
+modulate = Color(0.8753016, 0.7071762, 0.296279, 1)
+position = Vector2(1031.0001, 59.00003)
+rotation = 3.1415925
+scale = Vector2(-1, -1)
+texture = ExtResource("4_efxa6")
+
+[node name="Tree12" type="Sprite2D" parent="BackParallax/Background/Props"]
+modulate = Color(0.8753016, 0.7071762, 0.296279, 1)
+position = Vector2(1938.0001, 98.00003)
+rotation = 3.1415925
+scale = Vector2(-1, -1)
+texture = ExtResource("3_4c57u")
+
+[node name="Tree13" type="Sprite2D" parent="BackParallax/Background/Props"]
+modulate = Color(0.8753016, 0.7071762, 0.296279, 1)
+position = Vector2(-712.9998, 108.00003)
+rotation = 3.1415925
+scale = Vector2(-1, -1)
+texture = ExtResource("5_ycdy4")
+
+[node name="Tree14" type="Sprite2D" parent="BackParallax/Background/Props"]
+modulate = Color(0.8753016, 0.7071762, 0.296279, 1)
+position = Vector2(733.0001, 89.00003)
+rotation = 3.1415925
+scale = Vector2(-1, -1)
+texture = ExtResource("3_4c57u")
+
+[node name="Tree15" type="Sprite2D" parent="BackParallax/Background/Props"]
+modulate = Color(0.8753016, 0.7071762, 0.296279, 1)
+position = Vector2(-1701.9999, 25.00003)
+rotation = 3.1415925
+scale = Vector2(-1, -1)
+texture = ExtResource("4_efxa6")
+
+[node name="Tree16" type="Sprite2D" parent="BackParallax/Background/Props"]
+modulate = Color(0.8753016, 0.7071762, 0.296279, 1)
+position = Vector2(-144.99982, 6.0000305)
+rotation = 3.1415925
+scale = Vector2(-1, -1)
+texture = ExtResource("4_efxa6")
+
+[node name="Background2" type="Node2D" parent="BackParallax"]
+position = Vector2(-5, 192)
+
+[node name="Repeating" type="Parallax2D" parent="BackParallax/Background2"]
 scroll_scale = Vector2(0.5, 0.5)
-scroll_offset = Vector2(-5, 192)
 repeat_size = Vector2(2560, 0)
 repeat_times = 3
 
-[node name="Canopy" type="Sprite2D" parent="BackParallax/Background2/Parallax2d"]
+[node name="Canopy" type="Sprite2D" parent="BackParallax/Background2/Repeating"]
 modulate = Color(2.4092994, 2.7214386, 1.0234013, 1)
-position = Vector2(-248, -251)
+position = Vector2(-243, -216)
 scale = Vector2(1, -1)
 texture = ExtResource("1_5vw27")
 
-[node name="Tree" type="Sprite2D" parent="BackParallax/Background2/Parallax2d"]
-modulate = Color(7.846067, 5.2258167, 0, 1)
-position = Vector2(1129, -341)
-scale = Vector2(-1, 1)
-texture = ExtResource("5_7mycd")
+[node name="BackGrass" type="Sprite2D" parent="BackParallax/Background2/Repeating"]
+modulate = Color(0.77599835, 0.75164837, 0.33756283, 1)
+position = Vector2(-205, 209)
+texture = ExtResource("2_efxa6")
 
-[node name="Tree2" type="Sprite2D" parent="BackParallax/Background2/Parallax2d"]
-modulate = Color(7.846067, 5.2258167, 0, 1)
-position = Vector2(-1092, -308)
-texture = ExtResource("5_7mycd")
+[node name="Props" type="Parallax2D" parent="BackParallax/Background2"]
+scroll_scale = Vector2(0.5, 0.5)
+
+[node name="Tree" type="Sprite2D" parent="BackParallax/Background2/Props"]
+modulate = Color(0.87999445, 0.5088788, 0.15556309, 1)
+position = Vector2(-202, 106)
+rotation = 3.1415925
+scale = Vector2(1, -1)
+texture = ExtResource("3_4c57u")
+
+[node name="Tree2" type="Sprite2D" parent="BackParallax/Background2/Props"]
+modulate = Color(0.87999445, 0.5088788, 0.15556309, 1)
+position = Vector2(1244, 38)
+rotation = 3.1415925
+scale = Vector2(1, -1)
+texture = ExtResource("4_efxa6")
+
+[node name="Tree3" type="Sprite2D" parent="BackParallax/Background2/Props"]
+modulate = Color(0.87999445, 0.5088788, 0.15556309, 1)
+position = Vector2(2042, 38)
+rotation = 3.1415925
+scale = Vector2(-1, -1)
+texture = ExtResource("4_efxa6")
+
+[node name="Tree4" type="Sprite2D" parent="BackParallax/Background2/Props"]
+modulate = Color(0.87999445, 0.5088788, 0.15556309, 1)
+position = Vector2(2949, 77)
+rotation = 3.1415925
+scale = Vector2(1, -1)
+texture = ExtResource("3_4c57u")
+
+[node name="Tree5" type="Sprite2D" parent="BackParallax/Background2/Props"]
+modulate = Color(0.87999445, 0.5088788, 0.15556309, 1)
+position = Vector2(298, 87)
+rotation = 3.1415925
+scale = Vector2(1, -1)
+texture = ExtResource("5_ycdy4")
+
+[node name="Tree6" type="Sprite2D" parent="BackParallax/Background2/Props"]
+modulate = Color(0.87999445, 0.5088788, 0.15556309, 1)
+position = Vector2(1744, 68)
+rotation = 3.1415925
+scale = Vector2(-1, -1)
+texture = ExtResource("3_4c57u")
+
+[node name="Tree7" type="Sprite2D" parent="BackParallax/Background2/Props"]
+modulate = Color(0.87999445, 0.5088788, 0.15556309, 1)
+position = Vector2(-691, 4)
+rotation = 3.1415925
+scale = Vector2(-1, -1)
+texture = ExtResource("4_efxa6")
+
+[node name="Tree8" type="Sprite2D" parent="BackParallax/Background2/Props"]
+modulate = Color(0.87999445, 0.5088788, 0.15556309, 1)
+position = Vector2(866, -15)
+rotation = 3.1415925
+scale = Vector2(-1, -1)
+texture = ExtResource("4_efxa6")
 
 [node name="Background3" type="Node2D" parent="BackParallax"]
+position = Vector2(-5, 192)
 
-[node name="Parallax2d" type="Parallax2D" parent="BackParallax/Background3"]
+[node name="Repeating" type="Parallax2D" parent="BackParallax/Background3"]
 scroll_scale = Vector2(0.6, 0.6)
-scroll_offset = Vector2(-5, 192)
 repeat_size = Vector2(2560, 0)
 repeat_times = 3
 
-[node name="Canopy" type="Sprite2D" parent="BackParallax/Background3/Parallax2d"]
+[node name="Canopy" type="Sprite2D" parent="BackParallax/Background3/Repeating"]
 modulate = Color(2.0418396, 2.1792493, 1.3619889, 1)
-position = Vector2(-88, -331)
+position = Vector2(-87, -303)
 scale = Vector2(-1, -1)
 texture = ExtResource("1_5vw27")
 
+[node name="BackGrass" type="Sprite2D" parent="BackParallax/Background3/Repeating"]
+modulate = Color(0.67568123, 0.57951045, 0.27948928, 1)
+position = Vector2(-235, 169)
+texture = ExtResource("2_efxa6")
+
+[node name="Props" type="Parallax2D" parent="BackParallax/Background3"]
+scroll_scale = Vector2(0.6, 0.6)
+
+[node name="Tree" type="Sprite2D" parent="BackParallax/Background3/Props"]
+modulate = Color(0.6988536, 0.35679176, 0.04551585, 1)
+position = Vector2(1529, -34)
+rotation = 3.1415925
+scale = Vector2(1, -1)
+texture = ExtResource("3_4c57u")
+
+[node name="Tree2" type="Sprite2D" parent="BackParallax/Background3/Props"]
+modulate = Color(0.6988536, 0.35679176, 0.04551585, 1)
+position = Vector2(479.00012, 29.000061)
+rotation = 3.1415925
+scale = Vector2(1, -1)
+texture = ExtResource("4_efxa6")
+
+[node name="Tree3" type="Sprite2D" parent="BackParallax/Background3/Props"]
+modulate = Color(0.6988536, 0.35679176, 0.04551585, 1)
+position = Vector2(117.00012, -38.99997)
+rotation = 3.1415925
+scale = Vector2(-1, -1)
+texture = ExtResource("4_efxa6")
+
+[node name="Tree4" type="Sprite2D" parent="BackParallax/Background3/Props"]
+modulate = Color(0.6988536, 0.35679176, 0.04551585, 1)
+position = Vector2(-3, -23)
+rotation = 3.1415925
+scale = Vector2(1, -1)
+texture = ExtResource("3_4c57u")
+
+[node name="Tree5" type="Sprite2D" parent="BackParallax/Background3/Props"]
+modulate = Color(0.6988536, 0.35679176, 0.04551585, 1)
+position = Vector2(1229, 89.00003)
+rotation = 3.1415925
+scale = Vector2(1, -1)
+texture = ExtResource("5_ycdy4")
+
+[node name="Tree6" type="Sprite2D" parent="BackParallax/Background3/Props"]
+modulate = Color(0.6988536, 0.35679176, 0.04551585, 1)
+position = Vector2(-643.9999, 47.00003)
+rotation = 3.1415925
+scale = Vector2(-1, -1)
+texture = ExtResource("3_4c57u")
+
+[node name="Tree7" type="Sprite2D" parent="BackParallax/Background3/Props"]
+modulate = Color(0.6988536, 0.35679176, 0.04551585, 1)
+position = Vector2(-950.9999, 6.000061)
+rotation = 3.1415925
+scale = Vector2(-1, -1)
+texture = ExtResource("4_efxa6")
+
+[node name="Tree8" type="Sprite2D" parent="BackParallax/Background3/Props"]
+modulate = Color(0.6988536, 0.35679176, 0.04551585, 1)
+position = Vector2(911, -3)
+rotation = 3.1415925
+scale = Vector2(-1, -1)
+texture = ExtResource("4_efxa6")
+
 [node name="Background4" type="Node2D" parent="BackParallax"]
 
-[node name="Parallax2d" type="Parallax2D" parent="BackParallax/Background4"]
+[node name="Repeating" type="Parallax2D" parent="BackParallax/Background4"]
 scroll_scale = Vector2(0.7, 0.7)
 scroll_offset = Vector2(-5, 192)
 repeat_size = Vector2(2560, 0)
 repeat_times = 3
 
-[node name="Canopy" type="Sprite2D" parent="BackParallax/Background4/Parallax2d"]
+[node name="Canopy" type="Sprite2D" parent="BackParallax/Background4/Repeating"]
 modulate = Color(1.8427947, 1.8695909, 1.2912447, 1)
-position = Vector2(-242, -410)
+position = Vector2(-239, -393)
 scale = Vector2(1, -1)
 texture = ExtResource("1_5vw27")
 
+[node name="BackGrass" type="Sprite2D" parent="BackParallax/Background4/Repeating"]
+modulate = Color(0.5946943, 0.5273346, 0.18915975, 1)
+position = Vector2(-239, 137)
+texture = ExtResource("2_efxa6")
+
+[node name="Props" type="Parallax2D" parent="BackParallax/Background4"]
+scroll_scale = Vector2(0.7, 0.7)
+
+[node name="Tree" type="Sprite2D" parent="BackParallax/Background4/Props"]
+modulate = Color(0.39798617, 0.24573389, 0.07925556, 1)
+position = Vector2(-1150.9998, 126.00003)
+rotation = 3.1415925
+scale = Vector2(1, -1)
+texture = ExtResource("3_4c57u")
+
+[node name="Tree2" type="Sprite2D" parent="BackParallax/Background4/Props"]
+modulate = Color(0.39798617, 0.24573389, 0.07925556, 1)
+position = Vector2(1161, 116)
+rotation = 3.1415925
+scale = Vector2(1, -1)
+texture = ExtResource("4_efxa6")
+
+[node name="Tree3" type="Sprite2D" parent="BackParallax/Background4/Props"]
+modulate = Color(0.39798617, 0.24573389, 0.07925556, 1)
+position = Vector2(-220, 69)
+rotation = 3.1415925
+scale = Vector2(-1, -1)
+texture = ExtResource("4_efxa6")
+
+[node name="Tree4" type="Sprite2D" parent="BackParallax/Background4/Props"]
+modulate = Color(0.39798617, 0.24573389, 0.07925556, 1)
+position = Vector2(2000.0001, 97.00003)
+rotation = 3.1415925
+scale = Vector2(1, -1)
+texture = ExtResource("3_4c57u")
+
+[node name="Tree5" type="Sprite2D" parent="BackParallax/Background4/Props"]
+modulate = Color(0.39798617, 0.24573389, 0.07925556, 1)
+position = Vector2(539.99994, 107)
+rotation = 3.1415925
+scale = Vector2(1, -1)
+texture = ExtResource("5_ycdy4")
+
+[node name="Tree6" type="Sprite2D" parent="BackParallax/Background4/Props"]
+modulate = Color(0.39798617, 0.24573389, 0.07925556, 1)
+position = Vector2(-1332.9999, 65)
+rotation = 3.1415925
+scale = Vector2(-1, -1)
+texture = ExtResource("3_4c57u")
+
+[node name="Tree7" type="Sprite2D" parent="BackParallax/Background4/Props"]
+modulate = Color(0.39798617, 0.24573389, 0.07925556, 1)
+position = Vector2(-1639.9999, 24.00003)
+rotation = 3.1415925
+scale = Vector2(-1, -1)
+texture = ExtResource("4_efxa6")
+
+[node name="Tree8" type="Sprite2D" parent="BackParallax/Background4/Props"]
+modulate = Color(0.39798617, 0.24573389, 0.07925556, 1)
+position = Vector2(-845, -3)
+rotation = 3.1415925
+scale = Vector2(-1, -1)
+texture = ExtResource("4_efxa6")
+
 [node name="Background5" type="Node2D" parent="BackParallax"]
 
-[node name="Parallax2d" type="Parallax2D" parent="BackParallax/Background5"]
+[node name="Repeating" type="Parallax2D" parent="BackParallax/Background5"]
 scroll_scale = Vector2(0.8, 0.8)
 scroll_offset = Vector2(-5, 192)
 repeat_size = Vector2(2560, 0)
 repeat_times = 3
 
-[node name="Canopy" type="Sprite2D" parent="BackParallax/Background5/Parallax2d"]
+[node name="Canopy" type="Sprite2D" parent="BackParallax/Background5/Repeating"]
 modulate = Color(1.7919996, 1.6732408, 1.1290661, 1)
-position = Vector2(-134, -496)
+position = Vector2(-133, -486)
 scale = Vector2(-1, -1)
 texture = ExtResource("1_5vw27")
 
+[node name="Props" type="Parallax2D" parent="BackParallax/Background5"]
+scroll_scale = Vector2(0.8, 0.8)
+
+[node name="Tree" type="Sprite2D" parent="BackParallax/Background5/Props"]
+modulate = Color(0.1661033, 0.12316645, 0.019261891, 1)
+position = Vector2(-1341.9999, 168.00003)
+rotation = 3.1415925
+scale = Vector2(-1, -1)
+texture = ExtResource("3_4c57u")
+
+[node name="Tree2" type="Sprite2D" parent="BackParallax/Background5/Props"]
+modulate = Color(0.1661033, 0.12316645, 0.019261891, 1)
+position = Vector2(104.00018, 100.00003)
+rotation = 3.1415925
+scale = Vector2(-1, -1)
+texture = ExtResource("4_efxa6")
+
+[node name="Tree3" type="Sprite2D" parent="BackParallax/Background5/Props"]
+modulate = Color(0.1661033, 0.12316645, 0.019261891, 1)
+position = Vector2(902.0001, 100.00003)
+rotation = 3.1415925
+scale = Vector2(-1, -1)
+texture = ExtResource("4_efxa6")
+
+[node name="Tree4" type="Sprite2D" parent="BackParallax/Background5/Props"]
+modulate = Color(0.1661033, 0.12316645, 0.019261891, 1)
+position = Vector2(1809.0001, 139.00003)
+rotation = 3.1415925
+scale = Vector2(-1, -1)
+texture = ExtResource("3_4c57u")
+
+[node name="Tree5" type="Sprite2D" parent="BackParallax/Background5/Props"]
+modulate = Color(0.1661033, 0.12316645, 0.019261891, 1)
+position = Vector2(-841.9998, 149.00003)
+rotation = 3.1415925
+scale = Vector2(-1, -1)
+texture = ExtResource("5_ycdy4")
+
+[node name="Tree6" type="Sprite2D" parent="BackParallax/Background5/Props"]
+modulate = Color(0.1661033, 0.12316645, 0.019261891, 1)
+position = Vector2(604.0001, 130.00003)
+rotation = 3.1415925
+scale = Vector2(-1, -1)
+texture = ExtResource("3_4c57u")
+
+[node name="Tree7" type="Sprite2D" parent="BackParallax/Background5/Props"]
+modulate = Color(0.1661033, 0.12316645, 0.019261891, 1)
+position = Vector2(-1830.9999, 66.00003)
+rotation = 3.1415925
+scale = Vector2(-1, -1)
+texture = ExtResource("4_efxa6")
+
+[node name="Tree8" type="Sprite2D" parent="BackParallax/Background5/Props"]
+modulate = Color(0.1661033, 0.12316645, 0.019261891, 1)
+position = Vector2(-273.99982, 47.00003)
+rotation = 3.1415925
+scale = Vector2(-1, -1)
+texture = ExtResource("4_efxa6")
+
 [node name="Bushes" type="Node2D" parent="BackParallax"]
 
-[node name="Parallax2d" type="Parallax2D" parent="BackParallax/Bushes"]
+[node name="Repeating" type="Parallax2D" parent="BackParallax/Bushes"]
 scroll_scale = Vector2(0.9, 0.9)
 scroll_offset = Vector2(-5, 192)
 repeat_size = Vector2(2560, 0)
 repeat_times = 3
 
-[node name="Bushes" type="Sprite2D" parent="BackParallax/Bushes/Parallax2d"]
+[node name="Bushes" type="Sprite2D" parent="BackParallax/Bushes/Repeating"]
 position = Vector2(-1142, 111)
 texture = ExtResource("1_5vw27")
 
-[node name="BushBottom" type="ColorRect" parent="BackParallax/Bushes/Parallax2d"]
+[node name="BushBottom" type="ColorRect" parent="BackParallax/Bushes/Repeating"]
 offset_left = -1305.0
 offset_top = 233.00002
 offset_right = 1238.0
@@ -118,11 +483,14 @@ scale = Vector2(1.6800048, 9.080003)
 color = Color(0.33333334, 0.18431373, 0.16862746, 1)
 metadata/_edit_use_anchors_ = true
 
-[node name="Canopy" type="Sprite2D" parent="BackParallax/Bushes/Parallax2d"]
+[node name="Canopy" type="Sprite2D" parent="BackParallax/Bushes/Repeating"]
 modulate = Color(1.7289262, 1.5196562, 0.7654416, 1)
 position = Vector2(-308, -584)
 scale = Vector2(1, -1)
 texture = ExtResource("1_5vw27")
+
+[node name="Props" type="Parallax2D" parent="BackParallax/Bushes"]
+scroll_scale = Vector2(1.1, 1.1)
 
 [node name="BackMidground" type="Node2D" parent="BackParallax"]
 position = Vector2(-6, 10)
@@ -168,17 +536,17 @@ script = ExtResource("2_jjvhh")
 
 [node name="Main Layer" type="Node2D" parent="FrontParallax"]
 
-[node name="Main Layer" type="Parallax2D" parent="FrontParallax/Main Layer"]
+[node name="Repeating" type="Parallax2D" parent="FrontParallax/Main Layer"]
 scroll_offset = Vector2(-2156, 23)
 repeat_size = Vector2(2560, 0)
 repeat_times = 3
 
-[node name="Grass" type="Sprite2D" parent="FrontParallax/Main Layer/Main Layer"]
+[node name="Grass" type="Sprite2D" parent="FrontParallax/Main Layer/Repeating"]
 modulate = Color(1.3285676, 0.9534372, 0.4952448, 1)
 position = Vector2(-1140, -116)
 texture = ExtResource("4_272bh")
 
-[node name="BottomGrass" type="ColorRect" parent="FrontParallax/Main Layer/Main Layer"]
+[node name="BottomGrass" type="ColorRect" parent="FrontParallax/Main Layer/Repeating"]
 offset_left = -1321.0
 offset_top = 294.0
 offset_right = 1222.0
@@ -187,27 +555,30 @@ scale = Vector2(1.6800048, 9.080003)
 color = Color(1, 0.8784314, 0.1882353, 1)
 metadata/_edit_use_anchors_ = true
 
-[node name="Canopy" type="Sprite2D" parent="FrontParallax/Main Layer/Main Layer"]
+[node name="Canopy" type="Sprite2D" parent="FrontParallax/Main Layer/Repeating"]
 modulate = Color(1.4957577, 1.1363391, 0.7985637, 1)
 position = Vector2(-527, -487)
 scale = Vector2(1, -1)
 texture = ExtResource("1_5vw27")
 
+[node name="Props" type="Parallax2D" parent="FrontParallax/Main Layer"]
+scroll_scale = Vector2(1.1, 1.1)
+
 [node name="Midground2" type="Node2D" parent="FrontParallax"]
 position = Vector2(1825, 26)
 
-[node name="Midground2" type="Parallax2D" parent="FrontParallax/Midground2"]
+[node name="Repeating" type="Parallax2D" parent="FrontParallax/Midground2"]
 scale = Vector2(-1, 1)
 scroll_scale = Vector2(1.05, 1.05)
 repeat_size = Vector2(2560, 0)
 repeat_times = 3
 
-[node name="Grass" type="Sprite2D" parent="FrontParallax/Midground2/Midground2"]
+[node name="Grass" type="Sprite2D" parent="FrontParallax/Midground2/Repeating"]
 modulate = Color(1.114582, 0.7333345, 0.10142933, 1)
 position = Vector2(-1140, -116)
 texture = ExtResource("4_272bh")
 
-[node name="BottomGrass" type="ColorRect" parent="FrontParallax/Midground2/Midground2"]
+[node name="BottomGrass" type="ColorRect" parent="FrontParallax/Midground2/Repeating"]
 offset_left = -1321.0
 offset_top = 294.0
 offset_right = 1222.0
@@ -216,26 +587,29 @@ scale = Vector2(1.6800048, 9.080003)
 color = Color(1, 0.6745098, 0.039215688, 1)
 metadata/_edit_use_anchors_ = true
 
-[node name="Canopy" type="Sprite2D" parent="FrontParallax/Midground2/Midground2"]
+[node name="Canopy" type="Sprite2D" parent="FrontParallax/Midground2/Repeating"]
 modulate = Color(1.1958618, 0.9512316, 0.80435854, 1)
 position = Vector2(-208, -528)
 scale = Vector2(1, -1)
 texture = ExtResource("1_5vw27")
 
+[node name="Props" type="Parallax2D" parent="FrontParallax/Midground2"]
+scroll_scale = Vector2(1.1, 1.1)
+
 [node name="Midground3" type="Node2D" parent="FrontParallax"]
 position = Vector2(1600, 31)
 
-[node name="Midground3" type="Parallax2D" parent="FrontParallax/Midground3"]
+[node name="Repeating" type="Parallax2D" parent="FrontParallax/Midground3"]
 scroll_scale = Vector2(1.1, 1.1)
 repeat_size = Vector2(2560, 0)
 repeat_times = 3
 
-[node name="Grass" type="Sprite2D" parent="FrontParallax/Midground3/Midground3"]
+[node name="Grass" type="Sprite2D" parent="FrontParallax/Midground3/Repeating"]
 modulate = Color(0.9705997, 0.49511433, 0.33469236, 1)
 position = Vector2(-1140, -116)
 texture = ExtResource("4_272bh")
 
-[node name="BottomGrass" type="ColorRect" parent="FrontParallax/Midground3/Midground3"]
+[node name="BottomGrass" type="ColorRect" parent="FrontParallax/Midground3/Repeating"]
 offset_left = -1321.0
 offset_top = 294.0
 offset_right = 1222.0
@@ -244,26 +618,29 @@ scale = Vector2(1.6800048, 9.080003)
 color = Color(0.9529412, 0.45490196, 0.1254902, 1)
 metadata/_edit_use_anchors_ = true
 
-[node name="Canopy" type="Sprite2D" parent="FrontParallax/Midground3/Midground3"]
+[node name="Canopy" type="Sprite2D" parent="FrontParallax/Midground3/Repeating"]
 modulate = Color(0.9679722, 0.80613583, 0.67854196, 1)
 position = Vector2(-701, -585)
 scale = Vector2(1, -1)
 texture = ExtResource("1_5vw27")
 
+[node name="Props" type="Parallax2D" parent="FrontParallax/Midground3"]
+scroll_scale = Vector2(1.1, 1.1)
+
 [node name="FrontMidground" type="Node2D" parent="FrontParallax"]
 position = Vector2(0, 25)
 
-[node name="Midground" type="Parallax2D" parent="FrontParallax/FrontMidground"]
+[node name="Repeating" type="Parallax2D" parent="FrontParallax/FrontMidground"]
 scroll_scale = Vector2(1.15, 1.15)
 repeat_size = Vector2(2560, 0)
 repeat_times = 3
 
-[node name="BushyGrass" type="Sprite2D" parent="FrontParallax/FrontMidground/Midground"]
+[node name="BushyGrass" type="Sprite2D" parent="FrontParallax/FrontMidground/Repeating"]
 modulate = Color(6.7469997, 2.50044, 0.5246181, 1)
-position = Vector2(-1139, -31)
-texture = ExtResource("3_8gbba")
+position = Vector2(-1126, 272)
+texture = ExtResource("7_5vw27")
 
-[node name="BottomGrass" type="ColorRect" parent="FrontParallax/FrontMidground/Midground"]
+[node name="BottomGrass" type="ColorRect" parent="FrontParallax/FrontMidground/Repeating"]
 offset_left = -1321.0
 offset_top = 328.0
 offset_right = 1222.0
@@ -272,38 +649,55 @@ scale = Vector2(1.6800048, 9.080003)
 color = Color(0.5019608, 0.19607843, 0.08235294, 1)
 metadata/_edit_use_anchors_ = true
 
-[node name="Canopy" type="Sprite2D" parent="FrontParallax/FrontMidground/Midground"]
+[node name="Canopy" type="Sprite2D" parent="FrontParallax/FrontMidground/Repeating"]
 modulate = Color(0.78426254, 0.55712736, 0.61496365, 1)
 position = Vector2(-306, -662)
 scale = Vector2(-1, -1)
 texture = ExtResource("1_5vw27")
 
+[node name="Props" type="Parallax2D" parent="FrontParallax/FrontMidground"]
+scroll_scale = Vector2(1.1, 1.1)
+
 [node name="Foreground" type="Node2D" parent="FrontParallax"]
 position = Vector2(-2, -50)
 
-[node name="Foreground" type="Parallax2D" parent="FrontParallax/Foreground"]
+[node name="Props" type="Parallax2D" parent="FrontParallax/Foreground"]
+scroll_scale = Vector2(1.4, 1.4)
+
+[node name="Tree" type="Sprite2D" parent="FrontParallax/Foreground/Props"]
+position = Vector2(484, -161)
+texture = ExtResource("9_kek77")
+
+[node name="Tree2" type="Sprite2D" parent="FrontParallax/Foreground/Props"]
+position = Vector2(-1148, -158)
+rotation = 3.1415925
+scale = Vector2(1, -1)
+texture = ExtResource("9_kek77")
+
+[node name="Tree3" type="Sprite2D" parent="FrontParallax/Foreground/Props"]
+position = Vector2(1820, -172)
+texture = ExtResource("9_kek77")
+
+[node name="Repeating" type="Parallax2D" parent="FrontParallax/Foreground"]
 scroll_scale = Vector2(1.4, 1.4)
 repeat_size = Vector2(2560, 0)
 repeat_times = 3
+script = ExtResource("5_dg77c")
 
-[node name="ColorRect" type="ColorRect" parent="FrontParallax/Foreground/Foreground"]
-offset_left = -1266.0
-offset_top = 359.0
-offset_right = 1298.0
-offset_bottom = 892.0
+[node name="ColorRect" type="ColorRect" parent="FrontParallax/Foreground/Repeating"]
+offset_left = 14.0
+offset_top = 246.0
+offset_right = 2578.0
+offset_bottom = 779.0
 color = Color(0.07450981, 0.078431375, 0.16470589, 1)
 
-[node name="Ground" type="Sprite2D" parent="FrontParallax/Foreground/Foreground"]
-position = Vector2(-3, -176)
+[node name="Ground" type="Sprite2D" parent="FrontParallax/Foreground/Repeating"]
+position = Vector2(14, -132)
 texture = ExtResource("6_272bh")
 
-[node name="Tree" type="Sprite2D" parent="FrontParallax/Foreground/Foreground"]
-position = Vector2(375, -175)
-texture = ExtResource("5_7mycd")
-
-[node name="Canopy" type="Sprite2D" parent="FrontParallax/Foreground/Foreground"]
+[node name="Canopy" type="Sprite2D" parent="FrontParallax/Foreground/Repeating"]
 modulate = Color(0.23154116, 0.52167636, 1.1873763, 1)
-position = Vector2(-692, -809)
+position = Vector2(-492.143, -537.143)
 scale = Vector2(1, -1)
 texture = ExtResource("1_5vw27")
 
@@ -312,3 +706,11 @@ position = Vector2(0, 12)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("WorldBoundaryShape2D_0xm2m")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = 294.00003
+offset_top = 150.00003
+offset_right = 334.00003
+offset_bottom = 190.00003
+scale = Vector2(2.5864184, 4.7225204)
+color = Color(0, 0, 0, 1)
