@@ -8,11 +8,11 @@
 [ext_resource type="Texture2D" uid="uid://cc5t6dk5qt08y" path="res://Assets/Forest/Tree1.png" id="3_4c57u"]
 [ext_resource type="Texture2D" uid="uid://c2fn1ck4bikb1" path="res://Assets/Forest/Grass.png" id="4_272bh"]
 [ext_resource type="Texture2D" uid="uid://dg6umr23h26yn" path="res://Assets/Forest/Tree2.png" id="4_efxa6"]
-[ext_resource type="Script" uid="uid://cg30muddd7db1" path="res://parallaxfix.gd" id="5_dg77c"]
 [ext_resource type="Texture2D" uid="uid://kcitspqg4mfr" path="res://Assets/Forest/Tree3.png" id="5_ycdy4"]
 [ext_resource type="Texture2D" uid="uid://dok7ls8ld3g3u" path="res://Assets/Forest/FrontGround.png" id="6_272bh"]
 [ext_resource type="Texture2D" uid="uid://d15b6nmtxas3j" path="res://Assets/Forest/BushyGrass.png" id="7_5vw27"]
 [ext_resource type="Texture2D" uid="uid://cq7cgkb2e5fi8" path="res://Assets/Forest/BigTree.png" id="9_kek77"]
+[ext_resource type="Script" uid="uid://cg30muddd7db1" path="res://parallaxfix.gd" id="12_ycdy4"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0xm2m"]
 distance = -285.0
@@ -20,6 +20,7 @@ distance = -285.0
 [node name="Main" type="Node"]
 
 [node name="BackParallax" type="Node2D" parent="."]
+position = Vector2(1, -295)
 
 [node name="Background" type="Node2D" parent="BackParallax"]
 position = Vector2(-5, 192)
@@ -572,6 +573,7 @@ scale = Vector2(-1, -1)
 texture = ExtResource("1_5vw27")
 
 [node name="Player" parent="." instance=ExtResource("1_bo1nx")]
+position = Vector2(0, 0)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 offset = Vector2(0, -100)
@@ -580,22 +582,22 @@ position_smoothing_enabled = true
 script = ExtResource("2_jjvhh")
 
 [node name="Platform" parent="." instance=ExtResource("2_8gbba")]
+position = Vector2(1, -295)
 
-[node name="FrontParallax" type="Node2D" parent="."]
+[node name="Main Layer" type="Node2D" parent="."]
+position = Vector2(1, -295)
 
-[node name="Main Layer" type="Node2D" parent="FrontParallax"]
-
-[node name="Repeating" type="Parallax2D" parent="FrontParallax/Main Layer"]
+[node name="Repeating" type="Parallax2D" parent="Main Layer"]
 scroll_offset = Vector2(-2156, 23)
 repeat_size = Vector2(2560, 0)
 repeat_times = 3
 
-[node name="Grass" type="Sprite2D" parent="FrontParallax/Main Layer/Repeating"]
+[node name="Grass" type="Sprite2D" parent="Main Layer/Repeating"]
 modulate = Color(1.3285676, 0.9534372, 0.4952448, 1)
 position = Vector2(-1140, -116)
 texture = ExtResource("4_272bh")
 
-[node name="BottomGrass" type="ColorRect" parent="FrontParallax/Main Layer/Repeating"]
+[node name="BottomGrass" type="ColorRect" parent="Main Layer/Repeating"]
 offset_left = -1321.0
 offset_top = 294.0
 offset_right = 1222.0
@@ -604,14 +606,17 @@ scale = Vector2(1.6800048, 9.080003)
 color = Color(1, 0.8784314, 0.1882353, 1)
 metadata/_edit_use_anchors_ = true
 
-[node name="Canopy" type="Sprite2D" parent="FrontParallax/Main Layer/Repeating"]
+[node name="Canopy" type="Sprite2D" parent="Main Layer/Repeating"]
 modulate = Color(1.4957577, 1.1363391, 0.7985637, 1)
 position = Vector2(-527, -487)
 scale = Vector2(1, -1)
 texture = ExtResource("1_5vw27")
 
-[node name="Props" type="Parallax2D" parent="FrontParallax/Main Layer"]
+[node name="Props" type="Parallax2D" parent="Main Layer"]
 scroll_scale = Vector2(1.1, 1.1)
+
+[node name="FrontParallax" type="Node2D" parent="."]
+position = Vector2(1, -295)
 
 [node name="Midground2" type="Node2D" parent="FrontParallax"]
 position = Vector2(1825, 26)
@@ -714,52 +719,62 @@ position = Vector2(-2, -50)
 scroll_scale = Vector2(1.4, 1.4)
 
 [node name="Tree" type="Sprite2D" parent="FrontParallax/Foreground/Props"]
-position = Vector2(484, -161)
+position = Vector2(472, -737)
 texture = ExtResource("9_kek77")
+centered = false
 
 [node name="Tree2" type="Sprite2D" parent="FrontParallax/Foreground/Props"]
-position = Vector2(-1148, -158)
+position = Vector2(-1160, -734)
 rotation = 3.1415925
 scale = Vector2(1, -1)
 texture = ExtResource("9_kek77")
+centered = false
 
 [node name="Tree3" type="Sprite2D" parent="FrontParallax/Foreground/Props"]
-position = Vector2(1820, -172)
+position = Vector2(1808, -748)
 texture = ExtResource("9_kek77")
+centered = false
 
 [node name="Repeating" type="Parallax2D" parent="FrontParallax/Foreground"]
 scroll_scale = Vector2(1.4, 1.4)
 repeat_size = Vector2(2560, 0)
 repeat_times = 3
-script = ExtResource("5_dg77c")
+script = ExtResource("12_ycdy4")
 
 [node name="ColorRect" type="ColorRect" parent="FrontParallax/Foreground/Repeating"]
-offset_left = 14.0
-offset_top = 246.0
-offset_right = 2578.0
-offset_bottom = 779.0
-color = Color(0.07450981, 0.078431375, 0.16470589, 1)
+offset_top = 409.0
+offset_right = 2564.0
+offset_bottom = 942.0
+color = Color(0.7577565, 0.43606222, 0.11157472, 1)
+metadata/_edit_use_anchors_ = true
 
 [node name="Ground" type="Sprite2D" parent="FrontParallax/Foreground/Repeating"]
-position = Vector2(14, -132)
+position = Vector2(2, -668)
 texture = ExtResource("6_272bh")
+centered = false
 
 [node name="Canopy" type="Sprite2D" parent="FrontParallax/Foreground/Repeating"]
 modulate = Color(0.23154116, 0.52167636, 1.1873763, 1)
-position = Vector2(-492.143, -537.143)
+position = Vector2(-495, -689)
 scale = Vector2(1, -1)
 texture = ExtResource("1_5vw27")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(0, 12)
+position = Vector2(1, -283)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("WorldBoundaryShape2D_0xm2m")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_left = 2069.0
-offset_top = 131.0
-offset_right = 2109.0
-offset_bottom = 171.0
+offset_left = 956.0
+offset_top = -121.0
+offset_right = 996.0
+offset_bottom = -81.0
 scale = Vector2(2.5864184, 4.7225204)
 color = Color(0, 0, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+offset_left = 991.0
+offset_top = 67.0
+offset_right = 1031.0
+offset_bottom = 107.0
