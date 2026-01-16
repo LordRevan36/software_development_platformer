@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6lcnacw8vw5s"]
+
+[ext_resource type="Script" uid="uid://6hfsroor2sbh" path="res://Platform/platform.gd" id="1_0v4dy"]
+
+[node name="Platform" type="StaticBody2D"]
+script = ExtResource("1_0v4dy")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.30497152, 0.18106371, 2.4065375e-08, 1)
+polygon = PackedVector2Array(-5, 1, 5, 1, 5, -1, -5, -1)
+
+[node name="BorderLine2D" type="Line2D" parent="."]
+texture_repeat = 2
+closed = true
+default_color = Color(0.25865784, 0.14798227, 0, 1)

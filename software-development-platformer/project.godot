@@ -30,6 +30,7 @@ enabled=PackedStringArray("res://addons/parallax2d_preview/plugin.cfg")
 folder_colors={
 "res://Assets/": "orange",
 "res://Enemies/": "red",
+"res://Platform/": "yellow",
 "res://Player/": "purple"
 }
 
