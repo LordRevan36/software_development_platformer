@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://cy1vyx88wgg4v"]
+[gd_scene load_steps=57 format=3 uid="uid://cy1vyx88wgg4v"]
 
 [ext_resource type="Script" uid="uid://bangw8dvmuyod" path="res://Player/player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://bvtijhwqlx01u" path="res://Assets/Ivy.png" id="2_gwnis"]
@@ -294,28 +294,28 @@ animations = [{
 "speed": 6.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 1.33,
 "texture": SubResource("AtlasTexture_i4o1l")
 }, {
-"duration": 1.0,
+"duration": 1.33,
 "texture": SubResource("AtlasTexture_j2n6q")
 }, {
-"duration": 1.0,
+"duration": 1.33,
 "texture": SubResource("AtlasTexture_c6x0f")
 }, {
-"duration": 1.0,
+"duration": 1.33,
 "texture": SubResource("AtlasTexture_jp1hh")
 }, {
-"duration": 1.0,
+"duration": 1.33,
 "texture": SubResource("AtlasTexture_qs4pp")
 }, {
-"duration": 1.0,
+"duration": 1.33,
 "texture": SubResource("AtlasTexture_iyprq")
 }, {
-"duration": 1.0,
+"duration": 1.33,
 "texture": SubResource("AtlasTexture_f4lon")
 }, {
-"duration": 1.0,
+"duration": 1.33,
 "texture": SubResource("AtlasTexture_8ynux")
 }],
 "loop": false,
@@ -346,7 +346,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_dkpta")
 }, {
-"duration": 1.0,
+"duration": 4.0,
 "texture": SubResource("AtlasTexture_lfmf2")
 }],
 "loop": false,
