@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://davcfmie0bbc2"
-path="res://.godot/imported/Parallax.png-d7274486ef2ad8bc44fc3e1b7bb86823.ctex"
+uid="uid://bvtijhwqlx01u"
+path="res://.godot/imported/Ivy.png-8caf35cc1946159d722950dd52b23fa5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Parallax.png"
-dest_files=["res://.godot/imported/Parallax.png-d7274486ef2ad8bc44fc3e1b7bb86823.ctex"]
+source_file="res://Assets/Player/Ivy.png"
+dest_files=["res://.godot/imported/Ivy.png-8caf35cc1946159d722950dd52b23fa5.ctex"]
 
 [params]
 

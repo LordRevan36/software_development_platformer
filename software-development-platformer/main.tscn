@@ -448,7 +448,7 @@ repeat_times = 3
 
 [node name="Canopy" type="Sprite2D" parent="Parallax <100/Parallax80/Repeating"]
 modulate = Color(1.7919996, 1.6732408, 1.1290661, 1)
-position = Vector2(-125.756836, -482.36145)
+position = Vector2(-143.43628, -470.0442)
 scale = Vector2(-1, -1)
 texture = ExtResource("1_5vw27")
 
@@ -534,7 +534,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Canopy" type="Sprite2D" parent="Parallax <100/Parallax90/Repeating"]
 modulate = Color(1.7289262, 1.5196562, 0.7654416, 1)
-position = Vector2(-308, -584)
+position = Vector2(-306.71802, -575.0221)
 scale = Vector2(1, -1)
 texture = ExtResource("1_5vw27")
 
@@ -572,7 +572,6 @@ scale = Vector2(-1, -1)
 texture = ExtResource("1_5vw27")
 
 [node name="Player" parent="." instance=ExtResource("1_bo1nx")]
-position = Vector2(0, 0)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 offset = Vector2(0, -100)

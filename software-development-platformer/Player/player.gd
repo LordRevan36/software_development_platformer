@@ -1,5 +1,7 @@
 extends CharacterBody2D
-@onready var AnimSprite: AnimatedSprite2D = $AnimatedSprite2D #just makes code look better, easier to change later if file paths change
+@onready var AnimSprite: AnimatedSprite2D = $PlayerSprite #just makes code look better, easier to change later if file paths change
+@onready var Slash: AnimatedSprite2D = $Slash
+
 #if you ever want to do this, drag in the node you're referencing, then hold command/ctrl while releasing
 
 const SPEED = 288.0
@@ -70,8 +72,8 @@ func _physics_process(delta: float) -> void:
 				await AnimSprite.animation_finished
 				hardLand = true
 				AnimSprite.play("fall")
+
 	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
 	if !activeAction:
 		var direction := Input.get_axis("Left", "Right")
 		if !is_on_floor():
@@ -93,18 +95,20 @@ func _physics_process(delta: float) -> void:
 	
 	#Animations
 	#Checks first to see if you are attacking
-	if Input.is_action_just_pressed("Attack 1"):
+	if Input.is_action_just_pressed("Attack 1") and AnimSprite.animation != "attack":
 		velocity.x /= 2
 		if facing > 0:
-			$Slash.flip_h = false
-			$Slash.position = Vector2(120,40)
+			Slash.flip_h = false
+			Slash.position = Vector2(120,40)
 		else:
-			$Slash.flip_h = true
-			$Slash.position = Vector2(-120,40)
+			Slash.flip_h = true
+			Slash.position = Vector2(-120,40)
 		AnimSprite.play("attack")
-		$Slash.show()
+		Slash.show()
+		Slash.play("slash")
+		await Slash.animation_finished
+		Slash.hide()
 		await AnimSprite.animation_finished
-		$Slash.hide()
 		if !is_on_floor():
 			AnimSprite.play("fall")
 		else:

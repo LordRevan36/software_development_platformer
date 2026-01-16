@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvtijhwqlx01u"
-path="res://.godot/imported/Ivy.png-b408a616de91238b428c60d05a9d55c8.ctex"
+uid="uid://rnawpuddimk"
+path="res://.godot/imported/Slash.png-f2f88bc1807c08dd1e96183d6b4c788e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Ivy.png"
-dest_files=["res://.godot/imported/Ivy.png-b408a616de91238b428c60d05a9d55c8.ctex"]
+source_file="res://Assets/Player/Slash.png"
+dest_files=["res://.godot/imported/Slash.png-f2f88bc1807c08dd1e96183d6b4c788e.ctex"]
 
 [params]
 
