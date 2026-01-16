@@ -48,6 +48,9 @@ script = ExtResource("2_jjvhh")
 
 [node name="Platforms" type="Node2D" parent="."]
 
+[node name="Platform" parent="Platforms" instance=ExtResource("2_8gbba")]
+startPosition = Vector2(0, 100)
+
 [node name="FrontParallax" type="Node2D" parent="."]
 
 [node name="BackMidground" type="Parallax2D" parent="FrontParallax"]
@@ -135,9 +138,3 @@ position = Vector2(0, 12)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("WorldBoundaryShape2D_0xm2m")
-
-[node name="PlatformTimer" type="Timer" parent="."]
-wait_time = 3.0
-autostart = true
-
-[connection signal="timeout" from="PlatformTimer" to="." method="_on_platform_timer_timeout"]
