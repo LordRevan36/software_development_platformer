@@ -450,7 +450,7 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_btcbx"]
 radius = 102.0
-height = 392.0
+height = 372.0
 
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(-24, 5)
@@ -470,17 +470,17 @@ shape = SubResource("RectangleShape2D_onrkg")
 
 [node name="Slash" type="AnimatedSprite2D" parent="."]
 visible = false
-position = Vector2(97, 46)
+position = Vector2(95, 46)
 sprite_frames = SubResource("SpriteFrames_sm0op")
 animation = &"slash"
 frame = 3
 frame_progress = 1.0
 
-[node name="Attack" type="Area2D" parent="Slash"]
-position = Vector2(-54, -20)
+[node name="Attack" type="Area2D" parent="."]
+position = Vector2(41, 26)
 scale = Vector2(0.5, 0.5)
 
-[node name="AttackHitbox" type="CollisionShape2D" parent="Slash/Attack"]
+[node name="AttackHitbox" type="CollisionShape2D" parent="Attack"]
 position = Vector2(-24, 14)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_btcbx")
