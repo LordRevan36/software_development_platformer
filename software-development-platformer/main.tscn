@@ -1,8 +1,7 @@
-[gd_scene load_steps=20 format=3 uid="uid://0innvfg1noyr"]
+[gd_scene load_steps=25 format=3 uid="uid://0innvfg1noyr"]
 
 [ext_resource type="Texture2D" uid="uid://ctk8ibr44c642" path="res://Assets/Forest/Bush.png" id="1_5vw27"]
 [ext_resource type="PackedScene" uid="uid://cy1vyx88wgg4v" path="res://Player/player.tscn" id="1_bo1nx"]
-[ext_resource type="PackedScene" uid="uid://c6lcnacw8vw5s" path="res://platform.tscn" id="2_8gbba"]
 [ext_resource type="Texture2D" uid="uid://bud8q02b7boe8" path="res://Assets/Forest/BackGrass.png" id="2_efxa6"]
 [ext_resource type="Script" uid="uid://do5bugkt41qkv" path="res://camera.gd" id="2_jjvhh"]
 [ext_resource type="Texture2D" uid="uid://cc5t6dk5qt08y" path="res://Assets/Forest/Tree1.png" id="3_4c57u"]
@@ -13,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://yci8u2sv0dny" path="res://Assets/Forest/LeafParticle1.png" id="6_w48qg"]
 [ext_resource type="Texture2D" uid="uid://d15b6nmtxas3j" path="res://Assets/Forest/BushyGrass.png" id="7_5vw27"]
 [ext_resource type="Texture2D" uid="uid://ul3588q4vy3l" path="res://Assets/Forest/LeafParticle2.png" id="7_ycdy4"]
-[ext_resource type="Texture2D" uid="uid://cq7cgkb2e5fi8" path="res://Assets/Forest/BigTree.png" id="9_kek77"]
+[ext_resource type="Script" uid="uid://m70ma2rafm6p" path="res://Player/movement_particles.gd" id="11_vivmo"]
 
 [sub_resource type="Gradient" id="Gradient_w48qg"]
 offsets = PackedFloat32Array(0, 0.33490565, 0.8018868, 1)
@@ -21,6 +20,14 @@ colors = PackedColorArray(0.8298393, 0.28756416, 0.31498945, 1, 0.82405865, 0.41
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_1nvrg"]
 gradient = SubResource("Gradient_w48qg")
+
+[sub_resource type="Curve" id="Curve_w48qg"]
+bake_resolution = 25
+_data = [Vector2(0, 0.7507374), 0.0, 0.0, 0, 0, Vector2(0.5482758, 0.91946894), 0.0, 0.0, 0, 0, Vector2(1, 0.24070787), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_vivmo"]
+curve = SubResource("Curve_w48qg")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vivmo"]
 particle_flag_disable_z = true
@@ -34,17 +41,16 @@ initial_velocity_min = 20.0
 initial_velocity_max = 70.0
 angular_velocity_min = -20.000015
 angular_velocity_max = 14.999984
-gravity = Vector3(0, 150, 0)
-radial_accel_min = -1.0000023
-radial_accel_max = 0.99999774
+gravity = Vector3(0, 300, 0)
 color_initial_ramp = SubResource("GradientTexture1D_1nvrg")
 turbulence_enabled = true
-turbulence_noise_strength = 10.0
-turbulence_noise_scale = 9.5
+turbulence_noise_strength = 15.0
+turbulence_noise_scale = 8.0
 turbulence_noise_speed = Vector3(2, 1, 0)
-turbulence_noise_speed_random = 0.05
-turbulence_influence_min = 0.0
-turbulence_influence_max = 0.2
+turbulence_noise_speed_random = 1.0
+turbulence_influence_min = 0.15
+turbulence_influence_max = 0.18
+turbulence_influence_over_life = SubResource("CurveTexture_vivmo")
 
 [sub_resource type="GDScript" id="GDScript_2cqfq"]
 script/source = "extends GPUParticles2D
@@ -56,12 +62,79 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 "
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_w48qg"]
+particle_flag_disable_z = true
+angle_min = -89.99999
+angle_max = 90.000015
+direction = Vector3(0, -25, 0)
+spread = 10.0
+initial_velocity_min = 350.0
+initial_velocity_max = 350.0
+angular_velocity_min = -20.000015
+angular_velocity_max = 14.999984
+gravity = Vector3(0, 250, 0)
+radial_accel_min = -1.0000023
+radial_accel_max = 0.99999774
+color_initial_ramp = SubResource("GradientTexture1D_1nvrg")
+turbulence_enabled = true
+turbulence_noise_scale = 9.5
+turbulence_noise_speed = Vector3(2, 1, 0)
+turbulence_noise_speed_random = 0.05
+turbulence_influence_min = 0.0
+turbulence_influence_max = 0.2
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2cqfq"]
+particle_flag_disable_z = true
+angle_min = -89.99999
+angle_max = 90.000015
+direction = Vector3(0, -25, 0)
+spread = 20.0
+initial_velocity_min = 350.0
+initial_velocity_max = 350.0
+angular_velocity_min = -20.000015
+angular_velocity_max = 14.999984
+gravity = Vector3(0, 250, 0)
+radial_accel_min = -1.0000023
+radial_accel_max = 0.99999774
+color_initial_ramp = SubResource("GradientTexture1D_1nvrg")
+turbulence_enabled = true
+turbulence_noise_scale = 4.0
+turbulence_noise_speed = Vector3(2, 1, 0)
+turbulence_noise_speed_random = 0.05
+turbulence_influence_min = 0.0
+turbulence_influence_max = 0.2
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yaehf"]
+particle_flag_disable_z = true
+angle_min = -89.99999
+angle_max = 90.000015
+direction = Vector3(0, -25, 0)
+spread = 30.0
+initial_velocity_min = 250.0
+initial_velocity_max = 300.0
+angular_velocity_min = -20.000015
+angular_velocity_max = 14.999984
+gravity = Vector3(0, 250, 0)
+radial_accel_min = -1.0000023
+radial_accel_max = 0.99999774
+color_initial_ramp = SubResource("GradientTexture1D_1nvrg")
+turbulence_enabled = true
+turbulence_noise_strength = 0.5
+turbulence_noise_scale = 4.0
+turbulence_noise_speed = Vector3(2, 1, 0)
+turbulence_noise_speed_random = 0.05
+turbulence_influence_min = 0.0
+turbulence_influence_max = 0.2
+
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0xm2m"]
 distance = -285.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ycdy4"]
+size = Vector2(366, 50)
 
 [node name="Main" type="Node"]
 
@@ -78,8 +151,14 @@ repeat_times = 3
 
 [node name="Canopy" type="Sprite2D" parent="Parallax <100/Parallax30/Repeating"]
 modulate = Color(2.9472616, 3.058063, 1.896237, 1)
-position = Vector2(-169.37122, 13.365906)
+position = Vector2(-170.77844, -18.679565)
 scale = Vector2(-1, -1)
+texture = ExtResource("1_5vw27")
+
+[node name="Canopy2" type="Sprite2D" parent="Parallax <100/Parallax30/Repeating"]
+modulate = Color(2.9472616, 3.058063, 1.896237, 1)
+position = Vector2(207.40076, -233.37012)
+scale = Vector2(-1, 1)
 texture = ExtResource("1_5vw27")
 
 [node name="BackGrass" type="Sprite2D" parent="Parallax <100/Parallax30/Repeating"]
@@ -88,6 +167,7 @@ position = Vector2(-198.6352, 363.82813)
 texture = ExtResource("2_efxa6")
 
 [node name="Trees" type="Node2D" parent="Parallax <100/Parallax30/Repeating"]
+position = Vector2(6.2216797, -94.17462)
 
 [node name="Tree" type="Sprite2D" parent="Parallax <100/Parallax30/Repeating/Trees"]
 modulate = Color(0.9103884, 0.8025163, 0.35808155, 1)
@@ -215,8 +295,14 @@ repeat_times = 3
 
 [node name="Canopy" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating"]
 modulate = Color(3.1915548, 2.999711, 1.2243794, 1)
-position = Vector2(-182.31833, -70.54346)
+position = Vector2(-180.60886, -118.506836)
 scale = Vector2(-1, -1)
+texture = ExtResource("1_5vw27")
+
+[node name="Canopy2" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating"]
+modulate = Color(3.1915548, 2.999711, 1.2243794, 1)
+position = Vector2(197.57034, -333.1974)
+scale = Vector2(-1, 1)
 texture = ExtResource("1_5vw27")
 
 [node name="BackGrass" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating"]
@@ -224,85 +310,86 @@ modulate = Color(0.70319664, 0.719725, 0.29909807, 1)
 position = Vector2(-197.68933, 306.3014)
 texture = ExtResource("2_efxa6")
 
-[node name="Node2D" type="Node2D" parent="Parallax <100/Parallax40/Repeating"]
+[node name="Trees" type="Node2D" parent="Parallax <100/Parallax40/Repeating"]
+position = Vector2(6.2216797, -94.17462)
 
-[node name="Tree" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating"]
+[node name="Tree" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating/Trees"]
 modulate = Color(0.8753016, 0.7071762, 0.296279, 1)
-position = Vector2(351.5039, 175.54794)
+position = Vector2(351.5039, 175.54797)
 texture = ExtResource("3_4c57u")
 
-[node name="Tree2" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating"]
+[node name="Tree2" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating/Trees"]
 modulate = Color(0.8753016, 0.7071762, 0.296279, 1)
 position = Vector2(1977.3398, 204.19348)
 texture = ExtResource("4_efxa6")
 flip_h = true
 
-[node name="Tree3" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating"]
+[node name="Tree3" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating/Trees"]
 modulate = Color(0.8753016, 0.7071762, 0.296279, 1)
 position = Vector2(2595.504, 107.54791)
 texture = ExtResource("4_efxa6")
 
-[node name="Tree4" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating"]
+[node name="Tree4" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating/Trees"]
 modulate = Color(0.8753016, 0.7071762, 0.296279, 1)
 position = Vector2(3502.504, 146.54791)
 texture = ExtResource("3_4c57u")
 
-[node name="Tree5" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating"]
+[node name="Tree5" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating/Trees"]
 modulate = Color(0.8753016, 0.7071762, 0.296279, 1)
 position = Vector2(851.5039, 156.54791)
 texture = ExtResource("5_ycdy4")
 
-[node name="Tree6" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating"]
+[node name="Tree6" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating/Trees"]
 modulate = Color(0.8753016, 0.7071762, 0.296279, 1)
 position = Vector2(2297.504, 137.54791)
 texture = ExtResource("3_4c57u")
 
-[node name="Tree7" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating"]
+[node name="Tree7" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating/Trees"]
 modulate = Color(0.8753016, 0.7071762, 0.296279, 1)
 position = Vector2(-137.4961, 73.54791)
 texture = ExtResource("4_efxa6")
 
-[node name="Tree8" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating"]
+[node name="Tree8" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating/Trees"]
 modulate = Color(0.8753016, 0.7071762, 0.296279, 1)
 position = Vector2(1419.5039, 54.547913)
 texture = ExtResource("4_efxa6")
 
-[node name="Tree9" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating"]
+[node name="Tree9" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating/Trees"]
 modulate = Color(0.8753016, 0.7071762, 0.296279, 1)
-position = Vector2(-378.4961, 182.54794)
+position = Vector2(-378.4961, 182.54797)
 texture = ExtResource("3_4c57u")
 
-[node name="Tree10" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating"]
+[node name="Tree10" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating/Trees"]
 modulate = Color(0.8753016, 0.7071762, 0.296279, 1)
 position = Vector2(1067.5039, 114.54791)
 texture = ExtResource("4_efxa6")
 
-[node name="Tree11" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating"]
+[node name="Tree11" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating/Trees"]
 modulate = Color(0.8753016, 0.7071762, 0.296279, 1)
 position = Vector2(1865.5039, 114.54791)
 texture = ExtResource("4_efxa6")
 
-[node name="Tree12" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating"]
+[node name="Tree12" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating/Trees"]
 modulate = Color(0.8753016, 0.7071762, 0.296279, 1)
 position = Vector2(2772.504, 153.54791)
 texture = ExtResource("3_4c57u")
 
-[node name="Tree13" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating"]
+[node name="Tree13" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating/Trees"]
 modulate = Color(0.8753016, 0.7071762, 0.296279, 1)
-position = Vector2(121.50415, 163.54794)
+position = Vector2(121.50415, 163.54797)
 texture = ExtResource("5_ycdy4")
 
-[node name="Tree14" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating"]
+[node name="Tree14" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating/Trees"]
 modulate = Color(0.8753016, 0.7071762, 0.296279, 1)
 position = Vector2(1567.5039, 144.54791)
 texture = ExtResource("3_4c57u")
 
-[node name="Tree15" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating"]
+[node name="Tree15" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating/Trees"]
 modulate = Color(0.8753016, 0.7071762, 0.296279, 1)
 position = Vector2(-867.4961, 80.54791)
 texture = ExtResource("4_efxa6")
 
-[node name="Tree16" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating"]
+[node name="Tree16" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating/Trees"]
 modulate = Color(0.8753016, 0.7071762, 0.296279, 1)
 position = Vector2(689.5039, 61.547913)
 texture = ExtResource("4_efxa6")
@@ -320,8 +407,13 @@ repeat_times = 3
 
 [node name="Canopy" type="Sprite2D" parent="Parallax <100/Parallax50/Repeating"]
 modulate = Color(2.4092994, 2.7214386, 1.0234013, 1)
-position = Vector2(-240.26514, -160.45288)
+position = Vector2(-238.92627, -215.44958)
 scale = Vector2(1, -1)
+texture = ExtResource("1_5vw27")
+
+[node name="Canopy2" type="Sprite2D" parent="Parallax <100/Parallax50/Repeating"]
+modulate = Color(2.4092994, 2.7214386, 1.0234013, 1)
+position = Vector2(139.25293, -430.14014)
 texture = ExtResource("1_5vw27")
 
 [node name="BackGrass" type="Sprite2D" parent="Parallax <100/Parallax50/Repeating"]
@@ -330,6 +422,7 @@ position = Vector2(-191.90771, 248.08453)
 texture = ExtResource("2_efxa6")
 
 [node name="Trees" type="Node2D" parent="Parallax <100/Parallax50/Repeating"]
+position = Vector2(6.2216797, -94.17462)
 
 [node name="Tree" type="Sprite2D" parent="Parallax <100/Parallax50/Repeating/Trees"]
 modulate = Color(0.82316643, 0.6263619, 0.2485514, 1)
@@ -435,8 +528,14 @@ repeat_times = 3
 
 [node name="Canopy" type="Sprite2D" parent="Parallax <100/Parallax60/Repeating"]
 modulate = Color(2.0418396, 2.1792493, 1.3619889, 1)
-position = Vector2(-83.85449, -270.60986)
+position = Vector2(-77.24365, -326.39233)
 scale = Vector2(-1, -1)
+texture = ExtResource("1_5vw27")
+
+[node name="Canopy2" type="Sprite2D" parent="Parallax <100/Parallax60/Repeating"]
+modulate = Color(2.0418396, 2.1792493, 1.3619889, 1)
+position = Vector2(300.93555, -541.0829)
+scale = Vector2(-1, 1)
 texture = ExtResource("1_5vw27")
 
 [node name="BackGrass" type="Sprite2D" parent="Parallax <100/Parallax60/Repeating"]
@@ -445,6 +544,7 @@ position = Vector2(-234.12622, 199.86761)
 texture = ExtResource("2_efxa6")
 
 [node name="Trees" type="Node2D" parent="Parallax <100/Parallax60/Repeating"]
+position = Vector2(6.2216797, -94.17462)
 
 [node name="Tree" type="Sprite2D" parent="Parallax <100/Parallax60/Repeating/Trees"]
 modulate = Color(0.6988536, 0.35679176, 0.04551585, 1)
@@ -506,22 +606,28 @@ repeat_size = Vector2(2560, 0)
 repeat_times = 3
 
 [node name="LeafParticle" type="GPUParticles2D" parent="Parallax <100/Parallax70/Repeating"]
-position = Vector2(164.48364, -268.98987)
-amount = 50
+position = Vector2(241.16597, -363.35278)
+amount = 60
 amount_ratio = 0.9
 texture = ExtResource("6_w48qg")
-lifetime = 20.0
+lifetime = 25.0
 explosiveness = 0.1
 randomness = 0.3
-fixed_fps = 12
+fixed_fps = 24
+visibility_rect = Rect2(-200, -250, 400, 500)
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_vivmo")
 script = SubResource("GDScript_2cqfq")
 
 [node name="Canopy" type="Sprite2D" parent="Parallax <100/Parallax70/Repeating"]
 modulate = Color(1.8427947, 1.8695909, 1.2912447, 1)
-position = Vector2(-237.1355, -369.0421)
+position = Vector2(-236.56104, -435.33508)
 scale = Vector2(1, -1)
+texture = ExtResource("1_5vw27")
+
+[node name="Canopy2" type="Sprite2D" parent="Parallax <100/Parallax70/Repeating"]
+modulate = Color(1.8427947, 1.8695909, 1.2912447, 1)
+position = Vector2(141.61816, -650.02563)
 texture = ExtResource("1_5vw27")
 
 [node name="BackGrass" type="Sprite2D" parent="Parallax <100/Parallax70/Repeating"]
@@ -530,6 +636,7 @@ position = Vector2(-242.76978, 151.06207)
 texture = ExtResource("2_efxa6")
 
 [node name="Trees" type="Node2D" parent="Parallax <100/Parallax70/Repeating"]
+position = Vector2(6.2216797, -94.17462)
 
 [node name="Tree" type="Sprite2D" parent="Parallax <100/Parallax70/Repeating/Trees"]
 modulate = Color(0.39798617, 0.24573389, 0.07925556, 1)
@@ -576,7 +683,7 @@ texture = ExtResource("4_efxa6")
 
 [node name="Tree8" type="Sprite2D" parent="Parallax <100/Parallax70/Repeating/Trees"]
 modulate = Color(0.39798617, 0.24573389, 0.07925556, 1)
-position = Vector2(1720, -195)
+position = Vector2(1716.5431, -67.69379)
 texture = ExtResource("4_efxa6")
 
 [node name="Props" type="Parallax2D" parent="Parallax <100/Parallax70"]
@@ -592,11 +699,18 @@ repeat_times = 3
 
 [node name="Canopy" type="Sprite2D" parent="Parallax <100/Parallax80/Repeating"]
 modulate = Color(1.7919996, 1.6732408, 1.1290661, 1)
-position = Vector2(-143.43628, -470.0442)
+position = Vector2(-136.87842, -521.27783)
 scale = Vector2(-1, -1)
 texture = ExtResource("1_5vw27")
 
+[node name="Canopy2" type="Sprite2D" parent="Parallax <100/Parallax80/Repeating"]
+modulate = Color(1.7919996, 1.6732408, 1.1290661, 1)
+position = Vector2(241.30078, -735.9684)
+scale = Vector2(-1, 1)
+texture = ExtResource("1_5vw27")
+
 [node name="Trees" type="Node2D" parent="Parallax <100/Parallax80/Repeating"]
+position = Vector2(6.2216797, -94.17462)
 
 [node name="Tree" type="Sprite2D" parent="Parallax <100/Parallax80/Repeating/Trees"]
 modulate = Color(0.1661033, 0.12316645, 0.019261891, 1)
@@ -660,8 +774,13 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Canopy" type="Sprite2D" parent="Parallax <100/Parallax90/Repeating"]
 modulate = Color(1.7289262, 1.5196562, 0.7654416, 1)
-position = Vector2(-306.71802, -575.0221)
+position = Vector2(-300.1958, -630.2206)
 scale = Vector2(1, -1)
+texture = ExtResource("1_5vw27")
+
+[node name="Canopy2" type="Sprite2D" parent="Parallax <100/Parallax90/Repeating"]
+modulate = Color(1.7289262, 1.5196562, 0.7654416, 1)
+position = Vector2(77.9834, -844.91113)
 texture = ExtResource("1_5vw27")
 
 [node name="Props" type="Parallax2D" parent="Parallax <100/Parallax90"]
@@ -693,24 +812,31 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Canopy" type="Sprite2D" parent="Parallax <100/Parallax95/Repeating"]
 modulate = Color(1.7210789, 1.3615835, 0.7426006, 1)
-position = Vector2(-449, -446)
+position = Vector2(-447.26953, -546.3002)
 scale = Vector2(-1, -1)
 texture = ExtResource("1_5vw27")
 
+[node name="Canopy2" type="Sprite2D" parent="Parallax <100/Parallax95/Repeating"]
+modulate = Color(1.7210789, 1.3615835, 0.7426006, 1)
+position = Vector2(-69.09033, -760.9907)
+scale = Vector2(-1, 1)
+texture = ExtResource("1_5vw27")
+
 [node name="LeafParticle" type="GPUParticles2D" parent="Parallax <100/Parallax95/Repeating"]
-position = Vector2(149.09692, -346.51453)
-amount = 70
+position = Vector2(225.77925, -440.87744)
+amount = 80
 amount_ratio = 0.9
 texture = ExtResource("7_ycdy4")
-lifetime = 20.0
+lifetime = 25.0
 explosiveness = 0.1
 randomness = 0.3
-fixed_fps = 12
+fixed_fps = 24
 visibility_rect = Rect2(-100, 0, 200, 300)
 process_material = SubResource("ParticleProcessMaterial_vivmo")
 script = SubResource("GDScript_2cqfq")
 
 [node name="Player" parent="." instance=ExtResource("1_bo1nx")]
+position = Vector2(2, -155)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 offset = Vector2(0, -100)
@@ -718,8 +844,45 @@ zoom = Vector2(1.3, 1.3)
 position_smoothing_enabled = true
 script = ExtResource("2_jjvhh")
 
-[node name="Platform" parent="." instance=ExtResource("2_8gbba")]
-position = Vector2(1, -295)
+[node name="MovementParticles" type="Node2D" parent="Player"]
+show_behind_parent = true
+script = ExtResource("11_vivmo")
+
+[node name="RunParticle" type="GPUParticles2D" parent="Player/MovementParticles"]
+position = Vector2(-10, 112)
+amount = 30
+texture = ExtResource("7_ycdy4")
+lifetime = 6.0
+explosiveness = 0.1
+randomness = 0.3
+fixed_fps = 24
+process_material = SubResource("ParticleProcessMaterial_w48qg")
+
+[node name="JumpParticle" type="GPUParticles2D" parent="Player/MovementParticles"]
+position = Vector2(-11, 128)
+emitting = false
+amount = 20
+texture = ExtResource("7_ycdy4")
+lifetime = 6.0
+one_shot = true
+speed_scale = 2.0
+explosiveness = 1.0
+randomness = 0.3
+fixed_fps = 24
+process_material = SubResource("ParticleProcessMaterial_2cqfq")
+
+[node name="LandParticle" type="GPUParticles2D" parent="Player/MovementParticles"]
+position = Vector2(-11, 128)
+emitting = false
+amount = 10
+texture = ExtResource("7_ycdy4")
+lifetime = 6.0
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+randomness = 0.3
+fixed_fps = 24
+process_material = SubResource("ParticleProcessMaterial_yaehf")
 
 [node name="Parallax100" type="Node2D" parent="."]
 position = Vector2(1, -295)
@@ -745,8 +908,13 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Canopy" type="Sprite2D" parent="Parallax100/Repeating"]
 modulate = Color(1.4957577, 1.1363391, 0.7985637, 1)
-position = Vector2(-522, -490)
+position = Vector2(-520.26953, -590.3002)
 scale = Vector2(1, -1)
+texture = ExtResource("1_5vw27")
+
+[node name="Canopy2" type="Sprite2D" parent="Parallax100/Repeating"]
+modulate = Color(1.4957577, 1.1363391, 0.7985637, 1)
+position = Vector2(-142.09033, -804.9907)
 texture = ExtResource("1_5vw27")
 
 [node name="Props" type="Parallax2D" parent="Parallax100"]
@@ -780,8 +948,13 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Canopy" type="Sprite2D" parent="Parallax >100/Parallax110/Repeating"]
 modulate = Color(1.1958618, 0.9512316, 0.80435854, 1)
-position = Vector2(-208.9917, -596.35565)
+position = Vector2(-210.72217, -696.6558)
 scale = Vector2(1, -1)
+texture = ExtResource("1_5vw27")
+
+[node name="Canopy2" type="Sprite2D" parent="Parallax >100/Parallax110/Repeating"]
+modulate = Color(1.1958618, 0.9512316, 0.80435854, 1)
+position = Vector2(-588.90137, -911.3464)
 texture = ExtResource("1_5vw27")
 
 [node name="Props" type="Parallax2D" parent="Parallax >100/Parallax110"]
@@ -811,8 +984,13 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Canopy" type="Sprite2D" parent="Parallax >100/Parallax120/Repeating"]
 modulate = Color(0.9679722, 0.80613583, 0.67854196, 1)
-position = Vector2(-693.3456, -695.0161)
+position = Vector2(-691.6151, -795.3163)
 scale = Vector2(1, -1)
+texture = ExtResource("1_5vw27")
+
+[node name="Canopy2" type="Sprite2D" parent="Parallax >100/Parallax120/Repeating"]
+modulate = Color(0.9679722, 0.80613583, 0.67854196, 1)
+position = Vector2(-313.4359, -1010.00684)
 texture = ExtResource("1_5vw27")
 
 [node name="Props" type="Parallax2D" parent="Parallax >100/Parallax120"]
@@ -842,8 +1020,14 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Canopy" type="Sprite2D" parent="Parallax >100/Parallax130/Repeating"]
 modulate = Color(0.78426254, 0.55712736, 0.61496365, 1)
-position = Vector2(-299.35153, -826.0679)
+position = Vector2(-297.62106, -926.36804)
 scale = Vector2(-1, -1)
+texture = ExtResource("1_5vw27")
+
+[node name="Canopy2" type="Sprite2D" parent="Parallax >100/Parallax130/Repeating"]
+modulate = Color(0.78426254, 0.55712736, 0.61496365, 1)
+position = Vector2(80.558136, -1141.0586)
+scale = Vector2(-1, 1)
 texture = ExtResource("1_5vw27")
 
 [node name="Props" type="Parallax2D" parent="Parallax >100/Parallax130"]
@@ -854,23 +1038,6 @@ position = Vector2(-2, -50)
 
 [node name="Props" type="Parallax2D" parent="Parallax >100/Parallax150"]
 scroll_scale = Vector2(1.5, 1.5)
-
-[node name="Tree" type="Sprite2D" parent="Parallax >100/Parallax150/Props"]
-position = Vector2(458.9856, -908.53845)
-texture = ExtResource("9_kek77")
-centered = false
-
-[node name="Tree2" type="Sprite2D" parent="Parallax >100/Parallax150/Props"]
-position = Vector2(-1173.0144, -905.53845)
-rotation = 3.1415925
-scale = Vector2(1, -1)
-texture = ExtResource("9_kek77")
-centered = false
-
-[node name="Tree3" type="Sprite2D" parent="Parallax >100/Parallax150/Props"]
-position = Vector2(2281.5488, -914.5392)
-texture = ExtResource("9_kek77")
-centered = false
 
 [node name="Repeating" type="Parallax2D" parent="Parallax >100/Parallax150"]
 scroll_scale = Vector2(1.5, 1.5)
@@ -892,12 +1059,47 @@ centered = false
 
 [node name="Canopy" type="Sprite2D" parent="Parallax >100/Parallax150/Repeating"]
 modulate = Color(0.23154116, 0.52167636, 1.1873763, 1)
-position = Vector2(-489.7105, -1021.4137)
+position = Vector2(-487.98004, -1121.7139)
 scale = Vector2(1, -1)
 texture = ExtResource("1_5vw27")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="Canopy2" type="Sprite2D" parent="Parallax >100/Parallax150/Repeating"]
+modulate = Color(0.23154116, 0.52167636, 1.1873763, 1)
+position = Vector2(-109.80084, -1336.4044)
+scale = Vector2(-1, 1)
+texture = ExtResource("1_5vw27")
+
+[node name="Floor" type="StaticBody2D" parent="."]
 position = Vector2(1, -283)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
 shape = SubResource("WorldBoundaryShape2D_0xm2m")
+
+[node name="TempPlatform" type="StaticBody2D" parent="."]
+position = Vector2(1, -283)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TempPlatform"]
+position = Vector2(173, -15)
+shape = SubResource("RectangleShape2D_ycdy4")
+
+[node name="ColorRect" type="ColorRect" parent="TempPlatform"]
+offset_left = -10.0
+offset_top = -40.0
+offset_right = 355.0
+offset_bottom = 11.0
+
+[node name="TempPlatform2" type="StaticBody2D" parent="."]
+position = Vector2(523, -152)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TempPlatform2"]
+position = Vector2(173, -15)
+shape = SubResource("RectangleShape2D_ycdy4")
+
+[node name="ColorRect" type="ColorRect" parent="TempPlatform2"]
+offset_left = -10.0
+offset_top = -40.0
+offset_right = 355.0
+offset_bottom = 11.0
+
+[connection signal="jumped" from="Player" to="Player/MovementParticles" method="_on_player_jumped"]
+[connection signal="landed" from="Player" to="Player/MovementParticles" method="_on_player_landed"]
