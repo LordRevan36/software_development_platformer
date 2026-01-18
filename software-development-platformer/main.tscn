@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://0innvfg1noyr"]
+[gd_scene load_steps=23 format=3 uid="uid://0innvfg1noyr"]
 
 [ext_resource type="Texture2D" uid="uid://ctk8ibr44c642" path="res://Assets/Forest/Bush.png" id="1_5vw27"]
 [ext_resource type="PackedScene" uid="uid://cy1vyx88wgg4v" path="res://Player/player.tscn" id="1_bo1nx"]
@@ -14,6 +14,9 @@
 [ext_resource type="Texture2D" uid="uid://d15b6nmtxas3j" path="res://Assets/Forest/BushyGrass.png" id="7_5vw27"]
 [ext_resource type="Texture2D" uid="uid://ul3588q4vy3l" path="res://Assets/Forest/LeafParticle2.png" id="7_ycdy4"]
 [ext_resource type="Texture2D" uid="uid://cq7cgkb2e5fi8" path="res://Assets/Forest/BigTree.png" id="9_kek77"]
+[ext_resource type="Script" uid="uid://bqovlgcavqgg2" path="res://health_bar.gd" id="15_vivmo"]
+[ext_resource type="Script" uid="uid://dhqon0kvpcrte" path="res://button.gd" id="16_2cqfq"]
+[ext_resource type="Script" uid="uid://qy3w7jrwih6c" path="res://heal_button.gd" id="17_yaehf"]
 
 [sub_resource type="Gradient" id="Gradient_w48qg"]
 offsets = PackedFloat32Array(0, 0.33490565, 0.8018868, 1)
@@ -710,7 +713,7 @@ visibility_rect = Rect2(-100, 0, 200, 300)
 process_material = SubResource("ParticleProcessMaterial_vivmo")
 script = SubResource("GDScript_2cqfq")
 
-[node name="Player" parent="." instance=ExtResource("1_bo1nx")]
+[node name="Player" parent="." groups=["Player"] instance=ExtResource("1_bo1nx")]
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 offset = Vector2(0, -100)
@@ -901,3 +904,29 @@ position = Vector2(1, -283)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("WorldBoundaryShape2D_0xm2m")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+offset = Vector2(15, 15)
+transform = Transform2D(1, 0, 0, 1, 15, 15)
+
+[node name="HealthBar" type="ProgressBar" parent="CanvasLayer" groups=["Player"]]
+offset_right = 400.0
+offset_bottom = 60.0
+value = 100.0
+script = ExtResource("15_vivmo")
+
+[node name="DamageButton" type="Button" parent="CanvasLayer"]
+offset_left = 88.0
+offset_top = 66.0
+offset_right = 306.0
+offset_bottom = 124.0
+text = "Take Damage"
+script = ExtResource("16_2cqfq")
+
+[node name="HealButton" type="Button" parent="CanvasLayer"]
+offset_left = 88.0
+offset_top = 134.0
+offset_right = 306.0
+offset_bottom = 192.0
+text = "Heal Damage"
+script = ExtResource("17_yaehf")

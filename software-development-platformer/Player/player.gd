@@ -11,7 +11,27 @@ var tempYVelocityStorage = 0
 var facing = 1 #1 for right, -1 for left
 var hardLand = false #used to do landing animation after a large fall, but not tiny gaps
 
+#Healthbar
+signal health_changed(current, max)
+@export var MAX_Health := 100
+var health := MAX_Health
+
+#function for taking damage
+func take_damage(amount: int) -> void:
+	health = max(health - amount, 0)
+	emit_signal("health_changed", health, MAX_Health)
+	if health < 0:
+		health = 0
+
+#function for healing
+func heal(amount: int) -> void:
+	health = max(health + amount, 0)
+	emit_signal("health_changed", health, MAX_Health)
+	if health > MAX_Health:
+		health = MAX_Health
+
 func _physics_process(delta: float) -> void:
+
 	if (AnimSprite.animation == "attack") or (AnimSprite.animation == "backflip") or (AnimSprite.animation == "frontflip")  or (AnimSprite.animation == "crouch") or (AnimSprite.animation == "land"):
 		activeAction = true
 	else:
