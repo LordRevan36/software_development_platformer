@@ -12,7 +12,7 @@ var state = "idle" #state variable so physics doesn't depend on animations (bad 
 
 var time := 0.0 #time
 var crouchStartTime := 0.0 #used to store how long player crouches down for
-var jumpVelocityX := 0.0 #stores x velocity of player immediately after jumping
+var jumpVelocity = Vector2(0,0) #stores x velocity of player immediately after jumping
 var slow = 1 #stores velocity vector of player immediately before attacking
 
 
@@ -38,7 +38,7 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 		
 	
-	# attack
+	# ATTACKING
 	if Input.is_action_just_pressed("Attack 1"):
 		state = "attack"
 		attack_started.emit()
@@ -56,11 +56,11 @@ func _physics_process(delta: float) -> void:
 		# run
 		velocity.x = move_toward(velocity.x, SPEED * direction, SPEED/4)
 		
-		# sees if on ground and not currently crouched
+		# sees if on ground and not currently crouched or otherwise occupied
 		if state != "crouch" and state != "attack":
 			if direction != 0:
 				state = "run"
-			else:
+			elif state != "land": #this way, you can still run after landing, which feels better
 				state = "idle"
 			if (Input.is_action_just_pressed("Up") or Input.is_action_just_pressed("FlipLeft") or Input.is_action_just_pressed("FlipRight")):
 				state = "crouch"
@@ -107,11 +107,13 @@ func _physics_process(delta: float) -> void:
 		if state == "jump" or state == "fall":
 			velocity.x = lerp(velocity.x, SPEED*direction, 0.2)
 			
-		#LANDING
-		if is_on_floor() and !was_on_floor:
-			landed.emit()
-			if velocity.y > 100:
-				state = "land"
+			
+			
+			
+	#LANDING
+	if is_on_floor() and !was_on_floor:
+		landed.emit()
+		state = "land"
 		
 	was_on_floor = is_on_floor()	 #value used in subsequent frame to see if player just landed
 	
@@ -156,12 +158,14 @@ func updateAnimations():
 		attack_finished.emit()
 	elif state == "land":
 		AnimSprite.play("land")
+		await AnimSprite.animation_finished
+		state = "idle"
 		
 func jump():
 	velocity.y = (JUMP_VELOCITY+JUMP_VELOCITY*(time-crouchStartTime)/2)
 	state = "jump"
 	jumped.emit()
-	jumpVelocityX = velocity.x
+	jumpVelocity = velocity
 	
 	
 func backflip():
@@ -169,7 +173,7 @@ func backflip():
 	velocity.x = -(SPEED+SPEED*(time-crouchStartTime)/4)*facing*0.6
 	state = "backflip"
 	jumped.emit()
-	jumpVelocityX = velocity.x
+	jumpVelocity = velocity
 	
 	
 func frontflip():
@@ -177,5 +181,5 @@ func frontflip():
 	velocity.x = (SPEED+SPEED*(time-crouchStartTime)/4)*facing*1.7
 	state = "frontflip"
 	jumped.emit()
-	jumpVelocityX = velocity.x
+	jumpVelocity = velocity
 	

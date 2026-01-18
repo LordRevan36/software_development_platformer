@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://cy1vyx88wgg4v"]
+[gd_scene load_steps=62 format=3 uid="uid://cy1vyx88wgg4v"]
 
 [ext_resource type="Script" uid="uid://bangw8dvmuyod" path="res://Player/player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://bvtijhwqlx01u" path="res://Assets/Player/Ivy.png" id="2_gwnis"]
@@ -71,10 +71,6 @@ region = Rect2(896, 1120, 224, 224)
 [sub_resource type="AtlasTexture" id="AtlasTexture_gwnis"]
 atlas = ExtResource("2_gwnis")
 region = Rect2(1120, 1120, 224, 224)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_efx54"]
-atlas = ExtResource("2_gwnis")
-region = Rect2(0, 1344, 224, 224)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_755ss"]
 atlas = ExtResource("2_gwnis")
@@ -277,13 +273,10 @@ animations = [{
 "speed": 3.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_efx54")
-}, {
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_755ss")
 }, {
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_bbimk")
 }, {
 "duration": 100.0,
