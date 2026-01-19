@@ -28,7 +28,7 @@ var health := MAX_Health
 
  #signals to communicate important events, can be detected in other scripts.
 #Currently just used for particles and physics.
-signal landed #player lands after being in the air
+signal landed(landingVelocity) #player lands after being in the air
 signal jumped #player has left the ground with upward velocity. currently emitted for flips, too.
 signal attack_started
 signal attack_finished
@@ -53,11 +53,11 @@ func heal(amount: int) -> void:
 
 func _physics_process(delta: float) -> void:
 	direction = Input.get_axis("Left", "Right") # =-1 when holding left, 1 when holding right, 0 when neither
-	time += delta
+	time += delta #used to calculate time the jump button is held
 	slow = 1
 	
-	
-	#something suggested online for better gamefeel- increase falling gravity
+	#gravity
+	#something suggested online for better gamefeel- increase gravity when falling. i think it feels nice
 	if state == "attack":
 		velocity += get_gravity() * delta * 0.6
 	elif velocity.y > 0:
@@ -67,7 +67,7 @@ func _physics_process(delta: float) -> void:
 		
 	# LANDING
 	if is_on_floor() and !was_on_floor:
-		landed.emit()
+		landed.emit(landVelocity)
 		if state == "backflip" or state == "frontflip":
 			state = "flipland"
 		else:
@@ -108,7 +108,7 @@ func _physics_process(delta: float) -> void:
 			
 		# sees if on ground and not currently crouched or otherwise occupied
 		if state != "crouch" and state != "attack" and state != "flipland":
-			if direction != 0:
+			if direction != 0 and !is_on_wall():
 				state = "run"
 			elif state != "land": #this way, you can still run after landing, which feels better
 				state = "idle"
@@ -168,6 +168,7 @@ func _physics_process(delta: float) -> void:
 		
 		
 	was_on_floor = is_on_floor()	 #value used isn subsequent frame to see if player just landed
+	landVelocity = velocity #stores velocity from last frame so landing velocity is accurate
 	
 	if state == "attack":
 		slow = 0.5 #used to slow player's velocity right before calculations for effects
@@ -202,7 +203,11 @@ func updateAnimations():
 		#await AnimSprite.animation_finished
 		#state = "fall"
 	elif state == "fall":
-		AnimSprite.play("fall")
+		if velocity.y < 100: #if payer's velocity is upwards, hair won't fall yet
+			AnimSprite.animation = "fall"
+			AnimSprite.frame = 0
+		else:
+			AnimSprite.play("fall")
 	elif state == "attack":
 		AnimSprite.play("attack")
 		if facing == 1:
@@ -254,6 +259,19 @@ func frontflip():
 
 func _on_coyote_jump_timer_timeout() -> void:
 	canJump = false
+	if state == "crouch": #makes player jump instead of just falling off the ledge if they were trying to jump
+		if Input.is_action_pressed("Up"):
+			jump()
+		elif Input.is_action_pressed("FlipLeft"):
+			if facing == 1:
+				backflip()
+			else:
+				frontflip()
+		elif Input.is_action_pressed("FlipRight"):
+			if facing == 1:
+				frontflip()
+			else:
+				backflip()
 
 
 func _on_attack_timer_timeout() -> void:

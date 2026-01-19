@@ -20,6 +20,8 @@ func _on_player_jumped() -> void:
 	jump_particle.process_material.direction.x = -player.velocity.x/50
 	jump_particle.restart()
 
-func _on_player_landed() -> void:
-	land_particle.amount = int(15+player.velocity.y/50) #BROKEN RN. landing velocity is always recorded the same because ground slows player.
-	land_particle.restart()
+func _on_player_landed(landVelocity) -> void:
+	if landVelocity.y > 200:
+		land_particle.amount = int(5+landVelocity.y/50) #BROKEN RN. landing velocity is always recorded the same because ground slows player.
+		land_particle.restart()
+	print(landVelocity.y)

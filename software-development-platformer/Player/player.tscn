@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://cy1vyx88wgg4v"]
+[gd_scene load_steps=64 format=3 uid="uid://cy1vyx88wgg4v"]
 
 [ext_resource type="Script" uid="uid://bangw8dvmuyod" path="res://Player/player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://bvtijhwqlx01u" path="res://Assets/Player/Ivy.png" id="2_gwnis"]
@@ -75,6 +75,10 @@ region = Rect2(896, 1120, 224, 224)
 [sub_resource type="AtlasTexture" id="AtlasTexture_gwnis"]
 atlas = ExtResource("2_gwnis")
 region = Rect2(1120, 1120, 224, 224)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_efx54"]
+atlas = ExtResource("2_gwnis")
+region = Rect2(0, 1344, 224, 224)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_755ss"]
 atlas = ExtResource("2_gwnis")
@@ -280,6 +284,9 @@ animations = [{
 "speed": 3.0
 }, {
 "frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_efx54")
+}, {
 "duration": 2.0,
 "texture": SubResource("AtlasTexture_755ss")
 }, {
@@ -291,7 +298,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"fall",
-"speed": 6.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -469,7 +476,7 @@ metadata/_edit_group_ = true
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_sh265")
-animation = &"attack"
+animation = &"fall"
 autoplay = "idle"
 
 [node name="PlayerHitbox" type="CollisionShape2D" parent="."]
@@ -497,7 +504,7 @@ shape = SubResource("CapsuleShape2D_btcbx")
 [node name="Timers" type="Node2D" parent="."]
 
 [node name="CoyoteJumpTimer" type="Timer" parent="Timers"]
-wait_time = 0.25
+wait_time = 0.2
 one_shot = true
 
 [node name="AttackTimer" type="Timer" parent="Timers"]
