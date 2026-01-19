@@ -21,4 +21,5 @@ func _on_player_jumped() -> void:
 	jump_particle.restart()
 
 func _on_player_landed() -> void:
+	land_particle.amount = int(15+player.velocity.y/50) #BROKEN RN. landing velocity is always recorded the same because ground slows player.
 	land_particle.restart()

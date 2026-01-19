@@ -130,11 +130,11 @@ turbulence_noise_speed_random = 0.05
 turbulence_influence_min = 0.0
 turbulence_influence_max = 0.2
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0xm2m"]
-distance = -285.0
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ycdy4"]
 size = Vector2(366, 50)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0xm2m"]
+distance = -285.0
 
 [node name="Main" type="Node"]
 
@@ -884,6 +884,46 @@ randomness = 0.3
 fixed_fps = 24
 process_material = SubResource("ParticleProcessMaterial_yaehf")
 
+[node name="TempPlatform" type="StaticBody2D" parent="."]
+position = Vector2(1, -283)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TempPlatform"]
+position = Vector2(173, -15)
+shape = SubResource("RectangleShape2D_ycdy4")
+
+[node name="ColorRect" type="ColorRect" parent="TempPlatform"]
+offset_left = -10.0
+offset_top = -40.0
+offset_right = 355.0
+offset_bottom = 11.0
+
+[node name="TempPlatform2" type="StaticBody2D" parent="."]
+position = Vector2(523, -152)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TempPlatform2"]
+position = Vector2(173, -15)
+shape = SubResource("RectangleShape2D_ycdy4")
+
+[node name="ColorRect" type="ColorRect" parent="TempPlatform2"]
+offset_left = -10.0
+offset_top = -40.0
+offset_right = 355.0
+offset_bottom = 11.0
+
+[node name="TempPlatform3" type="StaticBody2D" parent="."]
+position = Vector2(1111, -50.000015)
+scale = Vector2(1, 6.8799996)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TempPlatform3"]
+position = Vector2(173, -15)
+shape = SubResource("RectangleShape2D_ycdy4")
+
+[node name="ColorRect" type="ColorRect" parent="TempPlatform3"]
+offset_left = -10.0
+offset_top = -40.0
+offset_right = 355.0
+offset_bottom = 11.0
+
 [node name="Parallax100" type="Node2D" parent="."]
 position = Vector2(1, -295)
 
@@ -1074,32 +1114,6 @@ position = Vector2(1, -283)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
 shape = SubResource("WorldBoundaryShape2D_0xm2m")
-
-[node name="TempPlatform" type="StaticBody2D" parent="."]
-position = Vector2(1, -283)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TempPlatform"]
-position = Vector2(173, -15)
-shape = SubResource("RectangleShape2D_ycdy4")
-
-[node name="ColorRect" type="ColorRect" parent="TempPlatform"]
-offset_left = -10.0
-offset_top = -40.0
-offset_right = 355.0
-offset_bottom = 11.0
-
-[node name="TempPlatform2" type="StaticBody2D" parent="."]
-position = Vector2(523, -152)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TempPlatform2"]
-position = Vector2(173, -15)
-shape = SubResource("RectangleShape2D_ycdy4")
-
-[node name="ColorRect" type="ColorRect" parent="TempPlatform2"]
-offset_left = -10.0
-offset_top = -40.0
-offset_right = 355.0
-offset_bottom = 11.0
 
 [connection signal="jumped" from="Player" to="Player/MovementParticles" method="_on_player_jumped"]
 [connection signal="landed" from="Player" to="Player/MovementParticles" method="_on_player_landed"]

@@ -5,14 +5,18 @@ extends CharacterBody2D
 
 const SPEED = 288.0
 const JUMP_VELOCITY = -520.0
+
+var friction = 0.9 #value from 0 to 1. 1 means full friction on floor when running, 0 means full icy floor
+var air_control = 0.5 #value from 0 to 1, lets you control how easily player can control their air movement
+
 var was_on_floor = false #replaces old hardLand; simply stores last frame's is_on_floor for detecting landing.
 var direction = 0
 var facing = 1 #1 for right, -1 for left. like direction, but doesnt change if we dont want it to
 var state = "idle" #state variable so physics doesn't depend on animations (bad practice i think?)
-
 var time := 0.0 #time
 var crouchStartTime := 0.0 #used to store how long player crouches down for
-var jumpVelocity = Vector2(0,0) #stores x velocity of player immediately after jumping
+var jumpVelocity = Vector2(0,0) #stores velocity of player immediately after jumping
+var landVelocity = Vector2(0,0) #stores velocity of player immediately before landing
 var slow = 1 #stores velocity vector of player immediately before attacking
 
 
@@ -37,7 +41,15 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity += get_gravity() * delta
 		
-	
+	# LANDING
+	if is_on_floor() and !was_on_floor:
+		landed.emit()
+		if state == "backflip" or state == "frontflip":
+			state = "flipland"
+		else:
+			state = "land"
+			
+			
 	# ATTACKING
 	if Input.is_action_just_pressed("Attack 1"):
 		state = "attack"
@@ -53,22 +65,32 @@ func _physics_process(delta: float) -> void:
 			
 	if is_on_floor():
 
-		# run
-		velocity.x = move_toward(velocity.x, SPEED * direction, SPEED/4)
-		
+		# MOVEMENT ON GROUND, includes friction and slight sliding on landing. values will likely need to be tweaked later
+		if (state == "crouch"):
+			slow = (0.8-(time-crouchStartTime)*1.5)/friction #slows movement if holding jumps
+		elif state == "run":
+			velocity.x = move_toward(velocity.x, SPEED * direction, SPEED/4*friction)
+		elif state == "idle" or state == "land":
+			velocity.x = move_toward(velocity.x, SPEED * direction, SPEED/8*friction)
+		elif state == "flipland":
+			velocity.x = move_toward(velocity.x, SPEED * direction, SPEED/32*friction)
+			
 		# sees if on ground and not currently crouched or otherwise occupied
-		if state != "crouch" and state != "attack":
+		if state != "crouch" and state != "attack" and state != "flipland":
 			if direction != 0:
 				state = "run"
 			elif state != "land": #this way, you can still run after landing, which feels better
 				state = "idle"
+				
+		# CROUCHING DOWN
+		if state != "crouch" and state != "attack":
 			if (Input.is_action_just_pressed("Up") or Input.is_action_just_pressed("FlipLeft") or Input.is_action_just_pressed("FlipRight")):
 				state = "crouch"
 				crouchStartTime = time
-		
+			
 		# HOLDING JUMP/FLIP
 		if (state == "crouch"):
-			slow = 1-(time-crouchStartTime)*1.5 #slows movement if holding jumps
+			slow = (0.8-(time-crouchStartTime)*1.5)/friction #slows movement if holding jumps
 
 			#JUMPING/FLIPPING
 			if ((time-crouchStartTime)>0.5): #if player's held down the jump/flip button too long:
@@ -98,34 +120,31 @@ func _physics_process(delta: float) -> void:
 				else:
 					backflip()
 		
-			
+		
 	else: #not on floor
-		#SETS FALLING IF IN AIR AND Not OTHER ACTION
+		#SETS FALLING IF IN AIR AND NOT DOING OTHER ACTION
 		if (state != "jump") and (state != "backflip") and (state != "frontflip") and (state != "attack"):
 			state = "fall"
-		#MIDAIR MOVEMENT. not during flips though
+			
+		#MIDAIR MOVEMENT. not during flips though! To nerf  them
 		if state == "jump" or state == "fall":
-			velocity.x = lerp(velocity.x, SPEED*direction, 0.2)
-			
-			
-			
-			
-	#LANDING
-	if is_on_floor() and !was_on_floor:
-		landed.emit()
-		state = "land"
+			velocity.x = lerp(velocity.x, SPEED*direction, 0.2*air_control)
+		if state == "backflip" or state == "frontflip":
+			velocity.x = lerp(velocity.x, jumpVelocity.x, 0.02) #so bumping a wall doesnt fully stop momentum
 		
-	was_on_floor = is_on_floor()	 #value used in subsequent frame to see if player just landed
+		
+		
+	was_on_floor = is_on_floor()	 #value used isn subsequent frame to see if player just landed
 	
 	if state == "attack":
-		slow = 0.5 #used to slow player's velocity for effects
+		slow = 0.5 #used to slow player's velocity right before calculations for effects
 	velocity *= slow
 	move_and_slide()
 	velocity /= slow
 	updateAnimations()
-	
-			
-		
+
+
+
 func updateAnimations():
 	if facing == 1:
 		AnimSprite.flip_h = false;
@@ -143,24 +162,30 @@ func updateAnimations():
 		state = "fall" ##THIS IS A BAD SOLUTION BUT I STRUGGLE TO FIND A WORKAROUND. Ideally, updateAnimations wouldn't affect any physics processes at all! 
 	elif state == "backflip":
 		AnimSprite.play("backflip")
-		await AnimSprite.animation_finished
-		state = "fall"
+		#await AnimSprite.animation_finished
+		#state = "fall"
 	elif state == "frontflip":
 		AnimSprite.play("frontflip")
-		await AnimSprite.animation_finished
-		state = "fall"
+		#await AnimSprite.animation_finished
+		#state = "fall"
 	elif state == "fall":
 		AnimSprite.play("fall")
 	elif state == "attack":
 		AnimSprite.play("attack")
 		await AnimSprite.animation_finished
-		state = "idle" #AGAIN I DONT LIKE DOING THIS. Could create a timer and set the state in physics_process, but im too lazy rn.
+		if AnimSprite.animation == "attack": #prevents waiting for ANY animation to end if this one is interrupted
+			state = "idle" #AGAIN I DONT LIKE DOING THIS. Could create a timer and set the state in physics_process, but im too lazy rn.
 		attack_finished.emit()
 	elif state == "land":
 		AnimSprite.play("land")
 		await AnimSprite.animation_finished
-		state = "idle"
-		
+		if AnimSprite.animation == "land":
+			state = "idle"
+	elif state == "flipland":
+		AnimSprite.play("flipland")
+		await AnimSprite.animation_finished
+		if AnimSprite.animation == "flipland":
+			state = "idle"
 func jump():
 	velocity.y = (JUMP_VELOCITY+JUMP_VELOCITY*(time-crouchStartTime)/2)
 	state = "jump"
