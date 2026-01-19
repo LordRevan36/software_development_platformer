@@ -64,6 +64,10 @@ region = Rect2(672, 672, 224, 224)
 atlas = ExtResource("2_gwnis")
 region = Rect2(896, 672, 224, 224)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_76lrf"]
+atlas = ExtResource("2_gwnis")
+region = Rect2(1120, 672, 224, 224)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_btcbx"]
 atlas = ExtResource("2_gwnis")
 region = Rect2(896, 1120, 224, 224)
@@ -71,10 +75,6 @@ region = Rect2(896, 1120, 224, 224)
 [sub_resource type="AtlasTexture" id="AtlasTexture_gwnis"]
 atlas = ExtResource("2_gwnis")
 region = Rect2(1120, 1120, 224, 224)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_efx54"]
-atlas = ExtResource("2_gwnis")
-region = Rect2(0, 1344, 224, 224)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_755ss"]
 atlas = ExtResource("2_gwnis")
@@ -87,6 +87,18 @@ region = Rect2(448, 1344, 224, 224)
 [sub_resource type="AtlasTexture" id="AtlasTexture_m0h3t"]
 atlas = ExtResource("2_gwnis")
 region = Rect2(672, 1344, 224, 224)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_maysp"]
+atlas = ExtResource("2_gwnis")
+region = Rect2(1120, 672, 224, 224)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1l10g"]
+atlas = ExtResource("2_gwnis")
+region = Rect2(1344, 672, 224, 224)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6rl0i"]
+atlas = ExtResource("2_gwnis")
+region = Rect2(0, 896, 224, 224)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i4o1l"]
 atlas = ExtResource("2_gwnis")
@@ -116,10 +128,6 @@ region = Rect2(0, 672, 224, 224)
 atlas = ExtResource("2_gwnis")
 region = Rect2(1344, 448, 224, 224)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8ynux"]
-atlas = ExtResource("2_gwnis")
-region = Rect2(1344, 672, 224, 224)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_d30e8"]
 atlas = ExtResource("2_gwnis")
 region = Rect2(0, 0, 224, 224)
@@ -148,17 +156,9 @@ region = Rect2(1344, 1120, 224, 224)
 atlas = ExtResource("2_gwnis")
 region = Rect2(0, 1344, 224, 224)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_maysp"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_sm0op"]
 atlas = ExtResource("2_gwnis")
-region = Rect2(1120, 672, 224, 224)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1l10g"]
-atlas = ExtResource("2_gwnis")
-region = Rect2(1344, 672, 224, 224)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6rl0i"]
-atlas = ExtResource("2_gwnis")
-region = Rect2(0, 896, 224, 224)
+region = Rect2(1120, 1120, 224, 224)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6eb1q"]
 atlas = ExtResource("2_gwnis")
@@ -260,8 +260,11 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_8mwp6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_76lrf")
 }],
-"loop": false,
+"loop": true,
 "name": &"backflip",
 "speed": 12.0
 }, {
@@ -269,24 +272,21 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_btcbx")
 }, {
-"duration": 1.5,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_gwnis")
 }],
 "loop": false,
 "name": &"crouch",
-"speed": 12.0
+"speed": 3.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_efx54")
-}, {
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_755ss")
 }, {
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_bbimk")
 }, {
-"duration": 1.0,
+"duration": 100.0,
 "texture": SubResource("AtlasTexture_m0h3t")
 }],
 "loop": false,
@@ -294,31 +294,42 @@ animations = [{
 "speed": 6.0
 }, {
 "frames": [{
-"duration": 1.33,
-"texture": SubResource("AtlasTexture_i4o1l")
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_maysp")
 }, {
-"duration": 1.33,
-"texture": SubResource("AtlasTexture_j2n6q")
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1l10g")
 }, {
-"duration": 1.33,
-"texture": SubResource("AtlasTexture_c6x0f")
-}, {
-"duration": 1.33,
-"texture": SubResource("AtlasTexture_jp1hh")
-}, {
-"duration": 1.33,
-"texture": SubResource("AtlasTexture_qs4pp")
-}, {
-"duration": 1.33,
-"texture": SubResource("AtlasTexture_iyprq")
-}, {
-"duration": 1.33,
-"texture": SubResource("AtlasTexture_f4lon")
-}, {
-"duration": 1.33,
-"texture": SubResource("AtlasTexture_8ynux")
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6rl0i")
 }],
 "loop": false,
+"name": &"flipland",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i4o1l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j2n6q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c6x0f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jp1hh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qs4pp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iyprq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f4lon")
+}],
+"loop": true,
 "name": &"frontflip",
 "speed": 12.0
 }, {
@@ -355,10 +366,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_maysp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1l10g")
+"texture": SubResource("AtlasTexture_sm0op")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_6rl0i")
@@ -409,8 +417,9 @@ animations = [{
 "speed": 12.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
-size = Vector2(37, 127)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gwnis"]
+radius = 19.0
+height = 119.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b1ygp"]
 atlas = ExtResource("3_btcbx")
@@ -459,14 +468,12 @@ metadata/_edit_group_ = true
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_sh265")
-animation = &"attack"
+animation = &"idle"
 autoplay = "idle"
-frame = 8
-frame_progress = 1.0
 
 [node name="PlayerHitbox" type="CollisionShape2D" parent="."]
-position = Vector2(-7.5, 47.5)
-shape = SubResource("RectangleShape2D_onrkg")
+position = Vector2(2, 51)
+shape = SubResource("CapsuleShape2D_gwnis")
 
 [node name="Slash" type="AnimatedSprite2D" parent="."]
 visible = false
@@ -477,6 +484,7 @@ frame = 3
 frame_progress = 1.0
 
 [node name="Attack" type="Area2D" parent="."]
+visible = false
 position = Vector2(41, 26)
 scale = Vector2(0.5, 0.5)
 
@@ -484,3 +492,11 @@ scale = Vector2(0.5, 0.5)
 position = Vector2(-24, 14)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_btcbx")
+
+[node name="CoyoteJumpTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[connection signal="animation_finished" from="PlayerSprite" to="." method="_on_player_animation_finished"]
+[connection signal="animation_finished" from="Slash" to="." method="_on_slash_animation_finished"]
+[connection signal="timeout" from="CoyoteJumpTimer" to="." method="_on_coyote_jump_timer_timeout"]
