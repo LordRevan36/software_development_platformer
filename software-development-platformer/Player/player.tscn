@@ -495,6 +495,8 @@ shape = SubResource("CapsuleShape2D_btcbx")
 
 [node name="CoyoteJumpTimer" type="Timer" parent="."]
 wait_time = 0.2
+one_shot = true
 
 [connection signal="animation_finished" from="PlayerSprite" to="." method="_on_player_animation_finished"]
 [connection signal="animation_finished" from="Slash" to="." method="_on_slash_animation_finished"]
+[connection signal="timeout" from="CoyoteJumpTimer" to="." method="_on_coyote_jump_timer_timeout"]

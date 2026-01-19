@@ -1,6 +1,8 @@
 extends CharacterBody2D
 @onready var AnimSprite: AnimatedSprite2D = $PlayerSprite #just makes code look better, easier to change later if file paths change
 @onready var Slash: AnimatedSprite2D = $Slash
+@onready var CoyoteTimer: Timer = $CoyoteJumpTimer
+
 #if you ever want to do this, drag in the node you're referencing, then hold command/ctrl while releasing
 
 const SPEED = 288.0
@@ -18,7 +20,7 @@ var crouchStartTime := 0.0 #used to store how long player crouches down for
 var jumpVelocity = Vector2(0,0) #stores velocity of player immediately after jumping
 var landVelocity = Vector2(0,0) #stores velocity of player immediately before landing
 var slow = 1 #stores velocity vector of player immediately before attacking
-
+var canJump = true #used to let player jump a little after leaving the platform
 
  #signals to communicate important events, can be detected in other scripts.
 #Currently just used for particles and physics.
@@ -28,6 +30,7 @@ signal attack_started
 signal attack_finished
 
 func _physics_process(delta: float) -> void:
+	print(CoyoteTimer.time_left)
 	direction = Input.get_axis("Left", "Right") # =-1 when holding left, 1 when holding right, 0 when neither
 	time += delta
 	slow = 1
@@ -64,7 +67,11 @@ func _physics_process(delta: float) -> void:
 			
 			
 	if is_on_floor():
-
+		
+		#resetting coyote jump time
+		if !canJump:
+			canJump = true
+			
 		# MOVEMENT ON GROUND, includes friction and slight sliding on landing. values will likely need to be tweaked later
 		if (state == "crouch"):
 			slow = (0.8-(time-crouchStartTime)*1.5)/friction #slows movement if holding jumps
@@ -82,7 +89,8 @@ func _physics_process(delta: float) -> void:
 			elif state != "land": #this way, you can still run after landing, which feels better
 				state = "idle"
 				
-		# CROUCHING DOWN
+	# CROUCHING DOWN (i didn't use is_on_floor() in this section, so they can coyote jump
+	if canJump:
 		if state != "crouch" and state != "attack":
 			if (Input.is_action_just_pressed("Up") or Input.is_action_just_pressed("FlipLeft") or Input.is_action_just_pressed("FlipRight")):
 				state = "crouch"
@@ -121,11 +129,13 @@ func _physics_process(delta: float) -> void:
 					backflip()
 		
 		
-	else: #not on floor
+	if !is_on_floor(): #not on floor, its a little inefficient to not connect this to the is_on_floor above, but thats nit how the order worked out
+		if canJump and CoyoteTimer.is_stopped():
+			CoyoteTimer.start()
+
 		#SETS FALLING IF IN AIR AND NOT DOING OTHER ACTION
-		if (state != "jump") and (state != "backflip") and (state != "frontflip") and (state != "attack"):
+		if (state != "jump") and (state != "backflip") and (state != "frontflip") and (state != "attack") and !(state == "crouch" and canJump):
 			state = "fall"
-			
 		#MIDAIR MOVEMENT. not during flips though! To nerf  them
 		if state == "jump" or state == "fall":
 			velocity.x = lerp(velocity.x, SPEED*direction, 0.2*air_control)
@@ -186,9 +196,11 @@ func updateAnimations():
 		await AnimSprite.animation_finished
 		if AnimSprite.animation == "flipland":
 			state = "idle"
+			
 func jump():
 	velocity.y = (JUMP_VELOCITY+JUMP_VELOCITY*(time-crouchStartTime)/2)
 	state = "jump"
+	canJump = false
 	jumped.emit()
 	jumpVelocity = velocity
 	
@@ -197,6 +209,7 @@ func backflip():
 	velocity.y = (JUMP_VELOCITY+JUMP_VELOCITY*(time-crouchStartTime)/4)*1.45
 	velocity.x = -(SPEED+SPEED*(time-crouchStartTime)/4)*facing*0.6
 	state = "backflip"
+	canJump = false
 	jumped.emit()
 	jumpVelocity = velocity
 	
@@ -205,6 +218,11 @@ func frontflip():
 	velocity.y = (JUMP_VELOCITY+JUMP_VELOCITY*(time-crouchStartTime)/4)*0.8
 	velocity.x = (SPEED+SPEED*(time-crouchStartTime)/4)*facing*1.7
 	state = "frontflip"
+	canJump = false
 	jumped.emit()
 	jumpVelocity = velocity
 	
+
+
+func _on_coyote_jump_timer_timeout() -> void:
+	canJump = false
