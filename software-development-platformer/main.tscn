@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://0innvfg1noyr"]
+[gd_scene load_steps=28 format=3 uid="uid://0innvfg1noyr"]
 
 [ext_resource type="Texture2D" uid="uid://ctk8ibr44c642" path="res://Assets/Forest/Bush.png" id="1_5vw27"]
 [ext_resource type="PackedScene" uid="uid://cy1vyx88wgg4v" path="res://Player/player.tscn" id="1_bo1nx"]
@@ -13,7 +13,6 @@
 [ext_resource type="Texture2D" uid="uid://d15b6nmtxas3j" path="res://Assets/Forest/BushyGrass.png" id="7_5vw27"]
 [ext_resource type="Texture2D" uid="uid://ul3588q4vy3l" path="res://Assets/Forest/LeafParticle2.png" id="7_ycdy4"]
 [ext_resource type="Script" uid="uid://m70ma2rafm6p" path="res://Player/movement_particles.gd" id="11_vivmo"]
-[ext_resource type="Texture2D" uid="uid://cq7cgkb2e5fi8" path="res://Assets/Forest/BigTree.png" id="9_kek77"]
 [ext_resource type="Script" uid="uid://bqovlgcavqgg2" path="res://health_bar.gd" id="15_vivmo"]
 [ext_resource type="Script" uid="uid://dhqon0kvpcrte" path="res://button.gd" id="16_2cqfq"]
 [ext_resource type="Script" uid="uid://qy3w7jrwih6c" path="res://heal_button.gd" id="17_yaehf"]
@@ -1118,8 +1117,6 @@ position = Vector2(1, -283)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
 shape = SubResource("WorldBoundaryShape2D_0xm2m")
 
-[connection signal="jumped" from="Player" to="Player/MovementParticles" method="_on_player_jumped"]
-[connection signal="landed" from="Player" to="Player/MovementParticles" method="_on_player_landed"]
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 offset = Vector2(15, 15)
 transform = Transform2D(1, 0, 0, 1, 15, 15)
@@ -1145,3 +1142,6 @@ offset_right = 306.0
 offset_bottom = 192.0
 text = "Heal Damage"
 script = ExtResource("17_yaehf")
+
+[connection signal="jumped" from="Player" to="Player/MovementParticles" method="_on_player_jumped"]
+[connection signal="landed" from="Player" to="Player/MovementParticles" method="_on_player_landed"]
