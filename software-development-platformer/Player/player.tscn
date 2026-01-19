@@ -464,11 +464,12 @@ height = 372.0
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(-24, 5)
 script = ExtResource("1_onrkg")
+friction = 0.8
 metadata/_edit_group_ = true
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_sh265")
-animation = &"idle"
+animation = &"attack"
 autoplay = "idle"
 
 [node name="PlayerHitbox" type="CollisionShape2D" parent="."]
@@ -493,10 +494,18 @@ position = Vector2(-24, 14)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_btcbx")
 
-[node name="CoyoteJumpTimer" type="Timer" parent="."]
+[node name="Timers" type="Node2D" parent="."]
+
+[node name="CoyoteJumpTimer" type="Timer" parent="Timers"]
 wait_time = 0.25
 one_shot = true
 
+[node name="AttackTimer" type="Timer" parent="Timers"]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="animation_finished" from="PlayerSprite" to="." method="_on_player_sprite_animation_finished"]
 [connection signal="animation_finished" from="PlayerSprite" to="." method="_on_player_animation_finished"]
 [connection signal="animation_finished" from="Slash" to="." method="_on_slash_animation_finished"]
-[connection signal="timeout" from="CoyoteJumpTimer" to="." method="_on_coyote_jump_timer_timeout"]
+[connection signal="timeout" from="Timers/CoyoteJumpTimer" to="." method="_on_coyote_jump_timer_timeout"]
+[connection signal="timeout" from="Timers/AttackTimer" to="." method="_on_attack_timer_timeout"]

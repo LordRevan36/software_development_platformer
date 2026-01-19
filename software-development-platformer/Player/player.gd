@@ -1,7 +1,8 @@
 extends CharacterBody2D
 @onready var AnimSprite: AnimatedSprite2D = $PlayerSprite #just makes code look better, easier to change later if file paths change
 @onready var Slash: AnimatedSprite2D = $Slash
-@onready var CoyoteTimer: Timer = $CoyoteJumpTimer
+@onready var CoyoteTimer: Timer = $Timers/CoyoteJumpTimer
+@onready var AttackTimer: Timer = $Timers/AttackTimer #making these timers both for balance tweaking, and not letting animations determinephysics state
 
 #if you ever want to do this, drag in the node you're referencing, then hold command/ctrl while releasing
 
@@ -77,6 +78,8 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("Attack 1"):
 		state = "attack"
 		attack_started.emit()
+		AttackTimer.start()
+		
 	
 	#UPDATES FACING WHEN IN APPROPRIATE STATE
 	if state == "run" or state == "idle" or state == "fall" or state == "jump":
@@ -94,7 +97,8 @@ func _physics_process(delta: float) -> void:
 			
 		# MOVEMENT ON GROUND, includes friction and slight sliding on landing. values will likely need to be tweaked later
 		if (state == "crouch"):
-			slow = (0.8-(time-crouchStartTime)*1.5)/friction #slows movement if holding jumps
+			velocity.x = move_toward(velocity.x, 0, SPEED/24*friction)
+			#slow = (0.8-(time-crouchStartTime)*1.5)/friction #slows movement if holding jumps
 		elif state == "run":
 			velocity.x = move_toward(velocity.x, SPEED * direction, SPEED/4*friction)
 		elif state == "idle" or state == "land":
@@ -118,8 +122,7 @@ func _physics_process(delta: float) -> void:
 			
 		# HOLDING JUMP/FLIP
 		if (state == "crouch"):
-			slow = (0.8-(time-crouchStartTime)*1.5)/friction #slows movement if holding jumps
-
+			
 			#JUMPING/FLIPPING
 			if ((time-crouchStartTime)>0.5): #if player's held down the jump/flip button too long:
 				if Input.is_action_pressed("Up"):
@@ -202,10 +205,15 @@ func updateAnimations():
 		AnimSprite.play("fall")
 	elif state == "attack":
 		AnimSprite.play("attack")
-		await AnimSprite.animation_finished
-		if AnimSprite.animation == "attack": #prevents waiting for ANY animation to end if this one is interrupted
-			state = "idle" #AGAIN I DONT LIKE DOING THIS. Could create a timer and set the state in physics_process, but im too lazy rn.
-		attack_finished.emit()
+		if facing == 1:
+			Slash.position = Vector2(95,46)
+			Slash.flip_h = false
+		else:
+			Slash.position = Vector2(-95,46)
+			Slash.flip_h = true
+		if AnimSprite.animation == "attack" and AnimSprite.frame == 2: #delays the slash slightly
+			Slash.show()
+			Slash.play()
 	elif state == "land":
 		AnimSprite.play("land")
 		await AnimSprite.animation_finished
@@ -246,3 +254,13 @@ func frontflip():
 
 func _on_coyote_jump_timer_timeout() -> void:
 	canJump = false
+
+
+func _on_attack_timer_timeout() -> void:
+	state = "idle"
+	attack_finished.emit()
+
+
+# HIDING SLASH
+func _on_slash_animation_finished() -> void: #used to visually hide slash when its done
+	Slash.hide()
