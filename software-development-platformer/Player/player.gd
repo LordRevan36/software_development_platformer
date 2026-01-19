@@ -8,8 +8,9 @@ extends CharacterBody2D
 const SPEED = 288.0
 const JUMP_VELOCITY = -520.0
 
-var friction = 0.9 #value from 0 to 1. 1 means full friction on floor when running, 0 means full icy floor
-var air_control = 0.5 #value from 0 to 1, lets you control how easily player can control their air movement
+@export var friction = 0.9 #value from 0 to 1. 1 means full friction on floor when running, 0 means full icy floor
+@export var air_control = 0.5 #value from 0 to 1, lets you control how easily player can control their air movement
+@export var MAX_Health := 100
 
 var was_on_floor = false #replaces old hardLand; simply stores last frame's is_on_floor for detecting landing.
 var direction = 0
@@ -21,6 +22,8 @@ var jumpVelocity = Vector2(0,0) #stores velocity of player immediately after jum
 var landVelocity = Vector2(0,0) #stores velocity of player immediately before landing
 var slow = 1 #stores velocity vector of player immediately before attacking
 var canJump = true #used to let player jump a little after leaving the platform
+#Healthbar
+var health := MAX_Health
 
  #signals to communicate important events, can be detected in other scripts.
 #Currently just used for particles and physics.
@@ -28,6 +31,23 @@ signal landed #player lands after being in the air
 signal jumped #player has left the ground with upward velocity. currently emitted for flips, too.
 signal attack_started
 signal attack_finished
+signal health_changed(current, max)
+
+#function for taking damage
+func take_damage(amount: int) -> void:
+	health = max(health - amount, 0)
+	emit_signal("health_changed", health, MAX_Health)
+	if health < 0:
+		health = 0
+
+#function for healing
+func heal(amount: int) -> void:
+	health = max(health + amount, 0)
+	emit_signal("health_changed", health, MAX_Health)
+	if health > MAX_Health:
+		health = MAX_Health
+
+
 
 func _physics_process(delta: float) -> void:
 	print(CoyoteTimer.time_left)
