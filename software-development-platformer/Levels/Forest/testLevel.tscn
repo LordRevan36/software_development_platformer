@@ -1,0 +1,250 @@
+[gd_scene load_steps=17 format=3 uid="uid://b1iavla5jso1x"]
+
+[ext_resource type="Texture2D" uid="uid://ctk8ibr44c642" path="res://Assets/Forest/Bush.png" id="1_w8v3s"]
+[ext_resource type="Texture2D" uid="uid://c2fn1ck4bikb1" path="res://Assets/Forest/Grass.png" id="7_sqofj"]
+[ext_resource type="Texture2D" uid="uid://ul3588q4vy3l" path="res://Assets/Forest/LeafParticle2.png" id="8_tpwu6"]
+[ext_resource type="PackedScene" uid="uid://cy1vyx88wgg4v" path="res://Player/player.tscn" id="9_diqn3"]
+[ext_resource type="Script" uid="uid://do5bugkt41qkv" path="res://camera.gd" id="10_t3dj1"]
+[ext_resource type="Script" uid="uid://m70ma2rafm6p" path="res://Player/movement_particles.gd" id="11_b7crr"]
+[ext_resource type="Script" uid="uid://bqovlgcavqgg2" path="res://UI/health_bar.gd" id="14_em3r6"]
+[ext_resource type="Script" uid="uid://dhqon0kvpcrte" path="res://UI/button.gd" id="15_soehs"]
+[ext_resource type="Script" uid="uid://qy3w7jrwih6c" path="res://UI/heal_button.gd" id="16_time6"]
+
+[sub_resource type="Gradient" id="Gradient_w48qg"]
+offsets = PackedFloat32Array(0, 0.33490565, 0.8018868, 1)
+colors = PackedColorArray(0.8298393, 0.28756416, 0.31498945, 1, 0.82405865, 0.41192046, 0.21686882, 1, 0.9603854, 0.6462903, 0, 1, 0.95962197, 0.8111548, 3.85046e-07, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_1nvrg"]
+gradient = SubResource("Gradient_w48qg")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_w48qg"]
+particle_flag_disable_z = true
+angle_min = -89.99999
+angle_max = 90.000015
+direction = Vector3(0, -25, 0)
+spread = 10.0
+initial_velocity_min = 350.0
+initial_velocity_max = 350.0
+angular_velocity_min = -20.000015
+angular_velocity_max = 14.999984
+gravity = Vector3(0, 250, 0)
+radial_accel_min = -1.0000023
+radial_accel_max = 0.99999774
+color_initial_ramp = SubResource("GradientTexture1D_1nvrg")
+turbulence_enabled = true
+turbulence_noise_scale = 9.5
+turbulence_noise_speed = Vector3(2, 1, 0)
+turbulence_noise_speed_random = 0.05
+turbulence_influence_min = 0.0
+turbulence_influence_max = 0.2
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2cqfq"]
+particle_flag_disable_z = true
+angle_min = -89.99999
+angle_max = 90.000015
+direction = Vector3(0, -25, 0)
+spread = 20.0
+initial_velocity_min = 350.0
+initial_velocity_max = 350.0
+angular_velocity_min = -20.000015
+angular_velocity_max = 14.999984
+gravity = Vector3(0, 250, 0)
+radial_accel_min = -1.0000023
+radial_accel_max = 0.99999774
+color_initial_ramp = SubResource("GradientTexture1D_1nvrg")
+turbulence_enabled = true
+turbulence_noise_scale = 4.0
+turbulence_noise_speed = Vector3(2, 1, 0)
+turbulence_noise_speed_random = 0.05
+turbulence_influence_min = 0.0
+turbulence_influence_max = 0.2
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yaehf"]
+particle_flag_disable_z = true
+angle_min = -89.99999
+angle_max = 90.000015
+direction = Vector3(0, -25, 0)
+spread = 30.0
+initial_velocity_min = 250.0
+initial_velocity_max = 300.0
+angular_velocity_min = -20.000015
+angular_velocity_max = 14.999984
+gravity = Vector3(0, 250, 0)
+radial_accel_min = -1.0000023
+radial_accel_max = 0.99999774
+color_initial_ramp = SubResource("GradientTexture1D_1nvrg")
+turbulence_enabled = true
+turbulence_noise_strength = 0.5
+turbulence_noise_scale = 4.0
+turbulence_noise_speed = Vector3(2, 1, 0)
+turbulence_noise_speed_random = 0.05
+turbulence_influence_min = 0.0
+turbulence_influence_max = 0.2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ycdy4"]
+size = Vector2(366, 50)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0xm2m"]
+distance = -285.0
+
+[node name="Main" type="Node"]
+
+[node name="Player" parent="." instance=ExtResource("9_diqn3")]
+position = Vector2(-20, -124)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+offset = Vector2(0, -100)
+zoom = Vector2(1.3, 1.3)
+position_smoothing_enabled = true
+script = ExtResource("10_t3dj1")
+
+[node name="MovementParticles" type="Node2D" parent="Player"]
+show_behind_parent = true
+script = ExtResource("11_b7crr")
+
+[node name="RunParticle" type="GPUParticles2D" parent="Player/MovementParticles"]
+position = Vector2(-10, 112)
+amount = 30
+texture = ExtResource("8_tpwu6")
+lifetime = 6.0
+explosiveness = 0.1
+randomness = 0.3
+fixed_fps = 24
+process_material = SubResource("ParticleProcessMaterial_w48qg")
+
+[node name="JumpParticle" type="GPUParticles2D" parent="Player/MovementParticles"]
+position = Vector2(-11, 128)
+emitting = false
+amount = 20
+texture = ExtResource("8_tpwu6")
+lifetime = 6.0
+one_shot = true
+speed_scale = 2.0
+explosiveness = 1.0
+randomness = 0.3
+fixed_fps = 24
+process_material = SubResource("ParticleProcessMaterial_2cqfq")
+
+[node name="LandParticle" type="GPUParticles2D" parent="Player/MovementParticles"]
+position = Vector2(-11, 128)
+emitting = false
+amount = 10
+texture = ExtResource("8_tpwu6")
+lifetime = 6.0
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+randomness = 0.3
+fixed_fps = 24
+process_material = SubResource("ParticleProcessMaterial_yaehf")
+
+[node name="TempPlatform" type="StaticBody2D" parent="."]
+position = Vector2(1, -281)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TempPlatform"]
+position = Vector2(173, -15)
+shape = SubResource("RectangleShape2D_ycdy4")
+
+[node name="ColorRect" type="ColorRect" parent="TempPlatform"]
+offset_left = -10.0
+offset_top = -40.0
+offset_right = 355.0
+offset_bottom = 11.0
+
+[node name="TempPlatform2" type="StaticBody2D" parent="."]
+position = Vector2(526, -147)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TempPlatform2"]
+position = Vector2(173, -15)
+shape = SubResource("RectangleShape2D_ycdy4")
+
+[node name="ColorRect" type="ColorRect" parent="TempPlatform2"]
+offset_left = -10.0
+offset_top = -40.0
+offset_right = 355.0
+offset_bottom = 11.0
+
+[node name="TempPlatform3" type="StaticBody2D" parent="."]
+position = Vector2(1246, 2)
+scale = Vector2(1, 6.8799996)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TempPlatform3"]
+position = Vector2(173, -15)
+shape = SubResource("RectangleShape2D_ycdy4")
+
+[node name="ColorRect" type="ColorRect" parent="TempPlatform3"]
+offset_left = -10.0
+offset_top = -40.0
+offset_right = 355.0
+offset_bottom = 11.0
+
+[node name="Parallax100" type="Node2D" parent="."]
+position = Vector2(1, -295)
+
+[node name="Repeating" type="Parallax2D" parent="Parallax100"]
+scroll_offset = Vector2(-2156, 23)
+repeat_size = Vector2(2560, 0)
+repeat_times = 3
+
+[node name="Grass" type="Sprite2D" parent="Parallax100/Repeating"]
+modulate = Color(1.3285676, 0.9534372, 0.4952448, 1)
+position = Vector2(-1140, -116)
+texture = ExtResource("7_sqofj")
+
+[node name="BottomGrass" type="ColorRect" parent="Parallax100/Repeating"]
+offset_left = -1321.0
+offset_top = 294.0
+offset_right = 1222.0
+offset_bottom = 353.0
+scale = Vector2(1.6800048, 9.080003)
+color = Color(1, 0.8784314, 0.1882353, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Canopy" type="Sprite2D" parent="Parallax100/Repeating"]
+modulate = Color(1.4957577, 1.1363391, 0.7985637, 1)
+position = Vector2(-520.26953, -590.3002)
+scale = Vector2(1, -1)
+texture = ExtResource("1_w8v3s")
+
+[node name="Canopy2" type="Sprite2D" parent="Parallax100/Repeating"]
+modulate = Color(1.4957577, 1.1363391, 0.7985637, 1)
+position = Vector2(-142.09033, -804.9907)
+texture = ExtResource("1_w8v3s")
+
+[node name="Props" type="Parallax2D" parent="Parallax100"]
+scroll_scale = Vector2(1.1, 1.1)
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(1, -283)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+shape = SubResource("WorldBoundaryShape2D_0xm2m")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+offset = Vector2(15, 15)
+transform = Transform2D(1, 0, 0, 1, 15, 15)
+
+[node name="HealthBar" type="ProgressBar" parent="CanvasLayer" groups=["Player"]]
+offset_right = 400.0
+offset_bottom = 60.0
+value = 100.0
+script = ExtResource("14_em3r6")
+
+[node name="DamageButton" type="Button" parent="CanvasLayer"]
+offset_left = 88.0
+offset_top = 66.0
+offset_right = 306.0
+offset_bottom = 124.0
+text = "Take Damage"
+script = ExtResource("15_soehs")
+
+[node name="HealButton" type="Button" parent="CanvasLayer"]
+offset_left = 88.0
+offset_top = 134.0
+offset_right = 306.0
+offset_bottom = 192.0
+text = "Heal Damage"
+script = ExtResource("16_time6")
+
+[connection signal="jumped" from="Player" to="Player/MovementParticles" method="_on_player_jumped"]
+[connection signal="landed" from="Player" to="Player/MovementParticles" method="_on_player_landed"]

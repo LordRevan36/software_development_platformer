@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://0innvfg1noyr"]
+[gd_scene load_steps=29 format=3 uid="uid://0innvfg1noyr"]
 
 [ext_resource type="Texture2D" uid="uid://ctk8ibr44c642" path="res://Assets/Forest/Bush.png" id="1_5vw27"]
 [ext_resource type="PackedScene" uid="uid://cy1vyx88wgg4v" path="res://Player/player.tscn" id="1_bo1nx"]
@@ -13,9 +13,10 @@
 [ext_resource type="Texture2D" uid="uid://d15b6nmtxas3j" path="res://Assets/Forest/BushyGrass.png" id="7_5vw27"]
 [ext_resource type="Texture2D" uid="uid://ul3588q4vy3l" path="res://Assets/Forest/LeafParticle2.png" id="7_ycdy4"]
 [ext_resource type="Script" uid="uid://m70ma2rafm6p" path="res://Player/movement_particles.gd" id="11_vivmo"]
-[ext_resource type="Script" uid="uid://bqovlgcavqgg2" path="res://health_bar.gd" id="15_vivmo"]
-[ext_resource type="Script" uid="uid://dhqon0kvpcrte" path="res://button.gd" id="16_2cqfq"]
-[ext_resource type="Script" uid="uid://qy3w7jrwih6c" path="res://heal_button.gd" id="17_yaehf"]
+[ext_resource type="PackedScene" uid="uid://cikgxfjxyjw3r" path="res://exit.tscn" id="12_86kmy"]
+[ext_resource type="Script" uid="uid://bqovlgcavqgg2" path="res://UI/health_bar.gd" id="15_vivmo"]
+[ext_resource type="Script" uid="uid://dhqon0kvpcrte" path="res://UI/button.gd" id="16_2cqfq"]
+[ext_resource type="Script" uid="uid://qy3w7jrwih6c" path="res://UI/heal_button.gd" id="17_yaehf"]
 
 [sub_resource type="Gradient" id="Gradient_w48qg"]
 offsets = PackedFloat32Array(0, 0.33490565, 0.8018868, 1)
@@ -151,6 +152,14 @@ position = Vector2(-5, 192)
 scroll_scale = Vector2(0.3, 0.3)
 repeat_size = Vector2(2560, 0)
 repeat_times = 3
+
+[node name="Background" type="ColorRect" parent="Parallax <100/Parallax30/Repeating"]
+offset_left = 1.9460449
+offset_top = 0.2970581
+offset_right = 2.946045
+offset_bottom = 1.2970581
+scale = Vector2(2560, 500)
+color = Color(0.9517366, 0.8742226, 0.3032913, 1)
 
 [node name="Canopy" type="Sprite2D" parent="Parallax <100/Parallax30/Repeating"]
 modulate = Color(2.9472616, 3.058063, 1.896237, 1)
@@ -838,7 +847,8 @@ visibility_rect = Rect2(-100, 0, 200, 300)
 process_material = SubResource("ParticleProcessMaterial_vivmo")
 script = SubResource("GDScript_2cqfq")
 
-[node name="Player" parent="." groups=["Player"] instance=ExtResource("1_bo1nx")]
+[node name="Player" parent="." instance=ExtResource("1_bo1nx")]
+position = Vector2(-20, -124)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 offset = Vector2(0, -100)
@@ -887,7 +897,7 @@ fixed_fps = 24
 process_material = SubResource("ParticleProcessMaterial_yaehf")
 
 [node name="TempPlatform" type="StaticBody2D" parent="."]
-position = Vector2(1, -283)
+position = Vector2(1, -281)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TempPlatform"]
 position = Vector2(173, -15)
@@ -900,7 +910,7 @@ offset_right = 355.0
 offset_bottom = 11.0
 
 [node name="TempPlatform2" type="StaticBody2D" parent="."]
-position = Vector2(523, -152)
+position = Vector2(526, -147)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TempPlatform2"]
 position = Vector2(173, -15)
@@ -913,7 +923,7 @@ offset_right = 355.0
 offset_bottom = 11.0
 
 [node name="TempPlatform3" type="StaticBody2D" parent="."]
-position = Vector2(1111, -50.000015)
+position = Vector2(1246, 2)
 scale = Vector2(1, 6.8799996)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TempPlatform3"]
@@ -925,6 +935,13 @@ offset_left = -10.0
 offset_top = -40.0
 offset_right = 355.0
 offset_bottom = 11.0
+
+[node name="LevelExit" parent="." instance=ExtResource("12_86kmy")]
+position = Vector2(1582, -275)
+exit = "uid://b1iavla5jso1x"
+
+[node name="CollisionShape2D" parent="LevelExit" index="0"]
+position = Vector2(4, -166)
 
 [node name="Parallax100" type="Node2D" parent="."]
 position = Vector2(1, -295)
@@ -1117,17 +1134,17 @@ position = Vector2(1, -283)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
 shape = SubResource("WorldBoundaryShape2D_0xm2m")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="."]
 offset = Vector2(15, 15)
 transform = Transform2D(1, 0, 0, 1, 15, 15)
 
-[node name="HealthBar" type="ProgressBar" parent="CanvasLayer" groups=["Player"]]
+[node name="HealthBar" type="ProgressBar" parent="UI" groups=["Player"]]
 offset_right = 400.0
 offset_bottom = 60.0
 value = 100.0
 script = ExtResource("15_vivmo")
 
-[node name="DamageButton" type="Button" parent="CanvasLayer"]
+[node name="DamageButton" type="Button" parent="UI"]
 offset_left = 88.0
 offset_top = 66.0
 offset_right = 306.0
@@ -1135,7 +1152,7 @@ offset_bottom = 124.0
 text = "Take Damage"
 script = ExtResource("16_2cqfq")
 
-[node name="HealButton" type="Button" parent="CanvasLayer"]
+[node name="HealButton" type="Button" parent="UI"]
 offset_left = 88.0
 offset_top = 134.0
 offset_right = 306.0
@@ -1145,3 +1162,5 @@ script = ExtResource("17_yaehf")
 
 [connection signal="jumped" from="Player" to="Player/MovementParticles" method="_on_player_jumped"]
 [connection signal="landed" from="Player" to="Player/MovementParticles" method="_on_player_landed"]
+
+[editable path="LevelExit"]

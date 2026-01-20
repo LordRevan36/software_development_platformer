@@ -24,4 +24,3 @@ func _on_player_landed(landVelocity) -> void:
 	if landVelocity.y > 200:
 		land_particle.amount = int(5+landVelocity.y/50) #BROKEN RN. landing velocity is always recorded the same because ground slows player.
 		land_particle.restart()
-	print(landVelocity.y)
