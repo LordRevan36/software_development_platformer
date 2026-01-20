@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://0innvfg1noyr"]
+[gd_scene load_steps=31 format=3 uid="uid://0innvfg1noyr"]
 
 [ext_resource type="Texture2D" uid="uid://ctk8ibr44c642" path="res://Assets/Forest/Bush.png" id="1_5vw27"]
 [ext_resource type="PackedScene" uid="uid://cy1vyx88wgg4v" path="res://Player/player.tscn" id="1_bo1nx"]
@@ -13,8 +13,9 @@
 [ext_resource type="Texture2D" uid="uid://d15b6nmtxas3j" path="res://Assets/Forest/BushyGrass.png" id="7_5vw27"]
 [ext_resource type="Texture2D" uid="uid://ul3588q4vy3l" path="res://Assets/Forest/LeafParticle2.png" id="7_ycdy4"]
 [ext_resource type="Script" uid="uid://m70ma2rafm6p" path="res://Player/movement_particles.gd" id="11_vivmo"]
-[ext_resource type="Script" uid="uid://bqovlgcavqgg2" path="res://health_bar.gd" id="15_vivmo"]
-[ext_resource type="Script" uid="uid://dhqon0kvpcrte" path="res://button.gd" id="16_2cqfq"]
+[ext_resource type="Script" uid="uid://dhqon0kvpcrte" path="res://DamageButton.gd" id="16_2cqfq"]
+[ext_resource type="Texture2D" uid="uid://cbmy31rblo60d" path="res://Assets/HUD/HealthBar.png" id="16_yaehf"]
+[ext_resource type="Script" uid="uid://rexj3shyfaq6" path="res://HealthBar.gd" id="17_074og"]
 [ext_resource type="Script" uid="uid://qy3w7jrwih6c" path="res://heal_button.gd" id="17_yaehf"]
 
 [sub_resource type="Gradient" id="Gradient_w48qg"]
@@ -138,6 +139,14 @@ size = Vector2(366, 50)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0xm2m"]
 distance = -285.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cegan"]
+atlas = ExtResource("16_yaehf")
+region = Rect2(0, 128, 384, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_getpj"]
+atlas = ExtResource("16_yaehf")
+region = Rect2(0, 0, 384, 128)
 
 [node name="Main" type="Node"]
 
@@ -1121,27 +1130,33 @@ shape = SubResource("WorldBoundaryShape2D_0xm2m")
 offset = Vector2(15, 15)
 transform = Transform2D(1, 0, 0, 1, 15, 15)
 
-[node name="HealthBar" type="ProgressBar" parent="CanvasLayer" groups=["Player"]]
-offset_right = 400.0
-offset_bottom = 60.0
-value = 100.0
-script = ExtResource("15_vivmo")
-
 [node name="DamageButton" type="Button" parent="CanvasLayer"]
-offset_left = 88.0
-offset_top = 66.0
-offset_right = 306.0
-offset_bottom = 124.0
+offset_left = 158.0
+offset_top = 111.0
+offset_right = 376.0
+offset_bottom = 169.0
 text = "Take Damage"
 script = ExtResource("16_2cqfq")
 
 [node name="HealButton" type="Button" parent="CanvasLayer"]
-offset_left = 88.0
-offset_top = 134.0
-offset_right = 306.0
-offset_bottom = 192.0
+offset_left = 158.0
+offset_top = 179.0
+offset_right = 376.0
+offset_bottom = 237.0
 text = "Heal Damage"
 script = ExtResource("17_yaehf")
+
+[node name="HealthBar" type="TextureProgressBar" parent="CanvasLayer"]
+offset_left = 12.0
+offset_top = -43.0
+offset_right = 140.0
+offset_bottom = 85.0
+scale = Vector2(1.2911928, 1.4154341)
+value = 100.0
+texture_under = SubResource("AtlasTexture_cegan")
+texture_progress = SubResource("AtlasTexture_getpj")
+script = ExtResource("17_074og")
+player_path = NodePath("../../Player")
 
 [connection signal="jumped" from="Player" to="Player/MovementParticles" method="_on_player_jumped"]
 [connection signal="landed" from="Player" to="Player/MovementParticles" method="_on_player_landed"]

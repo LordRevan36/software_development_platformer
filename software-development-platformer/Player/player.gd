@@ -23,8 +23,7 @@ var jumpVelocity = Vector2(0,0) #stores velocity of player immediately after jum
 var landVelocity = Vector2(0,0) #stores velocity of player immediately before landing
 var slow = 1 #stores velocity vector of player immediately before attacking
 var canJump = true #used to let player jump a little after leaving the platform
-#Healthbar
-var health := MAX_Health
+var health := MAX_Health #stores the health for the player
 
  #signals to communicate important events, can be detected in other scripts.
 #Currently just used for particles and physics.
@@ -277,7 +276,6 @@ func _on_coyote_jump_timer_timeout() -> void:
 func _on_attack_timer_timeout() -> void:
 	state = "idle"
 	attack_finished.emit()
-
 
 # HIDING SLASH
 func _on_slash_animation_finished() -> void: #used to visually hide slash when its done
