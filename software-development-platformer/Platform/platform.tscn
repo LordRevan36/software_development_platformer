@@ -12,10 +12,12 @@ script = ExtResource("1_0v4dy")
 texture_filter = 1
 texture_repeat = 2
 color = Color(0.30497152, 0.18106371, 2.4065375e-08, 1)
-texture = ExtResource("2_g263t")
 polygon = PackedVector2Array(-5, 1, 5, 1, 5, -1, -5, -1)
 
 [node name="BorderLine2D" type="Line2D" parent="."]
 texture_repeat = 2
+points = PackedVector2Array(11, 3)
 closed = true
 default_color = Color(0.25865784, 0.14798227, 0, 1)
+texture = ExtResource("2_g263t")
+texture_mode = 1
