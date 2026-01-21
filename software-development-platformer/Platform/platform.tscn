@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://c6lcnacw8vw5s"]
+[gd_scene load_steps=4 format=3 uid="uid://c6lcnacw8vw5s"]
 
 [ext_resource type="Script" uid="uid://6hfsroor2sbh" path="res://Platform/platform.gd" id="1_0v4dy"]
 [ext_resource type="Texture2D" uid="uid://gd7bqfy28ehk" path="res://Assets/MissingTexture.png" id="2_g263t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g263t"]
+resource_local_to_scene = true
+size = Vector2(366, 50)
 
 [node name="Platform" type="StaticBody2D"]
 script = ExtResource("1_0v4dy")
@@ -21,3 +25,7 @@ closed = true
 default_color = Color(0.25865784, 0.14798227, 0, 1)
 texture = ExtResource("2_g263t")
 texture_mode = 1
+
+[node name="RectangleOutline" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_g263t")
+disabled = true
