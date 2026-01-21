@@ -7,6 +7,10 @@ extends StaticBody2D
 #For rectangles, use the rectangle outline to create your shape
 #For polygons, they haven't been tested thoroughly so hold off on that
 
+#TODO
+#Fix Line2D centering
+#Update polygon mode
+
 @onready var polygon_2d = $Polygon2D
 @onready var collision_polygon_2d = $CollisionPolygon2D
 @onready var border_line_2d = $BorderLine2D
@@ -25,13 +29,18 @@ func _update_editor_visibility() -> void:
 	if not collision_polygon_2d or not rectangle_outline:
 		return
 	#shows only the collision box used for that type of shape based on edit_mode
-	match edit_mode:
-		EditMode.RECTANGLE:
-			collision_polygon_2d.visible = false;
-			rectangle_outline.visible = true;
-		EditMode.POLYGON:
-			collision_polygon_2d.visible = false;
-			rectangle_outline.visible = true;
+	if Engine.is_editor_hint():
+		match edit_mode:
+			EditMode.RECTANGLE:
+				collision_polygon_2d.visible = false
+				rectangle_outline.visible = true
+			EditMode.POLYGON:
+				collision_polygon_2d.visible = true
+				rectangle_outline.visible = false
+	else:
+		polygon_2d.visible = true
+		border_line_2d.visible = true
+		rectangle_outline.visible = false
 
 func _sync_shapes() -> void:
 	#stop if node deleted
@@ -63,7 +72,7 @@ func _sync_shapes() -> void:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	_sync_shapes()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
