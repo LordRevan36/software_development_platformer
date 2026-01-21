@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://0innvfg1noyr"]
+[gd_scene load_steps=35 format=3 uid="uid://0innvfg1noyr"]
 
 [ext_resource type="Texture2D" uid="uid://ctk8ibr44c642" path="res://Assets/Forest/Bush.png" id="1_5vw27"]
 [ext_resource type="PackedScene" uid="uid://cy1vyx88wgg4v" path="res://Player/player.tscn" id="1_bo1nx"]
@@ -138,6 +138,18 @@ turbulence_influence_max = 0.2
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cegan"]
 resource_local_to_scene = true
 size = Vector2(366, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_074og"]
+resource_local_to_scene = true
+size = Vector2(125, 46)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_82xsv"]
+resource_local_to_scene = true
+size = Vector2(366, 411)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_getpj"]
+resource_local_to_scene = true
+size = Vector2(98, 50)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0xm2m"]
 distance = -285.0
@@ -901,20 +913,72 @@ process_material = SubResource("ParticleProcessMaterial_yaehf")
 position = Vector2(-9, -323)
 
 [node name="Platform" parent="Platforms" instance=ExtResource("12_074og")]
-points = PackedVector2Array(-94, 137, 272, 137, 272, 187, -94, 187)
+points = PackedVector2Array(-86, 115, 280, 115, 280, 165, -86, 165)
 
 [node name="CollisionPolygon2D" parent="Platforms/Platform" index="0"]
-polygon = PackedVector2Array(-94, 137, 272, 137, 272, 187, -94, 187)
+polygon = PackedVector2Array(-86, 115, 280, 115, 280, 165, -86, 165)
 
 [node name="Polygon2D" parent="Platforms/Platform" index="1"]
-polygon = PackedVector2Array(-94, 137, 272, 137, 272, 187, -94, 187)
+polygon = PackedVector2Array(-86, 115, 280, 115, 280, 165, -86, 165)
 
 [node name="BorderLine2D" parent="Platforms/Platform" index="2"]
-points = PackedVector2Array(-94, 137, 272, 137, 272, 187, -94, 187)
+points = PackedVector2Array(-86, 115, 280, 115, 280, 165, -86, 165)
 
 [node name="RectangleOutline" parent="Platforms/Platform" index="3"]
-position = Vector2(89, 162)
+position = Vector2(97, 140)
 shape = SubResource("RectangleShape2D_cegan")
+
+[node name="Platform2" parent="Platforms" instance=ExtResource("12_074og")]
+points = PackedVector2Array(-334, -48, -209, -48, -209, -2, -334, -2)
+sizeVector = Vector2(125, 46)
+
+[node name="CollisionPolygon2D" parent="Platforms/Platform2" index="0"]
+polygon = PackedVector2Array(-334, -48, -209, -48, -209, -2, -334, -2)
+
+[node name="Polygon2D" parent="Platforms/Platform2" index="1"]
+polygon = PackedVector2Array(-334, -48, -209, -48, -209, -2, -334, -2)
+
+[node name="BorderLine2D" parent="Platforms/Platform2" index="2"]
+points = PackedVector2Array(-334, -48, -209, -48, -209, -2, -334, -2)
+
+[node name="RectangleOutline" parent="Platforms/Platform2" index="3"]
+position = Vector2(-271.5, -25)
+shape = SubResource("RectangleShape2D_074og")
+
+[node name="Platform3" parent="Platforms" instance=ExtResource("12_074og")]
+points = PackedVector2Array(443, -84, 809, -84, 809, 327, 443, 327)
+sizeVector = Vector2(366, 411)
+
+[node name="CollisionPolygon2D" parent="Platforms/Platform3" index="0"]
+polygon = PackedVector2Array(443, -84, 809, -84, 809, 327, 443, 327)
+
+[node name="Polygon2D" parent="Platforms/Platform3" index="1"]
+polygon = PackedVector2Array(443, -84, 809, -84, 809, 327, 443, 327)
+
+[node name="BorderLine2D" parent="Platforms/Platform3" index="2"]
+points = PackedVector2Array(443, -84, 809, -84, 809, 327, 443, 327)
+
+[node name="RectangleOutline" parent="Platforms/Platform3" index="3"]
+position = Vector2(626, 121.5)
+shape = SubResource("RectangleShape2D_82xsv")
+
+[node name="Platform4" parent="Platforms" instance=ExtResource("12_074og")]
+position = Vector2(-582, 230)
+points = PackedVector2Array(-75, -118, 23, -118, 23, -68, -75, -68)
+sizeVector = Vector2(98, 50)
+
+[node name="CollisionPolygon2D" parent="Platforms/Platform4" index="0"]
+polygon = PackedVector2Array(-75, -118, 23, -118, 23, -68, -75, -68)
+
+[node name="Polygon2D" parent="Platforms/Platform4" index="1"]
+polygon = PackedVector2Array(-75, -118, 23, -118, 23, -68, -75, -68)
+
+[node name="BorderLine2D" parent="Platforms/Platform4" index="2"]
+points = PackedVector2Array(-75, -118, 23, -118, 23, -68, -75, -68)
+
+[node name="RectangleOutline" parent="Platforms/Platform4" index="3"]
+position = Vector2(-26, -93)
+shape = SubResource("RectangleShape2D_getpj")
 
 [node name="Parallax100" type="Node2D" parent="."]
 position = Vector2(1, -295)
@@ -1143,3 +1207,6 @@ player_path = NodePath("../../Player")
 [connection signal="landed" from="Player" to="Player/MovementParticles" method="_on_player_landed"]
 
 [editable path="Platforms/Platform"]
+[editable path="Platforms/Platform2"]
+[editable path="Platforms/Platform3"]
+[editable path="Platforms/Platform4"]
