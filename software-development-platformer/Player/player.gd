@@ -161,7 +161,10 @@ func _physics_process(delta: float) -> void:
 			state = "fall"
 		#MIDAIR MOVEMENT. not during flips though! To nerf  them
 		if state == "jump" or state == "fall":
-			velocity.x = lerp(velocity.x, SPEED*direction, 0.2*air_control)
+			if direction: 
+				velocity.x = lerp(velocity.x, SPEED*direction, 0.2*air_control)
+			else: #so if you're not trying to slow down, you won't.
+				velocity.x = lerp(velocity.x, SPEED*direction, 0.01*air_control)
 		if state == "backflip" or state == "frontflip":
 			velocity.x = lerp(velocity.x, jumpVelocity.x, 0.02) #so bumping a wall doesnt fully stop momentum
 		

@@ -1,85 +1,12 @@
-[gd_scene load_steps=17 format=3 uid="uid://b1iavla5jso1x"]
+[gd_scene load_steps=10 format=3 uid="uid://b1iavla5jso1x"]
 
 [ext_resource type="Texture2D" uid="uid://ctk8ibr44c642" path="res://Assets/Forest/Bush.png" id="1_w8v3s"]
 [ext_resource type="Texture2D" uid="uid://c2fn1ck4bikb1" path="res://Assets/Forest/Grass.png" id="7_sqofj"]
-[ext_resource type="Texture2D" uid="uid://ul3588q4vy3l" path="res://Assets/Forest/LeafParticle2.png" id="8_tpwu6"]
 [ext_resource type="PackedScene" uid="uid://cy1vyx88wgg4v" path="res://Player/player.tscn" id="9_diqn3"]
 [ext_resource type="Script" uid="uid://do5bugkt41qkv" path="res://camera.gd" id="10_t3dj1"]
-[ext_resource type="Script" uid="uid://m70ma2rafm6p" path="res://Player/movement_particles.gd" id="11_b7crr"]
 [ext_resource type="Script" uid="uid://bqovlgcavqgg2" path="res://UI/health_bar.gd" id="14_em3r6"]
 [ext_resource type="Script" uid="uid://dhqon0kvpcrte" path="res://UI/button.gd" id="15_soehs"]
 [ext_resource type="Script" uid="uid://qy3w7jrwih6c" path="res://UI/heal_button.gd" id="16_time6"]
-
-[sub_resource type="Gradient" id="Gradient_w48qg"]
-offsets = PackedFloat32Array(0, 0.33490565, 0.8018868, 1)
-colors = PackedColorArray(0.8298393, 0.28756416, 0.31498945, 1, 0.82405865, 0.41192046, 0.21686882, 1, 0.9603854, 0.6462903, 0, 1, 0.95962197, 0.8111548, 3.85046e-07, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_1nvrg"]
-gradient = SubResource("Gradient_w48qg")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_w48qg"]
-particle_flag_disable_z = true
-angle_min = -89.99999
-angle_max = 90.000015
-direction = Vector3(0, -25, 0)
-spread = 10.0
-initial_velocity_min = 350.0
-initial_velocity_max = 350.0
-angular_velocity_min = -20.000015
-angular_velocity_max = 14.999984
-gravity = Vector3(0, 250, 0)
-radial_accel_min = -1.0000023
-radial_accel_max = 0.99999774
-color_initial_ramp = SubResource("GradientTexture1D_1nvrg")
-turbulence_enabled = true
-turbulence_noise_scale = 9.5
-turbulence_noise_speed = Vector3(2, 1, 0)
-turbulence_noise_speed_random = 0.05
-turbulence_influence_min = 0.0
-turbulence_influence_max = 0.2
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2cqfq"]
-particle_flag_disable_z = true
-angle_min = -89.99999
-angle_max = 90.000015
-direction = Vector3(0, -25, 0)
-spread = 20.0
-initial_velocity_min = 350.0
-initial_velocity_max = 350.0
-angular_velocity_min = -20.000015
-angular_velocity_max = 14.999984
-gravity = Vector3(0, 250, 0)
-radial_accel_min = -1.0000023
-radial_accel_max = 0.99999774
-color_initial_ramp = SubResource("GradientTexture1D_1nvrg")
-turbulence_enabled = true
-turbulence_noise_scale = 4.0
-turbulence_noise_speed = Vector3(2, 1, 0)
-turbulence_noise_speed_random = 0.05
-turbulence_influence_min = 0.0
-turbulence_influence_max = 0.2
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yaehf"]
-particle_flag_disable_z = true
-angle_min = -89.99999
-angle_max = 90.000015
-direction = Vector3(0, -25, 0)
-spread = 30.0
-initial_velocity_min = 250.0
-initial_velocity_max = 300.0
-angular_velocity_min = -20.000015
-angular_velocity_max = 14.999984
-gravity = Vector3(0, 250, 0)
-radial_accel_min = -1.0000023
-radial_accel_max = 0.99999774
-color_initial_ramp = SubResource("GradientTexture1D_1nvrg")
-turbulence_enabled = true
-turbulence_noise_strength = 0.5
-turbulence_noise_scale = 4.0
-turbulence_noise_speed = Vector3(2, 1, 0)
-turbulence_noise_speed_random = 0.05
-turbulence_influence_min = 0.0
-turbulence_influence_max = 0.2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ycdy4"]
 size = Vector2(366, 50)
@@ -97,46 +24,6 @@ offset = Vector2(0, -100)
 zoom = Vector2(1.3, 1.3)
 position_smoothing_enabled = true
 script = ExtResource("10_t3dj1")
-
-[node name="MovementParticles" type="Node2D" parent="Player"]
-show_behind_parent = true
-script = ExtResource("11_b7crr")
-
-[node name="RunParticle" type="GPUParticles2D" parent="Player/MovementParticles"]
-position = Vector2(-10, 112)
-amount = 30
-texture = ExtResource("8_tpwu6")
-lifetime = 6.0
-explosiveness = 0.1
-randomness = 0.3
-fixed_fps = 24
-process_material = SubResource("ParticleProcessMaterial_w48qg")
-
-[node name="JumpParticle" type="GPUParticles2D" parent="Player/MovementParticles"]
-position = Vector2(-11, 128)
-emitting = false
-amount = 20
-texture = ExtResource("8_tpwu6")
-lifetime = 6.0
-one_shot = true
-speed_scale = 2.0
-explosiveness = 1.0
-randomness = 0.3
-fixed_fps = 24
-process_material = SubResource("ParticleProcessMaterial_2cqfq")
-
-[node name="LandParticle" type="GPUParticles2D" parent="Player/MovementParticles"]
-position = Vector2(-11, 128)
-emitting = false
-amount = 10
-texture = ExtResource("8_tpwu6")
-lifetime = 6.0
-one_shot = true
-speed_scale = 1.5
-explosiveness = 1.0
-randomness = 0.3
-fixed_fps = 24
-process_material = SubResource("ParticleProcessMaterial_yaehf")
 
 [node name="TempPlatform" type="StaticBody2D" parent="."]
 position = Vector2(1, -281)
@@ -245,6 +132,3 @@ offset_right = 306.0
 offset_bottom = 192.0
 text = "Heal Damage"
 script = ExtResource("16_time6")
-
-[connection signal="jumped" from="Player" to="Player/MovementParticles" method="_on_player_jumped"]
-[connection signal="landed" from="Player" to="Player/MovementParticles" method="_on_player_landed"]
