@@ -64,25 +64,6 @@ func _sync_shapes() -> void:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass
-	#points = PackedVector2Array()
-	#if (edit_mode == EditMode.POLYGON):
-		#pass
-		##to be added
-	#if (edit_mode == EditMode.RECTANGLE):
-		#var center = rectangle_outline.position
-		#sizeVector = rectangle_outline.shape.size
-		#var topLeftCorner = center - sizeVector/2
-		#var topRightCorner = Vector2(center + Vector2(sizeVector.x/2, -sizeVector.y/2))
-		#var bottomRightCorner = center + sizeVector/2
-		#var bottomLeftCorner = Vector2(center + Vector2(-sizeVector.x/2, sizeVector.y/2))
-		#points.push_back(topLeftCorner)
-		#points.push_back(topRightCorner)
-		#points.push_back(bottomRightCorner)
-		#points.push_back(bottomLeftCorner)
-		#collision_polygon_2d.polygon = points
-	##match other platform children to the CollisionPolygon2D
-	#polygon_2d.polygon = collision_polygon_2d.polygon
-	#border_line_2d.points = points
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

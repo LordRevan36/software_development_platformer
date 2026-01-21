@@ -9,18 +9,21 @@ size = Vector2(366, 50)
 
 [node name="Platform" type="StaticBody2D"]
 script = ExtResource("1_0v4dy")
+points = PackedVector2Array(-183, -25, 183, -25, 183, 25, -183, 25)
+sizeVector = Vector2(366, 50)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-183, -25, 183, -25, 183, 25, -183, 25)
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 texture_filter = 1
 texture_repeat = 2
 color = Color(0.30497152, 0.18106371, 2.4065375e-08, 1)
-polygon = PackedVector2Array(-5, 1, 5, 1, 5, -1, -5, -1)
+polygon = PackedVector2Array(-183, -25, 183, -25, 183, 25, -183, 25)
 
 [node name="BorderLine2D" type="Line2D" parent="."]
 texture_repeat = 2
-points = PackedVector2Array(11, 3)
+points = PackedVector2Array(-183, -25, 183, -25, 183, 25, -183, 25)
 closed = true
 default_color = Color(0.25865784, 0.14798227, 0, 1)
 texture = ExtResource("2_g263t")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://0innvfg1noyr"]
+[gd_scene load_steps=34 format=3 uid="uid://0innvfg1noyr"]
 
 [ext_resource type="Texture2D" uid="uid://ctk8ibr44c642" path="res://Assets/Forest/Bush.png" id="1_5vw27"]
 [ext_resource type="PackedScene" uid="uid://cy1vyx88wgg4v" path="res://Player/player.tscn" id="1_bo1nx"]
@@ -13,10 +13,10 @@
 [ext_resource type="Texture2D" uid="uid://d15b6nmtxas3j" path="res://Assets/Forest/BushyGrass.png" id="7_5vw27"]
 [ext_resource type="Texture2D" uid="uid://ul3588q4vy3l" path="res://Assets/Forest/LeafParticle2.png" id="7_ycdy4"]
 [ext_resource type="Script" uid="uid://m70ma2rafm6p" path="res://Player/movement_particles.gd" id="11_vivmo"]
-[ext_resource type="PackedScene" uid="uid://c6lcnacw8vw5s" path="res://Platform/platform.tscn" id="14_yaehf"]
-[ext_resource type="Script" uid="uid://dhqon0kvpcrte" path="res://DamageButton.gd" id="16_2cqfq"]
+[ext_resource type="PackedScene" uid="uid://c6lcnacw8vw5s" path="res://Platform/platform.tscn" id="12_074og"]
+[ext_resource type="Script" path="res://DamageButton.gd" id="16_2cqfq"]
 [ext_resource type="Texture2D" uid="uid://cbmy31rblo60d" path="res://Assets/HUD/HealthBar.png" id="16_yaehf"]
-[ext_resource type="Script" uid="uid://rexj3shyfaq6" path="res://HealthBar.gd" id="17_074og"]
+[ext_resource type="Script" path="res://HealthBar.gd" id="17_074og"]
 [ext_resource type="Script" uid="uid://qy3w7jrwih6c" path="res://heal_button.gd" id="17_yaehf"]
 
 [sub_resource type="Gradient" id="Gradient_w48qg"]
@@ -135,7 +135,7 @@ turbulence_noise_speed_random = 0.05
 turbulence_influence_min = 0.0
 turbulence_influence_max = 0.2
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_yaehf"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cegan"]
 resource_local_to_scene = true
 size = Vector2(366, 50)
 
@@ -143,9 +143,9 @@ size = Vector2(366, 50)
 resource_local_to_scene = true
 size = Vector2(366, 50)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cegan"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_82xsv"]
 resource_local_to_scene = true
-size = Vector2(366, 317)
+size = Vector2(366, 367)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0xm2m"]
 distance = -285.0
@@ -908,60 +908,55 @@ process_material = SubResource("ParticleProcessMaterial_yaehf")
 [node name="Platforms" type="Node2D" parent="."]
 position = Vector2(-9, -323)
 
-[node name="Platform1" parent="Platforms" instance=ExtResource("14_yaehf")]
-points = PackedVector2Array(-1, 1, 365, 1, 365, 51, -1, 51)
-startPosition = Vector2(1, -283)
-sizeVector = Vector2(366, 50)
+[node name="Platform" parent="Platforms" instance=ExtResource("12_074og")]
+position = Vector2(-189, 31)
+points = PackedVector2Array(242, 86, 608, 86, 608, 136, 242, 136)
 
-[node name="CollisionPolygon2D" parent="Platforms/Platform1" index="0"]
-polygon = PackedVector2Array(-1, 1, 365, 1, 365, 51, -1, 51)
+[node name="CollisionPolygon2D" parent="Platforms/Platform" index="0"]
+polygon = PackedVector2Array(242, 86, 608, 86, 608, 136, 242, 136)
 
-[node name="Polygon2D" parent="Platforms/Platform1" index="1"]
-polygon = PackedVector2Array(-1, 1, 365, 1, 365, 51, -1, 51)
+[node name="Polygon2D" parent="Platforms/Platform" index="1"]
+polygon = PackedVector2Array(242, 86, 608, 86, 608, 136, 242, 136)
 
-[node name="BorderLine2D" parent="Platforms/Platform1" index="2"]
-points = PackedVector2Array(-1, 1, 365, 1, 365, 51, -1, 51)
+[node name="BorderLine2D" parent="Platforms/Platform" index="2"]
+points = PackedVector2Array(242, 86, 608, 86, 608, 136, 242, 136)
 
-[node name="RectangleOutline" parent="Platforms/Platform1" index="3"]
-position = Vector2(182, 26)
-shape = SubResource("RectangleShape2D_yaehf")
+[node name="RectangleOutline" parent="Platforms/Platform" index="3"]
+position = Vector2(425, 111)
+shape = SubResource("RectangleShape2D_cegan")
 
-[node name="Platform2" parent="Platforms" instance=ExtResource("14_yaehf")]
-position = Vector2(522, 133)
-points = PackedVector2Array(0, 1, 366, 1, 366, 51, 0, 51)
-startPosition = Vector2(1, -283)
-sizeVector = Vector2(366, 50)
+[node name="Platform2" parent="Platforms" instance=ExtResource("12_074og")]
+points = PackedVector2Array(-497, -25, -131, -25, -131, 25, -497, 25)
 
 [node name="CollisionPolygon2D" parent="Platforms/Platform2" index="0"]
-polygon = PackedVector2Array(0, 1, 366, 1, 366, 51, 0, 51)
+polygon = PackedVector2Array(-497, -25, -131, -25, -131, 25, -497, 25)
 
 [node name="Polygon2D" parent="Platforms/Platform2" index="1"]
-polygon = PackedVector2Array(0, 1, 366, 1, 366, 51, 0, 51)
+polygon = PackedVector2Array(-497, -25, -131, -25, -131, 25, -497, 25)
 
 [node name="BorderLine2D" parent="Platforms/Platform2" index="2"]
-points = PackedVector2Array(0, 1, 366, 1, 366, 51, 0, 51)
+points = PackedVector2Array(-497, -25, -131, -25, -131, 25, -497, 25)
 
 [node name="RectangleOutline" parent="Platforms/Platform2" index="3"]
-position = Vector2(183, 26)
+position = Vector2(-314, 0)
 shape = SubResource("RectangleShape2D_074og")
 
-[node name="Platform3" parent="Platforms" instance=ExtResource("14_yaehf")]
-position = Vector2(1296, 27)
-points = PackedVector2Array(-183, -25, 183, -25, 183, 292, -183, 292)
-sizeVector = Vector2(366, 317)
+[node name="Platform3" parent="Platforms" instance=ExtResource("12_074og")]
+points = PackedVector2Array(637, -52, 1003, -52, 1003, 315, 637, 315)
+sizeVector = Vector2(366, 367)
 
 [node name="CollisionPolygon2D" parent="Platforms/Platform3" index="0"]
-polygon = PackedVector2Array(-183, -25, 183, -25, 183, 292, -183, 292)
+polygon = PackedVector2Array(637, -52, 1003, -52, 1003, 315, 637, 315)
 
 [node name="Polygon2D" parent="Platforms/Platform3" index="1"]
-polygon = PackedVector2Array(-183, -25, 183, -25, 183, 292, -183, 292)
+polygon = PackedVector2Array(637, -52, 1003, -52, 1003, 315, 637, 315)
 
 [node name="BorderLine2D" parent="Platforms/Platform3" index="2"]
-points = PackedVector2Array(-183, -25, 183, -25, 183, 292, -183, 292)
+points = PackedVector2Array(637, -52, 1003, -52, 1003, 315, 637, 315)
 
 [node name="RectangleOutline" parent="Platforms/Platform3" index="3"]
-position = Vector2(0, 133.5)
-shape = SubResource("RectangleShape2D_cegan")
+position = Vector2(820, 131.5)
+shape = SubResource("RectangleShape2D_82xsv")
 
 [node name="Parallax100" type="Node2D" parent="."]
 position = Vector2(1, -295)
@@ -1189,6 +1184,6 @@ player_path = NodePath("../../Player")
 [connection signal="jumped" from="Player" to="Player/MovementParticles" method="_on_player_jumped"]
 [connection signal="landed" from="Player" to="Player/MovementParticles" method="_on_player_landed"]
 
-[editable path="Platforms/Platform1"]
+[editable path="Platforms/Platform"]
 [editable path="Platforms/Platform2"]
 [editable path="Platforms/Platform3"]
