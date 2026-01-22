@@ -24,9 +24,9 @@ enum EditMode {RECTANGLE, POLYGON}
 		_update_editor_visibility()
 @export var points : PackedVector2Array
 @export var startPosition : Vector2
-@export var sizeVector : Vector2 = Vector2(400,50)
+@export var sizeVector : Vector2 = Vector2(400,40)
 @export var texturePath : String = "res://.godot/imported/MissingTexture.png-22b33255012559b00bdd8aa9710640d6.ctex"
-@export var textureWidth : float = 10
+@export var textureWidth : float = 8
 
 func _update_editor_visibility() -> void:
 	if not collision_polygon_2d or not rectangle_outline:
@@ -54,10 +54,10 @@ func _sync_shapes() -> void:
 		#grab data from rectangle_outline
 		var center = rectangle_outline.position
 		sizeVector = rectangle_outline.shape.size
-		points = _return_rectangle_points(center, sizeVector)
 		#match array to actual collision_polygon_2d, then push to other nodes
-		collision_polygon_2d.polygon = points
-		polygon_2d.polygon = points
+		collision_polygon_2d.polygon = _return_rectangle_points(center, sizeVector)
+		sizeVector -= Vector2(textureWidth/2, textureWidth/2)
+		polygon_2d.polygon = _return_rectangle_points(center, sizeVector)
 		_generate_rectangle_borders(center, sizeVector)
 		#border_line_2d.points = points
 	if edit_mode == EditMode.POLYGON:
@@ -68,7 +68,6 @@ func _sync_shapes() -> void:
 
 func _generate_rectangle_borders(center, sizeVector) -> void:
 	_clear_children(border_lines)
-	sizeVector += Vector2(-textureWidth, -textureWidth)
 	var border_points = _return_rectangle_points(center, sizeVector)
 	for i in border_points.size():
 		var line_points = PackedVector2Array()

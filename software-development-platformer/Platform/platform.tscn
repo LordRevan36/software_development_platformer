@@ -8,10 +8,9 @@ size = Vector2(366, 50)
 
 [node name="Platform" type="StaticBody2D"]
 script = ExtResource("1_0v4dy")
-points = PackedVector2Array(-183, -25, 183, -25, 183, 25, -183, 25)
-sizeVector = Vector2(366, 50)
-texturePath = null
-textureWidth = null
+points = PackedVector2Array(-180.5, -22.5, 180.5, -22.5, 180.5, 22.5, -180.5, 22.5)
+sizeVector = Vector2(361, 45)
+textureWidth = 10.0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-183, -25, 183, -25, 183, 25, -183, 25)
@@ -20,7 +19,7 @@ polygon = PackedVector2Array(-183, -25, 183, -25, 183, 25, -183, 25)
 texture_filter = 1
 texture_repeat = 2
 color = Color(0.30497152, 0.18106371, 2.4065375e-08, 1)
-polygon = PackedVector2Array(-183, -25, 183, -25, 183, 25, -183, 25)
+polygon = PackedVector2Array(-180.5, -22.5, 180.5, -22.5, 180.5, 22.5, -180.5, 22.5)
 
 [node name="RectangleOutline" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_g263t")

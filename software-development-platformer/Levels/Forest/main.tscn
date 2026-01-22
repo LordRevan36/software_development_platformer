@@ -14,9 +14,9 @@
 [ext_resource type="Texture2D" uid="uid://ul3588q4vy3l" path="res://Assets/Forest/LeafParticle2.png" id="7_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://c6lcnacw8vw5s" path="res://Platform/platform.tscn" id="12_074og"]
 [ext_resource type="PackedScene" uid="uid://cikgxfjxyjw3r" path="res://exit.tscn" id="12_86kmy"]
-[ext_resource type="Script" uid="uid://dhqon0kvpcrte" path="res://UI/button.gd" id="16_2cqfq"]
+[ext_resource type="Script" uid="uid://dhqon0kvpcrte" path="res://DamageButton.gd" id="16_2cqfq"]
 [ext_resource type="Texture2D" uid="uid://cbmy31rblo60d" path="res://Assets/HUD/HealthBar.png" id="16_yaehf"]
-[ext_resource type="Script" path="res://HealthBar.gd" id="17_074og"]
+[ext_resource type="Script" uid="uid://rexj3shyfaq6" path="res://HealthBar.gd" id="17_074og"]
 [ext_resource type="Script" uid="uid://qy3w7jrwih6c" path="res://UI/heal_button.gd" id="17_yaehf"]
 
 [sub_resource type="Gradient" id="Gradient_vtle1"]
@@ -810,7 +810,7 @@ position = Vector2(-20, -124)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 offset = Vector2(0, -100)
-zoom = Vector2(1.3, 1.3)
+zoom = Vector2(2, 2)
 limit_top = -800
 limit_right = 1100
 limit_smoothed = true
@@ -822,64 +822,60 @@ position = Vector2(-9, -323)
 
 [node name="Platform" parent="Platforms" instance=ExtResource("12_074og")]
 position = Vector2(305, 74)
-points = PackedVector2Array(-67.5, -14.5, 67.5, -14.5, 67.5, 14.5, -67.5, 14.5)
-sizeVector = Vector2(145, 39)
-texturePath = "res://.godot/imported/MissingTexture.png-22b33255012559b00bdd8aa9710640d6.ctex"
-textureWidth = 10.0
+points = PackedVector2Array(-70.5, -17.5, 70.5, -17.5, 70.5, 17.5, -70.5, 17.5)
+sizeVector = Vector2(141, 35)
+textureWidth = 8.0
 
 [node name="CollisionPolygon2D" parent="Platforms/Platform" index="0"]
 polygon = PackedVector2Array(-72.5, -19.5, 72.5, -19.5, 72.5, 19.5, -72.5, 19.5)
 
 [node name="Polygon2D" parent="Platforms/Platform" index="1"]
-polygon = PackedVector2Array(-72.5, -19.5, 72.5, -19.5, 72.5, 19.5, -72.5, 19.5)
+polygon = PackedVector2Array(-70.5, -17.5, 70.5, -17.5, 70.5, 17.5, -70.5, 17.5)
 
 [node name="RectangleOutline" parent="Platforms/Platform" index="2"]
 shape = SubResource("RectangleShape2D_cegan")
 
 [node name="Platform2" parent="Platforms" instance=ExtResource("12_074og")]
 position = Vector2(-257, 61)
-points = PackedVector2Array(-57.5, -18, 57.5, -18, 57.5, 18, -57.5, 18)
-sizeVector = Vector2(125, 46)
-texturePath = "res://.godot/imported/MissingTexture.png-22b33255012559b00bdd8aa9710640d6.ctex"
-textureWidth = 10.0
+points = PackedVector2Array(-60.5, -21, 60.5, -21, 60.5, 21, -60.5, 21)
+sizeVector = Vector2(121, 42)
+textureWidth = 8.0
 
 [node name="CollisionPolygon2D" parent="Platforms/Platform2" index="0"]
 polygon = PackedVector2Array(-62.5, -23, 62.5, -23, 62.5, 23, -62.5, 23)
 
 [node name="Polygon2D" parent="Platforms/Platform2" index="1"]
-polygon = PackedVector2Array(-62.5, -23, 62.5, -23, 62.5, 23, -62.5, 23)
+polygon = PackedVector2Array(-60.5, -21, 60.5, -21, 60.5, 21, -60.5, 21)
 
 [node name="RectangleOutline" parent="Platforms/Platform2" index="2"]
 shape = SubResource("RectangleShape2D_074og")
 
 [node name="Platform3" parent="Platforms" instance=ExtResource("12_074og")]
 position = Vector2(926, 223)
-points = PackedVector2Array(-180.5, -158, 180.5, -158, 180.5, 158, -180.5, 158)
-sizeVector = Vector2(371, 326)
-texturePath = "res://.godot/imported/MissingTexture.png-22b33255012559b00bdd8aa9710640d6.ctex"
-textureWidth = 10.0
+points = PackedVector2Array(-183.5, -161, 183.5, -161, 183.5, 161, -183.5, 161)
+sizeVector = Vector2(367, 322)
+textureWidth = 8.0
 
 [node name="CollisionPolygon2D" parent="Platforms/Platform3" index="0"]
 polygon = PackedVector2Array(-185.5, -163, 185.5, -163, 185.5, 163, -185.5, 163)
 
 [node name="Polygon2D" parent="Platforms/Platform3" index="1"]
-polygon = PackedVector2Array(-185.5, -163, 185.5, -163, 185.5, 163, -185.5, 163)
+polygon = PackedVector2Array(-183.5, -161, 183.5, -161, 183.5, 161, -183.5, 161)
 
 [node name="RectangleOutline" parent="Platforms/Platform3" index="2"]
 shape = SubResource("RectangleShape2D_82xsv")
 
 [node name="Platform4" parent="Platforms" instance=ExtResource("12_074og")]
 position = Vector2(-596, 178)
-points = PackedVector2Array(-113, -20, 113, -20, 113, 20, -113, 20)
-sizeVector = Vector2(236, 50)
-texturePath = "res://.godot/imported/MissingTexture.png-22b33255012559b00bdd8aa9710640d6.ctex"
-textureWidth = 10.0
+points = PackedVector2Array(-116, -23, 116, -23, 116, 23, -116, 23)
+sizeVector = Vector2(232, 46)
+textureWidth = 8.0
 
 [node name="CollisionPolygon2D" parent="Platforms/Platform4" index="0"]
 polygon = PackedVector2Array(-118, -25, 118, -25, 118, 25, -118, 25)
 
 [node name="Polygon2D" parent="Platforms/Platform4" index="1"]
-polygon = PackedVector2Array(-118, -25, 118, -25, 118, 25, -118, 25)
+polygon = PackedVector2Array(-116, -23, 116, -23, 116, 23, -116, 23)
 
 [node name="RectangleOutline" parent="Platforms/Platform4" index="2"]
 shape = SubResource("RectangleShape2D_getpj")
