@@ -30,8 +30,16 @@ enabled=PackedStringArray("res://addons/parallax2d_preview/plugin.cfg")
 folder_colors={
 "res://Assets/": "orange",
 "res://Enemies/": "red",
-"res://Player/": "purple"
+"res://Levels/": "green",
+"res://Levels/Forest/": "orange",
+"res://Player/": "purple",
+"res://UI/": "yellow"
 }
+
+[global_group]
+
+Player="its the player .ngl idk if this is really necessary but im putting it in anyways"
+AutumnLeafMaterial="Causes leaf particles when player runs/jumps over."
 
 [input]
 
@@ -83,4 +91,4 @@ FlipLeft={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
-environment/defaults/default_clear_color=Color(0.9211927, 0.83087313, 0.34372523, 1)
+environment/defaults/default_clear_color=Color(0.084280215, 0.09976324, 0.23858869, 1)

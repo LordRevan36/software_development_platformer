@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://0innvfg1noyr"]
+[gd_scene load_steps=32 format=3 uid="uid://0innvfg1noyr"]
 
 [ext_resource type="Texture2D" uid="uid://ctk8ibr44c642" path="res://Assets/Forest/Bush.png" id="1_5vw27"]
 [ext_resource type="PackedScene" uid="uid://cy1vyx88wgg4v" path="res://Player/player.tscn" id="1_bo1nx"]
@@ -12,19 +12,19 @@
 [ext_resource type="Texture2D" uid="uid://yci8u2sv0dny" path="res://Assets/Forest/LeafParticle1.png" id="6_w48qg"]
 [ext_resource type="Texture2D" uid="uid://d15b6nmtxas3j" path="res://Assets/Forest/BushyGrass.png" id="7_5vw27"]
 [ext_resource type="Texture2D" uid="uid://ul3588q4vy3l" path="res://Assets/Forest/LeafParticle2.png" id="7_ycdy4"]
-[ext_resource type="Script" uid="uid://m70ma2rafm6p" path="res://Player/movement_particles.gd" id="11_vivmo"]
 [ext_resource type="PackedScene" uid="uid://c6lcnacw8vw5s" path="res://Platform/platform.tscn" id="12_074og"]
-[ext_resource type="Script" path="res://DamageButton.gd" id="16_2cqfq"]
+[ext_resource type="PackedScene" uid="uid://cikgxfjxyjw3r" path="res://exit.tscn" id="12_86kmy"]
+[ext_resource type="Script" uid="uid://dhqon0kvpcrte" path="res://UI/button.gd" id="16_2cqfq"]
 [ext_resource type="Texture2D" uid="uid://cbmy31rblo60d" path="res://Assets/HUD/HealthBar.png" id="16_yaehf"]
 [ext_resource type="Script" path="res://HealthBar.gd" id="17_074og"]
-[ext_resource type="Script" uid="uid://qy3w7jrwih6c" path="res://heal_button.gd" id="17_yaehf"]
+[ext_resource type="Script" uid="uid://qy3w7jrwih6c" path="res://UI/heal_button.gd" id="17_yaehf"]
 
-[sub_resource type="Gradient" id="Gradient_w48qg"]
+[sub_resource type="Gradient" id="Gradient_vtle1"]
 offsets = PackedFloat32Array(0, 0.33490565, 0.8018868, 1)
 colors = PackedColorArray(0.8298393, 0.28756416, 0.31498945, 1, 0.82405865, 0.41192046, 0.21686882, 1, 0.9603854, 0.6462903, 0, 1, 0.95962197, 0.8111548, 3.85046e-07, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_1nvrg"]
-gradient = SubResource("Gradient_w48qg")
+gradient = SubResource("Gradient_vtle1")
 
 [sub_resource type="Curve" id="Curve_w48qg"]
 bake_resolution = 25
@@ -71,73 +71,9 @@ func _process(_delta: float) -> void:
 	pass
 "
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_w48qg"]
-particle_flag_disable_z = true
-angle_min = -89.99999
-angle_max = 90.000015
-direction = Vector3(0, -25, 0)
-spread = 10.0
-initial_velocity_min = 350.0
-initial_velocity_max = 350.0
-angular_velocity_min = -20.000015
-angular_velocity_max = 14.999984
-gravity = Vector3(0, 250, 0)
-radial_accel_min = -1.0000023
-radial_accel_max = 0.99999774
-color_initial_ramp = SubResource("GradientTexture1D_1nvrg")
-turbulence_enabled = true
-turbulence_noise_scale = 9.5
-turbulence_noise_speed = Vector3(2, 1, 0)
-turbulence_noise_speed_random = 0.05
-turbulence_influence_min = 0.0
-turbulence_influence_max = 0.2
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2cqfq"]
-particle_flag_disable_z = true
-angle_min = -89.99999
-angle_max = 90.000015
-direction = Vector3(0, -25, 0)
-spread = 20.0
-initial_velocity_min = 350.0
-initial_velocity_max = 350.0
-angular_velocity_min = -20.000015
-angular_velocity_max = 14.999984
-gravity = Vector3(0, 250, 0)
-radial_accel_min = -1.0000023
-radial_accel_max = 0.99999774
-color_initial_ramp = SubResource("GradientTexture1D_1nvrg")
-turbulence_enabled = true
-turbulence_noise_scale = 4.0
-turbulence_noise_speed = Vector3(2, 1, 0)
-turbulence_noise_speed_random = 0.05
-turbulence_influence_min = 0.0
-turbulence_influence_max = 0.2
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yaehf"]
-particle_flag_disable_z = true
-angle_min = -89.99999
-angle_max = 90.000015
-direction = Vector3(0, -25, 0)
-spread = 30.0
-initial_velocity_min = 250.0
-initial_velocity_max = 300.0
-angular_velocity_min = -20.000015
-angular_velocity_max = 14.999984
-gravity = Vector3(0, 250, 0)
-radial_accel_min = -1.0000023
-radial_accel_max = 0.99999774
-color_initial_ramp = SubResource("GradientTexture1D_1nvrg")
-turbulence_enabled = true
-turbulence_noise_strength = 0.5
-turbulence_noise_scale = 4.0
-turbulence_noise_speed = Vector3(2, 1, 0)
-turbulence_noise_speed_random = 0.05
-turbulence_influence_min = 0.0
-turbulence_influence_max = 0.2
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cegan"]
 resource_local_to_scene = true
-size = Vector2(366, 50)
+size = Vector2(145, 39)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_074og"]
 resource_local_to_scene = true
@@ -145,11 +81,11 @@ size = Vector2(125, 46)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_82xsv"]
 resource_local_to_scene = true
-size = Vector2(366, 411)
+size = Vector2(371, 326)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_getpj"]
 resource_local_to_scene = true
-size = Vector2(98, 50)
+size = Vector2(236, 50)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0xm2m"]
 distance = -285.0
@@ -174,6 +110,14 @@ position = Vector2(-5, 192)
 scroll_scale = Vector2(0.3, 0.3)
 repeat_size = Vector2(2560, 0)
 repeat_times = 3
+
+[node name="Background" type="ColorRect" parent="Parallax <100/Parallax30/Repeating"]
+offset_left = 1.9460449
+offset_top = 0.2970581
+offset_right = 2.946045
+offset_bottom = 1.2970581
+scale = Vector2(2560, 500)
+color = Color(0.9517366, 0.8742226, 0.3032913, 1)
 
 [node name="Canopy" type="Sprite2D" parent="Parallax <100/Parallax30/Repeating"]
 modulate = Color(2.9472616, 3.058063, 1.896237, 1)
@@ -861,124 +805,99 @@ visibility_rect = Rect2(-100, 0, 200, 300)
 process_material = SubResource("ParticleProcessMaterial_vivmo")
 script = SubResource("GDScript_2cqfq")
 
-[node name="Player" parent="." groups=["Player"] instance=ExtResource("1_bo1nx")]
+[node name="Player" parent="." instance=ExtResource("1_bo1nx")]
+position = Vector2(-20, -124)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 offset = Vector2(0, -100)
 zoom = Vector2(1.3, 1.3)
+limit_top = -800
+limit_right = 1100
+limit_smoothed = true
 position_smoothing_enabled = true
 script = ExtResource("2_jjvhh")
-
-[node name="MovementParticles" type="Node2D" parent="Player"]
-show_behind_parent = true
-script = ExtResource("11_vivmo")
-
-[node name="RunParticle" type="GPUParticles2D" parent="Player/MovementParticles"]
-position = Vector2(-10, 112)
-amount = 30
-texture = ExtResource("7_ycdy4")
-lifetime = 6.0
-explosiveness = 0.1
-randomness = 0.3
-fixed_fps = 24
-process_material = SubResource("ParticleProcessMaterial_w48qg")
-
-[node name="JumpParticle" type="GPUParticles2D" parent="Player/MovementParticles"]
-position = Vector2(-11, 128)
-emitting = false
-amount = 20
-texture = ExtResource("7_ycdy4")
-lifetime = 6.0
-one_shot = true
-speed_scale = 2.0
-explosiveness = 1.0
-randomness = 0.3
-fixed_fps = 24
-process_material = SubResource("ParticleProcessMaterial_2cqfq")
-
-[node name="LandParticle" type="GPUParticles2D" parent="Player/MovementParticles"]
-position = Vector2(-11, 128)
-emitting = false
-amount = 10
-texture = ExtResource("7_ycdy4")
-lifetime = 6.0
-one_shot = true
-speed_scale = 1.5
-explosiveness = 1.0
-randomness = 0.3
-fixed_fps = 24
-process_material = SubResource("ParticleProcessMaterial_yaehf")
 
 [node name="Platforms" type="Node2D" parent="."]
 position = Vector2(-9, -323)
 
 [node name="Platform" parent="Platforms" instance=ExtResource("12_074og")]
-points = PackedVector2Array(-86, 115, 280, 115, 280, 165, -86, 165)
+position = Vector2(305, 74)
+points = PackedVector2Array(-72.5, -19.5, 72.5, -19.5, 72.5, 19.5, -72.5, 19.5)
+sizeVector = Vector2(145, 39)
 
 [node name="CollisionPolygon2D" parent="Platforms/Platform" index="0"]
-polygon = PackedVector2Array(-86, 115, 280, 115, 280, 165, -86, 165)
+polygon = PackedVector2Array(-72.5, -19.5, 72.5, -19.5, 72.5, 19.5, -72.5, 19.5)
 
 [node name="Polygon2D" parent="Platforms/Platform" index="1"]
-polygon = PackedVector2Array(-86, 115, 280, 115, 280, 165, -86, 165)
+polygon = PackedVector2Array(-72.5, -19.5, 72.5, -19.5, 72.5, 19.5, -72.5, 19.5)
 
 [node name="BorderLine2D" parent="Platforms/Platform" index="2"]
-points = PackedVector2Array(-86, 115, 280, 115, 280, 165, -86, 165)
+points = PackedVector2Array(-72.5, -19.5, 72.5, -19.5, 72.5, 19.5, -72.5, 19.5)
 
 [node name="RectangleOutline" parent="Platforms/Platform" index="3"]
-position = Vector2(97, 140)
 shape = SubResource("RectangleShape2D_cegan")
 
 [node name="Platform2" parent="Platforms" instance=ExtResource("12_074og")]
-points = PackedVector2Array(-334, -48, -209, -48, -209, -2, -334, -2)
+position = Vector2(-257, 61)
+points = PackedVector2Array(-62.5, -23, 62.5, -23, 62.5, 23, -62.5, 23)
 sizeVector = Vector2(125, 46)
 
 [node name="CollisionPolygon2D" parent="Platforms/Platform2" index="0"]
-polygon = PackedVector2Array(-334, -48, -209, -48, -209, -2, -334, -2)
+polygon = PackedVector2Array(-62.5, -23, 62.5, -23, 62.5, 23, -62.5, 23)
 
 [node name="Polygon2D" parent="Platforms/Platform2" index="1"]
-polygon = PackedVector2Array(-334, -48, -209, -48, -209, -2, -334, -2)
+polygon = PackedVector2Array(-62.5, -23, 62.5, -23, 62.5, 23, -62.5, 23)
 
 [node name="BorderLine2D" parent="Platforms/Platform2" index="2"]
-points = PackedVector2Array(-334, -48, -209, -48, -209, -2, -334, -2)
+points = PackedVector2Array(-62.5, -23, 62.5, -23, 62.5, 23, -62.5, 23)
 
 [node name="RectangleOutline" parent="Platforms/Platform2" index="3"]
-position = Vector2(-271.5, -25)
 shape = SubResource("RectangleShape2D_074og")
 
 [node name="Platform3" parent="Platforms" instance=ExtResource("12_074og")]
-points = PackedVector2Array(443, -84, 809, -84, 809, 327, 443, 327)
-sizeVector = Vector2(366, 411)
+position = Vector2(926, 223)
+points = PackedVector2Array(-185.5, -163, 185.5, -163, 185.5, 163, -185.5, 163)
+sizeVector = Vector2(371, 326)
 
 [node name="CollisionPolygon2D" parent="Platforms/Platform3" index="0"]
-polygon = PackedVector2Array(443, -84, 809, -84, 809, 327, 443, 327)
+polygon = PackedVector2Array(-185.5, -163, 185.5, -163, 185.5, 163, -185.5, 163)
 
 [node name="Polygon2D" parent="Platforms/Platform3" index="1"]
-polygon = PackedVector2Array(443, -84, 809, -84, 809, 327, 443, 327)
+polygon = PackedVector2Array(-185.5, -163, 185.5, -163, 185.5, 163, -185.5, 163)
 
 [node name="BorderLine2D" parent="Platforms/Platform3" index="2"]
-points = PackedVector2Array(443, -84, 809, -84, 809, 327, 443, 327)
+points = PackedVector2Array(-185.5, -163, 185.5, -163, 185.5, 163, -185.5, 163)
 
 [node name="RectangleOutline" parent="Platforms/Platform3" index="3"]
-position = Vector2(626, 121.5)
 shape = SubResource("RectangleShape2D_82xsv")
 
 [node name="Platform4" parent="Platforms" instance=ExtResource("12_074og")]
-position = Vector2(-582, 230)
-points = PackedVector2Array(-75, -118, 23, -118, 23, -68, -75, -68)
-sizeVector = Vector2(98, 50)
+position = Vector2(-596, 178)
+points = PackedVector2Array(-118, -25, 118, -25, 118, 25, -118, 25)
+sizeVector = Vector2(236, 50)
 
 [node name="CollisionPolygon2D" parent="Platforms/Platform4" index="0"]
-polygon = PackedVector2Array(-75, -118, 23, -118, 23, -68, -75, -68)
+polygon = PackedVector2Array(-118, -25, 118, -25, 118, 25, -118, 25)
 
 [node name="Polygon2D" parent="Platforms/Platform4" index="1"]
-polygon = PackedVector2Array(-75, -118, 23, -118, 23, -68, -75, -68)
+polygon = PackedVector2Array(-118, -25, 118, -25, 118, 25, -118, 25)
 
 [node name="BorderLine2D" parent="Platforms/Platform4" index="2"]
-points = PackedVector2Array(-75, -118, 23, -118, 23, -68, -75, -68)
+points = PackedVector2Array(-118, -25, 118, -25, 118, 25, -118, 25)
 
 [node name="RectangleOutline" parent="Platforms/Platform4" index="3"]
-position = Vector2(-26, -93)
 shape = SubResource("RectangleShape2D_getpj")
+
+[node name="TempPlatform" type="StaticBody2D" parent="."]
+position = Vector2(90, -166)
+scale = Vector2(0.6399994, 1)
+
+[node name="LevelExit" parent="." instance=ExtResource("12_86kmy")]
+position = Vector2(1078, -259)
+exit = "uid://b1iavla5jso1x"
+
+[node name="CollisionShape2D" parent="LevelExit" index="0"]
+position = Vector2(4, -166)
 
 [node name="Parallax100" type="Node2D" parent="."]
 position = Vector2(1, -295)
@@ -1165,17 +1084,17 @@ position = Vector2(-109.80084, -1336.4044)
 scale = Vector2(-1, 1)
 texture = ExtResource("1_5vw27")
 
-[node name="Floor" type="StaticBody2D" parent="."]
+[node name="Floor" type="StaticBody2D" parent="." groups=["AutumnLeafMaterial"]]
 position = Vector2(1, -283)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
 shape = SubResource("WorldBoundaryShape2D_0xm2m")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="."]
 offset = Vector2(15, 15)
 transform = Transform2D(1, 0, 0, 1, 15, 15)
 
-[node name="DamageButton" type="Button" parent="CanvasLayer"]
+[node name="DamageButton" type="Button" parent="UI"]
 offset_left = 158.0
 offset_top = 111.0
 offset_right = 376.0
@@ -1183,7 +1102,7 @@ offset_bottom = 169.0
 text = "Take Damage"
 script = ExtResource("16_2cqfq")
 
-[node name="HealButton" type="Button" parent="CanvasLayer"]
+[node name="HealButton" type="Button" parent="UI"]
 offset_left = 158.0
 offset_top = 179.0
 offset_right = 376.0
@@ -1191,10 +1110,10 @@ offset_bottom = 237.0
 text = "Heal Damage"
 script = ExtResource("17_yaehf")
 
-[node name="HealthBar" type="TextureProgressBar" parent="CanvasLayer"]
+[node name="HealthBar" type="TextureProgressBar" parent="UI"]
 offset_left = 12.0
 offset_top = -43.0
-offset_right = 140.0
+offset_right = 396.0
 offset_bottom = 85.0
 scale = Vector2(1.2911928, 1.4154341)
 value = 100.0
@@ -1203,10 +1122,8 @@ texture_progress = SubResource("AtlasTexture_getpj")
 script = ExtResource("17_074og")
 player_path = NodePath("../../Player")
 
-[connection signal="jumped" from="Player" to="Player/MovementParticles" method="_on_player_jumped"]
-[connection signal="landed" from="Player" to="Player/MovementParticles" method="_on_player_landed"]
-
 [editable path="Platforms/Platform"]
 [editable path="Platforms/Platform2"]
 [editable path="Platforms/Platform3"]
 [editable path="Platforms/Platform4"]
+[editable path="LevelExit"]

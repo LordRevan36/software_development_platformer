@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cikgxfjxyjw3r"]
+
+[ext_resource type="Script" uid="uid://c230anxiis4vl" path="res://exit.gd" id="1_6sfst"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k4lu3"]
+size = Vector2(28, 352)
+
+[node name="LevelExit" type="Area2D"]
+script = ExtResource("1_6sfst")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_k4lu3")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

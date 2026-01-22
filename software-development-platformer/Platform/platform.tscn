@@ -25,7 +25,6 @@ polygon = PackedVector2Array(-183, -25, 183, -25, 183, 25, -183, 25)
 texture_repeat = 2
 points = PackedVector2Array(-183, -25, 183, -25, 183, 25, -183, 25)
 closed = true
-default_color = Color(0.25865784, 0.14798227, 0, 1)
 texture = ExtResource("2_g263t")
 texture_mode = 1
 

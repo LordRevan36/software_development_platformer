@@ -14,3 +14,7 @@ func _process(delta: float) -> void:
 		offset = offset.lerp(player.velocity/1.5+Vector2(0,-50), delta * lerp_speed/2)
 	else:
 		offset = offset.lerp(player.velocity/1.5+Vector2(0,-50), delta * lerp_speed)
+	#prevents camera from going out of bounds. BROKEN
+	offset.x = clamp(offset.x+player.position.x, limit_left, limit_right)-player.position.x
+	offset.y = clamp(offset.y+player.position.y, limit_top, limit_bottom)-player.position.y
+	print(position.x)

@@ -6,8 +6,8 @@ extends CharacterBody2D
 
 #if you ever want to do this, drag in the node you're referencing, then hold command/ctrl while releasing
 
-const SPEED = 288.0
-const JUMP_VELOCITY = -520.0
+const SPEED = 300.0
+const JUMP_VELOCITY = -510.0
 
 @export var friction = 0.9 #value from 0 to 1. 1 means full friction on floor when running, 0 means full icy floor
 @export var air_control = 0.5 #value from 0 to 1, lets you control how easily player can control their air movement
@@ -160,7 +160,10 @@ func _physics_process(delta: float) -> void:
 			state = "fall"
 		#MIDAIR MOVEMENT. not during flips though! To nerf  them
 		if state == "jump" or state == "fall":
-			velocity.x = lerp(velocity.x, SPEED*direction, 0.2*air_control)
+			if direction: 
+				velocity.x = lerp(velocity.x, SPEED*direction, 0.2*air_control)
+			else: #so if you're not trying to slow down, you won't.
+				velocity.x = lerp(velocity.x, SPEED*direction, 0.01*air_control)
 		if state == "backflip" or state == "frontflip":
 			velocity.x = lerp(velocity.x, jumpVelocity.x, 0.02) #so bumping a wall doesnt fully stop momentum
 		
@@ -238,8 +241,8 @@ func jump():
 	
 	
 func backflip():
-	velocity.y = (JUMP_VELOCITY+JUMP_VELOCITY*(time-crouchStartTime)/4)*1.45
-	velocity.x = -(SPEED+SPEED*(time-crouchStartTime)/4)*facing*0.6
+	velocity.y = (JUMP_VELOCITY+JUMP_VELOCITY*(time-crouchStartTime)/4)*1.4
+	velocity.x = -(SPEED+SPEED*(time-crouchStartTime)/4)*facing*0.5
 	state = "backflip"
 	canJump = false
 	jumped.emit()
@@ -247,8 +250,8 @@ func backflip():
 	
 	
 func frontflip():
-	velocity.y = (JUMP_VELOCITY+JUMP_VELOCITY*(time-crouchStartTime)/4)*0.8
-	velocity.x = (SPEED+SPEED*(time-crouchStartTime)/4)*facing*1.7
+	velocity.y = (JUMP_VELOCITY+JUMP_VELOCITY*(time-crouchStartTime)/4)*0.7
+	velocity.x = (SPEED+SPEED*(time-crouchStartTime)/4)*facing*1.8
 	state = "frontflip"
 	canJump = false
 	jumped.emit()
