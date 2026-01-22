@@ -24,9 +24,10 @@ enum EditMode {RECTANGLE, POLYGON}
 		_update_editor_visibility()
 @export var points : PackedVector2Array
 @export var startPosition : Vector2
-@export var sizeVector : Vector2 = Vector2(400,40)
-@export var texturePath : String = "res://.godot/imported/MissingTexture.png-22b33255012559b00bdd8aa9710640d6.ctex"
+@export var sizeVector : Vector2 = Vector2(400,50)
+@export var texturePath : String = "res://Assets/MissingTexture2.png"
 @export var textureWidth : float = 8
+
 
 func _update_editor_visibility() -> void:
 	if not collision_polygon_2d or not rectangle_outline:

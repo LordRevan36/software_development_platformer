@@ -51,9 +51,14 @@ func heal(amount: int) -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if state == "exit":
+		move_and_slide()
+		return
+		
 	direction = Input.get_axis("Left", "Right") # =-1 when holding left, 1 when holding right, 0 when neither
 	time += delta #used to calculate time the jump button is held
 	slow = 1
+	
 	
 	#gravity
 	#something suggested online for better gamefeel- increase gravity when falling. i think it feels nice
@@ -160,7 +165,7 @@ func _physics_process(delta: float) -> void:
 			state = "fall"
 		#MIDAIR MOVEMENT. not during flips though! To nerf  them
 		if state == "jump" or state == "fall":
-			if direction: 
+			if sign(-direction) == sign(velocity.x) or abs(SPEED*direction) > abs(velocity.x): #so you keep inertia midair if not trying to move
 				velocity.x = lerp(velocity.x, SPEED*direction, 0.2*air_control)
 			else: #so if you're not trying to slow down, you won't.
 				velocity.x = lerp(velocity.x, SPEED*direction, 0.01*air_control)
@@ -231,6 +236,8 @@ func updateAnimations():
 		await AnimSprite.animation_finished
 		if AnimSprite.animation == "flipland":
 			state = "idle"
+	elif state == "exit":
+		AnimSprite.play("run")
 			
 func jump():
 	velocity.y = (JUMP_VELOCITY+JUMP_VELOCITY*(time-crouchStartTime)/2)

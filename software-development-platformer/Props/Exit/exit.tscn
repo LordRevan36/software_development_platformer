@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cikgxfjxyjw3r"]
 
-[ext_resource type="Script" uid="uid://c230anxiis4vl" path="res://exit.gd" id="1_6sfst"]
+[ext_resource type="Script" uid="uid://c230anxiis4vl" path="res://Props/Exit/exit.gd" id="1_6sfst"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k4lu3"]
 size = Vector2(28, 352)
@@ -11,4 +11,7 @@ script = ExtResource("1_6sfst")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_k4lu3")
 
+[node name="TransitionTime" type="Timer" parent="."]
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="TransitionTime" to="." method="_on_transition_time_timeout"]
