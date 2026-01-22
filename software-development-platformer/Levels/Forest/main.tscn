@@ -14,9 +14,9 @@
 [ext_resource type="Texture2D" uid="uid://ul3588q4vy3l" path="res://Assets/Forest/LeafParticle2.png" id="7_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://c6lcnacw8vw5s" path="res://Platform/platform.tscn" id="12_074og"]
 [ext_resource type="PackedScene" uid="uid://cikgxfjxyjw3r" path="res://exit.tscn" id="12_86kmy"]
-[ext_resource type="Script" uid="uid://dhqon0kvpcrte" path="res://DamageButton.gd" id="16_2cqfq"]
+[ext_resource type="Script" uid="uid://dhqon0kvpcrte" path="res://UI/button.gd" id="16_2cqfq"]
 [ext_resource type="Texture2D" uid="uid://cbmy31rblo60d" path="res://Assets/HUD/HealthBar.png" id="16_yaehf"]
-[ext_resource type="Script" uid="uid://rexj3shyfaq6" path="res://HealthBar.gd" id="17_074og"]
+[ext_resource type="Script" path="res://HealthBar.gd" id="17_074og"]
 [ext_resource type="Script" uid="uid://qy3w7jrwih6c" path="res://UI/heal_button.gd" id="17_yaehf"]
 
 [sub_resource type="Gradient" id="Gradient_vtle1"]
@@ -833,10 +833,7 @@ polygon = PackedVector2Array(-72.5, -19.5, 72.5, -19.5, 72.5, 19.5, -72.5, 19.5)
 [node name="Polygon2D" parent="Platforms/Platform" index="1"]
 polygon = PackedVector2Array(-72.5, -19.5, 72.5, -19.5, 72.5, 19.5, -72.5, 19.5)
 
-[node name="BorderLine2D" parent="Platforms/Platform" index="2"]
-points = PackedVector2Array(-72.5, -19.5, 72.5, -19.5, 72.5, 19.5, -72.5, 19.5)
-
-[node name="RectangleOutline" parent="Platforms/Platform" index="3"]
+[node name="RectangleOutline" parent="Platforms/Platform" index="2"]
 shape = SubResource("RectangleShape2D_cegan")
 
 [node name="Platform2" parent="Platforms" instance=ExtResource("12_074og")]
@@ -852,10 +849,7 @@ polygon = PackedVector2Array(-62.5, -23, 62.5, -23, 62.5, 23, -62.5, 23)
 [node name="Polygon2D" parent="Platforms/Platform2" index="1"]
 polygon = PackedVector2Array(-62.5, -23, 62.5, -23, 62.5, 23, -62.5, 23)
 
-[node name="BorderLine2D" parent="Platforms/Platform2" index="2"]
-points = PackedVector2Array(-62.5, -23, 62.5, -23, 62.5, 23, -62.5, 23)
-
-[node name="RectangleOutline" parent="Platforms/Platform2" index="3"]
+[node name="RectangleOutline" parent="Platforms/Platform2" index="2"]
 shape = SubResource("RectangleShape2D_074og")
 
 [node name="Platform3" parent="Platforms" instance=ExtResource("12_074og")]
@@ -871,10 +865,7 @@ polygon = PackedVector2Array(-185.5, -163, 185.5, -163, 185.5, 163, -185.5, 163)
 [node name="Polygon2D" parent="Platforms/Platform3" index="1"]
 polygon = PackedVector2Array(-185.5, -163, 185.5, -163, 185.5, 163, -185.5, 163)
 
-[node name="BorderLine2D" parent="Platforms/Platform3" index="2"]
-points = PackedVector2Array(-185.5, -163, 185.5, -163, 185.5, 163, -185.5, 163)
-
-[node name="RectangleOutline" parent="Platforms/Platform3" index="3"]
+[node name="RectangleOutline" parent="Platforms/Platform3" index="2"]
 shape = SubResource("RectangleShape2D_82xsv")
 
 [node name="Platform4" parent="Platforms" instance=ExtResource("12_074og")]
@@ -890,10 +881,7 @@ polygon = PackedVector2Array(-118, -25, 118, -25, 118, 25, -118, 25)
 [node name="Polygon2D" parent="Platforms/Platform4" index="1"]
 polygon = PackedVector2Array(-118, -25, 118, -25, 118, 25, -118, 25)
 
-[node name="BorderLine2D" parent="Platforms/Platform4" index="2"]
-points = PackedVector2Array(-118, -25, 118, -25, 118, 25, -118, 25)
-
-[node name="RectangleOutline" parent="Platforms/Platform4" index="3"]
+[node name="RectangleOutline" parent="Platforms/Platform4" index="2"]
 shape = SubResource("RectangleShape2D_getpj")
 
 [node name="TempPlatform" type="StaticBody2D" parent="."]
