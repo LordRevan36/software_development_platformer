@@ -1,12 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://b1iavla5jso1x"]
+[gd_scene load_steps=7 format=3 uid="uid://b1iavla5jso1x"]
 
 [ext_resource type="Texture2D" uid="uid://ctk8ibr44c642" path="res://Assets/Forest/Bush.png" id="1_w8v3s"]
 [ext_resource type="Texture2D" uid="uid://c2fn1ck4bikb1" path="res://Assets/Forest/Grass.png" id="7_sqofj"]
 [ext_resource type="PackedScene" uid="uid://cy1vyx88wgg4v" path="res://Player/player.tscn" id="9_diqn3"]
 [ext_resource type="Script" uid="uid://do5bugkt41qkv" path="res://camera.gd" id="10_t3dj1"]
-[ext_resource type="Script" uid="uid://bqovlgcavqgg2" path="res://UI/health_bar.gd" id="14_em3r6"]
-[ext_resource type="Script" uid="uid://dhqon0kvpcrte" path="res://UI/button.gd" id="15_soehs"]
-[ext_resource type="Script" uid="uid://qy3w7jrwih6c" path="res://UI/heal_button.gd" id="16_time6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ycdy4"]
 size = Vector2(366, 50)
@@ -106,29 +103,3 @@ position = Vector2(1, -283)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
 shape = SubResource("WorldBoundaryShape2D_0xm2m")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-offset = Vector2(15, 15)
-transform = Transform2D(1, 0, 0, 1, 15, 15)
-
-[node name="HealthBar" type="ProgressBar" parent="CanvasLayer" groups=["Player"]]
-offset_right = 400.0
-offset_bottom = 60.0
-value = 100.0
-script = ExtResource("14_em3r6")
-
-[node name="DamageButton" type="Button" parent="CanvasLayer"]
-offset_left = 88.0
-offset_top = 66.0
-offset_right = 306.0
-offset_bottom = 124.0
-text = "Take Damage"
-script = ExtResource("15_soehs")
-
-[node name="HealButton" type="Button" parent="CanvasLayer"]
-offset_left = 88.0
-offset_top = 134.0
-offset_right = 306.0
-offset_bottom = 192.0
-text = "Heal Damage"
-script = ExtResource("16_time6")

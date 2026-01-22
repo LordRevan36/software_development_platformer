@@ -1,10 +1,16 @@
-[gd_scene load_steps=71 format=3 uid="uid://cy1vyx88wgg4v"]
+[gd_scene load_steps=81 format=3 uid="uid://cy1vyx88wgg4v"]
 
 [ext_resource type="Script" uid="uid://bangw8dvmuyod" path="res://Player/player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://bvtijhwqlx01u" path="res://Assets/Player/Ivy.png" id="2_gwnis"]
 [ext_resource type="Texture2D" uid="uid://rnawpuddimk" path="res://Assets/Player/Slash.png" id="3_btcbx"]
 [ext_resource type="Script" uid="uid://m70ma2rafm6p" path="res://Player/movement_particles.gd" id="4_k53q1"]
 [ext_resource type="Texture2D" uid="uid://ul3588q4vy3l" path="res://Assets/Forest/LeafParticle2.png" id="5_fhl08"]
+[ext_resource type="Script" uid="uid://dhqon0kvpcrte" path="res://DamageButton.gd" id="6_00tjw"]
+[ext_resource type="Script" uid="uid://qy3w7jrwih6c" path="res://UI/heal_button.gd" id="7_x3vf3"]
+[ext_resource type="Texture2D" uid="uid://cbmy31rblo60d" path="res://Assets/HUD/HealthBar.png" id="8_apopc"]
+[ext_resource type="Script" uid="uid://rexj3shyfaq6" path="res://HealthBar.gd" id="9_5htga"]
+[ext_resource type="Texture2D" uid="uid://cgw1lcgfkoqap" path="res://Assets/HUD/StaminaBar.png" id="10_apopc"]
+[ext_resource type="Script" uid="uid://cv8mai7sitq67" path="res://Player/stamina_bar.gd" id="10_x3vf3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k53q1"]
 atlas = ExtResource("2_gwnis")
@@ -542,6 +548,22 @@ turbulence_noise_speed_random = 0.05
 turbulence_influence_min = 0.0
 turbulence_influence_max = 0.2
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ynux"]
+atlas = ExtResource("8_apopc")
+region = Rect2(0, 128, 384, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7x5p2"]
+atlas = ExtResource("8_apopc")
+region = Rect2(0, 0, 384, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qpoj2"]
+atlas = ExtResource("10_apopc")
+region = Rect2(0, 128, 0, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3e3ym"]
+atlas = ExtResource("10_apopc")
+region = Rect2(0, 0, 0, 128)
+
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 position = Vector2(-24, 5)
 script = ExtResource("1_onrkg")
@@ -585,6 +607,10 @@ one_shot = true
 wait_time = 0.5
 one_shot = true
 
+[node name="StaminaTimer" type="Timer" parent="Timers"]
+wait_time = 3.0
+one_shot = true
+
 [node name="MovementParticles" type="Node2D" parent="."]
 show_behind_parent = true
 script = ExtResource("4_k53q1")
@@ -625,10 +651,55 @@ randomness = 0.3
 fixed_fps = 24
 process_material = SubResource("ParticleProcessMaterial_x3vf3")
 
+[node name="UI" type="CanvasLayer" parent="."]
+offset = Vector2(15, 15)
+transform = Transform2D(1, 0, 0, 1, 15, 15)
+
+[node name="DamageButton" type="Button" parent="UI"]
+offset_left = 527.0
+offset_top = 20.0
+offset_right = 745.0
+offset_bottom = 78.0
+text = "Take Damage"
+script = ExtResource("6_00tjw")
+metadata/_edit_use_anchors_ = true
+
+[node name="HealButton" type="Button" parent="UI"]
+offset_left = 527.0
+offset_top = 88.0
+offset_right = 745.0
+offset_bottom = 146.0
+text = "Heal Damage"
+script = ExtResource("7_x3vf3")
+
+[node name="HealthBar" type="TextureProgressBar" parent="UI"]
+offset_left = 12.0
+offset_top = -43.0
+offset_right = 396.0
+offset_bottom = 85.0
+scale = Vector2(1.25, 1.25)
+value = 100.0
+texture_under = SubResource("AtlasTexture_8ynux")
+texture_progress = SubResource("AtlasTexture_7x5p2")
+script = ExtResource("9_5htga")
+player_path = NodePath("../../Player")
+
+[node name="StaminaBar" type="TextureProgressBar" parent="UI"]
+offset_left = 12.0
+offset_right = 396.0
+offset_bottom = 128.0
+scale = Vector2(1.25, 1.25)
+value = 100.0
+texture_under = SubResource("AtlasTexture_qpoj2")
+texture_progress = SubResource("AtlasTexture_3e3ym")
+script = ExtResource("10_x3vf3")
+player_path = NodePath("../..")
+
 [connection signal="jumped" from="." to="MovementParticles" method="_on_player_jumped"]
 [connection signal="landed" from="." to="MovementParticles" method="_on_player_landed"]
-[connection signal="animation_finished" from="PlayerSprite" to="." method="_on_player_sprite_animation_finished"]
 [connection signal="animation_finished" from="PlayerSprite" to="." method="_on_player_animation_finished"]
+[connection signal="animation_finished" from="PlayerSprite" to="." method="_on_player_sprite_animation_finished"]
 [connection signal="animation_finished" from="Slash" to="." method="_on_slash_animation_finished"]
 [connection signal="timeout" from="Timers/CoyoteJumpTimer" to="." method="_on_coyote_jump_timer_timeout"]
 [connection signal="timeout" from="Timers/AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="Timers/StaminaTimer" to="." method="_on_stamina_timer_timeout"]
