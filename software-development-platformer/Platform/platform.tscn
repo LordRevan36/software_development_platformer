@@ -1,7 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://c6lcnacw8vw5s"]
+[gd_scene load_steps=3 format=3 uid="uid://c6lcnacw8vw5s"]
 
 [ext_resource type="Script" uid="uid://6hfsroor2sbh" path="res://Platform/platform.gd" id="1_0v4dy"]
-[ext_resource type="Texture2D" uid="uid://gd7bqfy28ehk" path="res://Assets/MissingTexture.png" id="2_g263t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g263t"]
 resource_local_to_scene = true
@@ -11,6 +10,8 @@ size = Vector2(366, 50)
 script = ExtResource("1_0v4dy")
 points = PackedVector2Array(-183, -25, 183, -25, 183, 25, -183, 25)
 sizeVector = Vector2(366, 50)
+texturePath = null
+textureWidth = null
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-183, -25, 183, -25, 183, 25, -183, 25)
@@ -21,13 +22,8 @@ texture_repeat = 2
 color = Color(0.30497152, 0.18106371, 2.4065375e-08, 1)
 polygon = PackedVector2Array(-183, -25, 183, -25, 183, 25, -183, 25)
 
-[node name="BorderLine2D" type="Line2D" parent="."]
-texture_repeat = 2
-points = PackedVector2Array(-183, -25, 183, -25, 183, 25, -183, 25)
-closed = true
-texture = ExtResource("2_g263t")
-texture_mode = 1
-
 [node name="RectangleOutline" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_g263t")
 disabled = true
+
+[node name="BorderLines" type="Node2D" parent="."]
