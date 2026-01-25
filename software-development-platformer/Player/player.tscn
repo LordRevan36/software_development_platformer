@@ -542,15 +542,17 @@ turbulence_noise_speed_random = 0.05
 turbulence_influence_min = 0.0
 turbulence_influence_max = 0.2
 
-[node name="Player" type="CharacterBody2D" groups=["Player"]]
+[node name="Player" type="CharacterBody2D" groups=["Bouncy", "Player"]]
 position = Vector2(-24, 5)
+collision_layer = 2
+collision_mask = 11
 script = ExtResource("1_onrkg")
 friction = 0.8
 metadata/_edit_group_ = true
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_sh265")
-animation = &"fall"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="PlayerHitbox" type="CollisionShape2D" parent="."]
@@ -565,7 +567,7 @@ animation = &"slash"
 frame = 3
 frame_progress = 1.0
 
-[node name="Attack" type="Area2D" parent="."]
+[node name="Attack" type="Area2D" parent="." groups=["Player"]]
 visible = false
 position = Vector2(41, 26)
 scale = Vector2(0.5, 0.5)
@@ -626,6 +628,7 @@ fixed_fps = 24
 process_material = SubResource("ParticleProcessMaterial_x3vf3")
 
 [connection signal="jumped" from="." to="MovementParticles" method="_on_player_jumped"]
+[connection signal="landed" from="." to="." method="_on_landed"]
 [connection signal="landed" from="." to="MovementParticles" method="_on_player_landed"]
 [connection signal="animation_finished" from="PlayerSprite" to="." method="_on_player_animation_finished"]
 [connection signal="animation_finished" from="PlayerSprite" to="." method="_on_player_sprite_animation_finished"]

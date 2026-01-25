@@ -8,8 +8,8 @@ size = Vector2(366, 50)
 
 [node name="Platform" type="StaticBody2D"]
 script = ExtResource("1_0v4dy")
-points = PackedVector2Array(-178, -20, 178, -20, 178, 20, -178, 20)
-sizeVector = Vector2(366, 50)
+points = PackedVector2Array(-180.5, -22.5, 180.5, -22.5, 180.5, 22.5, -180.5, 22.5)
+sizeVector = Vector2(361, 45)
 texturePath = "res://.godot/imported/MissingTexture.png-22b33255012559b00bdd8aa9710640d6.ctex"
 textureWidth = 10.0
 

@@ -3,6 +3,8 @@ extends CharacterBody2D
 @onready var Slash: AnimatedSprite2D = $Slash
 @onready var CoyoteTimer: Timer = $Timers/CoyoteJumpTimer
 @onready var AttackTimer: Timer = $Timers/AttackTimer #making these timers both for balance tweaking, and not letting animations determinephysics state
+@onready var AttackHitbox: CollisionShape2D = $Attack/AttackHitbox
+
 
 #if you ever want to do this, drag in the node you're referencing, then hold command/ctrl while releasing
 
@@ -13,21 +15,21 @@ const JUMP_VELOCITY = -510.0
 @export var air_control = 0.5 #value from 0 to 1, lets you control how easily player can control their air movement
 @export var MAX_Health := 100
 
-var was_on_floor = false #replaces old hardLand; simply stores last frame's is_on_floor for detecting landing.
-var direction = 0
-var facing = 1 #1 for right, -1 for left. like direction, but doesnt change if we dont want it to
-var state = "idle" #state variable so physics doesn't depend on animations (bad practice i think?)
+var was_on_floor: bool = false #replaces old hardLand; simply stores last frame's is_on_floor for detecting landing.
+var direction: float = 0
+var facing: int = 1 #1 for right, -1 for left. like direction, but doesnt change if we dont want it to
+var state: String = "idle" #state variable so physics doesn't depend on animations (bad practice i think?)
 var time := 0.0 #time
 var crouchStartTime := 0.0 #used to store how long player crouches down for
-var jumpVelocity = Vector2(0,0) #stores velocity of player immediately after jumping
-var landVelocity = Vector2(0,0) #stores velocity of player immediately before landing
-var slow = 1 #stores velocity vector of player immediately before attacking
-var canJump = true #used to let player jump a little after leaving the platform
+var jumpVelocity: Vector2 = Vector2(0,0) #stores velocity of player immediately after jumping
+var landVelocity: Vector2 = Vector2(0,0) #stores velocity of player immediately before landing
+var slow:= 1.0 #stores velocity vector of player immediately before attacking
+var canJump: bool = true #used to let player jump a little after leaving the platform
 var health := MAX_Health #stores the health for the player
 
  #signals to communicate important events, can be detected in other scripts.
 #Currently just used for particles and physics.
-signal landed(landingVelocity) #player lands after being in the air
+signal landed(landingVelocity, collision) #player lands after being in the air
 signal jumped #player has left the ground with upward velocity. currently emitted for flips, too.
 signal attack_started
 signal attack_finished
@@ -71,16 +73,16 @@ func _physics_process(delta: float) -> void:
 		
 	# LANDING
 	if is_on_floor() and !was_on_floor:
-		landed.emit(landVelocity)
-		if state == "backflip" or state == "frontflip":
-			state = "flipland"
-		else:
-			state = "land"
+		var collision = get_last_slide_collision()
+		if collision:
+			landed.emit(landVelocity, collision)
+		#rest is in signal at bottom
 			
 			
 	# ATTACKING
-	if Input.is_action_just_pressed("Attack 1"):
+	if Input.is_action_just_pressed("Attack 1") and state != "attack":
 		state = "attack"
+		AttackHitbox.disabled = false
 		attack_started.emit()
 		AttackTimer.start()
 		
@@ -95,8 +97,8 @@ func _physics_process(delta: float) -> void:
 			
 	if is_on_floor():
 		
-		#resetting coyote jump time
-		if !canJump:
+		#resetting coyote jump time. not when bounced though.
+		if !canJump and state != "jump":
 			canJump = true
 			
 		# MOVEMENT ON GROUND, includes friction and slight sliding on landing. values will likely need to be tweaked later
@@ -111,7 +113,7 @@ func _physics_process(delta: float) -> void:
 			velocity.x = move_toward(velocity.x, SPEED * direction, SPEED/32*friction)
 			
 		# sees if on ground and not currently crouched or otherwise occupied
-		if state != "crouch" and state != "attack" and state != "flipland":
+		if state != "crouch" and state != "attack" and state != "flipland" and state != "jump":
 			if direction != 0 and !is_on_wall():
 				state = "run"
 			elif state != "land": #this way, you can still run after landing, which feels better
@@ -186,6 +188,8 @@ func _physics_process(delta: float) -> void:
 
 
 
+
+
 func updateAnimations():
 	if facing == 1:
 		AnimSprite.flip_h = false;
@@ -203,12 +207,8 @@ func updateAnimations():
 		state = "fall" ##THIS IS A BAD SOLUTION BUT I STRUGGLE TO FIND A WORKAROUND. Ideally, updateAnimations wouldn't affect any physics processes at all! 
 	elif state == "backflip":
 		AnimSprite.play("backflip")
-		#await AnimSprite.animation_finished
-		#state = "fall"
 	elif state == "frontflip":
 		AnimSprite.play("frontflip")
-		#await AnimSprite.animation_finished
-		#state = "fall"
 	elif state == "fall":
 		if velocity.y < 100: #if payer's velocity is upwards, hair won't fall yet
 			AnimSprite.animation = "fall"
@@ -285,8 +285,25 @@ func _on_coyote_jump_timer_timeout() -> void:
 
 func _on_attack_timer_timeout() -> void:
 	state = "idle"
+	AttackHitbox.disabled = true
 	attack_finished.emit()
 
 # HIDING SLASH
 func _on_slash_animation_finished() -> void: #used to visually hide slash when its done
 	Slash.hide()
+
+
+# LANDING- WITH BOUNCY PLATFORMS
+func _on_landed(landingVelocity: Vector2, collision: Object) -> void:
+	var collider = collision.get_collider()
+	if collider and collider.is_in_group("Bouncy") and landingVelocity.y > 300:
+		state = "jump"
+		canJump = false
+		velocity.y = -landingVelocity.y*0.8
+		velocity.x *= 1.1
+	else:
+		if state == "backflip" or state == "frontflip":
+			state = "flipland"
+		else:
+			state = "land"
+			

@@ -1,0 +1,81 @@
+[gd_scene load_steps=10 format=3 uid="uid://b56d4jexrfnwu"]
+
+[ext_resource type="Script" uid="uid://dv03xrv5o1rl" path="res://Enemies/ladybug.gd" id="1_0wkyt"]
+[ext_resource type="Texture2D" uid="uid://57wun4w15gbv" path="res://Assets/Enemies/ladybugenemy.png" id="1_y6uar"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0wkyt"]
+atlas = ExtResource("1_y6uar")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7fh7g"]
+atlas = ExtResource("1_y6uar")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_100if"]
+atlas = ExtResource("1_y6uar")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t4xq1"]
+atlas = ExtResource("1_y6uar")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h2mil"]
+animations = [{
+"frames": [{
+"duration": 4.0,
+"texture": SubResource("AtlasTexture_0wkyt")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_7fh7g")
+}, {
+"duration": 4.0,
+"texture": SubResource("AtlasTexture_100if")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_t4xq1")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 12.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y6uar"]
+size = Vector2(115.75, 36.5)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y6uar"]
+radius = 28.0
+height = 88.0
+
+[node name="Ladybug" type="RigidBody2D" groups=["Bouncy"]]
+collision_layer = 12
+collision_mask = 13
+lock_rotation = true
+script = ExtResource("1_0wkyt")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_h2mil")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.66212493
+
+[node name="Body" type="CollisionShape2D" parent="."]
+position = Vector2(-2.125, 33.25)
+shape = SubResource("RectangleShape2D_y6uar")
+
+[node name="Top" type="CollisionShape2D" parent="." groups=["Bouncy"]]
+position = Vector2(3, 10)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_y6uar")
+
+[node name="Attackable" type="Area2D" parent="."]
+
+[node name="Body" type="CollisionShape2D" parent="Attackable"]
+position = Vector2(-2.125, 33.25)
+shape = SubResource("RectangleShape2D_y6uar")
+
+[node name="Top" type="CollisionShape2D" parent="Attackable" groups=["Bouncy"]]
+position = Vector2(3, 10)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_y6uar")
+
+[connection signal="area_entered" from="Attackable" to="." method="_on_attackable_area_entered"]
