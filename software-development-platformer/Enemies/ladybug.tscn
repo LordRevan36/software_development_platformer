@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://b56d4jexrfnwu"]
+[gd_scene load_steps=13 format=3 uid="uid://b56d4jexrfnwu"]
 
 [ext_resource type="Script" uid="uid://dv03xrv5o1rl" path="res://Enemies/ladybug.gd" id="1_0wkyt"]
 [ext_resource type="Texture2D" uid="uid://57wun4w15gbv" path="res://Assets/Enemies/ladybugenemy.png" id="1_y6uar"]
+[ext_resource type="BehaviorTree" uid="uid://cptkxrewo5ufm" path="res://ai/trees/ladybugEnemy.tres" id="3_7fh7g"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0wkyt"]
 atlas = ExtResource("1_y6uar")
@@ -46,6 +47,12 @@ size = Vector2(115.75, 36.5)
 radius = 28.0
 height = 88.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0wkyt"]
+radius = 43.0
+height = 122.0
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_100if"]
+
 [node name="Ladybug" type="RigidBody2D" groups=["Bouncy"]]
 collision_layer = 12
 collision_mask = 13
@@ -56,9 +63,10 @@ script = ExtResource("1_0wkyt")
 sprite_frames = SubResource("SpriteFrames_h2mil")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.66212493
+frame_progress = 0.9710655
 
 [node name="Body" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(-2.125, 33.25)
 shape = SubResource("RectangleShape2D_y6uar")
 
@@ -69,13 +77,13 @@ shape = SubResource("CapsuleShape2D_y6uar")
 
 [node name="Attackable" type="Area2D" parent="."]
 
-[node name="Body" type="CollisionShape2D" parent="Attackable"]
-position = Vector2(-2.125, 33.25)
-shape = SubResource("RectangleShape2D_y6uar")
-
 [node name="Top" type="CollisionShape2D" parent="Attackable" groups=["Bouncy"]]
-position = Vector2(3, 10)
+position = Vector2(-1, 14)
 rotation = 1.5707964
-shape = SubResource("CapsuleShape2D_y6uar")
+shape = SubResource("CapsuleShape2D_0wkyt")
+
+[node name="BTPlayer" type="BTPlayer" parent="."]
+behavior_tree = ExtResource("3_7fh7g")
+blackboard_plan = SubResource("BlackboardPlan_100if")
 
 [connection signal="area_entered" from="Attackable" to="." method="_on_attackable_area_entered"]

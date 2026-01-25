@@ -83,6 +83,10 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("Attack 1") and state != "attack":
 		state = "attack"
 		AttackHitbox.disabled = false
+		if facing == 1:
+			AttackHitbox.position = Vector2(-24,30)
+		else:
+			AttackHitbox.position = Vector2(-136,30)
 		attack_started.emit()
 		AttackTimer.start()
 		
@@ -185,6 +189,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	velocity /= slow
 	updateAnimations()
+	globalUpdate()
 
 
 
@@ -304,6 +309,11 @@ func _on_landed(landingVelocity: Vector2, collision: Object) -> void:
 	else:
 		if state == "backflip" or state == "frontflip":
 			state = "flipland"
-		else:
+		elif state != "attack":
 			state = "land"
 			
+
+func globalUpdate() -> void:
+	Global.player_velocity = velocity
+	Global.player_facing = facing
+	Global.player_position = position

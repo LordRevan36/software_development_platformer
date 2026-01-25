@@ -796,7 +796,7 @@ process_material = SubResource("ParticleProcessMaterial_vivmo")
 script = SubResource("GDScript_2cqfq")
 
 [node name="Ladybug" parent="." instance=ExtResource("11_byont")]
-position = Vector2(-4, -279)
+position = Vector2(132, -53)
 
 [node name="Player" parent="." instance=ExtResource("1_bo1nx")]
 position = Vector2(-20, -124)
