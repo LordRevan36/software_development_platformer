@@ -5,10 +5,10 @@
 [ext_resource type="Texture2D" uid="uid://rnawpuddimk" path="res://Assets/Player/Slash.png" id="3_btcbx"]
 [ext_resource type="Script" uid="uid://m70ma2rafm6p" path="res://Player/movement_particles.gd" id="4_k53q1"]
 [ext_resource type="Texture2D" uid="uid://ul3588q4vy3l" path="res://Assets/Forest/LeafParticle2.png" id="5_fhl08"]
-[ext_resource type="Script" uid="uid://dhqon0kvpcrte" path="res://DamageButton.gd" id="6_00tjw"]
+[ext_resource type="Script" uid="uid://dhqon0kvpcrte" path="res://UI/DamageButton.gd" id="6_00tjw"]
 [ext_resource type="Script" uid="uid://qy3w7jrwih6c" path="res://UI/heal_button.gd" id="7_x3vf3"]
 [ext_resource type="Texture2D" uid="uid://cbmy31rblo60d" path="res://Assets/HUD/HealthBar.png" id="8_apopc"]
-[ext_resource type="Script" uid="uid://rexj3shyfaq6" path="res://HealthBar.gd" id="9_5htga"]
+[ext_resource type="Script" uid="uid://rexj3shyfaq6" path="res://UI/HealthBar.gd" id="9_5htga"]
 [ext_resource type="Texture2D" uid="uid://cgw1lcgfkoqap" path="res://Assets/HUD/StaminaBar.png" id="10_apopc"]
 [ext_resource type="Script" uid="uid://cv8mai7sitq67" path="res://Player/stamina_bar.gd" id="10_x3vf3"]
 
@@ -697,8 +697,8 @@ player_path = NodePath("../..")
 
 [connection signal="jumped" from="." to="MovementParticles" method="_on_player_jumped"]
 [connection signal="landed" from="." to="MovementParticles" method="_on_player_landed"]
-[connection signal="animation_finished" from="PlayerSprite" to="." method="_on_player_animation_finished"]
 [connection signal="animation_finished" from="PlayerSprite" to="." method="_on_player_sprite_animation_finished"]
+[connection signal="animation_finished" from="PlayerSprite" to="." method="_on_player_animation_finished"]
 [connection signal="animation_finished" from="Slash" to="." method="_on_slash_animation_finished"]
 [connection signal="timeout" from="Timers/CoyoteJumpTimer" to="." method="_on_coyote_jump_timer_timeout"]
 [connection signal="timeout" from="Timers/AttackTimer" to="." method="_on_attack_timer_timeout"]
