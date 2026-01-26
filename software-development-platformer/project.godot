@@ -45,6 +45,7 @@ folder_colors={
 Player="its the player .ngl idk if this is really necessary but im putting it in anyways"
 AutumnLeafMaterial="Causes leaf particles when player runs/jumps over."
 Bouncy="Bounces the player (and maybe enemies?) when landed on."
+Enemy="Group for any enemies. First added for a tutorial."
 
 [input]
 

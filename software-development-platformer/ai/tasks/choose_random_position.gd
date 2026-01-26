@@ -1,3 +1,4 @@
+@tool
 extends BTAction
 #https://www.youtube.com/watch?v=gAk3xl5fBsM
 #tutorial moment :P

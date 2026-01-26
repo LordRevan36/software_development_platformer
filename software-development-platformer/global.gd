@@ -5,3 +5,4 @@ var player_velocity: Vector2 = Vector2(0,0)
 var player_position: Vector2 = Vector2(0,0)
 var player_facing
 var player_health
+var player

@@ -30,3 +30,14 @@ func updateAnimations(dir) -> void:
 		AnimSprite.flip_h = true
 	else:
 		AnimSprite.flip_h = false
+		
+func check_for_self(node): #for enemy ai
+	if node == self:
+		return true
+	else:
+		return false
+
+func attackPlayer():
+	print("ATTACK!")
+	linear_velocity.x = 20
+	linear_velocity.y = -20

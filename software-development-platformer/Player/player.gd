@@ -317,3 +317,4 @@ func globalUpdate() -> void:
 	Global.player_velocity = velocity
 	Global.player_facing = facing
 	Global.player_position = position
+	Global.player = self

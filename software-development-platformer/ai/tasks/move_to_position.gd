@@ -1,3 +1,4 @@
+@tool
 extends BTAction
 
 @export var target_pos_var := &"pos"

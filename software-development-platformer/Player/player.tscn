@@ -544,7 +544,7 @@ turbulence_influence_max = 0.2
 
 [node name="Player" type="CharacterBody2D" groups=["Bouncy", "Player"]]
 position = Vector2(-24, 5)
-collision_layer = 2
+collision_layer = 10
 collision_mask = 11
 script = ExtResource("1_onrkg")
 friction = 0.8
