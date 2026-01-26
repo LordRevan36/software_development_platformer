@@ -3,6 +3,7 @@ extends CharacterBody2D
 @onready var Slash: AnimatedSprite2D = $Slash
 @onready var CoyoteTimer: Timer = $Timers/CoyoteJumpTimer
 @onready var AttackTimer: Timer = $Timers/AttackTimer #making these timers both for balance tweaking, and not letting animations determinephysics state
+@onready var StaminaTimer: Timer = $Timers/StaminaTimer
 
 #if you ever want to do this, drag in the node you're referencing, then hold command/ctrl while releasing
 
@@ -12,6 +13,7 @@ const JUMP_VELOCITY = -510.0
 @export var friction = 0.9 #value from 0 to 1. 1 means full friction on floor when running, 0 means full icy floor
 @export var air_control = 0.5 #value from 0 to 1, lets you control how easily player can control their air movement
 @export var MAX_Health := 100
+@export var MAX_Stamina := 100 
 
 var was_on_floor = false #replaces old hardLand; simply stores last frame's is_on_floor for detecting landing.
 var direction = 0
@@ -24,14 +26,18 @@ var landVelocity = Vector2(0,0) #stores velocity of player immediately before la
 var slow = 1 #stores velocity vector of player immediately before attacking
 var canJump = true #used to let player jump a little after leaving the platform
 var health := MAX_Health #stores the health for the player
+var stamina := MAX_Stamina #stores the stamina for the player
+#var duration = 0
+var exercise = false
 
- #signals to communicate important events, can be detected in other scripts.
+#signals to communicate important events, can be detected in other scripts.
 #Currently just used for particles and physics.
 signal landed(landingVelocity) #player lands after being in the air
 signal jumped #player has left the ground with upward velocity. currently emitted for flips, too.
 signal attack_started
 signal attack_finished
 signal health_changed(current, max)
+signal stamina_changed(current, max, duration)
 
 #function for taking damage
 func take_damage(amount: int) -> void:
@@ -47,8 +53,20 @@ func heal(amount: int) -> void:
 	if health > MAX_Health:
 		health = MAX_Health
 
-
-
+#function for stamina
+func stam(amount: int, duration: float) -> void:
+	exercise = true
+	stamina = max(stamina + amount, 0)
+	emit_signal("stamina_changed", stamina, MAX_Stamina, duration)
+	if stamina > MAX_Stamina:
+		stamina = MAX_Stamina
+	if stamina < 0:
+		stamina = 0
+		
+func regenStam() -> void:
+	stam(10,0.5)
+	while stamina != MAX_Stamina:
+			stam(10, 0.5)
 
 func _physics_process(delta: float) -> void:
 	if state == "exit":
@@ -183,6 +201,9 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	velocity /= slow
 	updateAnimations()
+	
+	if state == "idle":
+		exercise = false
 
 
 
@@ -238,32 +259,41 @@ func updateAnimations():
 			state = "idle"
 	elif state == "exit":
 		AnimSprite.play("run")
+	if state == "idle":
+		exercise = false
 			
 func jump():
-	velocity.y = (JUMP_VELOCITY+JUMP_VELOCITY*(time-crouchStartTime)/2)
-	state = "jump"
-	canJump = false
-	jumped.emit()
-	jumpVelocity = velocity
+	if stamina >= 10:
+		velocity.y = (JUMP_VELOCITY+JUMP_VELOCITY*(time-crouchStartTime)/2)
+		state = "jump"
+		canJump = false
+		jumped.emit()
+		jumpVelocity = velocity
+		stam(-10, 0.3)
+		StaminaTimer.start()
 	
 	
 func backflip():
-	velocity.y = (JUMP_VELOCITY+JUMP_VELOCITY*(time-crouchStartTime)/4)*1.4
-	velocity.x = -(SPEED+SPEED*(time-crouchStartTime)/4)*facing*0.5
-	state = "backflip"
-	canJump = false
-	jumped.emit()
-	jumpVelocity = velocity
-	
+	if stamina >= 30:
+		velocity.y = (JUMP_VELOCITY+JUMP_VELOCITY*(time-crouchStartTime)/4)*1.4
+		velocity.x = -(SPEED+SPEED*(time-crouchStartTime)/4)*facing*0.5
+		state = "backflip"
+		canJump = false
+		jumped.emit()
+		jumpVelocity = velocity
+		stam(-30, 0.3)
+		StaminaTimer.start()
 	
 func frontflip():
-	velocity.y = (JUMP_VELOCITY+JUMP_VELOCITY*(time-crouchStartTime)/4)*0.7
-	velocity.x = (SPEED+SPEED*(time-crouchStartTime)/4)*facing*1.8
-	state = "frontflip"
-	canJump = false
-	jumped.emit()
-	jumpVelocity = velocity
-	
+	if stamina >= 30:
+		velocity.y = (JUMP_VELOCITY+JUMP_VELOCITY*(time-crouchStartTime)/4)*0.7
+		velocity.x = (SPEED+SPEED*(time-crouchStartTime)/4)*facing*1.8
+		state = "frontflip"
+		canJump = false
+		jumped.emit()
+		jumpVelocity = velocity
+		stam(-30, 0.3)
+		StaminaTimer.start()
 
 
 func _on_coyote_jump_timer_timeout() -> void:
@@ -290,3 +320,7 @@ func _on_attack_timer_timeout() -> void:
 # HIDING SLASH
 func _on_slash_animation_finished() -> void: #used to visually hide slash when its done
 	Slash.hide()
+
+func _on_stamina_timer_timeout() -> void:
+	state = "idle"
+	regenStam()
