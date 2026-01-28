@@ -844,13 +844,13 @@ size_vector = Vector2(372, 328)
 textureWidth = 8.0
 
 [node name="CollisionPolygon2D" parent="Platforms/Platform3" index="0"]
-polygon = PackedVector2Array(-186, -164, 186, -164, 186, 164, -186, 164)
+polygon = PackedVector2Array(-186, -116, 186, -116, 186, 212, -186, 212)
 
 [node name="Polygon2D" parent="Platforms/Platform3" index="1"]
-polygon = PackedVector2Array(-182, -160, 182, -160, 182, 160, -182, 160)
+polygon = PackedVector2Array(-182, -112, 182, -112, 182, 208, -182, 208)
 
 [node name="RectangleOutline" parent="Platforms/Platform3" index="2"]
-position = Vector2(0, 47)
+position = Vector2(0, 48)
 shape = SubResource("RectangleShape2D_82xsv")
 
 [node name="Platform4" parent="Platforms" instance=ExtResource("12_074og")]
@@ -859,13 +859,13 @@ size_vector = Vector2(236, 52)
 textureWidth = 8.0
 
 [node name="CollisionPolygon2D" parent="Platforms/Platform4" index="0"]
-polygon = PackedVector2Array(-118, -26, 118, -26, 118, 26, -118, 26)
+polygon = PackedVector2Array(-118, -14, 118, -14, 118, 38, -118, 38)
 
 [node name="Polygon2D" parent="Platforms/Platform4" index="1"]
-polygon = PackedVector2Array(-114, -22, 114, -22, 114, 22, -114, 22)
+polygon = PackedVector2Array(-114, -10, 114, -10, 114, 34, -114, 34)
 
 [node name="RectangleOutline" parent="Platforms/Platform4" index="2"]
-position = Vector2(0, 11)
+position = Vector2(0, 12)
 shape = SubResource("RectangleShape2D_getpj")
 
 [node name="LevelExit" parent="." instance=ExtResource("12_86kmy")]
