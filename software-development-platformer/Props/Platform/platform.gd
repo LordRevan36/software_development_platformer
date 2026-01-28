@@ -8,26 +8,29 @@ extends StaticBody2D
 #For polygons, they haven't been tested thoroughly so hold off on that
 
 #TODO
-#Fix Line2D centering
 #Update polygon mode
 
-@onready var polygon_2d = $Polygon2D
-@onready var collision_polygon_2d = $CollisionPolygon2D
-#@onready var border_line_2d = $BorderLine2D
-@onready var border_lines = $BorderLines
-@onready var rectangle_outline = $RectangleOutline
+@onready var polygon_2d = $Polygon2D #visible inner portion of platform
+@onready var collision_polygon_2d = $CollisionPolygon2D #collison portion
+@onready var border_lines = $BorderLines #storage for each individually-generated border line
+@onready var rectangle_outline = $RectangleOutline #rectangle handler to create rectangles easily
 
+#enum to choose between rectangle and polygon mode
+#RECTANGLE: will generate a rectangle with a handle that is easy to move, updates polygons to the shape of the rectangle
+#POLYGON: (not done yet) allows you to create any shape but a little harder to work with
 enum EditMode {RECTANGLE, POLYGON}
 @export var edit_mode: EditMode = EditMode.RECTANGLE:
 	set(value):
 		edit_mode = value
 		_update_editor_visibility()
-@export var points : PackedVector2Array
-@export var startPosition : Vector2
-@export var sizeVector : Vector2 = Vector2(400,50)
-@export var texturePath : String = "res://Assets/MissingTexture2.png"
-@export var textureWidth : float = 8
 
+#used only for polygon
+@export var saved_polygon_points : PackedVector2Array
+
+@export var size_vector : Vector2 = Vector2(400,40)
+@export var texturePath : String = "res://.godot/imported/MissingTexture.png-22b33255012559b00bdd8aa9710640d6.ctex"
+@export var textureWidth : float = 8
+@export var enableSnap : bool = true
 
 func _update_editor_visibility() -> void:
 	if not collision_polygon_2d or not rectangle_outline:
@@ -43,9 +46,30 @@ func _update_editor_visibility() -> void:
 				rectangle_outline.visible = false
 	else:
 		polygon_2d.visible = true
-		#border_line_2d.visible = true
 		border_lines.visible = true
 		rectangle_outline.visible = false
+
+func _snap_function() -> void:
+	if not rectangle_outline or not collision_polygon_2d or not polygon_2d or not border_lines:
+		return
+	if not enableSnap:
+		return
+	if edit_mode == EditMode.RECTANGLE:
+		var current_pos = rectangle_outline.position
+		var new_pos = Vector2()
+		new_pos.x = snapped(current_pos.x, textureWidth/2)
+		new_pos.y = snapped(current_pos.y, textureWidth/2)
+		if not new_pos.is_equal_approx(current_pos):
+			rectangle_outline.position = new_pos
+		var old_size = rectangle_outline.shape.size
+		var new_size = Vector2()
+		new_size.x = snapped(old_size.x, textureWidth/2)
+		new_size.y = snapped(old_size.y, textureWidth/2)
+		if not new_size.is_equal_approx(old_size):
+			rectangle_outline.shape.size = new_size
+			size_vector = new_size
+	if edit_mode == EditMode.POLYGON:
+		pass
 
 func _sync_shapes() -> void:
 	#stop if node deleted
@@ -53,13 +77,12 @@ func _sync_shapes() -> void:
 		return
 	if edit_mode == EditMode.RECTANGLE:
 		#grab data from rectangle_outline
-		var center = rectangle_outline.position
-		sizeVector = rectangle_outline.shape.size
+		size_vector = rectangle_outline.shape.size
 		#match array to actual collision_polygon_2d, then push to other nodes
-		collision_polygon_2d.polygon = _return_rectangle_points(center, sizeVector)
-		sizeVector -= Vector2(textureWidth/2, textureWidth/2)
-		polygon_2d.polygon = _return_rectangle_points(center, sizeVector)
-		_generate_rectangle_borders(center, sizeVector)
+		collision_polygon_2d.polygon = _return_rectangle_points(rectangle_outline, size_vector)
+		var adjusted_size_vector = size_vector - Vector2(textureWidth, textureWidth)
+		polygon_2d.polygon = _return_rectangle_points(rectangle_outline, adjusted_size_vector)
+		_generate_rectangle_borders(rectangle_outline, adjusted_size_vector)
 		#border_line_2d.points = points
 	if edit_mode == EditMode.POLYGON:
 		polygon_2d.polygon = collision_polygon_2d.polygon
@@ -67,14 +90,17 @@ func _sync_shapes() -> void:
 		#border_line_2d.points = points
 
 
-func _generate_rectangle_borders(center, sizeVector) -> void:
+func _generate_rectangle_borders(rectangle_handler, size) -> void:
 	_clear_children(border_lines)
-	var border_points = _return_rectangle_points(center, sizeVector)
+	var border_points = _return_rectangle_points(rectangle_handler, size)
 	for i in border_points.size():
+		var start_position = border_points.get(i)
+		var end_position = border_points.get((i + 1) % border_points.size())
 		var line_points = PackedVector2Array()
-		line_points.push_back(border_points.get(i))
-		line_points.push_back(border_points.get((i + 1) % border_points.size()))
+		line_points.push_back(Vector2())
+		line_points.push_back(end_position - start_position)
 		var line = Line2D.new()
+		line.position = start_position
 		line.points = line_points
 		line.texture = load(texturePath)
 		line.width = textureWidth
@@ -83,18 +109,20 @@ func _generate_rectangle_borders(center, sizeVector) -> void:
 		border_lines.add_child(line)
 
 #takes a center and size of a rectangle and returns an array of its corners
-func _return_rectangle_points(center, sizeVector) -> PackedVector2Array:
-	var topLeftCorner = center - sizeVector/2
-	var topRightCorner = Vector2(center + Vector2(sizeVector.x/2, -sizeVector.y/2))
-	var bottomRightCorner = center + sizeVector/2
-	var bottomLeftCorner = Vector2(center + Vector2(-sizeVector.x/2, sizeVector.y/2))
+func _return_rectangle_points(rectangle_handler: Node2D, size_vector: Vector2) -> PackedVector2Array:
+	var half_size = size_vector/2
+	var local_corners = [
+		Vector2(-half_size.x, -half_size.y),#top left
+		Vector2(half_size.x, -half_size.y),#top right
+		Vector2(half_size.x, half_size.y),#bottom right
+		Vector2(-half_size.x, half_size.y)#bottom left
+	]
+	var handle_transform = rectangle_handler.transform
 	#push points to polygon array
-	points = PackedVector2Array()
-	points.push_back(topLeftCorner)
-	points.push_back(topRightCorner)
-	points.push_back(bottomRightCorner)
-	points.push_back(bottomLeftCorner)
-	return points
+	var pts = PackedVector2Array()
+	for pt in local_corners:
+		pts.push_back(handle_transform * pt)
+	return pts
 
 func _clear_children(parent_node) -> void:
 	for child in parent_node.get_children():
@@ -107,4 +135,5 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if Engine.is_editor_hint():
+		_snap_function()
 		_sync_shapes()

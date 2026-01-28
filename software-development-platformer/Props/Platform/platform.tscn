@@ -4,23 +4,21 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g263t"]
 resource_local_to_scene = true
-size = Vector2(366, 50)
+size = Vector2(365, 50)
 
 [node name="Platform" type="StaticBody2D"]
 script = ExtResource("1_0v4dy")
-points = PackedVector2Array(-178, -20, 178, -20, 178, 20, -178, 20)
-sizeVector = Vector2(366, 50)
-texturePath = "res://.godot/imported/MissingTexture.png-22b33255012559b00bdd8aa9710640d6.ctex"
+size_vector = Vector2(365, 50)
 textureWidth = 10.0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-183, -25, 183, -25, 183, 25, -183, 25)
+polygon = PackedVector2Array(-182.5, -25, 182.5, -25, 182.5, 25, -182.5, 25)
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 texture_filter = 1
 texture_repeat = 2
 color = Color(0.30497152, 0.18106371, 2.4065375e-08, 1)
-polygon = PackedVector2Array(-180.5, -22.5, 180.5, -22.5, 180.5, 22.5, -180.5, 22.5)
+polygon = PackedVector2Array(-177.5, -20, 177.5, -20, 177.5, 20, -177.5, 20)
 
 [node name="RectangleOutline" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_g263t")
