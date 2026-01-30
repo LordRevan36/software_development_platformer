@@ -64,9 +64,9 @@ func stam(amount: int, duration: float) -> void:
 		stamina = 0
 		
 func regenStam() -> void:
-	stam(10,0.5)
+	stam(10,0.75)
 	while stamina != MAX_Stamina:
-			stam(10, 0.5)
+			stam(10, 0.75)
 
 func _physics_process(delta: float) -> void:
 	if state == "exit":
