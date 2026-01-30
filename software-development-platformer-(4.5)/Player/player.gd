@@ -4,7 +4,7 @@ extends CharacterBody2D
 @onready var CoyoteTimer: Timer = $Timers/CoyoteJumpTimer
 @onready var AttackTimer: Timer = $Timers/AttackTimer #making these timers both for balance tweaking, and not letting animations determinephysics state
 @onready var StaminaTimer: Timer = $Timers/StaminaTimer
-#i added a comment to see if 4.6 works
+
 #if you ever want to do this, drag in the node you're referencing, then hold command/ctrl while releasing
 
 const SPEED = 300.0

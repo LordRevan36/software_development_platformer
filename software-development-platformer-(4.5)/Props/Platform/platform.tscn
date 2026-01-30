@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6lcnacw8vw5s"]
+
+[ext_resource type="Script" uid="uid://6hfsroor2sbh" path="res://Props/Platform/platform.gd" id="1_0v4dy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g263t"]
+resource_local_to_scene = true
+size = Vector2(365, 50)
+
+[node name="Platform" type="StaticBody2D"]
+script = ExtResource("1_0v4dy")
+size_vector = Vector2(365, 50)
+textureWidth = 10.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-182.5, -25, 182.5, -25, 182.5, 25, -182.5, 25)
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+texture_filter = 1
+texture_repeat = 2
+color = Color(0.30497152, 0.18106371, 2.4065375e-08, 1)
+polygon = PackedVector2Array(-177.5, -20, 177.5, -20, 177.5, 20, -177.5, 20)
+
+[node name="RectangleOutline" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_g263t")
+disabled = true
+
+[node name="BorderLines" type="Node2D" parent="."]
