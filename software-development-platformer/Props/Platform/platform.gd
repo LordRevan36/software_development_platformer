@@ -29,8 +29,8 @@ enum EditMode {RECTANGLE, POLYGON}
 
 @export var size_vector : Vector2 = Vector2(400,40)
 @export var texturePath : String = "res://.godot/imported/MissingTexture.png-22b33255012559b00bdd8aa9710640d6.ctex"
-@export var textureWidth : float = 8
-@export var enableSnap : bool = true
+@export var textureWidth : float = 8 #width of texture imported
+@export var enableSnap : bool = true #enables snapping to multiples of 0.5 texture width to ensure texture doesn't warp
 
 func _update_editor_visibility() -> void:
 	if not collision_polygon_2d or not rectangle_outline:
@@ -44,6 +44,7 @@ func _update_editor_visibility() -> void:
 			EditMode.POLYGON:
 				collision_polygon_2d.visible = true
 				rectangle_outline.visible = false
+	#set visibilities when running scene (hide editor handle)
 	else:
 		polygon_2d.visible = true
 		border_lines.visible = true
@@ -55,17 +56,21 @@ func _snap_function() -> void:
 	if not enableSnap:
 		return
 	if edit_mode == EditMode.RECTANGLE:
+		#update position to be multiple of textureWidth/2
 		var current_pos = rectangle_outline.position
 		var new_pos = Vector2()
 		new_pos.x = snapped(current_pos.x, textureWidth/2)
 		new_pos.y = snapped(current_pos.y, textureWidth/2)
-		if not new_pos.is_equal_approx(current_pos):
+		if not new_pos.is_equal_approx(current_pos): #prevents the editor from freaking out as you drag stuff
+			#push change to rectangle_outline
 			rectangle_outline.position = new_pos
+		#update size to be multiple of textureWidth/2
 		var old_size = rectangle_outline.shape.size
 		var new_size = Vector2()
 		new_size.x = snapped(old_size.x, textureWidth/2)
 		new_size.y = snapped(old_size.y, textureWidth/2)
-		if not new_size.is_equal_approx(old_size):
+		if not new_size.is_equal_approx(old_size): #prevents the editor from freaking out as you drag stuff
+			#push change to rectangle_outline
 			rectangle_outline.shape.size = new_size
 			size_vector = new_size
 	if edit_mode == EditMode.POLYGON:
@@ -83,11 +88,9 @@ func _sync_shapes() -> void:
 		var adjusted_size_vector = size_vector - Vector2(textureWidth, textureWidth)
 		polygon_2d.polygon = _return_rectangle_points(rectangle_outline, adjusted_size_vector)
 		_generate_rectangle_borders(rectangle_outline, adjusted_size_vector)
-		#border_line_2d.points = points
 	if edit_mode == EditMode.POLYGON:
 		polygon_2d.polygon = collision_polygon_2d.polygon
-		#border_line_2d.points = collision_polygon_2d.polygon
-		#border_line_2d.points = points
+		#generate polygon borders
 
 
 func _generate_rectangle_borders(rectangle_handler, size) -> void:
@@ -117,14 +120,14 @@ func _return_rectangle_points(rectangle_handler: Node2D, size_vector: Vector2) -
 		Vector2(half_size.x, half_size.y),#bottom right
 		Vector2(-half_size.x, half_size.y)#bottom left
 	]
-	var handle_transform = rectangle_handler.transform
+	var handle_transform = rectangle_handler.transform #pulls transform changes such as rotation
 	#push points to polygon array
 	var pts = PackedVector2Array()
 	for pt in local_corners:
-		pts.push_back(handle_transform * pt)
+		pts.push_back(handle_transform * pt) #note: handle_transform * pt != pt * handle_transform
 	return pts
 
-func _clear_children(parent_node) -> void:
+func _clear_children(parent_node) -> void: #clears children from a node (used to clear border_lines from border)
 	for child in parent_node.get_children():
 		child.queue_free()
 
