@@ -1,4 +1,4 @@
-[gd_scene load_steps=81 format=3 uid="uid://cy1vyx88wgg4v"]
+[gd_scene format=3 uid="uid://cy1vyx88wgg4v"]
 
 [ext_resource type="Script" uid="uid://bangw8dvmuyod" path="res://Player/player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://bvtijhwqlx01u" path="res://Assets/Player/Ivy.png" id="2_gwnis"]
@@ -564,22 +564,22 @@ region = Rect2(0, 128, 0, 128)
 atlas = ExtResource("10_apopc")
 region = Rect2(0, 0, 0, 128)
 
-[node name="Player" type="CharacterBody2D" groups=["Player"]]
+[node name="Player" type="CharacterBody2D" unique_id=359640240 groups=["Player"]]
 position = Vector2(-24, 5)
 script = ExtResource("1_onrkg")
 friction = 0.8
 metadata/_edit_group_ = true
 
-[node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
+[node name="PlayerSprite" type="AnimatedSprite2D" parent="." unique_id=1583302059]
 sprite_frames = SubResource("SpriteFrames_sh265")
 animation = &"fall"
 autoplay = "idle"
 
-[node name="PlayerHitbox" type="CollisionShape2D" parent="."]
+[node name="PlayerHitbox" type="CollisionShape2D" parent="." unique_id=1628864781]
 position = Vector2(2, 51)
 shape = SubResource("CapsuleShape2D_gwnis")
 
-[node name="Slash" type="AnimatedSprite2D" parent="."]
+[node name="Slash" type="AnimatedSprite2D" parent="." unique_id=1497850521]
 visible = false
 position = Vector2(95, 46)
 sprite_frames = SubResource("SpriteFrames_sm0op")
@@ -587,35 +587,35 @@ animation = &"slash"
 frame = 3
 frame_progress = 1.0
 
-[node name="Attack" type="Area2D" parent="."]
+[node name="Attack" type="Area2D" parent="." unique_id=2102233171]
 visible = false
 position = Vector2(41, 26)
 scale = Vector2(0.5, 0.5)
 
-[node name="AttackHitbox" type="CollisionShape2D" parent="Attack"]
+[node name="AttackHitbox" type="CollisionShape2D" parent="Attack" unique_id=280980245]
 position = Vector2(-24, 14)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_btcbx")
 
-[node name="Timers" type="Node2D" parent="."]
+[node name="Timers" type="Node2D" parent="." unique_id=496500108]
 
-[node name="CoyoteJumpTimer" type="Timer" parent="Timers"]
+[node name="CoyoteJumpTimer" type="Timer" parent="Timers" unique_id=348289732]
 wait_time = 0.1
 one_shot = true
 
-[node name="AttackTimer" type="Timer" parent="Timers"]
+[node name="AttackTimer" type="Timer" parent="Timers" unique_id=1701815434]
 wait_time = 0.5
 one_shot = true
 
-[node name="StaminaTimer" type="Timer" parent="Timers"]
+[node name="StaminaTimer" type="Timer" parent="Timers" unique_id=397263107]
 wait_time = 3.0
 one_shot = true
 
-[node name="MovementParticles" type="Node2D" parent="."]
+[node name="MovementParticles" type="Node2D" parent="." unique_id=1737745883]
 show_behind_parent = true
 script = ExtResource("4_k53q1")
 
-[node name="LeafRun" type="GPUParticles2D" parent="MovementParticles"]
+[node name="LeafRun" type="GPUParticles2D" parent="MovementParticles" unique_id=1347907303]
 position = Vector2(-10, 112)
 amount = 30
 texture = ExtResource("5_fhl08")
@@ -625,7 +625,7 @@ randomness = 0.3
 fixed_fps = 24
 process_material = SubResource("ParticleProcessMaterial_od3ui")
 
-[node name="LeafJump" type="GPUParticles2D" parent="MovementParticles"]
+[node name="LeafJump" type="GPUParticles2D" parent="MovementParticles" unique_id=773188979]
 position = Vector2(-11, 128)
 emitting = false
 amount = 20
@@ -638,7 +638,7 @@ randomness = 0.3
 fixed_fps = 24
 process_material = SubResource("ParticleProcessMaterial_00tjw")
 
-[node name="LeafLand" type="GPUParticles2D" parent="MovementParticles" groups=["AutumnLeafMaterial"]]
+[node name="LeafLand" type="GPUParticles2D" parent="MovementParticles" unique_id=728812708 groups=["AutumnLeafMaterial"]]
 position = Vector2(-11, 128)
 emitting = false
 amount = 10
@@ -651,11 +651,11 @@ randomness = 0.3
 fixed_fps = 24
 process_material = SubResource("ParticleProcessMaterial_x3vf3")
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="." unique_id=1340181654]
 offset = Vector2(15, 15)
 transform = Transform2D(1, 0, 0, 1, 15, 15)
 
-[node name="DamageButton" type="Button" parent="UI"]
+[node name="DamageButton" type="Button" parent="UI" unique_id=63594304]
 offset_left = 527.0
 offset_top = 20.0
 offset_right = 745.0
@@ -664,7 +664,7 @@ text = "Take Damage"
 script = ExtResource("6_00tjw")
 metadata/_edit_use_anchors_ = true
 
-[node name="HealButton" type="Button" parent="UI"]
+[node name="HealButton" type="Button" parent="UI" unique_id=1848162511]
 offset_left = 527.0
 offset_top = 88.0
 offset_right = 745.0
@@ -672,7 +672,7 @@ offset_bottom = 146.0
 text = "Heal Damage"
 script = ExtResource("7_x3vf3")
 
-[node name="HealthBar" type="TextureProgressBar" parent="UI"]
+[node name="HealthBar" type="TextureProgressBar" parent="UI" unique_id=489409292]
 offset_left = 12.0
 offset_top = -43.0
 offset_right = 396.0
@@ -684,7 +684,7 @@ texture_progress = SubResource("AtlasTexture_7x5p2")
 script = ExtResource("9_5htga")
 player_path = NodePath("../../Player")
 
-[node name="StaminaBar" type="TextureProgressBar" parent="UI"]
+[node name="StaminaBar" type="TextureProgressBar" parent="UI" unique_id=1142485887]
 offset_left = 12.0
 offset_right = 396.0
 offset_bottom = 128.0
@@ -697,8 +697,8 @@ player_path = NodePath("../..")
 
 [connection signal="jumped" from="." to="MovementParticles" method="_on_player_jumped"]
 [connection signal="landed" from="." to="MovementParticles" method="_on_player_landed"]
-[connection signal="animation_finished" from="PlayerSprite" to="." method="_on_player_sprite_animation_finished"]
 [connection signal="animation_finished" from="PlayerSprite" to="." method="_on_player_animation_finished"]
+[connection signal="animation_finished" from="PlayerSprite" to="." method="_on_player_sprite_animation_finished"]
 [connection signal="animation_finished" from="Slash" to="." method="_on_slash_animation_finished"]
 [connection signal="timeout" from="Timers/CoyoteJumpTimer" to="." method="_on_coyote_jump_timer_timeout"]
 [connection signal="timeout" from="Timers/AttackTimer" to="." method="_on_attack_timer_timeout"]

@@ -10,7 +10,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if player.state == "attack": #camera moves slower when attacking, fixes bug that let them move camera farther than intended
+	if player.state == Player.State.ATTACK: #camera moves slower when attacking, fixes bug that let them move camera farther than intended
 		offset = offset.lerp(player.velocity/1.5+Vector2(0,-50), delta * lerp_speed/2)
 	else:
 		offset = offset.lerp(player.velocity/1.5+Vector2(0,-50), delta * lerp_speed)
