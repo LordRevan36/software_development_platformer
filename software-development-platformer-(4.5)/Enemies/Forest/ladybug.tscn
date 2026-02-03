@@ -1,0 +1,129 @@
+[gd_scene load_steps=15 format=3 uid="uid://b56d4jexrfnwu"]
+
+[ext_resource type="Script" uid="uid://dv03xrv5o1rl" path="res://Enemies/Forest/ladybug.gd" id="1_0wkyt"]
+[ext_resource type="Texture2D" uid="uid://57wun4w15gbv" path="res://Assets/Enemies/ladybugenemy.png" id="1_y6uar"]
+[ext_resource type="BehaviorTree" uid="uid://cptkxrewo5ufm" path="res://ai/trees/ladybugEnemy.tres" id="3_7fh7g"]
+[ext_resource type="Script" uid="uid://du47usdd37p0m" path="res://Enemies/bounce.gd" id="4_100if"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0wkyt"]
+atlas = ExtResource("1_y6uar")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7fh7g"]
+atlas = ExtResource("1_y6uar")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_100if"]
+atlas = ExtResource("1_y6uar")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t4xq1"]
+atlas = ExtResource("1_y6uar")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h2mil"]
+animations = [{
+"frames": [{
+"duration": 4.0,
+"texture": SubResource("AtlasTexture_0wkyt")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_7fh7g")
+}, {
+"duration": 4.0,
+"texture": SubResource("AtlasTexture_100if")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_t4xq1")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 12.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y6uar"]
+size = Vector2(115.75, 36.5)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y6uar"]
+radius = 28.0
+height = 88.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0wkyt"]
+radius = 43.0
+height = 122.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yxxhq"]
+radius = 24.0
+height = 108.0
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_100if"]
+
+[node name="Ladybug" type="RigidBody2D" groups=["Enemy"]]
+collision_layer = 4
+lock_rotation = true
+script = ExtResource("1_0wkyt")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_h2mil")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.9710655
+
+[node name="Body" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(-2.125, 33.25)
+shape = SubResource("RectangleShape2D_y6uar")
+
+[node name="Top" type="CollisionShape2D" parent="." groups=["Bouncy"]]
+visible = false
+position = Vector2(3, 10)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_y6uar")
+
+[node name="Attackable" type="Area2D" parent="."]
+visible = false
+
+[node name="Top" type="CollisionShape2D" parent="Attackable" groups=["Bouncy"]]
+position = Vector2(-1, 14)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_0wkyt")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="BounceZone" type="Area2D" parent="." groups=["Bouncy"]]
+visible = false
+collision_mask = 2
+script = ExtResource("4_100if")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BounceZone"]
+position = Vector2(1, 4)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_yxxhq")
+
+[node name="Raycasts" type="Node2D" parent="."]
+
+[node name="GroundDetect1" type="RayCast2D" parent="Raycasts"]
+position = Vector2(-46, 4)
+
+[node name="GroundDetect2" type="RayCast2D" parent="Raycasts"]
+position = Vector2(50, 4)
+
+[node name="BottomLeftWall" type="RayCast2D" parent="Raycasts"]
+position = Vector2(-46, 29)
+target_position = Vector2(-25, 0)
+
+[node name="TopLeftWall" type="RayCast2D" parent="Raycasts"]
+position = Vector2(-46, -18)
+target_position = Vector2(-25, 0)
+
+[node name="BottomRightWall" type="RayCast2D" parent="Raycasts"]
+position = Vector2(48, 27)
+target_position = Vector2(25, 0)
+
+[node name="BTPlayer" type="BTPlayer" parent="."]
+behavior_tree = ExtResource("3_7fh7g")
+blackboard_plan = SubResource("BlackboardPlan_100if")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[connection signal="area_entered" from="Attackable" to="." method="_on_attackable_area_entered"]

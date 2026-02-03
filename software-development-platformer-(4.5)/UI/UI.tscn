@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://4e147ggbn8mm"]
+
+[ext_resource type="Script" uid="uid://dhqon0kvpcrte" path="res://UI/DamageButton.gd" id="1_e707p"]
+[ext_resource type="Script" uid="uid://qy3w7jrwih6c" path="res://UI/heal_button.gd" id="2_f1fl4"]
+[ext_resource type="Texture2D" uid="uid://cbmy31rblo60d" path="res://Assets/HUD/HealthBar.png" id="3_jqf55"]
+[ext_resource type="Script" uid="uid://rexj3shyfaq6" path="res://UI/HealthBar.gd" id="4_byuxr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d050y"]
+atlas = ExtResource("3_jqf55")
+region = Rect2(0, 128, 384, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qgmx8"]
+atlas = ExtResource("3_jqf55")
+region = Rect2(0, 0, 384, 128)
+
+[node name="UI" type="CanvasLayer"]
+
+[node name="DamageButton" type="Button" parent="."]
+offset_left = 158.0
+offset_top = 111.0
+offset_right = 376.0
+offset_bottom = 169.0
+text = "Take Damage"
+script = ExtResource("1_e707p")
+
+[node name="HealButton" type="Button" parent="."]
+offset_left = 158.0
+offset_top = 179.0
+offset_right = 376.0
+offset_bottom = 237.0
+text = "Heal Damage"
+script = ExtResource("2_f1fl4")
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+offset_left = 12.0
+offset_top = -43.0
+offset_right = 396.0
+offset_bottom = 85.0
+scale = Vector2(1.2911928, 1.4154341)
+value = 100.0
+texture_under = SubResource("AtlasTexture_d050y")
+texture_progress = SubResource("AtlasTexture_qgmx8")
+script = ExtResource("4_byuxr")
+player_path = NodePath("../../Player")

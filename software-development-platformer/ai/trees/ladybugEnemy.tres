@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=20 format=3 uid="uid://cptkxrewo5ufm"]
+[gd_resource type="BehaviorTree" format=3 uid="uid://cptkxrewo5ufm"]
 
 [ext_resource type="Script" uid="uid://b2ha5q6fog8jf" path="res://ai/tasks/choose_random_position.gd" id="1_j2mxh"]
 [ext_resource type="Script" uid="uid://ddtw0doq1rnor" path="res://ai/tasks/move_to_position.gd" id="2_eegsy"]
@@ -56,8 +56,10 @@ children = [SubResource("BTAction_get2p"), SubResource("BTAction_jo4w5"), SubRes
 [sub_resource type="BTProbabilitySelector" id="BTProbabilitySelector_jo4w5"]
 children = [SubResource("BTSequence_j2mxh"), SubResource("BTSequence_jo4w5")]
 
+[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_get2p"]
+
 [sub_resource type="BTSelector" id="BTSelector_j2mxh"]
-children = [SubResource("BTProbabilitySelector_jo4w5")]
+children = [SubResource("BTProbabilitySelector_jo4w5"), SubResource("BTDynamicSelector_get2p")]
 
 [resource]
 blackboard_plan = SubResource("BlackboardPlan_bj3um")

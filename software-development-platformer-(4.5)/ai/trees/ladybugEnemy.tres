@@ -1,0 +1,66 @@
+[gd_resource type="BehaviorTree" load_steps=21 format=3 uid="uid://cptkxrewo5ufm"]
+
+[ext_resource type="Script" uid="uid://b2ha5q6fog8jf" path="res://ai/tasks/choose_random_position.gd" id="1_j2mxh"]
+[ext_resource type="Script" uid="uid://ddtw0doq1rnor" path="res://ai/tasks/move_to_position.gd" id="2_eegsy"]
+[ext_resource type="Script" uid="uid://u1im4q2bwkti" path="res://ai/tasks/find_target.gd" id="3_ak3ji"]
+[ext_resource type="Script" uid="uid://brbh8xgfj5foj" path="res://ai/tasks/move_to_target.gd" id="4_get2p"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_bj3um"]
+
+[sub_resource type="BTAction" id="BTAction_eegsy"]
+script = ExtResource("1_j2mxh")
+min_pos_range = 200.0
+max_pos_range = 400.0
+
+[sub_resource type="BTAction" id="BTAction_ak3ji"]
+script = ExtResource("2_eegsy")
+
+[sub_resource type="BTWait" id="BTWait_ak3ji"]
+duration = 2.0
+
+[sub_resource type="BTRandomWait" id="BTRandomWait_eegsy"]
+max_duration = 4.0
+
+[sub_resource type="BTSequence" id="BTSequence_ak3ji"]
+custom_name = "Idle Sequence"
+children = [SubResource("BTRandomWait_eegsy")]
+
+[sub_resource type="BTSequence" id="BTSequence_j2mxh"]
+custom_name = "Random Move Sequence"
+children = [SubResource("BTAction_eegsy"), SubResource("BTAction_ak3ji"), SubResource("BTWait_ak3ji"), SubResource("BTSequence_ak3ji")]
+
+[sub_resource type="BTAction" id="BTAction_get2p"]
+script = ExtResource("3_ak3ji")
+group = &"Player"
+
+[sub_resource type="BTAction" id="BTAction_jo4w5"]
+script = ExtResource("4_get2p")
+speed_var = 100
+tolerance = 40
+
+[sub_resource type="BBNode" id="BBNode_get2p"]
+saved_value = NodePath(".")
+resource_name = "."
+
+[sub_resource type="BTCallMethod" id="BTCallMethod_jo4w5"]
+node = SubResource("BBNode_get2p")
+method = &"attackPlayer"
+
+[sub_resource type="BTWait" id="BTWait_qeffd"]
+duration = 2.0
+
+[sub_resource type="BTSequence" id="BTSequence_jo4w5"]
+custom_name = "Move To Enemy Sequence"
+children = [SubResource("BTAction_get2p"), SubResource("BTAction_jo4w5"), SubResource("BTCallMethod_jo4w5"), SubResource("BTWait_qeffd")]
+
+[sub_resource type="BTProbabilitySelector" id="BTProbabilitySelector_jo4w5"]
+children = [SubResource("BTSequence_j2mxh"), SubResource("BTSequence_jo4w5")]
+
+[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_get2p"]
+
+[sub_resource type="BTSelector" id="BTSelector_j2mxh"]
+children = [SubResource("BTProbabilitySelector_jo4w5"), SubResource("BTDynamicSelector_get2p")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_bj3um")
+root_task = SubResource("BTSelector_j2mxh")
