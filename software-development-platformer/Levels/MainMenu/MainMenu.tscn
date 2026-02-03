@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://5hjr27qo25yx"]
+
+[ext_resource type="Script" uid="uid://cwx65cbh18fao" path="res://Levels/MainMenu/main_menu.gd" id="1_pdyux"]
+
+[node name="Menu" type="Node2D" unique_id=549876513]
+script = ExtResource("1_pdyux")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1524748149]
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0.4833331, 1, 1)
+
+[node name="Title" type="Label" parent="." unique_id=763824264]
+offset_left = 730.0
+offset_top = 100.0
+offset_right = 822.0
+offset_bottom = 123.0
+scale = Vector2(5, 5)
+text = "Main Menu!"
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=849165448]
+offset_left = 845.0
+offset_top = 250.0
+offset_right = 891.0
+offset_bottom = 281.0
+scale = Vector2(5, 5)
+
+[node name="StartButton" type="Button" parent="CenterContainer" unique_id=710741598]
+layout_mode = 2
+text = "Start
+"
+flat = true
+
+[node name="CenterContainer2" type="CenterContainer" parent="." unique_id=1814439415]
+offset_left = 785.0
+offset_top = 400.0
+offset_right = 855.0
+offset_bottom = 431.0
+scale = Vector2(5, 5)
+
+[node name="SettingsButton" type="Button" parent="CenterContainer2" unique_id=555014896]
+layout_mode = 2
+text = "Settings"
+flat = true
+
+[connection signal="mouse_entered" from="CenterContainer/StartButton" to="." method="_on_start_button_mouse_entered"]
+[connection signal="mouse_exited" from="CenterContainer/StartButton" to="." method="_on_start_button_mouse_exited"]
+[connection signal="pressed" from="CenterContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="mouse_entered" from="CenterContainer2/SettingsButton" to="." method="_on_settings_button_mouse_entered"]
+[connection signal="mouse_exited" from="CenterContainer2/SettingsButton" to="." method="_on_settings_button_mouse_exited"]
+[connection signal="pressed" from="CenterContainer2/SettingsButton" to="." method="_on_settings_button_pressed"]
