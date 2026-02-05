@@ -11,41 +11,50 @@ offset_bottom = 1080.0
 color = Color(0, 0.4833331, 1, 1)
 
 [node name="Title" type="Label" parent="." unique_id=763824264]
-offset_left = 730.0
-offset_top = 100.0
-offset_right = 822.0
-offset_bottom = 123.0
-scale = Vector2(5, 5)
+offset_left = 704.0
+offset_top = 50.0
+offset_right = 1216.0
+offset_bottom = 138.0
+theme_override_font_sizes/font_size = 128
 text = "Main Menu!"
 
-[node name="CenterContainer" type="CenterContainer" parent="." unique_id=849165448]
-offset_left = 845.0
+[node name="StartButton" type="Button" parent="." unique_id=710741598]
+offset_left = 876.0
 offset_top = 250.0
-offset_right = 891.0
-offset_bottom = 281.0
-scale = Vector2(5, 5)
-
-[node name="StartButton" type="Button" parent="CenterContainer" unique_id=710741598]
-layout_mode = 2
+offset_right = 1044.0
+offset_bottom = 319.0
+pivot_offset = Vector2(84, 34.5)
+theme_override_font_sizes/font_size = 88
 text = "Start
 "
 flat = true
 
-[node name="CenterContainer2" type="CenterContainer" parent="." unique_id=1814439415]
-offset_left = 785.0
+[node name="SettingsButton" type="Button" parent="." unique_id=555014896]
+offset_left = 824.0
 offset_top = 400.0
-offset_right = 855.0
-offset_bottom = 431.0
-scale = Vector2(5, 5)
-
-[node name="SettingsButton" type="Button" parent="CenterContainer2" unique_id=555014896]
-layout_mode = 2
+offset_right = 1096.0
+offset_bottom = 469.0
+pivot_offset = Vector2(136, 34.5)
+theme_override_font_sizes/font_size = 88
 text = "Settings"
 flat = true
 
-[connection signal="mouse_entered" from="CenterContainer/StartButton" to="." method="_on_start_button_mouse_entered"]
-[connection signal="mouse_exited" from="CenterContainer/StartButton" to="." method="_on_start_button_mouse_exited"]
-[connection signal="pressed" from="CenterContainer/StartButton" to="." method="_on_start_button_pressed"]
-[connection signal="mouse_entered" from="CenterContainer2/SettingsButton" to="." method="_on_settings_button_mouse_entered"]
-[connection signal="mouse_exited" from="CenterContainer2/SettingsButton" to="." method="_on_settings_button_mouse_exited"]
-[connection signal="pressed" from="CenterContainer2/SettingsButton" to="." method="_on_settings_button_pressed"]
+[node name="ExitButton" type="Button" parent="." unique_id=1193582900]
+offset_left = 895.5
+offset_top = 550.0
+offset_right = 1024.5
+offset_bottom = 619.0
+pivot_offset = Vector2(64.5, 34.5)
+theme_override_font_sizes/font_size = 88
+text = "Exit"
+flat = true
+
+[connection signal="mouse_entered" from="StartButton" to="." method="_on_start_button_mouse_entered"]
+[connection signal="mouse_exited" from="StartButton" to="." method="_on_start_button_mouse_exited"]
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="mouse_entered" from="SettingsButton" to="." method="_on_settings_button_mouse_entered"]
+[connection signal="mouse_exited" from="SettingsButton" to="." method="_on_settings_button_mouse_exited"]
+[connection signal="pressed" from="SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="mouse_entered" from="ExitButton" to="." method="_on_exit_button_mouse_entered"]
+[connection signal="mouse_exited" from="ExitButton" to="." method="_on_exit_button_mouse_exited"]
+[connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]

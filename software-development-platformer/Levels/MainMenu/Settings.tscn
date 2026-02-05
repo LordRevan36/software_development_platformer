@@ -1,8 +1,33 @@
 [gd_scene format=3 uid="uid://dpj3jr16hdap7"]
 
+[ext_resource type="Script" uid="uid://dcxjk5fgji2l8" path="res://Levels/MainMenu/settings.gd" id="1_t1les"]
+
 [node name="Settings" type="Node2D" unique_id=357164762]
+script = ExtResource("1_t1les")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1287427654]
 offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0, 0.4833331, 1, 1)
+
+[node name="Title" type="Label" parent="." unique_id=1792999856]
+offset_left = 768.0
+offset_top = 50.0
+offset_right = 1152.0
+offset_bottom = 138.0
+theme_override_font_sizes/font_size = 128
+text = "Settings"
+
+[node name="ReturnButton" type="Button" parent="." unique_id=1936123245]
+offset_left = 851.5
+offset_top = 250.0
+offset_right = 1068.5
+offset_bottom = 319.0
+pivot_offset = Vector2(108.5, 34.5)
+theme_override_font_sizes/font_size = 88
+text = "Return"
+flat = true
+
+[connection signal="mouse_entered" from="ReturnButton" to="." method="_on_return_button_mouse_entered"]
+[connection signal="mouse_exited" from="ReturnButton" to="." method="_on_return_button_mouse_exited"]
+[connection signal="pressed" from="ReturnButton" to="." method="_on_return_button_pressed"]
