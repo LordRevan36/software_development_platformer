@@ -131,7 +131,6 @@ func _physics_process(delta: float) -> void:
 			velocity.x = move_toward(velocity.x, SPEED * direction, SPEED/8*friction)
 		elif state == State.FLIPLAND:
 			velocity.x = move_toward(velocity.x, SPEED * direction, SPEED/32*friction)
-			
 		# sees if on ground and not currently crouched or otherwise occupied
 		if state != State.CROUCH and state != State.ATTACK and state != State.FLIPLAND:
 			if direction != 0 and !is_on_wall():
@@ -203,6 +202,7 @@ func _physics_process(delta: float) -> void:
 		slow = 0.5 #used to slow player's velocity right before calculations for effects
 	velocity *= slow
 	move_and_slide()
+	
 	velocity /= slow
 	updateAnimations()
 	
@@ -265,7 +265,7 @@ func updateAnimations():
 		AnimSprite.play("run")
 	if state == State.IDLE:
 		exercise = false
-			
+
 func jump():
 	if stamina >= 10:
 		velocity.y = (JUMP_VELOCITY+JUMP_VELOCITY*(time-crouchStartTime)/2)
