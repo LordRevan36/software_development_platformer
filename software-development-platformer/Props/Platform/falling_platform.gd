@@ -1,3 +1,4 @@
+@tool
 extends "res://Props/Platform/platform.gd"
 
 @onready var fall_timer = $FallTimer
@@ -6,10 +7,19 @@ extends "res://Props/Platform/platform.gd"
 @export var fall_timer_length : float = 1
 @export var regen_timer_length : float = 5
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super()
+	GlobalPlayer.landed.connect(_try_to_start_falling)
 
+func _try_to_start_falling(landingVelocity, collider) -> void:
+	if collider == self:
+		print("success")
+		_start_falling()
+	
+func _start_falling() -> void:
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

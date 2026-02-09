@@ -38,24 +38,23 @@ var exercise = false
 
 #signals to communicate important events, can be detected in other scripts.
 #Currently just used for particles and physics.
-signal landed(landingVelocity) #player lands after being in the air
-signal jumped #player has left the ground with upward velocity. currently emitted for flips, too.
-signal attack_started
-signal attack_finished
-signal health_changed(current, max)
-signal stamina_changed(current, max, duration)
+#signal jumped #player has left the ground with upward velocity. currently emitted for flips, too.
+#signal attack_started
+#signal attack_finished
+#signal health_changed(current, max)
+#signal stamina_changed(current, max, duration)
 
 #function for taking damage
 func take_damage(amount: int) -> void:
 	health = max(health - amount, 0)
-	emit_signal("health_changed", health, MAX_Health)
+	GlobalPlayer.health_changed.emit(health, MAX_Health)
 	if health < 0:
 		health = 0
 
 #function for healing
 func heal(amount: int) -> void:
 	health = max(health + amount, 0)
-	emit_signal("health_changed", health, MAX_Health)
+	GlobalPlayer.health_changed.emit(health, MAX_Health)
 	if health > MAX_Health:
 		health = MAX_Health
 
@@ -63,7 +62,7 @@ func heal(amount: int) -> void:
 func stam(amount: int, duration: float) -> void:
 	exercise = true
 	stamina = max(stamina + amount, 0)
-	emit_signal("stamina_changed", stamina, MAX_Stamina, duration)
+	GlobalPlayer.stamina_changed.emit(stamina, MAX_Stamina, duration)
 	if stamina > MAX_Stamina:
 		stamina = MAX_Stamina
 	if stamina < 0:
@@ -95,7 +94,8 @@ func _physics_process(delta: float) -> void:
 		
 	# LANDING
 	if is_on_floor() and !was_on_floor:
-		landed.emit(landVelocity)
+		GlobalPlayer.landed.emit(landVelocity, get_last_slide_collision().get_collider())
+		print(get_last_slide_collision().get_collider())
 		if state == State.BACKFLIP or state == State.FRONTFLIP:
 			state = State.FLIPLAND
 		else:
@@ -105,7 +105,7 @@ func _physics_process(delta: float) -> void:
 	# ATTACKING
 	if Input.is_action_just_pressed("Attack 1"):
 		state = State.ATTACK
-		attack_started.emit()
+		GlobalPlayer.attack_started.emit()
 		AttackTimer.start()
 		
 	
@@ -271,7 +271,7 @@ func jump():
 	velocity.y = (JUMP_VELOCITY+JUMP_VELOCITY*(time-crouchStartTime)/2)
 	state = State.JUMP
 	canJump = false
-	jumped.emit()
+	GlobalPlayer.jumped.emit()
 	jumpVelocity = velocity
 	stam(-JUMP_COST, 0.3)
 	StaminaTimer.start()
@@ -282,7 +282,7 @@ func backflip():
 	velocity.x = -(SPEED+SPEED*(time-crouchStartTime)/4)*facing*0.5
 	state = State.BACKFLIP
 	canJump = false
-	jumped.emit()
+	GlobalPlayer.jumped.emit()
 	jumpVelocity = velocity
 	stam(-FLIP_COST, 0.3)
 	StaminaTimer.start()
@@ -292,7 +292,7 @@ func frontflip():
 	velocity.x = (SPEED+SPEED*(time-crouchStartTime)/4)*facing*1.8
 	state = State.FRONTFLIP
 	canJump = false
-	jumped.emit()
+	GlobalPlayer.jumped.emit()
 	jumpVelocity = velocity
 	stam(-FLIP_COST, 0.3)
 	StaminaTimer.start()
@@ -317,7 +317,7 @@ func _on_coyote_jump_timer_timeout() -> void:
 
 func _on_attack_timer_timeout() -> void:
 	state = State.IDLE
-	attack_finished.emit()
+	GlobalPlayer.attack_finished.emit()
 
 # HIDING SLASH
 func _on_slash_animation_finished() -> void: #used to visually hide slash when its done

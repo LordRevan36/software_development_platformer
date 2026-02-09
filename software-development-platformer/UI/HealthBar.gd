@@ -7,7 +7,7 @@ var health_tween: Tween
 func _ready():
 	max_value = player.MAX_Health
 	value = player.health
-	player.health_changed.connect(update_health)
+	GlobalPlayer.health_changed.connect(update_health)
 
 func update_health(current: float, max_health: float):
 	max_value = max_health
