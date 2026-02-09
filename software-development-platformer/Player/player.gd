@@ -11,6 +11,8 @@ class_name Player
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -510.0
+const JUMP_COST = 10 #stamina cost of actions, so we can change later
+const FLIP_COST = 30
 
 @export var friction = 0.9 #value from 0 to 1. 1 means full friction on floor when running, 0 means full icy floor
 @export var air_control = 0.5 #value from 0 to 1, lets you control how easily player can control their air movement
@@ -137,11 +139,10 @@ func _physics_process(delta: float) -> void:
 				state = State.RUN
 			elif state != State.LAND: #this way, you can still run after landing, which feels better
 				state = State.IDLE
-				
 	# CROUCHING DOWN (i didn't use is_on_floor() in this section, so they can coyote jump
 	if canJump:
 		if state != State.CROUCH and state != State.ATTACK:
-			if (Input.is_action_just_pressed("Up") or Input.is_action_just_pressed("FlipLeft") or Input.is_action_just_pressed("FlipRight")):
+			if ((Input.is_action_just_pressed("Up") and stamina >= JUMP_COST) or ((Input.is_action_just_pressed("FlipLeft") or Input.is_action_just_pressed("FlipRight")) and stamina >= FLIP_COST)):
 				state = State.CROUCH
 				crouchStartTime = time
 			
@@ -267,37 +268,34 @@ func updateAnimations():
 		exercise = false
 
 func jump():
-	if stamina >= 10:
-		velocity.y = (JUMP_VELOCITY+JUMP_VELOCITY*(time-crouchStartTime)/2)
-		state = State.JUMP
-		canJump = false
-		jumped.emit()
-		jumpVelocity = velocity
-		stam(-10, 0.3)
-		StaminaTimer.start()
+	velocity.y = (JUMP_VELOCITY+JUMP_VELOCITY*(time-crouchStartTime)/2)
+	state = State.JUMP
+	canJump = false
+	jumped.emit()
+	jumpVelocity = velocity
+	stam(-JUMP_COST, 0.3)
+	StaminaTimer.start()
 	
 	
 func backflip():
-	if stamina >= 30:
-		velocity.y = (JUMP_VELOCITY+JUMP_VELOCITY*(time-crouchStartTime)/4)*1.4
-		velocity.x = -(SPEED+SPEED*(time-crouchStartTime)/4)*facing*0.5
-		state = State.BACKFLIP
-		canJump = false
-		jumped.emit()
-		jumpVelocity = velocity
-		stam(-30, 0.3)
-		StaminaTimer.start()
+	velocity.y = (JUMP_VELOCITY+JUMP_VELOCITY*(time-crouchStartTime)/4)*1.4
+	velocity.x = -(SPEED+SPEED*(time-crouchStartTime)/4)*facing*0.5
+	state = State.BACKFLIP
+	canJump = false
+	jumped.emit()
+	jumpVelocity = velocity
+	stam(-FLIP_COST, 0.3)
+	StaminaTimer.start()
 	
 func frontflip():
-	if stamina >= 30:
-		velocity.y = (JUMP_VELOCITY+JUMP_VELOCITY*(time-crouchStartTime)/4)*0.7
-		velocity.x = (SPEED+SPEED*(time-crouchStartTime)/4)*facing*1.8
-		state = State.FRONTFLIP
-		canJump = false
-		jumped.emit()
-		jumpVelocity = velocity
-		stam(-30, 0.3)
-		StaminaTimer.start()
+	velocity.y = (JUMP_VELOCITY+JUMP_VELOCITY*(time-crouchStartTime)/4)*0.7
+	velocity.x = (SPEED+SPEED*(time-crouchStartTime)/4)*facing*1.8
+	state = State.FRONTFLIP
+	canJump = false
+	jumped.emit()
+	jumpVelocity = velocity
+	stam(-FLIP_COST, 0.3)
+	StaminaTimer.start()
 
 
 func _on_coyote_jump_timer_timeout() -> void:
