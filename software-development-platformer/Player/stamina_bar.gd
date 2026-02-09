@@ -8,7 +8,7 @@ var stam_tween: Tween
 func _ready():
 	max_value = player.MAX_Stamina
 	value = player.stamina
-	player.stamina_changed.connect(update_stamina)
+	GlobalPlayer.stamina_changed.connect(update_stamina)
 
 func update_stamina(current: float, max_stam: float, duration: float):
 	max_value = max_stam

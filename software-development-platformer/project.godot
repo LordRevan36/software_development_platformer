@@ -22,6 +22,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 GlobalUI="*uid://b483sopfst6nc"
+GlobalPlayer="*uid://camvgg7swtyap"
 
 [display]
 
