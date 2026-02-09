@@ -14,7 +14,7 @@ func _on_return_button_mouse_exited() -> void:
 	GlobalUI.shrinkTween(ReturnButton)
 
 func _on_volume_value_changed(value: float) -> void:
-	$VolumeLabel.text = "Volume: " + str(value)
+	$VolumeLabel.text = "Volume: " + str((value / 20) * 200) + "%"
 	if value == 0:
 		AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"), true)
 	else:
