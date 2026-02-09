@@ -11,3 +11,7 @@ func shrinkTween(button):
 	var tween = create_tween()
 	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	tween.tween_property(button, "scale", Vector2(1,1), 0.1)
+
+func volume():
+	var MasterVolume = get_node("/root/Menus/Settings/Volume").value() - 50
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), MasterVolume)

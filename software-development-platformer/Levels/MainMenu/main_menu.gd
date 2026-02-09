@@ -18,7 +18,8 @@ func _on_start_button_pressed() -> void:
 
 #Settings Button functions
 func _on_settings_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://Levels/MainMenu/Settings.tscn")
+	hide()
+	get_node("/root/Menus/Settings").show()
 
 func _on_settings_button_mouse_entered() -> void:
 	SettingsButton.modulate = Color.YELLOW

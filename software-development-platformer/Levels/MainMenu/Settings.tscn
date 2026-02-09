@@ -20,14 +20,32 @@ text = "Settings"
 
 [node name="ReturnButton" type="Button" parent="." unique_id=1936123245]
 offset_left = 851.5
-offset_top = 250.0
+offset_top = 800.0
 offset_right = 1068.5
-offset_bottom = 319.0
+offset_bottom = 869.0
 pivot_offset = Vector2(108.5, 34.5)
 theme_override_font_sizes/font_size = 88
 text = "Return"
 flat = true
 
+[node name="Volume" type="HScrollBar" parent="." unique_id=687718657]
+offset_left = 760.0
+offset_top = 350.0
+offset_right = 1160.0
+offset_bottom = 400.0
+max_value = 30.0
+step = 0.5
+value = 15.0
+
+[node name="VolumeLabel" type="Label" parent="." unique_id=1530925958]
+offset_left = 818.0
+offset_top = 300.0
+offset_right = 1102.0
+offset_bottom = 344.0
+theme_override_font_sizes/font_size = 64
+text = "Volume: 15.0"
+
 [connection signal="mouse_entered" from="ReturnButton" to="." method="_on_return_button_mouse_entered"]
 [connection signal="mouse_exited" from="ReturnButton" to="." method="_on_return_button_mouse_exited"]
 [connection signal="pressed" from="ReturnButton" to="." method="_on_return_button_pressed"]
+[connection signal="value_changed" from="Volume" to="." method="_on_volume_value_changed"]

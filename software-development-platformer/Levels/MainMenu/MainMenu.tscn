@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cwx65cbh18fao" path="res://Levels/MainMenu/main_menu.gd" id="1_pdyux"]
 
-[node name="Menu" type="Node2D" unique_id=549876513]
+[node name="MainMenu" type="Node2D" unique_id=549876513]
 script = ExtResource("1_pdyux")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1524748149]
