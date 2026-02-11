@@ -324,5 +324,7 @@ func _on_slash_animation_finished() -> void: #used to visually hide slash when i
 	Slash.hide()
 
 func _on_stamina_timer_timeout() -> void:
-	state = State.IDLE
-	regenStam()
+	if state == State.IDLE:
+		regenStam()
+	else:
+		return

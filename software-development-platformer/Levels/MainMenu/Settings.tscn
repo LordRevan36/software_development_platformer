@@ -11,41 +11,106 @@ offset_bottom = 1080.0
 color = Color(0, 0.4833331, 1, 1)
 
 [node name="Title" type="Label" parent="." unique_id=1792999856]
-offset_left = 768.0
-offset_top = 50.0
-offset_right = 1152.0
-offset_bottom = 138.0
+offset_left = 756.0
+offset_top = 71.0
+offset_right = 1164.0
+offset_bottom = 159.0
 theme_override_font_sizes/font_size = 128
-text = "Settings"
+text = "Settings:"
 
 [node name="ReturnButton" type="Button" parent="." unique_id=1936123245]
-offset_left = 851.5
-offset_top = 800.0
-offset_right = 1068.5
-offset_bottom = 869.0
-pivot_offset = Vector2(108.5, 34.5)
+offset_left = 851.0
+offset_top = 940.0
+offset_right = 1068.0
+offset_bottom = 1009.0
 theme_override_font_sizes/font_size = 88
 text = "Return"
 flat = true
 
-[node name="Volume" type="HScrollBar" parent="." unique_id=687718657]
-offset_left = 760.0
-offset_top = 350.0
-offset_right = 1160.0
-offset_bottom = 400.0
-max_value = 20.0
-step = 0.5
-value = 10.0
+[node name="AudioSettings" type="VBoxContainer" parent="." unique_id=359059480]
+offset_left = 1294.0
+offset_top = 180.0
+offset_right = 1644.0
+offset_bottom = 530.0
 
-[node name="VolumeLabel" type="Label" parent="." unique_id=1530925958]
-offset_left = 808.0
-offset_top = 300.0
-offset_right = 1112.0
-offset_bottom = 344.0
+[node name="Audio" type="Label" parent="AudioSettings" unique_id=1884708400]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 88
+text = "Audio"
+
+[node name="MasterVolume" type="VBoxContainer" parent="AudioSettings" unique_id=2096635135]
+layout_mode = 2
+
+[node name="VolumeLabel" type="Label" parent="AudioSettings/MasterVolume" unique_id=1530925958]
+layout_mode = 2
+size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 64
-text = "Volume: 50%"
+text = "Master: 50%"
+
+[node name="Volume" type="HScrollBar" parent="AudioSettings/MasterVolume" unique_id=687718657]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+max_value = 20.0
+step = 0.2
+page = 0.3
+value = 10.0
+allow_greater = true
+
+[node name="Effects" type="VBoxContainer" parent="AudioSettings" unique_id=2106841038]
+layout_mode = 2
+
+[node name="EffectsLabel" type="Label" parent="AudioSettings/Effects" unique_id=742822022]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 64
+text = "Effects: 50%"
+
+[node name="EffectsVolume" type="HScrollBar" parent="AudioSettings/Effects" unique_id=2113402509]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+max_value = 20.0
+step = 0.2
+page = 0.3
+value = 10.0
+allow_greater = true
+
+[node name="Music" type="VBoxContainer" parent="AudioSettings" unique_id=1278028194]
+layout_mode = 2
+
+[node name="MusicLabel" type="Label" parent="AudioSettings/Music" unique_id=1525415972]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 64
+text = "Music: 50%"
+
+[node name="MusicVolume" type="HScrollBar" parent="AudioSettings/Music" unique_id=1837472055]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+max_value = 20.0
+step = 0.2
+page = 0.3
+value = 10.0
+allow_greater = true
+
+[node name="ControlContainer" type="VBoxContainer" parent="." unique_id=185400136]
+offset_left = 71.0
+offset_top = 180.0
+offset_right = 1223.0
+offset_bottom = 919.0
+
+[node name="ControlsLabel" type="Label" parent="ControlContainer" unique_id=1383122744]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 88
+text = "Controls:"
+
+[node name="ControlsGrid" type="GridContainer" parent="ControlContainer" unique_id=359387678]
+layout_mode = 2
 
 [connection signal="mouse_entered" from="ReturnButton" to="." method="_on_return_button_mouse_entered"]
 [connection signal="mouse_exited" from="ReturnButton" to="." method="_on_return_button_mouse_exited"]
 [connection signal="pressed" from="ReturnButton" to="." method="_on_return_button_pressed"]
-[connection signal="value_changed" from="Volume" to="." method="_on_volume_value_changed"]
+[connection signal="value_changed" from="AudioSettings/MasterVolume/Volume" to="." method="_on_volume_value_changed"]
+[connection signal="value_changed" from="AudioSettings/Effects/EffectsVolume" to="." method="_on_effects_volume_value_changed"]
+[connection signal="value_changed" from="AudioSettings/Music/MusicVolume" to="." method="_on_music_volume_value_changed"]

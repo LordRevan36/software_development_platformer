@@ -14,3 +14,4 @@ visible = false
 [node name="MenuMusic" type="AudioStreamPlayer" parent="." unique_id=1852687070]
 stream = ExtResource("3_0o7qf")
 autoplay = true
+bus = &"Music"
