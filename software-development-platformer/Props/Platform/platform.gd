@@ -1,10 +1,12 @@
 @tool
 extends StaticBody2D
+class_name platform
 
 #PROCESS TO CREATE A PLATFORM
 #Instantiate a platform (do not copy-paste or duplicate, this will create a link between rectangles)
 #Right-click and enable "editable children"
 #For rectangles, use the rectangle outline to create your shape
+	#Once you are done editing, use the center_kids feature of the parent node to align the platform node with its child geometry
 #For polygons, they haven't been tested thoroughly so hold off on that
 
 #TODO
@@ -31,6 +33,7 @@ enum EditMode {RECTANGLE, POLYGON}
 @export var texturePath : String = "res://.godot/imported/MissingTexture.png-22b33255012559b00bdd8aa9710640d6.ctex"
 @export var textureWidth : float = 8 #width of texture imported
 @export var enableSnap : bool = true #enables snapping to multiples of 0.5 texture width to ensure texture doesn't warp
+@export var centerRectangle: bool = false #click true in editor to force the platform to center itself on the rectangle handler
 
 func _update_editor_visibility() -> void:
 	if not collision_polygon_2d or not rectangle_outline:
@@ -81,6 +84,8 @@ func _sync_shapes() -> void:
 	if not rectangle_outline or not collision_polygon_2d or not polygon_2d or not border_lines:
 		return
 	if edit_mode == EditMode.RECTANGLE:
+		if centerRectangle:
+			_center_node()
 		#grab data from rectangle_outline
 		size_vector = rectangle_outline.shape.size
 		#match array to actual collision_polygon_2d, then push to other nodes
@@ -111,6 +116,18 @@ func _generate_rectangle_borders(rectangle_handler, size) -> void:
 		line.texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
 		border_lines.add_child(line)
 
+func _center_node() -> void:
+	if centerRectangle:
+		if edit_mode == EditMode.RECTANGLE:
+			#Move position transform to platform node
+			global_position = rectangle_outline.global_position
+			rectangle_outline.position = Vector2.ZERO
+			rectangle_outline.force_update_transform()
+			centerRectangle = false
+			#collision_polygon_2d.position = Vector2.ZERO
+			#polygon_2d.position = Vector2.ZERO
+			#border_lines.position = Vector2.ZERO
+
 #takes a center and size of a rectangle and returns an array of its corners
 func _return_rectangle_points(rectangle_handler: Node2D, size_vector: Vector2) -> PackedVector2Array:
 	var half_size = size_vector/2
@@ -130,6 +147,9 @@ func _return_rectangle_points(rectangle_handler: Node2D, size_vector: Vector2) -
 func _clear_children(parent_node) -> void: #clears children from a node (used to clear border_lines from border)
 	for child in parent_node.get_children():
 		child.queue_free()
+
+func _is_rectangle_edit_mode() -> bool:
+	return edit_mode == EditMode.RECTANGLE
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
