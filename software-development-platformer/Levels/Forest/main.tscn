@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://c6lcnacw8vw5s" path="res://Props/Platform/platform.tscn" id="12_074og"]
 [ext_resource type="PackedScene" uid="uid://cikgxfjxyjw3r" path="res://Props/Exit/exit.tscn" id="12_86kmy"]
 [ext_resource type="PackedScene" uid="uid://brk7a4rc4835j" path="res://Props/Platform/falling_platform.tscn" id="12_wevk2"]
+[ext_resource type="AudioStream" uid="uid://buaaxggw78ntj" path="res://Assets/Music/ForestLevel?.mp3" id="16_byont"]
 
 [sub_resource type="Gradient" id="Gradient_vtle1"]
 offsets = PackedFloat32Array(0, 0.33490565, 0.8018868, 1)
@@ -68,23 +69,23 @@ func _process(_delta: float) -> void:
 	pass
 "
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wevk2"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_86kmy"]
 resource_local_to_scene = true
 size = Vector2(172, 60)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_byont"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_llrqw"]
 resource_local_to_scene = true
 size = Vector2(124, 48)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_86kmy"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_py8ao"]
 resource_local_to_scene = true
 size = Vector2(372, 328)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_llrqw"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5008v"]
 resource_local_to_scene = true
 size = Vector2(236, 52)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_py8ao"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_68od5"]
 resource_local_to_scene = true
 size = Vector2(160, 52)
 
@@ -827,7 +828,7 @@ polygon = PackedVector2Array(-113.39885, 46.34585, 35.834805, -21.663837, 57.398
 [node name="RectangleOutline" parent="Platforms/Platform" index="2" unique_id=1082408081]
 position = Vector2(-28, 36)
 rotation = -0.42760566
-shape = SubResource("RectangleShape2D_wevk2")
+shape = SubResource("RectangleShape2D_86kmy")
 
 [node name="Platform2" parent="Platforms" unique_id=73062743 instance=ExtResource("12_074og")]
 position = Vector2(-257, 61)
@@ -841,7 +842,7 @@ polygon = PackedVector2Array(-62, -24, 62, -24, 62, 24, -62, 24)
 polygon = PackedVector2Array(-58, -20, 58, -20, 58, 20, -58, 20)
 
 [node name="RectangleOutline" parent="Platforms/Platform2" index="2" unique_id=1082408081]
-shape = SubResource("RectangleShape2D_byont")
+shape = SubResource("RectangleShape2D_llrqw")
 
 [node name="Platform3" parent="Platforms" unique_id=778821719 instance=ExtResource("12_074og")]
 position = Vector2(926, 223)
@@ -856,7 +857,7 @@ polygon = PackedVector2Array(-182, -112, 182, -112, 182, 208, -182, 208)
 
 [node name="RectangleOutline" parent="Platforms/Platform3" index="2" unique_id=1082408081]
 position = Vector2(0, 48)
-shape = SubResource("RectangleShape2D_86kmy")
+shape = SubResource("RectangleShape2D_py8ao")
 
 [node name="Platform4" parent="Platforms" unique_id=780874561 instance=ExtResource("12_074og")]
 position = Vector2(-596, 178)
@@ -871,7 +872,7 @@ polygon = PackedVector2Array(-114, -10, 114, -10, 114, 34, -114, 34)
 
 [node name="RectangleOutline" parent="Platforms/Platform4" index="2" unique_id=1082408081]
 position = Vector2(0, 12)
-shape = SubResource("RectangleShape2D_llrqw")
+shape = SubResource("RectangleShape2D_5008v")
 
 [node name="Platform5" parent="Platforms" unique_id=1558722153 instance=ExtResource("12_wevk2")]
 size_vector = Vector2(160, 52)
@@ -885,7 +886,7 @@ polygon = PackedVector2Array(-812, 34, -660, 34, -660, 78, -812, 78)
 
 [node name="RectangleOutline" parent="Platforms/Platform5" index="2" unique_id=1082408081]
 position = Vector2(-736, 56)
-shape = SubResource("RectangleShape2D_py8ao")
+shape = SubResource("RectangleShape2D_68od5")
 
 [node name="LevelExit" parent="." unique_id=659289399 instance=ExtResource("12_86kmy")]
 position = Vector2(1078, -259)
@@ -1084,6 +1085,12 @@ position = Vector2(1, -283)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=68231649]
 shape = SubResource("WorldBoundaryShape2D_0xm2m")
+
+[node name="ForestMusic" type="AudioStreamPlayer" parent="." unique_id=608094418]
+stream = ExtResource("16_byont")
+autoplay = true
+bus = &"Music"
+parameters/looping = true
 
 [editable path="Platforms/Platform"]
 [editable path="Platforms/Platform2"]

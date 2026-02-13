@@ -1,5 +1,4 @@
 extends Node
-
 #smoothly increases the size of the text when hovering
 func growTween(button):
 	var tween = create_tween()
@@ -12,6 +11,11 @@ func shrinkTween(button):
 	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	tween.tween_property(button, "scale", Vector2(1,1), 0.1)
 
+#saves the volume to be used in other scenes
 func volume():
-	var MasterVolume = get_node("/root/Menus/Settings/Volume").value() - 50
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), MasterVolume)
+	var MasterVolume = get_node("/root/Menus/Settings/AudioSettings/MasterVolume/Volume").value()
+	var EfffectsVolume = get_node("/root/Menus/Settings/AudioSettings/Effects/EffectsVolume").value()
+	var MusicVolume = get_node("/root/Menus/Settings/AudioSettings/Music/MusicVolume").value()
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), MasterVolume - 20)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Effects"), EfffectsVolume - 20)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), MusicVolume - 20)

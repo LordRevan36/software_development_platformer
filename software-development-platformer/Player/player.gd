@@ -103,7 +103,7 @@ func _physics_process(delta: float) -> void:
 			
 			
 	# ATTACKING
-	if Input.is_action_just_pressed("Attack 1"):
+	if Input.is_action_just_pressed("Attack"):
 		state = State.ATTACK
 		GlobalPlayer.attack_started.emit()
 		AttackTimer.start()

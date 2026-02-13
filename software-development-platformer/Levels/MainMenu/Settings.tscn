@@ -23,15 +23,16 @@ offset_left = 851.0
 offset_top = 940.0
 offset_right = 1068.0
 offset_bottom = 1009.0
+pivot_offset = Vector2(108, 34)
 theme_override_font_sizes/font_size = 88
 text = "Return"
 flat = true
 
 [node name="AudioSettings" type="VBoxContainer" parent="." unique_id=359059480]
-offset_left = 1294.0
-offset_top = 180.0
-offset_right = 1644.0
-offset_bottom = 530.0
+offset_left = 1200.0
+offset_top = 200.0
+offset_right = 1550.0
+offset_bottom = 550.0
 
 [node name="Audio" type="Label" parent="AudioSettings" unique_id=1884708400]
 layout_mode = 2
@@ -94,10 +95,12 @@ value = 10.0
 allow_greater = true
 
 [node name="ControlContainer" type="VBoxContainer" parent="." unique_id=185400136]
-offset_left = 71.0
-offset_top = 180.0
-offset_right = 1223.0
-offset_bottom = 919.0
+offset_left = 160.0
+offset_top = 200.0
+offset_right = 1036.0
+offset_bottom = 537.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_constants/separation = 20
 
 [node name="ControlsLabel" type="Label" parent="ControlContainer" unique_id=1383122744]
 layout_mode = 2
@@ -107,6 +110,64 @@ text = "Controls:"
 
 [node name="ControlsGrid" type="GridContainer" parent="ControlContainer" unique_id=359387678]
 layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 50
+theme_override_constants/v_separation = 50
+columns = 2
+
+[node name="Jump" type="Button" parent="ControlContainer/ControlsGrid" unique_id=750054593]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Jump"
+flat = true
+
+[node name="Move Down" type="Button" parent="ControlContainer/ControlsGrid" unique_id=970526200]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Move Down"
+flat = true
+
+[node name="Move Right" type="Button" parent="ControlContainer/ControlsGrid" unique_id=845933259]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Move Right"
+flat = true
+
+[node name="Move Left" type="Button" parent="ControlContainer/ControlsGrid" unique_id=1832720115]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Move Left"
+flat = true
+
+[node name="Attack" type="Button" parent="ControlContainer/ControlsGrid" unique_id=870256382]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Attack"
+flat = true
+
+[node name="Flip Right" type="Button" parent="ControlContainer/ControlsGrid" unique_id=1290675001]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Flip Right"
+flat = true
+
+[node name="Flip Left" type="Button" parent="ControlContainer/ControlsGrid" unique_id=1067889719]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Flip Left"
+flat = true
+
+[node name="Skill Tree" type="Button" parent="ControlContainer/ControlsGrid" unique_id=1258710192]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Skill Tree"
+flat = true
+
+[node name="Pause" type="Button" parent="ControlContainer/ControlsGrid" unique_id=1030943126]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Pause"
+flat = true
 
 [connection signal="mouse_entered" from="ReturnButton" to="." method="_on_return_button_mouse_entered"]
 [connection signal="mouse_exited" from="ReturnButton" to="." method="_on_return_button_mouse_exited"]
@@ -114,3 +175,21 @@ layout_mode = 2
 [connection signal="value_changed" from="AudioSettings/MasterVolume/Volume" to="." method="_on_volume_value_changed"]
 [connection signal="value_changed" from="AudioSettings/Effects/EffectsVolume" to="." method="_on_effects_volume_value_changed"]
 [connection signal="value_changed" from="AudioSettings/Music/MusicVolume" to="." method="_on_music_volume_value_changed"]
+[connection signal="mouse_entered" from="ControlContainer/ControlsGrid/Jump" to="." method="_on_jump_mouse_entered"]
+[connection signal="mouse_exited" from="ControlContainer/ControlsGrid/Jump" to="." method="_on_jump_mouse_exited"]
+[connection signal="mouse_entered" from="ControlContainer/ControlsGrid/Move Down" to="." method="_on_move_down_mouse_entered"]
+[connection signal="mouse_exited" from="ControlContainer/ControlsGrid/Move Down" to="." method="_on_move_down_mouse_exited"]
+[connection signal="mouse_entered" from="ControlContainer/ControlsGrid/Move Right" to="." method="_on_move_right_mouse_entered"]
+[connection signal="mouse_exited" from="ControlContainer/ControlsGrid/Move Right" to="." method="_on_move_right_mouse_exited"]
+[connection signal="mouse_entered" from="ControlContainer/ControlsGrid/Move Left" to="." method="_on_move_left_mouse_entered"]
+[connection signal="mouse_exited" from="ControlContainer/ControlsGrid/Move Left" to="." method="_on_move_left_mouse_exited"]
+[connection signal="mouse_entered" from="ControlContainer/ControlsGrid/Attack" to="." method="_on_attack_mouse_entered"]
+[connection signal="mouse_exited" from="ControlContainer/ControlsGrid/Attack" to="." method="_on_attack_mouse_exited"]
+[connection signal="mouse_entered" from="ControlContainer/ControlsGrid/Flip Right" to="." method="_on_flip_right_mouse_entered"]
+[connection signal="mouse_exited" from="ControlContainer/ControlsGrid/Flip Right" to="." method="_on_flip_right_mouse_exited"]
+[connection signal="mouse_entered" from="ControlContainer/ControlsGrid/Flip Left" to="." method="_on_flip_left_mouse_entered"]
+[connection signal="mouse_exited" from="ControlContainer/ControlsGrid/Flip Left" to="." method="_on_flip_left_mouse_exited"]
+[connection signal="mouse_entered" from="ControlContainer/ControlsGrid/Skill Tree" to="." method="_on_skill_tree_mouse_entered"]
+[connection signal="mouse_exited" from="ControlContainer/ControlsGrid/Skill Tree" to="." method="_on_skill_tree_mouse_exited"]
+[connection signal="mouse_entered" from="ControlContainer/ControlsGrid/Pause" to="." method="_on_pause_mouse_entered"]
+[connection signal="mouse_exited" from="ControlContainer/ControlsGrid/Pause" to="." method="_on_pause_mouse_exited"]
