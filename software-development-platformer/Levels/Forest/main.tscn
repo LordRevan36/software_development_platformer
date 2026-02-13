@@ -874,6 +874,7 @@ shape = SubResource("RectangleShape2D_py8ao")
 
 [node name="Platform5" parent="Platforms" unique_id=1558722153 instance=ExtResource("12_wevk2")]
 position = Vector2(-856, 52)
+state = null
 size_vector = Vector2(160, 52)
 textureWidth = 8.0
 
