@@ -697,8 +697,8 @@ texture_progress = SubResource("AtlasTexture_3e3ym")
 script = ExtResource("10_x3vf3")
 player_path = NodePath("../..")
 
-[connection signal="animation_finished" from="PlayerSprite" to="." method="_on_player_animation_finished"]
 [connection signal="animation_finished" from="PlayerSprite" to="." method="_on_player_sprite_animation_finished"]
+[connection signal="animation_finished" from="PlayerSprite" to="." method="_on_player_animation_finished"]
 [connection signal="animation_finished" from="Slash" to="." method="_on_slash_animation_finished"]
 [connection signal="timeout" from="Timers/CoyoteJumpTimer" to="." method="_on_coyote_jump_timer_timeout"]
 [connection signal="timeout" from="Timers/AttackTimer" to="." method="_on_attack_timer_timeout"]
