@@ -142,7 +142,7 @@ func _physics_process(delta: float) -> void:
 	# CROUCHING DOWN (i didn't use is_on_floor() in this section, so they can coyote jump
 	if canJump:
 		if state != State.CROUCH and state != State.ATTACK:
-			if ((Input.is_action_just_pressed("Up") and stamina >= JUMP_COST) or ((Input.is_action_just_pressed("FlipLeft") or Input.is_action_just_pressed("FlipRight")) and stamina >= FLIP_COST)):
+			if (Input.is_action_just_pressed("Up") or ((Input.is_action_just_pressed("FlipLeft") or Input.is_action_just_pressed("FlipRight")) and stamina >= FLIP_COST)):
 				state = State.CROUCH
 				crouchStartTime = time
 			
@@ -176,6 +176,9 @@ func _physics_process(delta: float) -> void:
 					frontflip()
 				else:
 					backflip()
+			#forced jump if stamina is too low?
+			if Input.is_action_pressed("Up") and JUMP_COST*(time-crouchStartTime)*2 >= stamina:
+				jump()
 		
 		
 	if !is_on_floor(): #not on floor, its a little inefficient to not connect this to the is_on_floor above, but thats nit how the order worked out
@@ -273,7 +276,7 @@ func jump():
 	canJump = false
 	GlobalPlayer.jumped.emit()
 	jumpVelocity = velocity
-	stam(-JUMP_COST, 0.3)
+	stam(-JUMP_COST*(time-crouchStartTime)*2, 0.3)
 	StaminaTimer.start()
 	
 	
@@ -324,7 +327,4 @@ func _on_slash_animation_finished() -> void: #used to visually hide slash when i
 	Slash.hide()
 
 func _on_stamina_timer_timeout() -> void:
-	if state == State.IDLE:
 		regenStam()
-	else:
-		return

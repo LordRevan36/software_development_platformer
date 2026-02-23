@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://c6lcnacw8vw5s" path="res://Props/Platform/platform.tscn" id="12_074og"]
 [ext_resource type="PackedScene" uid="uid://cikgxfjxyjw3r" path="res://Props/Exit/exit.tscn" id="12_86kmy"]
 [ext_resource type="PackedScene" uid="uid://brk7a4rc4835j" path="res://Props/Platform/falling_platform.tscn" id="12_wevk2"]
+[ext_resource type="Texture2D" uid="uid://yxb4gb5qqoxi" path="res://Assets/testPlatform.png" id="13_86kmy"]
 
 [sub_resource type="Gradient" id="Gradient_vtle1"]
 offsets = PackedFloat32Array(0, 0.33490565, 0.8018868, 1)
@@ -71,7 +72,7 @@ func _process(_delta: float) -> void:
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_byont"]
 resource_local_to_scene = true
-size = Vector2(172, 60)
+size = Vector2(176, 64)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_86kmy"]
 resource_local_to_scene = true
@@ -817,14 +818,18 @@ script = ExtResource("11_byont")
 
 [node name="Platform" parent="Platforms" unique_id=1326313302 instance=ExtResource("12_074og")]
 position = Vector2(184, -96)
-size_vector = Vector2(172, 60)
-textureWidth = 8.0
+size_vector = Vector2(176, 64)
+texturePath = "res://Assets/testPlatformBorder.png"
+textureWidth = 16.0
 
 [node name="CollisionPolygon2D" parent="Platforms/Platform" index="0" unique_id=581306703]
-polygon = PackedVector2Array(-90.697464, 8.364782, 65.81587, -62.962456, 90.697464, -8.364782, -65.81587, 62.962456)
+polygon = PackedVector2Array(-93.34677, 7.374243, 66.80641, -65.61176, 93.34677, -7.374243, -66.80641, 65.61176)
 
 [node name="Polygon2D" parent="Platforms/Platform" index="1" unique_id=1861125354]
-polygon = PackedVector2Array(-85.39885, 10.345852, 63.834805, -57.663837, 85.39885, -10.345852, -63.834805, 57.663837)
+color = Color(0.9999997, 0.6637959, 0.2018961, 1)
+texture = ExtResource("13_86kmy")
+texture_rotation = 0.45727625
+polygon = PackedVector2Array(-82.74954, 11.33639, 62.84427, -55.014534, 82.74954, -11.33639, -62.84427, 55.014534)
 
 [node name="RectangleOutline" parent="Platforms/Platform" index="2" unique_id=1082408081]
 rotation = -0.42760566
