@@ -577,7 +577,8 @@ animation = &"frontflip"
 autoplay = "idle"
 
 [node name="PlayerHitbox" type="CollisionShape2D" parent="." unique_id=1628864781]
-position = Vector2(2, 51)
+position = Vector2(0, 42)
+scale = Vector2(1, 1.1200012)
 shape = SubResource("CapsuleShape2D_gwnis")
 
 [node name="Slash" type="AnimatedSprite2D" parent="." unique_id=1497850521]
