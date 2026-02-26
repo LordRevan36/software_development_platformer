@@ -140,3 +140,5 @@ func _process(delta: float) -> void:
 	if Engine.is_editor_hint():
 		_snap_function()
 		_sync_shapes()
+
+#adding a comment to test
