@@ -9,12 +9,18 @@ size = Vector2(365, 50)
 
 [node name="Platform" unique_id=1558722153 instance=ExtResource("1_fdpk5")]
 script = ExtResource("2_5ngo2")
+state = 0
+shake_timer_length = 1.5
 fall_timer_length = 1.0
 regen_timer_length = 5.0
 
 [node name="RectangleOutline" parent="." index="2" unique_id=1082408081]
 shape = SubResource("RectangleShape2D_5ngo2")
 
-[node name="FallTimer" type="Timer" parent="." index="4" unique_id=967461251]
+[node name="ShakeTimer" type="Timer" parent="." index="4" unique_id=643183198]
 
-[node name="RegenTimer" type="Timer" parent="." index="5" unique_id=116418502]
+[node name="FallTimer" type="Timer" parent="." index="5" unique_id=967461251]
+
+[node name="RegenTimer" type="Timer" parent="." index="6" unique_id=116418502]
+
+[connection signal="timeout" from="ShakeTimer" to="." method="_on_shake_timer_timeout"]
