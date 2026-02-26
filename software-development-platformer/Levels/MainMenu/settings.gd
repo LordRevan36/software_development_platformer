@@ -39,7 +39,7 @@ func _connect_button_signals(button: Button):
 # Generic handler for button presses
 var buttonPressed
 func _on_button_pressed(button: Button) -> void:
-	buttonPressed = button
+	buttonPressed = button.get_tooltip()
 	ChangeControl.show()
 	
 func _input(event: InputEvent) -> void:

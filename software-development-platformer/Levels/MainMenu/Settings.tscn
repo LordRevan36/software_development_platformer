@@ -116,54 +116,63 @@ columns = 2
 
 [node name="Jump" type="Button" parent="ControlContainer/ControlsGrid" unique_id=750054593]
 layout_mode = 2
+tooltip_text = "Up"
 theme_override_font_sizes/font_size = 64
 text = "Jump"
 flat = true
 
 [node name="Move Down" type="Button" parent="ControlContainer/ControlsGrid" unique_id=970526200]
 layout_mode = 2
+tooltip_text = "Down"
 theme_override_font_sizes/font_size = 64
 text = "Move Down"
 flat = true
 
 [node name="Move Right" type="Button" parent="ControlContainer/ControlsGrid" unique_id=845933259]
 layout_mode = 2
+tooltip_text = "Right"
 theme_override_font_sizes/font_size = 64
 text = "Move Right"
 flat = true
 
 [node name="Move Left" type="Button" parent="ControlContainer/ControlsGrid" unique_id=1832720115]
 layout_mode = 2
+tooltip_text = "Left"
 theme_override_font_sizes/font_size = 64
 text = "Move Left"
 flat = true
 
 [node name="Attack" type="Button" parent="ControlContainer/ControlsGrid" unique_id=870256382]
 layout_mode = 2
+tooltip_text = "Attack"
 theme_override_font_sizes/font_size = 64
 text = "Attack"
 flat = true
 
 [node name="Flip Right" type="Button" parent="ControlContainer/ControlsGrid" unique_id=1290675001]
 layout_mode = 2
+tooltip_text = "FlipRight"
 theme_override_font_sizes/font_size = 64
 text = "Flip Right"
 flat = true
 
 [node name="Flip Left" type="Button" parent="ControlContainer/ControlsGrid" unique_id=1067889719]
 layout_mode = 2
+tooltip_text = "FlipLeft"
 theme_override_font_sizes/font_size = 64
 text = "Flip Left"
 flat = true
 
 [node name="Skill Tree" type="Button" parent="ControlContainer/ControlsGrid" unique_id=1258710192]
 layout_mode = 2
+tooltip_text = "Skills"
 theme_override_font_sizes/font_size = 64
 text = "Skill Tree"
 flat = true
 
 [node name="Pause" type="Button" parent="ControlContainer/ControlsGrid" unique_id=1030943126]
 layout_mode = 2
+tooltip_text = "Pause"
 theme_override_font_sizes/font_size = 64
 text = "Pause"
 flat = true
