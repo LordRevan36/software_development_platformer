@@ -44,11 +44,11 @@ func _on_button_pressed(button: Button) -> void:
 	
 func _input(event: InputEvent) -> void:
 	if ChangeControl.visible:
-		if event is InputEventKey and event.is_released():
+		if event is InputEventKey and event.is_pressed():
 			print(OS.get_keycode_string(event.keycode))
 			print(buttonPressed)
 			ChangeControl.hide()
-		elif event is InputEventMouseButton and event.is_released():
+		elif event is InputEventMouseButton and event.is_pressed():
 			print(event.as_text())
 			ChangeControl.hide()
 

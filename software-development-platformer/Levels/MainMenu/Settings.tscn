@@ -169,7 +169,6 @@ text = "Pause"
 flat = true
 
 [node name="ChangeControl" type="Control" parent="." unique_id=1835719246]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
