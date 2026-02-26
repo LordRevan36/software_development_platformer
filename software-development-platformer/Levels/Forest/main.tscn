@@ -12,10 +12,12 @@
 [ext_resource type="Texture2D" uid="uid://yci8u2sv0dny" path="res://Assets/Forest/LeafParticle1.png" id="6_w48qg"]
 [ext_resource type="Texture2D" uid="uid://d15b6nmtxas3j" path="res://Assets/Forest/BushyGrass.png" id="7_5vw27"]
 [ext_resource type="Texture2D" uid="uid://ul3588q4vy3l" path="res://Assets/Forest/LeafParticle2.png" id="7_ycdy4"]
+[ext_resource type="Script" uid="uid://cuc4a4nkwo6vf" path="res://Props/Platform/platforms.gd" id="11_byont"]
 [ext_resource type="PackedScene" uid="uid://c6lcnacw8vw5s" path="res://Props/Platform/platform.tscn" id="12_074og"]
 [ext_resource type="PackedScene" uid="uid://cikgxfjxyjw3r" path="res://Props/Exit/exit.tscn" id="12_86kmy"]
 [ext_resource type="PackedScene" uid="uid://brk7a4rc4835j" path="res://Props/Platform/falling_platform.tscn" id="12_wevk2"]
 [ext_resource type="AudioStream" uid="uid://buaaxggw78ntj" path="res://Assets/Music/ForestLevel?.mp3" id="16_byont"]
+[ext_resource type="Texture2D" uid="uid://yxb4gb5qqoxi" path="res://Assets/testPlatform.png" id="13_86kmy"]
 
 [sub_resource type="Gradient" id="Gradient_vtle1"]
 offsets = PackedFloat32Array(0, 0.33490565, 0.8018868, 1)
@@ -69,23 +71,23 @@ func _process(_delta: float) -> void:
 	pass
 "
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_86kmy"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_byont"]
 resource_local_to_scene = true
-size = Vector2(172, 60)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_llrqw"]
-resource_local_to_scene = true
-size = Vector2(124, 48)
+size = Vector2(176, 64)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_py8ao"]
 resource_local_to_scene = true
-size = Vector2(372, 328)
+size = Vector2(124, 48)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5008v"]
 resource_local_to_scene = true
-size = Vector2(236, 52)
+size = Vector2(372, 80)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_68od5"]
+resource_local_to_scene = true
+size = Vector2(316, 132)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5008v"]
 resource_local_to_scene = true
 size = Vector2(160, 52)
 
@@ -813,25 +815,29 @@ script = ExtResource("2_jjvhh")
 
 [node name="Platforms" type="Node2D" parent="." unique_id=2139959054]
 position = Vector2(-9, -323)
+script = ExtResource("11_byont")
 
 [node name="Platform" parent="Platforms" unique_id=1326313302 instance=ExtResource("12_074og")]
-position = Vector2(333, 64)
-size_vector = Vector2(172, 60)
-textureWidth = 8.0
+position = Vector2(184, -96)
+size_vector = Vector2(176, 64)
+texturePath = "res://Assets/testPlatformBorder.png"
+textureWidth = 16.0
 
 [node name="CollisionPolygon2D" parent="Platforms/Platform" index="0" unique_id=581306703]
-polygon = PackedVector2Array(-118.697464, 44.364784, 37.815872, -26.962456, 62.697464, 27.635218, -93.81587, 98.962456)
+polygon = PackedVector2Array(-93.34677, 7.374243, 66.80641, -65.61176, 93.34677, -7.374243, -66.80641, 65.61176)
 
 [node name="Polygon2D" parent="Platforms/Platform" index="1" unique_id=1861125354]
-polygon = PackedVector2Array(-113.39885, 46.34585, 35.834805, -21.663837, 57.39885, 25.654148, -91.83481, 93.66383)
+color = Color(0.9999997, 0.6637959, 0.2018961, 1)
+texture = ExtResource("13_86kmy")
+texture_rotation = 0.45727625
+polygon = PackedVector2Array(-82.74954, 11.33639, 62.84427, -55.014534, 82.74954, -11.33639, -62.84427, 55.014534)
 
 [node name="RectangleOutline" parent="Platforms/Platform" index="2" unique_id=1082408081]
-position = Vector2(-28, 36)
 rotation = -0.42760566
-shape = SubResource("RectangleShape2D_86kmy")
+shape = SubResource("RectangleShape2D_byont")
 
 [node name="Platform2" parent="Platforms" unique_id=73062743 instance=ExtResource("12_074og")]
-position = Vector2(-257, 61)
+position = Vector2(-276, -44)
 size_vector = Vector2(124, 48)
 textureWidth = 8.0
 
@@ -842,51 +848,50 @@ polygon = PackedVector2Array(-62, -24, 62, -24, 62, 24, -62, 24)
 polygon = PackedVector2Array(-58, -20, 58, -20, 58, 20, -58, 20)
 
 [node name="RectangleOutline" parent="Platforms/Platform2" index="2" unique_id=1082408081]
-shape = SubResource("RectangleShape2D_llrqw")
+shape = SubResource("RectangleShape2D_86kmy")
 
 [node name="Platform3" parent="Platforms" unique_id=778821719 instance=ExtResource("12_074og")]
-position = Vector2(926, 223)
-size_vector = Vector2(372, 328)
+position = Vector2(872, -152)
+size_vector = Vector2(372, 80)
 textureWidth = 8.0
 
 [node name="CollisionPolygon2D" parent="Platforms/Platform3" index="0" unique_id=581306703]
-polygon = PackedVector2Array(-186, -116, 186, -116, 186, 212, -186, 212)
+polygon = PackedVector2Array(-186, -40, 186, -40, 186, 40, -186, 40)
 
 [node name="Polygon2D" parent="Platforms/Platform3" index="1" unique_id=1861125354]
-polygon = PackedVector2Array(-182, -112, 182, -112, 182, 208, -182, 208)
+polygon = PackedVector2Array(-182, -36, 182, -36, 182, 36, -182, 36)
 
 [node name="RectangleOutline" parent="Platforms/Platform3" index="2" unique_id=1082408081]
-position = Vector2(0, 48)
-shape = SubResource("RectangleShape2D_py8ao")
+shape = SubResource("RectangleShape2D_llrqw")
 
 [node name="Platform4" parent="Platforms" unique_id=780874561 instance=ExtResource("12_074og")]
-position = Vector2(-596, 178)
-size_vector = Vector2(236, 52)
+position = Vector2(-499, 240)
+size_vector = Vector2(316, 132)
 textureWidth = 8.0
 
 [node name="CollisionPolygon2D" parent="Platforms/Platform4" index="0" unique_id=581306703]
-polygon = PackedVector2Array(-118, -14, 118, -14, 118, 38, -118, 38)
+polygon = PackedVector2Array(-158, -66, 158, -66, 158, 66, -158, 66)
 
 [node name="Polygon2D" parent="Platforms/Platform4" index="1" unique_id=1861125354]
-polygon = PackedVector2Array(-114, -10, 114, -10, 114, 34, -114, 34)
+polygon = PackedVector2Array(-154, -62, 154, -62, 154, 62, -154, 62)
 
 [node name="RectangleOutline" parent="Platforms/Platform4" index="2" unique_id=1082408081]
-position = Vector2(0, 12)
-shape = SubResource("RectangleShape2D_5008v")
+shape = SubResource("RectangleShape2D_py8ao")
 
 [node name="Platform5" parent="Platforms" unique_id=1558722153 instance=ExtResource("12_wevk2")]
+position = Vector2(-856, 52)
+shake_timer_length = 1.5
 size_vector = Vector2(160, 52)
 textureWidth = 8.0
 
 [node name="CollisionPolygon2D" parent="Platforms/Platform5" index="0" unique_id=581306703]
-polygon = PackedVector2Array(-816, 30, -656, 30, -656, 82, -816, 82)
+polygon = PackedVector2Array(-80, -26, 80, -26, 80, 26, -80, 26)
 
 [node name="Polygon2D" parent="Platforms/Platform5" index="1" unique_id=1861125354]
-polygon = PackedVector2Array(-812, 34, -660, 34, -660, 78, -812, 78)
+polygon = PackedVector2Array(-76, -22, 76, -22, 76, 22, -76, 22)
 
 [node name="RectangleOutline" parent="Platforms/Platform5" index="2" unique_id=1082408081]
-position = Vector2(-736, 56)
-shape = SubResource("RectangleShape2D_68od5")
+shape = SubResource("RectangleShape2D_5008v")
 
 [node name="LevelExit" parent="." unique_id=659289399 instance=ExtResource("12_86kmy")]
 position = Vector2(1078, -259)

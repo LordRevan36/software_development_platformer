@@ -533,7 +533,7 @@ direction = Vector3(0, -25, 0)
 spread = 35.0
 flatness = 0.5
 initial_velocity_min = 300.0
-initial_velocity_max = 300.0
+initial_velocity_max = 325.0
 angular_velocity_min = -20.000015
 angular_velocity_max = 14.999984
 gravity = Vector3(0, 250, 0)
@@ -573,11 +573,12 @@ metadata/_edit_group_ = true
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="." unique_id=1583302059]
 sprite_frames = SubResource("SpriteFrames_sh265")
-animation = &"fall"
+animation = &"frontflip"
 autoplay = "idle"
 
 [node name="PlayerHitbox" type="CollisionShape2D" parent="." unique_id=1628864781]
-position = Vector2(2, 51)
+position = Vector2(0, 42)
+scale = Vector2(1, 1.1200012)
 shape = SubResource("CapsuleShape2D_gwnis")
 
 [node name="Slash" type="AnimatedSprite2D" parent="." unique_id=1497850521]
