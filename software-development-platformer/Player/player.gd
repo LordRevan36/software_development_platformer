@@ -142,7 +142,7 @@ func _physics_process(delta: float) -> void:
 	# CROUCHING DOWN (i didn't use is_on_floor() in this section, so they can coyote jump
 	if canJump:
 		if state != State.CROUCH and state != State.ATTACK:
-			if (Input.is_action_just_pressed("Up") or ((Input.is_action_just_pressed("Frontflip") or Input.is_action_just_pressed("Backflip")) and stamina >= FLIP_COST)):
+			if ((Input.is_action_just_pressed("Up") and stamina >= JUMP_COST) or ((Input.is_action_just_pressed("FlipLeft") or Input.is_action_just_pressed("FlipRight")) and stamina >= FLIP_COST)):
 				state = State.CROUCH
 				crouchStartTime = time
 			
@@ -153,21 +153,30 @@ func _physics_process(delta: float) -> void:
 			if ((time-crouchStartTime)>0.5): #if player's held down the jump/flip button too long:
 				if Input.is_action_pressed("Up"):
 					jump()
-				elif Input.is_action_pressed("Backflip"):
-					backflip()
-				elif Input.is_action_pressed("Frontflip"):
-					frontflip()
+				elif Input.is_action_pressed("FlipLeft"):
+					if facing == 1:
+						backflip()
+					else:
+						frontflip()
+				elif Input.is_action_pressed("FlipRight"):
+					if facing == 1:
+						frontflip()
+					else:
+						backflip()
 			#regular jump/flip detection
 			if Input.is_action_just_released("Up"):
 				jump()
-			elif Input.is_action_just_released("Backflip"):
-				backflip()
-			elif Input.is_action_just_released("Frontflip"):
-				frontflip()
-			#forced jump if stamina is too low?
-			if Input.is_action_pressed("Up") and JUMP_COST*(time-crouchStartTime)*2 >= stamina:
-				jump()
-
+			elif Input.is_action_just_released("FlipLeft"):
+				if facing == 1:
+					backflip()
+				else:
+					frontflip()
+			elif Input.is_action_just_released("FlipRight"):
+				if facing == 1:
+					frontflip()
+				else:
+					backflip()
+		
 		
 	if !is_on_floor(): #not on floor, its a little inefficient to not connect this to the is_on_floor above, but thats nit how the order worked out
 		if canJump and CoyoteTimer.is_stopped():
@@ -264,7 +273,7 @@ func jump():
 	canJump = false
 	GlobalPlayer.jumped.emit()
 	jumpVelocity = velocity
-	stam(-JUMP_COST*(time-crouchStartTime)*2, 0.3)
+	stam(-JUMP_COST, 0.3)
 	StaminaTimer.start()
 	
 	
@@ -294,10 +303,16 @@ func _on_coyote_jump_timer_timeout() -> void:
 	if state == State.CROUCH: #makes player jump instead of just falling off the ledge if they were trying to jump
 		if Input.is_action_pressed("Up"):
 			jump()
-		elif Input.is_action_pressed("Backflip"):
-			backflip()
-		elif Input.is_action_pressed("Frontflip"):
-			frontflip()
+		elif Input.is_action_pressed("FlipLeft"):
+			if facing == 1:
+				backflip()
+			else:
+				frontflip()
+		elif Input.is_action_pressed("FlipRight"):
+			if facing == 1:
+				frontflip()
+			else:
+				backflip()
 
 
 func _on_attack_timer_timeout() -> void:
@@ -309,4 +324,7 @@ func _on_slash_animation_finished() -> void: #used to visually hide slash when i
 	Slash.hide()
 
 func _on_stamina_timer_timeout() -> void:
+	if state == State.IDLE:
 		regenStam()
+	else:
+		return
