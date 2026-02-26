@@ -29,10 +29,10 @@ text = "Return"
 flat = true
 
 [node name="AudioSettings" type="VBoxContainer" parent="." unique_id=359059480]
-offset_left = 1200.0
-offset_top = 200.0
-offset_right = 1550.0
-offset_bottom = 550.0
+offset_left = 1280.0
+offset_top = 202.0
+offset_right = 1630.0
+offset_bottom = 552.0
 
 [node name="Audio" type="Label" parent="AudioSettings" unique_id=1884708400]
 layout_mode = 2
@@ -95,11 +95,10 @@ value = 10.0
 allow_greater = true
 
 [node name="ControlContainer" type="VBoxContainer" parent="." unique_id=185400136]
-offset_left = 160.0
+offset_left = 100.0
 offset_top = 200.0
-offset_right = 1036.0
-offset_bottom = 537.0
-pivot_offset_ratio = Vector2(0.5, 0.5)
+offset_right = 976.0
+offset_bottom = 741.0
 theme_override_constants/separation = 20
 
 [node name="ControlsLabel" type="Label" parent="ControlContainer" unique_id=1383122744]
@@ -168,6 +167,31 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 64
 text = "Pause"
 flat = true
+
+[node name="ChangeControl" type="Control" parent="." unique_id=1835719246]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect2" type="ColorRect" parent="ChangeControl" unique_id=1753315965]
+layout_mode = 0
+offset_left = 980.0
+offset_top = 180.0
+offset_right = 1840.0
+offset_bottom = 900.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+color = Color(0, 0.116666794, 1, 1)
+
+[node name="ChangeControls" type="Label" parent="ChangeControl" unique_id=1107005985]
+layout_mode = 0
+offset_left = 1028.0
+offset_top = 214.0
+offset_right = 1796.0
+offset_bottom = 258.0
+theme_override_font_sizes/font_size = 64
+text = "Press a key to select a control."
 
 [connection signal="mouse_entered" from="ReturnButton" to="." method="_on_return_button_mouse_entered"]
 [connection signal="mouse_exited" from="ReturnButton" to="." method="_on_return_button_mouse_exited"]

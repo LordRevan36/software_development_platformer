@@ -1,9 +1,10 @@
 extends Node2D
 
 @onready var ControlsGrid: GridContainer = $ControlContainer/ControlsGrid
+@onready var ReturnButton: Button = $ReturnButton
 @onready var controls: Array
+@onready var ChangeControl: Control = $ChangeControl
 @onready var Buttons: Array = [
-	$ReturnButton,
 	$ControlContainer/ControlsGrid/Jump,
 	$"ControlContainer/ControlsGrid/Move Down",
 	$"ControlContainer/ControlsGrid/Move Left",
@@ -36,23 +37,28 @@ func _connect_button_signals(button: Button):
 	button.mouse_exited.connect(_on_button_mouse_exited.bind(button))
 
 # Generic handler for button presses
+var buttonPressed
 func _on_button_pressed(button: Button) -> void:
-	if button == Buttons[0]:
-		hide()
-		get_node("/root/Menus/MainMenu").show()
-	else:
-		return
+	buttonPressed = button
+	ChangeControl.show()
+	
+func _input(event: InputEvent) -> void:
+	if ChangeControl.visible:
+		if event is InputEventKey and event.is_released():
+			print(OS.get_keycode_string(event.keycode))
+			print(buttonPressed)
+			ChangeControl.hide()
+		elif event is InputEventMouseButton and event.is_released():
+			print(event.as_text())
+			ChangeControl.hide()
 
 func _on_button_mouse_entered(button: Button) -> void:
 	button.modulate = Color.YELLOW
-	GlobalUI.growTween(button)  # Assuming you have a global function to handle this
+	GlobalUI.growTween(button, 1.1, 1.1)
 
 # Generic handler for mouse exit event
 func _on_button_mouse_exited(button: Button) -> void:
-	if button == Buttons[0]:
-		GlobalUI.shrinkTween(button) 
-	else:
-		GlobalUI.shrinkTween(button) 
+	GlobalUI.shrinkTween(button) 
 	button.modulate = Color.WHITE
 
 #Volume Functions
@@ -82,3 +88,16 @@ func _on_music_volume_value_changed(value: float) -> void:
 	else:
 		AudioServer.set_bus_mute(AudioServer.get_bus_index("Music"), false)
 		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), value - 10)
+
+func _on_return_button_mouse_entered() -> void:
+	ReturnButton.modulate = Color.YELLOW
+	GlobalUI.growTween(ReturnButton, 1.2, 1.2)
+
+func _on_return_button_mouse_exited() -> void:
+	ReturnButton.modulate = Color.WHITE
+	GlobalUI.shrinkTween(ReturnButton)
+
+
+func _on_return_button_pressed() -> void:
+	hide()
+	get_node("/root/Menus/MainMenu").show()

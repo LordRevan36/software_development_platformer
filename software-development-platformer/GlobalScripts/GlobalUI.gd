@@ -1,12 +1,14 @@
 extends Node
 #smoothly increases the size of the text when hovering
-func growTween(button):
+func growTween(button, xVar, yVar):
+	button.pivot_offset = button.size/2
 	var tween = create_tween()
 	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	tween.tween_property(button, "scale", Vector2(1.2,1.2), 0.1)
+	tween.tween_property(button, "scale", Vector2(xVar,yVar), 0.1)
 	
 #smoothly decreases the size of the text when hovering
 func shrinkTween(button):
+	button.pivot_offset = button.size/2
 	var tween = create_tween()
 	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	tween.tween_property(button, "scale", Vector2(1,1), 0.1)

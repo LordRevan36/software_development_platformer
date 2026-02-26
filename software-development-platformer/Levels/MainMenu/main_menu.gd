@@ -6,7 +6,7 @@ extends Node2D
 #Start Button functions
 func _on_start_button_mouse_entered() -> void:
 	StartButton.modulate = Color.YELLOW
-	GlobalUI.growTween(StartButton)
+	GlobalUI.growTween(StartButton, 1.2, 1.2)
 
 func _on_start_button_mouse_exited() -> void:
 	StartButton.modulate = Color.WHITE
@@ -23,7 +23,7 @@ func _on_settings_button_pressed() -> void:
 
 func _on_settings_button_mouse_entered() -> void:
 	SettingsButton.modulate = Color.YELLOW
-	GlobalUI.growTween(SettingsButton)
+	GlobalUI.growTween(SettingsButton, 1.2, 1.2)
 
 func _on_settings_button_mouse_exited() -> void:
 	SettingsButton.modulate = Color.WHITE
@@ -36,7 +36,7 @@ func _on_exit_button_pressed() -> void:
 
 func _on_exit_button_mouse_entered() -> void:
 	ExitButton.modulate = Color.YELLOW
-	GlobalUI.growTween(ExitButton)
+	GlobalUI.growTween(ExitButton, 1.2, 1.2)
 
 func _on_exit_button_mouse_exited() -> void:
 	ExitButton.modulate = Color.WHITE
