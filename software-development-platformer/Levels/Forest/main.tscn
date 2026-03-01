@@ -70,23 +70,23 @@ func _process(_delta: float) -> void:
 	pass
 "
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_byont"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_86kmy"]
 resource_local_to_scene = true
 size = Vector2(176, 64)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_86kmy"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_llrqw"]
 resource_local_to_scene = true
 size = Vector2(124, 48)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_llrqw"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_py8ao"]
 resource_local_to_scene = true
 size = Vector2(372, 80)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_py8ao"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5008v"]
 resource_local_to_scene = true
 size = Vector2(316, 132)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5008v"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_68od5"]
 resource_local_to_scene = true
 size = Vector2(160, 52)
 
@@ -833,7 +833,7 @@ polygon = PackedVector2Array(-82.74954, 11.33639, 62.84427, -55.014534, 82.74954
 
 [node name="RectangleOutline" parent="Platforms/Platform" index="2" unique_id=1082408081]
 rotation = -0.42760566
-shape = SubResource("RectangleShape2D_byont")
+shape = SubResource("RectangleShape2D_86kmy")
 
 [node name="Platform2" parent="Platforms" unique_id=73062743 instance=ExtResource("12_074og")]
 position = Vector2(-276, -44)
@@ -847,7 +847,7 @@ polygon = PackedVector2Array(-62, -24, 62, -24, 62, 24, -62, 24)
 polygon = PackedVector2Array(-58, -20, 58, -20, 58, 20, -58, 20)
 
 [node name="RectangleOutline" parent="Platforms/Platform2" index="2" unique_id=1082408081]
-shape = SubResource("RectangleShape2D_86kmy")
+shape = SubResource("RectangleShape2D_llrqw")
 
 [node name="Platform3" parent="Platforms" unique_id=778821719 instance=ExtResource("12_074og")]
 position = Vector2(872, -152)
@@ -861,7 +861,7 @@ polygon = PackedVector2Array(-186, -40, 186, -40, 186, 40, -186, 40)
 polygon = PackedVector2Array(-182, -36, 182, -36, 182, 36, -182, 36)
 
 [node name="RectangleOutline" parent="Platforms/Platform3" index="2" unique_id=1082408081]
-shape = SubResource("RectangleShape2D_llrqw")
+shape = SubResource("RectangleShape2D_py8ao")
 
 [node name="Platform4" parent="Platforms" unique_id=780874561 instance=ExtResource("12_074og")]
 position = Vector2(-499, 240)
@@ -875,11 +875,10 @@ polygon = PackedVector2Array(-158, -66, 158, -66, 158, 66, -158, 66)
 polygon = PackedVector2Array(-154, -62, 154, -62, 154, 62, -154, 62)
 
 [node name="RectangleOutline" parent="Platforms/Platform4" index="2" unique_id=1082408081]
-shape = SubResource("RectangleShape2D_py8ao")
+shape = SubResource("RectangleShape2D_5008v")
 
 [node name="Platform5" parent="Platforms" unique_id=1558722153 instance=ExtResource("12_wevk2")]
 position = Vector2(-856, 52)
-shake_timer_length = 1.5
 size_vector = Vector2(160, 52)
 textureWidth = 8.0
 
@@ -890,7 +889,7 @@ polygon = PackedVector2Array(-80, -26, 80, -26, 80, 26, -80, 26)
 polygon = PackedVector2Array(-76, -22, 76, -22, 76, 22, -76, 22)
 
 [node name="RectangleOutline" parent="Platforms/Platform5" index="2" unique_id=1082408081]
-shape = SubResource("RectangleShape2D_5008v")
+shape = SubResource("RectangleShape2D_68od5")
 
 [node name="LevelExit" parent="." unique_id=659289399 instance=ExtResource("12_86kmy")]
 position = Vector2(1078, -259)
