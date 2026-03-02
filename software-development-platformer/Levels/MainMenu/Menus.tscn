@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dpj3jr16hdap7" path="res://Levels/MainMenu/Settings.tscn" id="1_423fp"]
 [ext_resource type="PackedScene" uid="uid://5hjr27qo25yx" path="res://Levels/MainMenu/MainMenu.tscn" id="2_0o7qf"]
-[ext_resource type="AudioStream" uid="uid://cguo55niaj5i1" path="res://Assets/Music/MainMenu?.mp3" id="3_0o7qf"]
+[ext_resource type="AudioStream" uid="uid://cguo55niaj5i1" path="res://Assets/Music/MainMenu.mp3" id="3_0o7qf"]
 
 [node name="Menus" type="Node" unique_id=53690175]
 

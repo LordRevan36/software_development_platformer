@@ -9,6 +9,10 @@ extends Node2D
 #Made it a separate script to handle different footsteps in different scenes.
 var collision
 
+func _ready() -> void:
+	GlobalPlayer.jumped.connect(_on_player_jumped)
+	GlobalPlayer.landed.connect(_on_player_landed)
+	
 func _process(_delta: float) -> void:
 	collision = player.get_last_slide_collision()
 	if player.AnimSprite.animation == "run":
@@ -30,12 +34,9 @@ func _on_player_jumped() -> void:
 			leaf_jump.process_material.direction.x = -player.velocity.x/50
 			leaf_jump.restart()
 
-func _on_player_landed(landVelocity) -> void:
-	collision = player.get_last_slide_collision()
-	if collision:
-		var collider = collision.get_collider()
-		if collider and collider.is_in_group("AutumnLeafMaterial"):
-			if landVelocity.y > 300:
-				leaf_land.amount = int(5+landVelocity.y/30) #BROKEN RN. landing velocity is always recorded the same because ground slows player.
-				leaf_land.process_material.direction.x = player.velocity.x/40
-				leaf_land.restart()
+func _on_player_landed(landVelocity, collider) -> void:
+	if collider and collider.is_in_group("AutumnLeafMaterial"):
+		if landVelocity.y > 300:
+			leaf_land.amount = int(5+landVelocity.y/30)
+			leaf_land.process_material.direction.x = player.velocity.x/30
+			leaf_land.restart()
