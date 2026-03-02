@@ -4,14 +4,16 @@ extends Node2D
 @onready var ReturnButton: Button = $ReturnButton
 @onready var controls: Array
 @onready var ChangeControl: Control = $ChangeControl
+@onready var ControlsTimer: Timer = $ControlsTimer
+@onready var ControlPicker: Label = $ChangeControl/ColorRect2/ControlPicker
 @onready var Buttons: Array = [
 	$ControlContainer/ControlsGrid/Jump,
 	$"ControlContainer/ControlsGrid/Move Down",
 	$"ControlContainer/ControlsGrid/Move Left",
 	$"ControlContainer/ControlsGrid/Move Right",
 	$ControlContainer/ControlsGrid/Attack,
-	$"ControlContainer/ControlsGrid/Flip Right",
-	$"ControlContainer/ControlsGrid/Flip Left",
+	$"ControlContainer/ControlsGrid/Frontflip",
+	$"ControlContainer/ControlsGrid/Backflip",
 	$"ControlContainer/ControlsGrid/Skill Tree",
 	$ControlContainer/ControlsGrid/Pause
 ]
@@ -41,15 +43,14 @@ var buttonPressed
 func _on_button_pressed(button: Button) -> void:
 	buttonPressed = button.get_tooltip()
 	ChangeControl.show()
+	ControlPicker.text = "Select control for " + button.get_name()
 	
+#input listener for changing controls
 func _input(event: InputEvent) -> void:
 	if ChangeControl.visible:
-		if event is InputEventKey and event.is_pressed():
-			print(OS.get_keycode_string(event.keycode))
-			print(buttonPressed)
-			ChangeControl.hide()
-		elif event is InputEventMouseButton and event.is_pressed():
+		if (event is InputEventKey or InputEventMouseButton) and event.is_pressed() and buttonPressed:
 			print(event.as_text())
+			print(buttonPressed)
 			ChangeControl.hide()
 
 func _on_button_mouse_entered(button: Button) -> void:

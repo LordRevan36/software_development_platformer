@@ -149,18 +149,18 @@ theme_override_font_sizes/font_size = 64
 text = "Attack"
 flat = true
 
-[node name="Flip Right" type="Button" parent="ControlContainer/ControlsGrid" unique_id=1290675001]
+[node name="Frontflip" type="Button" parent="ControlContainer/ControlsGrid" unique_id=1290675001]
 layout_mode = 2
 tooltip_text = "FlipRight"
 theme_override_font_sizes/font_size = 64
-text = "Flip Right"
+text = "Frontflip"
 flat = true
 
-[node name="Flip Left" type="Button" parent="ControlContainer/ControlsGrid" unique_id=1067889719]
+[node name="Backflip" type="Button" parent="ControlContainer/ControlsGrid" unique_id=1067889719]
 layout_mode = 2
 tooltip_text = "FlipLeft"
 theme_override_font_sizes/font_size = 64
-text = "Flip Left"
+text = "Backflip"
 flat = true
 
 [node name="Skill Tree" type="Button" parent="ControlContainer/ControlsGrid" unique_id=1258710192]
@@ -192,6 +192,22 @@ offset_bottom = 900.0
 pivot_offset_ratio = Vector2(0.5, 0.5)
 color = Color(0, 0.116666794, 1, 1)
 
+[node name="ControlPicker" type="Label" parent="ChangeControl/ColorRect2" unique_id=1468245853]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -157.0
+offset_top = -30.5
+offset_right = 157.0
+offset_bottom = 30.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 64
+text = "Test Text"
+
 [node name="ChangeControls" type="Label" parent="ChangeControl" unique_id=1107005985]
 layout_mode = 0
 offset_left = 1028.0
@@ -217,10 +233,10 @@ text = "Press a key to select a control."
 [connection signal="mouse_exited" from="ControlContainer/ControlsGrid/Move Left" to="." method="_on_move_left_mouse_exited"]
 [connection signal="mouse_entered" from="ControlContainer/ControlsGrid/Attack" to="." method="_on_attack_mouse_entered"]
 [connection signal="mouse_exited" from="ControlContainer/ControlsGrid/Attack" to="." method="_on_attack_mouse_exited"]
-[connection signal="mouse_entered" from="ControlContainer/ControlsGrid/Flip Right" to="." method="_on_flip_right_mouse_entered"]
-[connection signal="mouse_exited" from="ControlContainer/ControlsGrid/Flip Right" to="." method="_on_flip_right_mouse_exited"]
-[connection signal="mouse_entered" from="ControlContainer/ControlsGrid/Flip Left" to="." method="_on_flip_left_mouse_entered"]
-[connection signal="mouse_exited" from="ControlContainer/ControlsGrid/Flip Left" to="." method="_on_flip_left_mouse_exited"]
+[connection signal="mouse_entered" from="ControlContainer/ControlsGrid/Frontflip" to="." method="_on_flip_right_mouse_entered"]
+[connection signal="mouse_exited" from="ControlContainer/ControlsGrid/Frontflip" to="." method="_on_flip_right_mouse_exited"]
+[connection signal="mouse_entered" from="ControlContainer/ControlsGrid/Backflip" to="." method="_on_flip_left_mouse_entered"]
+[connection signal="mouse_exited" from="ControlContainer/ControlsGrid/Backflip" to="." method="_on_flip_left_mouse_exited"]
 [connection signal="mouse_entered" from="ControlContainer/ControlsGrid/Skill Tree" to="." method="_on_skill_tree_mouse_entered"]
 [connection signal="mouse_exited" from="ControlContainer/ControlsGrid/Skill Tree" to="." method="_on_skill_tree_mouse_exited"]
 [connection signal="mouse_entered" from="ControlContainer/ControlsGrid/Pause" to="." method="_on_pause_mouse_entered"]
