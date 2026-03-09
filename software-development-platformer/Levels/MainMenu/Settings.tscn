@@ -151,14 +151,14 @@ flat = true
 
 [node name="Frontflip" type="Button" parent="ControlContainer/ControlsGrid" unique_id=1290675001]
 layout_mode = 2
-tooltip_text = "FlipRight"
+tooltip_text = "Frontflip"
 theme_override_font_sizes/font_size = 64
 text = "Frontflip"
 flat = true
 
 [node name="Backflip" type="Button" parent="ControlContainer/ControlsGrid" unique_id=1067889719]
 layout_mode = 2
-tooltip_text = "FlipLeft"
+tooltip_text = "Backflip"
 theme_override_font_sizes/font_size = 64
 text = "Backflip"
 flat = true
@@ -199,14 +199,59 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -157.0
+offset_left = -114.0
 offset_top = -30.5
-offset_right = 157.0
-offset_bottom = 30.5
+offset_right = 114.0
+offset_bottom = 13.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 64
 text = "Test Text"
+
+[node name="ControlUsed" type="Control" parent="ChangeControl/ColorRect2" unique_id=1939951553]
+visible = false
+anchors_preset = 0
+offset_left = -980.0
+offset_top = -180.0
+offset_right = -940.0
+offset_bottom = -140.0
+
+[node name="ContUsedLabel" type="Label" parent="ChangeControl/ColorRect2/ControlUsed" unique_id=542118347]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 1180.0
+offset_top = 580.0
+offset_right = 1620.0
+offset_bottom = 624.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 64
+text = "Key Already Bound
+   Are You Sure?"
+
+[node name="YesButton" type="Button" parent="ChangeControl/ColorRect2/ControlUsed" unique_id=1313608514]
+layout_mode = 0
+offset_left = 1195.0
+offset_top = 700.0
+offset_right = 1287.0
+offset_bottom = 752.0
+theme_override_font_sizes/font_size = 64
+text = "Yes"
+flat = true
+
+[node name="NoButton" type="Button" parent="ChangeControl/ColorRect2/ControlUsed" unique_id=1596120485]
+layout_mode = 0
+offset_left = 1561.0
+offset_top = 700.0
+offset_right = 1625.0
+offset_bottom = 752.0
+theme_override_font_sizes/font_size = 64
+text = "No"
+flat = true
 
 [node name="ChangeControls" type="Label" parent="ChangeControl" unique_id=1107005985]
 layout_mode = 0
@@ -241,3 +286,9 @@ text = "Press a key to select a control."
 [connection signal="mouse_exited" from="ControlContainer/ControlsGrid/Skill Tree" to="." method="_on_skill_tree_mouse_exited"]
 [connection signal="mouse_entered" from="ControlContainer/ControlsGrid/Pause" to="." method="_on_pause_mouse_entered"]
 [connection signal="mouse_exited" from="ControlContainer/ControlsGrid/Pause" to="." method="_on_pause_mouse_exited"]
+[connection signal="mouse_entered" from="ChangeControl/ColorRect2/ControlUsed/YesButton" to="." method="_on_yes_button_mouse_entered"]
+[connection signal="mouse_exited" from="ChangeControl/ColorRect2/ControlUsed/YesButton" to="." method="_on_yes_button_mouse_exited"]
+[connection signal="pressed" from="ChangeControl/ColorRect2/ControlUsed/YesButton" to="." method="_on_yes_button_pressed"]
+[connection signal="mouse_entered" from="ChangeControl/ColorRect2/ControlUsed/NoButton" to="." method="_on_no_button_mouse_entered"]
+[connection signal="mouse_exited" from="ChangeControl/ColorRect2/ControlUsed/NoButton" to="." method="_on_no_button_mouse_exited"]
+[connection signal="pressed" from="ChangeControl/ColorRect2/ControlUsed/NoButton" to="." method="_on_no_button_pressed"]
