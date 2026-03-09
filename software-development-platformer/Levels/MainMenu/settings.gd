@@ -4,7 +4,6 @@ extends Node2D
 @onready var ReturnButton: Button = $ReturnButton
 @onready var controls: Array
 @onready var ChangeControl: Control = $ChangeControl
-@onready var ControlsTimer: Timer = $ControlsTimer
 @onready var ControlPicker: Label = $ChangeControl/ColorRect2/ControlPicker
 @onready var YesButton: Button = $ChangeControl/ColorRect2/ControlUsed/YesButton
 @onready var NoButton: Button = $ChangeControl/ColorRect2/ControlUsed/NoButton
@@ -20,9 +19,11 @@ extends Node2D
 	$ControlContainer/ControlsGrid/Pause
 ]
 #functions to get the input map and display what each input is
-func _process(delta: float) -> void:
+func _ready() -> void:
 	for button in Buttons:
 		_connect_button_signals(button)
+		
+func _process(delta: float) -> void:
 	var i = 0
 	for child_node in ControlsGrid.get_children():
 		controls.append(child_node)
