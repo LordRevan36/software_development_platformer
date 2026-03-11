@@ -1,6 +1,6 @@
 @tool
 extends AnimatableBody2D
-class_name platform
+class_name moving_platform
 
 #PROCESS TO CREATE A PLATFORM
 #Instantiate a platform (do not copy-paste or duplicate, this will create a link between rectangles)

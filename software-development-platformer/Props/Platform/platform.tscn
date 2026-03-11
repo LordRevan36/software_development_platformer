@@ -6,10 +6,8 @@
 resource_local_to_scene = true
 size = Vector2(365, 50)
 
-[node name="Platform" type="StaticBody2D" unique_id=922697831]
+[node name="Platform" type="AnimatableBody2D" unique_id=1136379276]
 script = ExtResource("1_0v4dy")
-size_vector = Vector2(365, 50)
-textureWidth = 10.0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=581306703]
 polygon = PackedVector2Array(-182.5, -25, 182.5, -25, 182.5, 25, -182.5, 25)

@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://bgnpnvakyrgs0"]
+
+[ext_resource type="Script" uid="uid://baflwmykixa8h" path="res://Props/Platform/moving_platform.gd" id="1_8qtoc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8duk3"]
+resource_local_to_scene = true
+size = Vector2(365, 50)
+
+[node name="FallPlatform" type="Node2D" unique_id=885156819]
+
+[node name="MovingPlatform" type="AnimatableBody2D" parent="." unique_id=56233282]
+script = ExtResource("1_8qtoc")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MovingPlatform" unique_id=581306703]
+polygon = PackedVector2Array(-182.5, -25, 182.5, -25, 182.5, 25, -182.5, 25)
+
+[node name="Polygon2D" type="Polygon2D" parent="MovingPlatform" unique_id=1861125354]
+texture_filter = 1
+texture_repeat = 2
+color = Color(0.30497152, 0.18106371, 2.4065375e-08, 1)
+polygon = PackedVector2Array(-177.5, -20, 177.5, -20, 177.5, 20, -177.5, 20)
+
+[node name="RectangleOutline" type="CollisionShape2D" parent="MovingPlatform" unique_id=1082408081]
+shape = SubResource("RectangleShape2D_8duk3")
+disabled = true
+
+[node name="BorderLines" type="Node2D" parent="MovingPlatform" unique_id=1496693585]
