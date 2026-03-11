@@ -1,5 +1,4 @@
 extends Node2D
-
 @onready var ControlsGrid: GridContainer = $ControlContainer/ControlsGrid
 @onready var ReturnButton: Button = $ReturnButton
 @onready var controls: Array
@@ -7,6 +6,7 @@ extends Node2D
 @onready var ControlPicker: Label = $ChangeControl/ColorRect2/ControlPicker
 @onready var YesButton: Button = $ChangeControl/ColorRect2/ControlUsed/YesButton
 @onready var NoButton: Button = $ChangeControl/ColorRect2/ControlUsed/NoButton
+@onready var ControlUsed: Control = $ChangeControl/ColorRect2/ControlUsed
 @onready var Buttons: Array = [
 	$ControlContainer/ControlsGrid/Jump,
 	$"ControlContainer/ControlsGrid/Move Down",
@@ -18,12 +18,15 @@ extends Node2D
 	$"ControlContainer/ControlsGrid/Skill Tree",
 	$ControlContainer/ControlsGrid/Pause
 ]
+@onready var uiActions: Array
 #functions to get the input map and display what each input is
 func _ready() -> void:
 	for button in Buttons:
 		_connect_button_signals(button)
-		
-func _process(delta: float) -> void:
+	for action in InputMap.get_actions():
+		if not action.begins_with("ui_"):
+			pass
+func _process(_delta: float) -> void:
 	var i = 0
 	for child_node in ControlsGrid.get_children():
 		controls.append(child_node)
@@ -42,6 +45,7 @@ func _connect_button_signals(button: Button):
 	button.mouse_exited.connect(_on_button_mouse_exited.bind(button))
 
 # Generic handler for button presses
+var key
 var buttonPressed
 var agree
 var decided
@@ -53,39 +57,34 @@ func _on_button_pressed(button: Button) -> void:
 	decided = false
 
 func _on_yes_button_pressed() -> void:
-	agree = true
-	decided = true
+	InputMap.action_erase_events(buttonPressed)
+	InputMap.action_add_event(buttonPressed, key)
+	ControlUsed.hide()
+	ChangeControl.hide()
 
 func _on_no_button_pressed() -> void:
-	agree = false
-	decided = true
+	ControlUsed.hide()
+	ChangeControl.hide()
 
 #input listener for changing controls
-var key
 func _input(event: InputEvent) -> void:
 	if ChangeControl.visible:
-		#if is_key_mapped(event):
-			#ControlUsed(event)
-		if (event is InputEventKey or InputEventMouseButton) and event.is_pressed() and buttonPressed:
+		if is_key_mapped(event) and not event.is_echo():
+			ControlUsed.show()
+			key = event
+		elif (event is InputEventKey or event is InputEventMouseButton) and event.is_pressed() and buttonPressed and not ControlUsed.visible:
 			print(event.as_text())
 			print(buttonPressed)
 			InputMap.action_erase_events(buttonPressed)
 			InputMap.action_add_event(buttonPressed, event)
 			ChangeControl.hide()
-			
-func ControlUsed(event) -> void:
-	print(event.as_text() + " is being used")
-	$ChangeControl/ColorRect2/ControlUsed.show()
-	if agree and decided:
-		$ChangeControl/ColorRect2/ControlUsed.hide()
-	elif not agree and decided:
-		$ChangeControl/ColorRect2/ControlUsed.hide()
-		return
-
+			ControlUsed.hide()
 
 func is_key_mapped(event: InputEvent) -> bool:
 	# Iterate through all action names defined in the Project Settings -> Input Map
 	for action_name in InputMap.get_actions():
+		if action_name.begins_with("ui_"):
+			continue
 		# Get all InputEvents associated with the current action
 		var events: Array = InputMap.action_get_events(action_name)
 		for action_event in events:
