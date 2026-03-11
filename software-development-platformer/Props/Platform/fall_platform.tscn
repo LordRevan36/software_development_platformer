@@ -1,27 +1,29 @@
 [gd_scene format=3 uid="uid://bgnpnvakyrgs0"]
 
-[ext_resource type="Script" uid="uid://baflwmykixa8h" path="res://Props/Platform/moving_platform.gd" id="1_8qtoc"]
+[ext_resource type="PackedScene" uid="uid://c6lcnacw8vw5s" path="res://Props/Platform/platform.tscn" id="1_8qtoc"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8duk3"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iiy46"]
 resource_local_to_scene = true
-size = Vector2(365, 50)
+size = Vector2(364, 52)
 
 [node name="FallPlatform" type="Node2D" unique_id=885156819]
 
-[node name="MovingPlatform" type="AnimatableBody2D" parent="." unique_id=56233282]
-script = ExtResource("1_8qtoc")
+[node name="Platform" parent="." unique_id=1136379276 instance=ExtResource("1_8qtoc")]
+size_vector = Vector2(364, 52)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MovingPlatform" unique_id=581306703]
-polygon = PackedVector2Array(-182.5, -25, 182.5, -25, 182.5, 25, -182.5, 25)
+[node name="CollisionPolygon2D" parent="Platform" index="0" unique_id=581306703]
+polygon = PackedVector2Array(-182, -26, 182, -26, 182, 26, -182, 26)
 
-[node name="Polygon2D" type="Polygon2D" parent="MovingPlatform" unique_id=1861125354]
-texture_filter = 1
-texture_repeat = 2
-color = Color(0.30497152, 0.18106371, 2.4065375e-08, 1)
-polygon = PackedVector2Array(-177.5, -20, 177.5, -20, 177.5, 20, -177.5, 20)
+[node name="Polygon2D" parent="Platform" index="1" unique_id=1861125354]
+polygon = PackedVector2Array(-178, -22, 178, -22, 178, 22, -178, 22)
 
-[node name="RectangleOutline" type="CollisionShape2D" parent="MovingPlatform" unique_id=1082408081]
-shape = SubResource("RectangleShape2D_8duk3")
-disabled = true
+[node name="RectangleOutline" parent="Platform" index="2" unique_id=1082408081]
+shape = SubResource("RectangleShape2D_iiy46")
 
-[node name="BorderLines" type="Node2D" parent="MovingPlatform" unique_id=1496693585]
+[node name="ShakeTimer" type="Timer" parent="." unique_id=751676419]
+
+[node name="FallTimer" type="Timer" parent="." unique_id=11688494]
+
+[node name="RegenTimer" type="Timer" parent="." unique_id=259924434]
+
+[editable path="Platform"]
