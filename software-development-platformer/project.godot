@@ -23,6 +23,7 @@ config/icon="res://icon.svg"
 
 GlobalUI="*uid://b483sopfst6nc"
 GlobalPlayer="*uid://camvgg7swtyap"
+GlobalControls="*uid://dwpn4gp8817ux"
 
 [display]
 

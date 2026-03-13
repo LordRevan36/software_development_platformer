@@ -8,3 +8,6 @@ extends Node
 @onready var Backflip = InputMap.action_get_events("Backflip")
 @onready var Skills = InputMap.action_get_events("Skills")
 @onready var Pause = InputMap.action_get_events("Pause")
+
+func _ready() -> void:
+	process_mode = PROCESS_MODE_ALWAYS

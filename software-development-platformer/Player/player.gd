@@ -200,6 +200,15 @@ func _physics_process(delta: float) -> void:
 	
 	if state == State.IDLE:
 		exercise = false
+		
+	#pausing
+	if Input.is_action_just_released("Pause"):
+		$UI/PauseMenu.show()
+		
+	if $UI/PauseMenu.visible:
+		get_tree().paused = true
+	else:
+		get_tree().paused = false
 
 
 

@@ -1,4 +1,8 @@
 extends Node
+
+func _ready() -> void:
+	process_mode = PROCESS_MODE_ALWAYS
+	
 #smoothly increases the size of the text when hovering
 func growTween(button, xVar, yVar):
 	button.pivot_offset = button.size/2

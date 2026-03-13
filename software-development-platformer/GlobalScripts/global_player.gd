@@ -6,3 +6,6 @@ signal attack_started
 signal attack_finished
 signal health_changed(current, max)
 signal stamina_changed(current, max, duration)
+
+func _ready() -> void:
+	process_mode = PROCESS_MODE_ALWAYS

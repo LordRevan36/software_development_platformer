@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://rexj3shyfaq6" path="res://UI/HealthBar.gd" id="9_5htga"]
 [ext_resource type="Texture2D" uid="uid://cgw1lcgfkoqap" path="res://Assets/HUD/StaminaBar.png" id="10_apopc"]
 [ext_resource type="Script" uid="uid://cv8mai7sitq67" path="res://Player/stamina_bar.gd" id="10_x3vf3"]
+[ext_resource type="PackedScene" uid="uid://by60jn4wyw65s" path="res://UI/PauseMenu.tscn" id="12_5htga"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k53q1"]
 atlas = ExtResource("2_gwnis")
@@ -697,8 +698,11 @@ texture_progress = SubResource("AtlasTexture_3e3ym")
 script = ExtResource("10_x3vf3")
 player_path = NodePath("../..")
 
-[connection signal="animation_finished" from="PlayerSprite" to="." method="_on_player_sprite_animation_finished"]
+[node name="PauseMenu" parent="UI" unique_id=469843484 instance=ExtResource("12_5htga")]
+visible = false
+
 [connection signal="animation_finished" from="PlayerSprite" to="." method="_on_player_animation_finished"]
+[connection signal="animation_finished" from="PlayerSprite" to="." method="_on_player_sprite_animation_finished"]
 [connection signal="animation_finished" from="Slash" to="." method="_on_slash_animation_finished"]
 [connection signal="timeout" from="Timers/CoyoteJumpTimer" to="." method="_on_coyote_jump_timer_timeout"]
 [connection signal="timeout" from="Timers/AttackTimer" to="." method="_on_attack_timer_timeout"]
