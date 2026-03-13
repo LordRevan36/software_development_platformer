@@ -15,6 +15,10 @@ func _center_child_nodes() -> void:
 		for child in children:
 			if child is platform and child._is_rectangle_edit_mode():
 				child.centerRectangle = true
+			elif child is fall_platform:
+				child.centerNode = true
+				if child.child_platform._is_rectangle_edit_mode():
+					child.child_platform.centerRectangle = true
 		center_kids = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

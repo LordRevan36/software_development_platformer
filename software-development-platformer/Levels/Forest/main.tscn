@@ -879,21 +879,24 @@ polygon = PackedVector2Array(-154, -62, 154, -62, 154, 62, -154, 62)
 shape = SubResource("RectangleShape2D_5008v")
 
 [node name="FallPlatform" parent="Platforms" unique_id=885156819 instance=ExtResource("15_llrqw")]
+centerNode = false
 
 [node name="Platform" parent="Platforms/FallPlatform" index="0" unique_id=1136379276]
 position = Vector2(-1036, 0)
 size_vector = Vector2(196, 52)
 
 [node name="CollisionPolygon2D" parent="Platforms/FallPlatform/Platform" index="0" unique_id=581306703]
-polygon = PackedVector2Array(-98, -26, 98, -26, 98, 26, -98, 26)
+polygon = PackedVector2Array(-146, 14, 50, 14, 50, 66, -146, 66)
 
 [node name="Polygon2D" parent="Platforms/FallPlatform/Platform" index="1" unique_id=1861125354]
-polygon = PackedVector2Array(-94, -22, 94, -22, 94, 22, -94, 22)
+polygon = PackedVector2Array(-142, 18, 46, 18, 46, 62, -142, 62)
 
 [node name="RectangleOutline" parent="Platforms/FallPlatform/Platform" index="2" unique_id=1082408081]
+position = Vector2(-48, 40)
 shape = SubResource("RectangleShape2D_68od5")
 
 [node name="FallPlatform2" parent="Platforms" unique_id=468827690 instance=ExtResource("15_llrqw")]
+centerNode = false
 
 [node name="Platform" parent="Platforms/FallPlatform2" index="0" unique_id=1136379276]
 position = Vector2(-832, 112)

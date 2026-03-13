@@ -1,12 +1,14 @@
 [gd_scene format=3 uid="uid://bgnpnvakyrgs0"]
 
 [ext_resource type="PackedScene" uid="uid://c6lcnacw8vw5s" path="res://Props/Platform/platform.tscn" id="1_8qtoc"]
+[ext_resource type="Script" uid="uid://cxlh8pt1jlpid" path="res://Props/Platform/fall_platform.gd" id="1_iiy46"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iiy46"]
 resource_local_to_scene = true
 size = Vector2(364, 52)
 
 [node name="FallPlatform" type="Node2D" unique_id=885156819]
+script = ExtResource("1_iiy46")
 
 [node name="Platform" parent="." unique_id=1136379276 instance=ExtResource("1_8qtoc")]
 size_vector = Vector2(364, 52)
