@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://by60jn4wyw65s"]
+
+[ext_resource type="Script" uid="uid://cs12fxymvy61l" path="res://UI/pause_menu.gd" id="1_05bun"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5mt5m"]
+bg_color = Color(0, 0.48235294, 1, 0.88235295)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+corner_detail = 20
+
+[node name="PauseMenu" type="CanvasLayer" unique_id=469843484]
+script = ExtResource("1_05bun")
+
+[node name="Panel" type="Panel" parent="." unique_id=1956467514]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -470.0
+offset_right = 300.0
+offset_bottom = 470.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_5mt5m")
+
+[node name="BoxContainer" type="BoxContainer" parent="." unique_id=1136988355]
+offset_left = 660.0
+offset_top = 70.0
+offset_right = 1260.0
+offset_bottom = 1010.0
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BoxContainer" unique_id=542319698]
+layout_mode = 2
+theme_override_constants/separation = 80
+alignment = 1
+
+[node name="Resume" type="Button" parent="BoxContainer/VBoxContainer" unique_id=1380335457]
+layout_mode = 2
+theme_override_font_sizes/font_size = 88
+text = "Resume"
+flat = true
+
+[node name="Settings" type="Button" parent="BoxContainer/VBoxContainer" unique_id=826312251]
+layout_mode = 2
+theme_override_font_sizes/font_size = 88
+text = "Settings"
+flat = true
+
+[node name="MainMenu" type="Button" parent="BoxContainer/VBoxContainer" unique_id=234912373]
+layout_mode = 2
+theme_override_font_sizes/font_size = 88
+text = "Quit To 
+Main Menu"
+flat = true
+
+[node name="Desktop" type="Button" parent="BoxContainer/VBoxContainer" unique_id=1401204633]
+layout_mode = 2
+theme_override_font_sizes/font_size = 88
+text = "Quit To 
+Desktop"
+flat = true
+
+[connection signal="pressed" from="BoxContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="BoxContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="BoxContainer/VBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="BoxContainer/VBoxContainer/Desktop" to="." method="_on_desktop_pressed"]

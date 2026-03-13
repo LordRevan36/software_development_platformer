@@ -19,13 +19,15 @@ extends Node2D
 	$ControlContainer/ControlsGrid/Pause
 ]
 @onready var uiActions: Array
+
 #functions to get the input map and display what each input is
 func _ready() -> void:
 	for button in Buttons:
 		_connect_button_signals(button)
 	for action in InputMap.get_actions():
 		if not action.begins_with("ui_"):
-			pass
+			continue
+
 func _process(_delta: float) -> void:
 	var i = 0
 	for child_node in ControlsGrid.get_children():
@@ -38,11 +40,13 @@ func _process(_delta: float) -> void:
 		controls[i].text = controls[i].get_name() + ": " + event.substr(0, event.find(" "))
 		i += 1
 
+
 #Button Functions
 func _connect_button_signals(button: Button):
 	button.pressed.connect(_on_button_pressed.bind(button))
 	button.mouse_entered.connect(_on_button_mouse_entered.bind(button))
 	button.mouse_exited.connect(_on_button_mouse_exited.bind(button))
+
 
 # Generic handler for button presses
 var key
@@ -54,7 +58,6 @@ func _on_button_pressed(button: Button) -> void:
 	buttonPressed = button.get_tooltip()
 	ChangeControl.show()
 	ControlPicker.text = "Select control for " + button.get_name()
-	decided = false
 
 func _on_yes_button_pressed() -> void:
 	InputMap.action_erase_events(buttonPressed)
@@ -94,6 +97,7 @@ func is_key_mapped(event: InputEvent) -> bool:
 			if action_event.is_match(event):
 				return true
 	return false
+
 
 func _on_button_mouse_entered(button: Button) -> void:
 	button.modulate = Color.YELLOW
