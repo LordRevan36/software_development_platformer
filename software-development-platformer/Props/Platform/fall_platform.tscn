@@ -13,6 +13,7 @@ reset_timer_length = null
 
 [node name="Platform" parent="." unique_id=1136379276 instance=ExtResource("1_8qtoc")]
 size_vector = Vector2(364, 52)
+texturePath = "res://.godot/imported/MissingTexture.png-22b33255012559b00bdd8aa9710640d6.ctex"
 
 [node name="CollisionPolygon2D" parent="Platform" index="0" unique_id=581306703]
 polygon = PackedVector2Array(-182, -26, 182, -26, 182, 26, -182, 26)

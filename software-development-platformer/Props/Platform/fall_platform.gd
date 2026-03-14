@@ -39,7 +39,7 @@ func _ready() -> void:
 		_center_node()
 
 func _try_to_start_falling(landingVelocity, collider) -> void:
-	if collider == child_platform:
+	if collider == child_platform and state == State.IDLE:
 		_start_falling()
 
 func _start_falling() -> void:
