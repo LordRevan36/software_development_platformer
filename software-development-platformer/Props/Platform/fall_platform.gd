@@ -4,8 +4,7 @@ class_name fall_platform
 
 @onready var child_platform = $Platform
 @onready var shake_timer = $ShakeTimer
-@onready var fall_timer = $FallTimer
-@onready var regen_timer = $RegenTimer
+@onready var reset_timer = $ResetTimer
 @onready var line_path = $LinePath
 
 enum State {IDLE, PREFALL, FALLING, RESET}
@@ -15,8 +14,7 @@ enum State {IDLE, PREFALL, FALLING, RESET}
 		#can add function here
 
 @export var shake_timer_length : float = 1.5
-@export var fall_timer_length : float = 2
-@export var regen_timer_length : float = 5
+@export var reset_timer_length : float = 3
 @export var centerNode: bool = false #click true in editor to force the platform to center itself on the rectangle handler
 
 var shake_strength_min : float = 1
@@ -32,11 +30,13 @@ func _ready() -> void:
 	#child_platform._sync_shapes()
 	GlobalPlayer.landed.connect(_try_to_start_falling)
 	shake_timer.wait_time = shake_timer_length
-	fall_timer.wait_time = fall_timer_length
-	regen_timer.wait_time = regen_timer_length
+	reset_timer.wait_time = reset_timer_length
+	shake_timer.one_shot = true
+	reset_timer.one_shot = true
 	destination = line_path.to_global(line_path.points[1])
 	#vector from global start of line to global end (destination)
 	path_vector = line_path.to_global(line_path.points[0]).direction_to(destination)
+	line_path.hide()
 	if centerNode:
 		_center_node()
 
@@ -65,20 +65,29 @@ func _shake_before_fall() -> void:
 func _fall_along_path(delta: float) -> void:
 	speed += GRAVITY
 	var fall_step = path_vector * speed * delta
-	if child_platform.position.distance_to(destination) <= fall_step.length():
-		child_platform.position = destination
+	if child_platform.global_position.distance_to(destination) <= fall_step.length():
+		child_platform.global_position = destination
 		state = State.RESET
+		speed = 0.0
+		reset_timer.start()
 	else:
 		child_platform.position += fall_step
-	if child_platform.position == destination:
+	if child_platform.global_position == destination:
 		state = State.RESET
+		speed = 0.0
+		reset_timer.start()
 
 func _fall_logic(delta: float) -> void:
+	print(state)
 	match(state):
+		State.IDLE:
+			pass
 		State.PREFALL:
 			_shake_before_fall()
 		State.FALLING:
 			_fall_along_path(delta)
+		State.RESET:
+			pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -101,3 +110,9 @@ func _center_node() -> void:
 	child_platform.position = Vector2.ZERO
 	child_platform.force_update_transform()
 	centerNode = false
+
+func _on_reset_timer_timeout() -> void:
+	#Reset platform position to root (which should be start of line path)
+	child_platform.position = Vector2.ZERO
+	state = State.IDLE
+	print("reset success")#never reaching this point for some reason...
