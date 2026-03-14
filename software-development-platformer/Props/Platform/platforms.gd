@@ -16,9 +16,10 @@ func _center_child_nodes() -> void:
 			if child is platform and child._is_rectangle_edit_mode():
 				child.centerRectangle = true
 			elif child is fall_platform:
-				child.centerNode = true
 				if child.child_platform._is_rectangle_edit_mode():
 					child.child_platform.centerRectangle = true
+				await get_tree().create_timer(0.5).timeout
+				child.centerNode = true
 		center_kids = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

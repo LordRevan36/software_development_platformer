@@ -6,6 +6,7 @@ class_name fall_platform
 @onready var shake_timer = $ShakeTimer
 @onready var fall_timer = $FallTimer
 @onready var regen_timer = $RegenTimer
+@onready var line_path = $LinePath
 
 enum State {IDLE, PREFALL, FALLING, RESET}
 @export var state: State = State.IDLE:
@@ -21,6 +22,10 @@ enum State {IDLE, PREFALL, FALLING, RESET}
 var shake_strength_min : float = 1
 var shake_strength_max : float = 5
 var shake_strength : float
+const GRAVITY : float = 9.80
+var destination : Vector2
+var speed : float = 0.0
+var path_vector : Vector2
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -29,6 +34,9 @@ func _ready() -> void:
 	shake_timer.wait_time = shake_timer_length
 	fall_timer.wait_time = fall_timer_length
 	regen_timer.wait_time = regen_timer_length
+	destination = line_path.to_global(line_path.points[1])
+	#vector from global start of line to global end (destination)
+	path_vector = line_path.to_global(line_path.points[0]).direction_to(destination)
 	if centerNode:
 		_center_node()
 
@@ -54,25 +62,38 @@ func _shake_before_fall() -> void:
 		child_platform.polygon_2d.position = Vector2(randf_range(-shake_strength, shake_strength), randf_range(-shake_strength, shake_strength))
 		child_platform.border_lines.position = child_platform.polygon_2d.position
 
-func _start_downward_fall() -> void:
-	pass
+func _fall_along_path(delta: float) -> void:
+	speed += GRAVITY
+	var fall_step = path_vector * speed * delta
+	if child_platform.position.distance_to(destination) <= fall_step.length():
+		child_platform.position = destination
+		state = State.RESET
+	else:
+		child_platform.position += fall_step
+	if child_platform.position == destination:
+		state = State.RESET
 
-func _fall_logic() -> void:
+func _fall_logic(delta: float) -> void:
 	match(state):
 		State.PREFALL:
 			_shake_before_fall()
 		State.FALLING:
-			pass
+			_fall_along_path(delta)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	#super(delta)
-	_fall_logic()
+	if Engine.is_editor_hint():
+		if centerNode:
+			_center_node()
+	_fall_logic(delta)
 
 func _on_shake_timer_timeout() -> void:
 	state = State.FALLING
 	shake_strength = shake_strength_min
-	
+	child_platform.polygon_2d.position = Vector2.ZERO
+	child_platform.border_lines.position = child_platform.polygon_2d.position
+	speed = 0.0
 
 func _center_node() -> void:
 	#Move position transform to platform node
