@@ -31,8 +31,6 @@ func _ready() -> void:
 	GlobalPlayer.landed.connect(_try_to_start_falling)
 	shake_timer.wait_time = shake_timer_length
 	reset_timer.wait_time = reset_timer_length
-	shake_timer.one_shot = true
-	reset_timer.one_shot = true
 	destination = line_path.to_global(line_path.points[1])
 	#vector from global start of line to global end (destination)
 	path_vector = line_path.to_global(line_path.points[0]).direction_to(destination)
@@ -115,4 +113,3 @@ func _on_reset_timer_timeout() -> void:
 	#Reset platform position to root (which should be start of line path)
 	child_platform.position = Vector2.ZERO
 	state = State.IDLE
-	print("reset success")#never reaching this point for some reason...

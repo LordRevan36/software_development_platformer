@@ -24,8 +24,10 @@ polygon = PackedVector2Array(-178, -22, 178, -22, 178, 22, -178, 22)
 shape = SubResource("RectangleShape2D_iiy46")
 
 [node name="ShakeTimer" type="Timer" parent="." unique_id=751676419]
+one_shot = true
 
 [node name="ResetTimer" type="Timer" parent="." unique_id=259924434]
+one_shot = true
 
 [node name="LinePath" type="Line2D" parent="." unique_id=1945529642]
 points = PackedVector2Array(0, 0, 0, 600)
