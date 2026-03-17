@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://cgw1lcgfkoqap" path="res://Assets/HUD/StaminaBar.png" id="10_apopc"]
 [ext_resource type="Script" uid="uid://cv8mai7sitq67" path="res://Player/stamina_bar.gd" id="10_x3vf3"]
 [ext_resource type="PackedScene" uid="uid://by60jn4wyw65s" path="res://UI/PauseMenu.tscn" id="12_5htga"]
+[ext_resource type="PackedScene" uid="uid://cffyceji6uhit" path="res://UI/Skill Tree.tscn" id="13_p5o4e"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k53q1"]
 atlas = ExtResource("2_gwnis")
@@ -699,6 +700,9 @@ script = ExtResource("10_x3vf3")
 player_path = NodePath("../..")
 
 [node name="PauseMenu" parent="UI" unique_id=469843484 instance=ExtResource("12_5htga")]
+visible = false
+
+[node name="SkillTree" parent="UI" unique_id=56710748 instance=ExtResource("13_p5o4e")]
 visible = false
 
 [connection signal="animation_finished" from="PlayerSprite" to="." method="_on_player_sprite_animation_finished"]

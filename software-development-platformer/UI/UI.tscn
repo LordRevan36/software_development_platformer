@@ -45,3 +45,4 @@ script = ExtResource("4_byuxr")
 player_path = NodePath("../../Player")
 
 [node name="PauseMenu" parent="." unique_id=469843484 instance=ExtResource("5_f1fl4")]
+visible = false
