@@ -6,6 +6,7 @@ class_name Player
 @onready var CoyoteTimer: Timer = $Timers/CoyoteJumpTimer
 @onready var AttackTimer: Timer = $Timers/AttackTimer #making these timers both for balance tweaking, and not letting animations determinephysics state
 @onready var StaminaTimer: Timer = $Timers/StaminaTimer
+@onready var SkillTimer: Timer = $UI/SkillTree/SkillTimer
 #i added a comment to see if 4.6 works
 #if you ever want to do this, drag in the node you're referencing, then hold command/ctrl while releasing
 
@@ -142,7 +143,7 @@ func _physics_process(delta: float) -> void:
 	# CROUCHING DOWN (i didn't use is_on_floor() in this section, so they can coyote jump
 	if canJump:
 		if state != State.CROUCH and state != State.ATTACK:
-			if (Input.is_action_just_pressed("Up") or ((Input.is_action_just_pressed("Frontflip") or Input.is_action_just_pressed("Backflip")) and stamina >= FLIP_COST)):
+			if (Input.is_action_just_pressed("Up") or (((Input.is_action_just_pressed("Frontflip") and GlobalControls.canFrontflip) or (Input.is_action_just_pressed("Backflip")) and GlobalControls.canBackflip) and stamina >= FLIP_COST)):
 				state = State.CROUCH
 				crouchStartTime = time
 			
@@ -153,16 +154,16 @@ func _physics_process(delta: float) -> void:
 			if ((time-crouchStartTime)>0.5): #if player's held down the jump/flip button too long:
 				if Input.is_action_pressed("Up"):
 					jump()
-				elif Input.is_action_pressed("Backflip"):
+				elif Input.is_action_pressed("Backflip") and GlobalControls.canBackflip:
 					backflip()
-				elif Input.is_action_pressed("Frontflip"):
+				elif Input.is_action_pressed("Frontflip") and GlobalControls.canFrontflip:
 					frontflip()
 			#regular jump/flip detection
 			if Input.is_action_just_released("Up"):
 				jump()
-			elif Input.is_action_just_released("Backflip"):
+			elif Input.is_action_just_released("Backflip") and GlobalControls.canBackflip:
 				backflip()
-			elif Input.is_action_just_released("Frontflip"):
+			elif Input.is_action_just_released("Frontflip") and GlobalControls.canFrontflip:
 				frontflip()
 			#forced jump if stamina is too low?
 			if Input.is_action_pressed("Up") and JUMP_COST*(time-crouchStartTime)*2 >= stamina:
@@ -209,8 +210,16 @@ func _physics_process(delta: float) -> void:
 		get_tree().paused = true
 	else:
 		get_tree().paused = false
-
-
+	
+	#skill tree
+	if Input.is_action_just_released("Skills"):
+		$UI/SkillTree.show()
+		SkillTimer.start()
+	
+	if $UI/SkillTree.visible:
+		get_tree().paused = true
+	else:
+		get_tree().paused = false
 
 func updateAnimations():
 	if facing == 1:
