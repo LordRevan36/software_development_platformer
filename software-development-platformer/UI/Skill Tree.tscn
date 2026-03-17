@@ -54,6 +54,7 @@ flat = true
 
 [node name="SkillTimer" type="Timer" parent="." unique_id=994415787]
 process_mode = 3
+wait_time = 0.05
 one_shot = true
 
 [connection signal="mouse_entered" from="ColorRect/HBoxContainer/Backflip" to="." method="_on_backflip_mouse_entered"]
