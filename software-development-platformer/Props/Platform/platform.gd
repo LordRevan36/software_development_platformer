@@ -1,5 +1,5 @@
 @tool
-extends StaticBody2D
+extends AnimatableBody2D
 class_name platform
 
 #PROCESS TO CREATE A PLATFORM
@@ -30,7 +30,8 @@ enum EditMode {RECTANGLE, POLYGON}
 @export var saved_polygon_points : PackedVector2Array
 
 @export var size_vector : Vector2 = Vector2(400,40)
-@export var texturePath : String = "res://.godot/imported/MissingTexture.png-22b33255012559b00bdd8aa9710640d6.ctex"
+@export var border_texture : Texture
+@export var body_texture : Texture
 @export var textureWidth : float = 8 #width of texture imported
 @export var enableSnap : bool = true #enables snapping to multiples of 0.5 texture width to ensure texture doesn't warp
 @export var centerRectangle: bool = false #click true in editor to force the platform to center itself on the rectangle handler
@@ -93,6 +94,7 @@ func _sync_shapes() -> void:
 		var adjusted_size_vector = size_vector - Vector2(textureWidth, textureWidth)
 		polygon_2d.polygon = _return_rectangle_points(rectangle_outline, adjusted_size_vector)
 		_generate_rectangle_borders(rectangle_outline, adjusted_size_vector)
+		polygon_2d.texture = body_texture
 	if edit_mode == EditMode.POLYGON:
 		polygon_2d.polygon = collision_polygon_2d.polygon
 		#generate polygon borders
@@ -110,7 +112,7 @@ func _generate_rectangle_borders(rectangle_handler, size) -> void:
 		var line = Line2D.new()
 		line.position = start_position
 		line.points = line_points
-		line.texture = load(texturePath)
+		line.texture = border_texture
 		line.width = textureWidth
 		line.texture_mode = Line2D.LINE_TEXTURE_TILE
 		line.texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED

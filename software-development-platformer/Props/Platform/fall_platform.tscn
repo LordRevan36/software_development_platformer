@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://bgnpnvakyrgs0"]
+
+[ext_resource type="PackedScene" uid="uid://c6lcnacw8vw5s" path="res://Props/Platform/platform.tscn" id="1_8qtoc"]
+[ext_resource type="Script" uid="uid://cxlh8pt1jlpid" path="res://Props/Platform/fall_platform.gd" id="1_iiy46"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iiy46"]
+resource_local_to_scene = true
+size = Vector2(364, 52)
+
+[node name="FallPlatform" type="Node2D" unique_id=885156819]
+script = ExtResource("1_iiy46")
+reset_timer_length = null
+
+[node name="Platform" parent="." unique_id=1136379276 instance=ExtResource("1_8qtoc")]
+size_vector = Vector2(364, 52)
+texturePath = "res://.godot/imported/MissingTexture.png-22b33255012559b00bdd8aa9710640d6.ctex"
+
+[node name="CollisionPolygon2D" parent="Platform" index="0" unique_id=581306703]
+polygon = PackedVector2Array(-182, -26, 182, -26, 182, 26, -182, 26)
+
+[node name="Polygon2D" parent="Platform" index="1" unique_id=1861125354]
+polygon = PackedVector2Array(-178, -22, 178, -22, 178, 22, -178, 22)
+
+[node name="RectangleOutline" parent="Platform" index="2" unique_id=1082408081]
+shape = SubResource("RectangleShape2D_iiy46")
+
+[node name="ShakeTimer" type="Timer" parent="." unique_id=751676419]
+one_shot = true
+
+[node name="ResetTimer" type="Timer" parent="." unique_id=259924434]
+one_shot = true
+
+[node name="LinePath" type="Line2D" parent="." unique_id=1945529642]
+points = PackedVector2Array(0, 0, 0, 600)
+default_color = Color(0, 1, 1, 0.7490196)
+
+[connection signal="timeout" from="ShakeTimer" to="." method="_on_shake_timer_timeout"]
+[connection signal="timeout" from="ResetTimer" to="." method="_on_reset_timer_timeout"]
+
+[editable path="Platform"]
