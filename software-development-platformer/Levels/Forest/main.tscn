@@ -70,19 +70,13 @@ func _process(_delta: float) -> void:
 	pass
 "
 
-[sub_resource type="Gradient" id="Gradient_llrqw"]
-interpolation_mode = 2
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_py8ao"]
-gradient = SubResource("Gradient_llrqw")
-height = 256
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(1, 0.5)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_86kmy"]
+resource_local_to_scene = true
+size = Vector2(176, 64)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_llrqw"]
 resource_local_to_scene = true
-size = Vector2(128, 48)
+size = Vector2(124, 48)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_py8ao"]
 resource_local_to_scene = true
@@ -90,19 +84,15 @@ size = Vector2(176, 64)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5008v"]
 resource_local_to_scene = true
-size = Vector2(200, 56)
+size = Vector2(316, 132)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_68od5"]
 resource_local_to_scene = true
-size = Vector2(176, 64)
+size = Vector2(196, 52)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_enmu2"]
 resource_local_to_scene = true
-size = Vector2(320, 136)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lv8v6"]
-resource_local_to_scene = true
-size = Vector2(320, 136)
+size = Vector2(160, 52)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0xm2m"]
 distance = -285.0
@@ -775,7 +765,7 @@ repeat_size = Vector2(2560, 0)
 repeat_times = 3
 
 [node name="Grass" type="Sprite2D" parent="Parallax <100/Parallax95/Repeating" unique_id=210775978]
-modulate = Color(1.951586, 1.3133479, 0.46427977, 1)
+modulate = Color(3.6413581, 2.464391, 0.89682823, 1)
 position = Vector2(-1140, -104)
 scale = Vector2(-1, 1)
 texture = ExtResource("4_272bh")
@@ -826,106 +816,97 @@ limit_smoothed = true
 position_smoothing_enabled = true
 script = ExtResource("2_jjvhh")
 
-[node name="PointLight2D" type="PointLight2D" parent="Player" unique_id=510046388]
-position = Vector2(-2, 51)
-energy = 0.5
-texture = SubResource("GradientTexture2D_py8ao")
-texture_scale = 5.0
-
 [node name="Platforms" type="Node2D" parent="." unique_id=2139959054]
 position = Vector2(-9, -323)
 script = ExtResource("11_byont")
 
 [node name="Platform" parent="Platforms" unique_id=1326313302 instance=ExtResource("12_074og")]
 position = Vector2(184, -96)
-size_vector = Vector2(128, 48)
+size_vector = Vector2(176, 64)
 textureWidth = 16.0
 
 [node name="CollisionPolygon2D" parent="Platforms/Platform" index="0" unique_id=581306703]
-polygon = PackedVector2Array(-68.19016, 4.701296, 48.284885, -48.37944, 68.19016, -4.701296, -48.284885, 48.37944)
+polygon = PackedVector2Array(-93.34677, 7.374243, 66.80641, -65.61176, 93.34677, -7.374243, -66.80641, 65.61176)
 
 [node name="Polygon2D" parent="Platforms/Platform" index="1" unique_id=1861125354]
 color = Color(0.9999997, 0.6637959, 0.2018961, 1)
 texture_rotation = 0.45727625
+polygon = PackedVector2Array(-82.74954, 11.33639, 62.84427, -55.014534, 82.74954, -11.33639, -62.84427, 55.014534)
 
 [node name="RectangleOutline" parent="Platforms/Platform" index="2" unique_id=1082408081]
 rotation = -0.42760566
-shape = SubResource("RectangleShape2D_llrqw")
+shape = SubResource("RectangleShape2D_86kmy")
 
 [node name="Platform2" parent="Platforms" unique_id=73062743 instance=ExtResource("12_074og")]
 position = Vector2(-276, -44)
-textureWidth = 16.0
+size_vector = Vector2(124, 48)
 
 [node name="CollisionPolygon2D" parent="Platforms/Platform2" index="0" unique_id=581306703]
-polygon = PackedVector2Array(-88, -32, 88, -32, 88, 32, -88, 32)
+polygon = PackedVector2Array(-62, -24, 62, -24, 62, 24, -62, 24)
 
 [node name="Polygon2D" parent="Platforms/Platform2" index="1" unique_id=1861125354]
-polygon = PackedVector2Array(-80, -24, 80, -24, 80, 24, -80, 24)
+polygon = PackedVector2Array(-58, -20, 58, -20, 58, 20, -58, 20)
 
 [node name="RectangleOutline" parent="Platforms/Platform2" index="2" unique_id=1082408081]
+shape = SubResource("RectangleShape2D_llrqw")
 
 [node name="Platform3" parent="Platforms" unique_id=778821719 instance=ExtResource("12_074og")]
 position = Vector2(872, -152)
-size_vector = Vector2(200, 56)
-textureWidth = 16.0
+size_vector = Vector2(176, 64)
 
 [node name="CollisionPolygon2D" parent="Platforms/Platform3" index="0" unique_id=581306703]
-polygon = PackedVector2Array(-100, 20, 100, 20, 100, 76, -100, 76)
+polygon = PackedVector2Array(-88, -32, 88, -32, 88, 32, -88, 32)
 
 [node name="Polygon2D" parent="Platforms/Platform3" index="1" unique_id=1861125354]
-polygon = PackedVector2Array(-92, 28, 92, 28, 92, 68, -92, 68)
+polygon = PackedVector2Array(-84, -28, 84, -28, 84, 28, -84, 28)
 
 [node name="RectangleOutline" parent="Platforms/Platform3" index="2" unique_id=1082408081]
-position = Vector2(0, 48)
+shape = SubResource("RectangleShape2D_py8ao")
 
 [node name="Platform4" parent="Platforms" unique_id=780874561 instance=ExtResource("12_074og")]
 position = Vector2(-499, 240)
-size_vector = Vector2(176, 64)
-textureWidth = 16.0
+size_vector = Vector2(316, 132)
 
 [node name="CollisionPolygon2D" parent="Platforms/Platform4" index="0" unique_id=581306703]
-polygon = PackedVector2Array(-88, -32, 88, -32, 88, 32, -88, 32)
+polygon = PackedVector2Array(-158, -66, 158, -66, 158, 66, -158, 66)
 
 [node name="Polygon2D" parent="Platforms/Platform4" index="1" unique_id=1861125354]
-polygon = PackedVector2Array(-80, -24, 80, -24, 80, 24, -80, 24)
+polygon = PackedVector2Array(-154, -62, 154, -62, 154, 62, -154, 62)
 
 [node name="RectangleOutline" parent="Platforms/Platform4" index="2" unique_id=1082408081]
-shape = SubResource("RectangleShape2D_68od5")
+shape = SubResource("RectangleShape2D_5008v")
 
 [node name="FallPlatform" parent="Platforms" unique_id=885156819 instance=ExtResource("15_llrqw")]
 position = Vector2(-1092, 0)
 reset_timer_length = 3.0
 
 [node name="Platform" parent="Platforms/FallPlatform" index="0" unique_id=1136379276]
-size_vector = Vector2(320, 136)
-textureWidth = 16.0
+size_vector = Vector2(196, 52)
 
 [node name="CollisionPolygon2D" parent="Platforms/FallPlatform/Platform" index="0" unique_id=581306703]
-polygon = PackedVector2Array(-160, -52, 160, -52, 160, 84, -160, 84)
+polygon = PackedVector2Array(-98, -26, 98, -26, 98, 26, -98, 26)
 
 [node name="Polygon2D" parent="Platforms/FallPlatform/Platform" index="1" unique_id=1861125354]
-polygon = PackedVector2Array(-152, -44, 152, -44, 152, 76, -152, 76)
+polygon = PackedVector2Array(-94, -22, 94, -22, 94, 22, -94, 22)
 
 [node name="RectangleOutline" parent="Platforms/FallPlatform/Platform" index="2" unique_id=1082408081]
-position = Vector2(0, 16)
-shape = SubResource("RectangleShape2D_enmu2")
+shape = SubResource("RectangleShape2D_68od5")
 
 [node name="FallPlatform2" parent="Platforms" unique_id=468827690 instance=ExtResource("15_llrqw")]
 position = Vector2(-832, 112)
 reset_timer_length = 3.0
 
 [node name="Platform" parent="Platforms/FallPlatform2" index="0" unique_id=1136379276]
-size_vector = Vector2(320, 136)
-textureWidth = 16.0
+size_vector = Vector2(160, 52)
 
 [node name="CollisionPolygon2D" parent="Platforms/FallPlatform2/Platform" index="0" unique_id=581306703]
-polygon = PackedVector2Array(-160, -68, 160, -68, 160, 68, -160, 68)
+polygon = PackedVector2Array(-80, -26, 80, -26, 80, 26, -80, 26)
 
 [node name="Polygon2D" parent="Platforms/FallPlatform2/Platform" index="1" unique_id=1861125354]
-polygon = PackedVector2Array(-152, -60, 152, -60, 152, 60, -152, 60)
+polygon = PackedVector2Array(-76, -22, 76, -22, 76, 22, -76, 22)
 
 [node name="RectangleOutline" parent="Platforms/FallPlatform2/Platform" index="2" unique_id=1082408081]
-shape = SubResource("RectangleShape2D_lv8v6")
+shape = SubResource("RectangleShape2D_enmu2")
 
 [node name="LevelExit" parent="." unique_id=659289399 instance=ExtResource("12_86kmy")]
 position = Vector2(1078, -259)
@@ -943,7 +924,7 @@ repeat_size = Vector2(2560, 0)
 repeat_times = 3
 
 [node name="Grass" type="Sprite2D" parent="Parallax100/Repeating" unique_id=1047452284]
-modulate = Color(1.352, 0.9882738, 0.5124581, 1)
+modulate = Color(1.3285676, 0.9534372, 0.4952448, 1)
 position = Vector2(-1140, -116)
 texture = ExtResource("4_272bh")
 
@@ -1130,12 +1111,6 @@ stream = ExtResource("16_byont")
 autoplay = true
 bus = &"Music"
 parameters/looping = true
-
-[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1360444637]
-color = Color(0.7285387, 0.7285387, 0.7285387, 1)
-
-[node name="Tree" parent="." unique_id=1518292858 instance=ExtResource("11_py8ao")]
-position = Vector2(258, -137)
 
 [editable path="Platforms/Platform"]
 [editable path="Platforms/Platform2"]

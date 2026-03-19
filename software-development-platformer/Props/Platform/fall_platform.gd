@@ -76,6 +76,7 @@ func _fall_along_path(delta: float) -> void:
 		reset_timer.start()
 
 func _fall_logic(delta: float) -> void:
+	print(state)
 	match(state):
 		State.IDLE:
 			pass
