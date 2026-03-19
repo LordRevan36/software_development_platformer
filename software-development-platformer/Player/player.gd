@@ -17,8 +17,7 @@ const FLIP_COST = 30
 
 @export var friction = 0.9 #value from 0 to 1. 1 means full friction on floor when running, 0 means full icy floor
 @export var air_control = 0.5 #value from 0 to 1, lets you control how easily player can control their air movement
-@export var MAX_Health := 100
-@export var MAX_Stamina := 100 
+
 
 #can reference State outside of player as Player.State.IDLE (or other value)
 enum State {IDLE, EXIT, ATTACK, BACKFLIP, FRONTFLIP, FLIPLAND, LAND, RUN, FALL, JUMP, CROUCH}
@@ -32,8 +31,8 @@ var jumpVelocity = Vector2(0,0) #stores velocity of player immediately after jum
 var landVelocity = Vector2(0,0) #stores velocity of player immediately before landing
 var slow = 1 #stores velocity vector of player immediately before attacking
 var canJump = true #used to let player jump a little after leaving the platform
-var health := MAX_Health #stores the health for the player
-var stamina := MAX_Stamina #stores the stamina for the player
+var health = GlobalPlayer.MAX_Health #stores the health for the player
+var stamina = GlobalPlayer.MAX_Stamina #stores the stamina for the player
 #var duration = 0
 var exercise = false
 
@@ -48,30 +47,30 @@ var exercise = false
 #function for taking damage
 func take_damage(amount: int) -> void:
 	health = max(health - amount, 0)
-	GlobalPlayer.health_changed.emit(health, MAX_Health)
+	GlobalPlayer.health_changed.emit(health, GlobalPlayer.MAX_Health)
 	if health < 0:
 		health = 0
 
 #function for healing
 func heal(amount: int) -> void:
 	health = max(health + amount, 0)
-	GlobalPlayer.health_changed.emit(health, MAX_Health)
-	if health > MAX_Health:
-		health = MAX_Health
+	GlobalPlayer.health_changed.emit(health, GlobalPlayer.MAX_Health)
+	if health > GlobalPlayer.MAX_Health:
+		health = GlobalPlayer.MAX_Health
 
 #function for stamina
 func stam(amount: int, duration: float) -> void:
 	exercise = true
 	stamina = max(stamina + amount, 0)
-	GlobalPlayer.stamina_changed.emit(stamina, MAX_Stamina, duration)
-	if stamina > MAX_Stamina:
-		stamina = MAX_Stamina
+	GlobalPlayer.stamina_changed.emit(stamina, GlobalPlayer.MAX_Stamina, duration)
+	if stamina > GlobalPlayer.MAX_Stamina:
+		stamina = GlobalPlayer.MAX_Stamina
 	if stamina < 0:
 		stamina = 0
 		
 func regenStam() -> void:
 	stam(10,0.75)
-	while stamina != MAX_Stamina:
+	while stamina != GlobalPlayer.MAX_Stamina:
 			stam(10, 0.75)
 
 func _physics_process(delta: float) -> void:
