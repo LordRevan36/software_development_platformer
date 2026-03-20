@@ -2,67 +2,91 @@
 
 [ext_resource type="PackedScene" uid="uid://0innvfg1noyr" path="res://Levels/Forest/main.tscn" id="1_8aig8"]
 [ext_resource type="PackedScene" uid="uid://bgnpnvakyrgs0" path="res://Props/Platform/fall_platform.tscn" id="2_tyk8v"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_tyk8v"]
-resource_local_to_scene = true
-size = Vector2(176, 52)
+[ext_resource type="PackedScene" uid="uid://b3jxwclvxcfot" path="res://Props/Platform/swing.tscn" id="3_t2qmn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t2qmn"]
 resource_local_to_scene = true
-size = Vector2(176, 64)
+size = Vector2(364, 52)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wa5j0"]
 resource_local_to_scene = true
-size = Vector2(124, 48)
+size = Vector2(176, 64)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gtl8g"]
 resource_local_to_scene = true
-size = Vector2(372, 80)
+size = Vector2(124, 48)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xt5ae"]
 resource_local_to_scene = true
-size = Vector2(316, 132)
+size = Vector2(372, 80)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vuc8t"]
 resource_local_to_scene = true
+size = Vector2(316, 132)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4n83i"]
+resource_local_to_scene = true
+size = Vector2(196, 52)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dlp0c"]
+resource_local_to_scene = true
 size = Vector2(160, 52)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_78s2b"]
+resource_local_to_scene = true
+size = Vector2(364, 52)
 
 [node name="Main" unique_id=732509840 instance=ExtResource("1_8aig8")]
 
 [node name="FallPlatform" parent="Parallax <100" parent_id_path=PackedInt32Array(1351633235) index="8" unique_id=885156819 instance=ExtResource("2_tyk8v")]
+reset_timer_length = 3.0
 
-[node name="MovingPlatform" parent="Parallax <100/FallPlatform" index="0" unique_id=56233282]
-position = Vector2(-1084, -60)
-size_vector = Vector2(176, 52)
-
-[node name="CollisionPolygon2D" parent="Parallax <100/FallPlatform/MovingPlatform" index="0" unique_id=581306703]
-polygon = PackedVector2Array(-88, -26, 88, -26, 88, 26, -88, 26)
-
-[node name="Polygon2D" parent="Parallax <100/FallPlatform/MovingPlatform" index="1" unique_id=1861125354]
-polygon = PackedVector2Array(-84, -22, 84, -22, 84, 22, -84, 22)
-
-[node name="RectangleOutline" parent="Parallax <100/FallPlatform/MovingPlatform" index="2" unique_id=1082408081]
-shape = SubResource("RectangleShape2D_tyk8v")
-
-[node name="RectangleOutline" parent="Platforms/Platform" parent_id_path=PackedInt32Array(1326313302) index="2" unique_id=1082408081]
+[node name="RectangleOutline" parent="Parallax <100/FallPlatform/Platform" parent_id_path=PackedInt32Array(885156819, 1136379276) index="2" unique_id=1082408081]
 shape = SubResource("RectangleShape2D_t2qmn")
 
-[node name="RectangleOutline" parent="Platforms/Platform2" parent_id_path=PackedInt32Array(73062743) index="2" unique_id=1082408081]
+[node name="RectangleOutline" parent="Platforms/Platform" parent_id_path=PackedInt32Array(1326313302) index="2" unique_id=1082408081]
 shape = SubResource("RectangleShape2D_wa5j0")
 
-[node name="RectangleOutline" parent="Platforms/Platform3" parent_id_path=PackedInt32Array(778821719) index="2" unique_id=1082408081]
+[node name="RectangleOutline" parent="Platforms/Platform2" parent_id_path=PackedInt32Array(73062743) index="2" unique_id=1082408081]
 shape = SubResource("RectangleShape2D_gtl8g")
 
-[node name="RectangleOutline" parent="Platforms/Platform4" parent_id_path=PackedInt32Array(780874561) index="2" unique_id=1082408081]
+[node name="Platform3" parent="Platforms" parent_id_path=PackedInt32Array(2139959054) index="2" unique_id=778821719]
+size_vector = Vector2(372, 80)
+
+[node name="CollisionPolygon2D" parent="Platforms/Platform3" index="0" unique_id=581306703]
+polygon = PackedVector2Array(-186, -40, 186, -40, 186, 40, -186, 40)
+
+[node name="Polygon2D" parent="Platforms/Platform3" index="1" unique_id=1861125354]
+polygon = PackedVector2Array(-182, -36, 182, -36, 182, 36, -182, 36)
+
+[node name="RectangleOutline" parent="Platforms/Platform3" index="2" unique_id=1082408081]
 shape = SubResource("RectangleShape2D_xt5ae")
 
-[node name="RectangleOutline" parent="Platforms/Platform5" parent_id_path=PackedInt32Array(1558722153) index="2" unique_id=1082408081]
+[node name="RectangleOutline" parent="Platforms/Platform4" parent_id_path=PackedInt32Array(780874561) index="2" unique_id=1082408081]
 shape = SubResource("RectangleShape2D_vuc8t")
 
+[node name="RectangleOutline" parent="Platforms/FallPlatform/Platform" parent_id_path=PackedInt32Array(885156819, 1136379276) index="2" unique_id=1082408081]
+shape = SubResource("RectangleShape2D_4n83i")
+
+[node name="RectangleOutline" parent="Platforms/FallPlatform2/Platform" parent_id_path=PackedInt32Array(468827690, 1136379276) index="2" unique_id=1082408081]
+shape = SubResource("RectangleShape2D_dlp0c")
+
+[node name="Swing" parent="Platforms" parent_id_path=PackedInt32Array(2139959054) index="6" unique_id=1362813319 instance=ExtResource("3_t2qmn")]
+position = Vector2(551, -123)
+
+[node name="RectangleOutline" parent="Platforms/Swing/Platform" parent_id_path=PackedInt32Array(1362813319, 1136379276) index="2" unique_id=1082408081]
+shape = SubResource("RectangleShape2D_78s2b")
+
 [editable path="Parallax <100/FallPlatform"]
+[editable path="Parallax <100/FallPlatform/Platform"]
 [editable path="Platforms/Platform"]
 [editable path="Platforms/Platform2"]
 [editable path="Platforms/Platform3"]
 [editable path="Platforms/Platform4"]
-[editable path="Platforms/Platform5"]
+[editable path="Platforms/FallPlatform"]
+[editable path="Platforms/FallPlatform/Platform"]
+[editable path="Platforms/FallPlatform2"]
+[editable path="Platforms/FallPlatform2/Platform"]
+[editable path="Platforms/Swing"]
+[editable path="Platforms/Swing/Platform"]
 [editable path="LevelExit"]
