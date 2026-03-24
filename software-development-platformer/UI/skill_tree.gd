@@ -16,8 +16,8 @@ func _process(_delta: float) -> void:
 		get_tree().paused = false
 		can_close = false
 		hide()
-
-		AtkUpgrades.texture = load("res://Assets/HUD/Upgrade%d.png" % AttackLevel)
+	
+	AtkUpgrades.texture = load("res://Assets/HUD/Upgrade%d.png" % AttackLevel)
 	if AttackLevel == 5:
 		AttackUpgrade1.modulate = Color.GREEN
 
