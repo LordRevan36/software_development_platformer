@@ -95,7 +95,6 @@ func _physics_process(delta: float) -> void:
 	# LANDING
 	if is_on_floor() and !was_on_floor:
 		GlobalPlayer.landed.emit(landVelocity, get_last_slide_collision().get_collider())
-		print(get_last_slide_collision().get_collider())
 		if state == State.BACKFLIP or state == State.FRONTFLIP:
 			state = State.FLIPLAND
 		else:
