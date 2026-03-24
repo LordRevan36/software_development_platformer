@@ -79,9 +79,9 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(-2, 1),
+"transitions": PackedFloat32Array(-2, -2),
 "update": 0,
-"values": [-259.8076211353316, 259.8076211353316]
+"values": [-100.0, 100.0]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -90,10 +90,10 @@ tracks/2/path = NodePath("Platform:position:y")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 1, 2),
-"transitions": PackedFloat32Array(-2, -2, -2),
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(-2, -2),
 "update": 0,
-"values": [149.99999999999997, 300.0, 149.99999999999997]
+"values": [-20.0, 20.0]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -116,8 +116,10 @@ _data = {
 
 [node name="Swing" type="Node2D" unique_id=1362813319 groups=["Swing"]]
 script = ExtResource("1_mbygn")
-swing_speed = 2.0
+move_speed = null
+y_range = 20.0
 ropeTexture = ExtResource("2_14nk7")
+toggleAnimation = null
 
 [node name="Ropes" type="Node2D" parent="." unique_id=1356544557]
 
