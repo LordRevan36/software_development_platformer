@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2wubaqw65gxj"
-path="res://.godot/imported/PlaceholderIcon (1).png-bec815923d86ba963abea55cfe13c7c7.ctex"
+uid="uid://4uq25r6uuc1o"
+path="res://.godot/imported/Attack2.png-503ea9acbac758e70e98e389030978e1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/HUD/PlaceholderIcon (1).png"
-dest_files=["res://.godot/imported/PlaceholderIcon (1).png-bec815923d86ba963abea55cfe13c7c7.ctex"]
+source_file="res://Assets/HUD/Attack2.png"
+dest_files=["res://.godot/imported/Attack2.png-503ea9acbac758e70e98e389030978e1.ctex"]
 
 [params]
 

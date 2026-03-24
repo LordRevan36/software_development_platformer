@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://cffyceji6uhit"]
 
 [ext_resource type="Script" uid="uid://c4l103lvinr0d" path="res://UI/skill_tree.gd" id="1_2ah4k"]
-[ext_resource type="Texture2D" uid="uid://d2wubaqw65gxj" path="res://Assets/HUD/PlaceholderIcon (1).png" id="2_53nrm"]
-[ext_resource type="Texture2D" uid="uid://bwg4dn83h7vsu" path="res://Assets/HUD/Upgrade1.png" id="3_6oij1"]
+[ext_resource type="Texture2D" path="res://Assets/HUD/Attack1 (1).png" id="2_6oij1"]
+[ext_resource type="Texture2D" path="res://Assets/HUD/PlaceholderIcon (1).png" id="2_53nrm"]
+[ext_resource type="Texture2D" path="res://Assets/HUD/Upgrade1 (1).png" id="3_6kcas"]
 
 [node name="SkillTree" type="CanvasLayer" unique_id=56710748]
 process_mode = 3
@@ -64,15 +65,30 @@ theme_override_font_sizes/font_size = 64
 text = "Frontflip"
 flat = true
 
-[node name="AttackUpgrades" type="Button" parent="ColorRect" unique_id=1709746307]
+[node name="AttackUpgrade1" type="Button" parent="ColorRect" unique_id=1709746307]
 layout_mode = 0
 offset_left = 657.0
 offset_top = 264.0
 offset_right = 807.0
 offset_bottom = 414.0
-icon = ExtResource("3_6oij1")
+icon = ExtResource("2_6oij1")
 flat = true
 expand_icon = true
+
+[node name="AtkUpgrades" type="TextureRect" parent="ColorRect/AttackUpgrade1" unique_id=46899538]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = -75.0
+offset_right = 75.0
+offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_6kcas")
 
 [node name="SkillTimer" type="Timer" parent="." unique_id=994415787]
 process_mode = 3
@@ -85,7 +101,7 @@ one_shot = true
 [connection signal="mouse_entered" from="ColorRect/Frontflip" to="." method="_on_frontflip_mouse_entered"]
 [connection signal="mouse_exited" from="ColorRect/Frontflip" to="." method="_on_frontflip_mouse_exited"]
 [connection signal="pressed" from="ColorRect/Frontflip" to="." method="_on_frontflip_pressed"]
-[connection signal="mouse_entered" from="ColorRect/AttackUpgrades" to="." method="_on_attack_upgrades_mouse_entered"]
-[connection signal="mouse_exited" from="ColorRect/AttackUpgrades" to="." method="_on_attack_upgrades_mouse_exited"]
-[connection signal="pressed" from="ColorRect/AttackUpgrades" to="." method="_on_attack_upgrades_pressed"]
+[connection signal="mouse_entered" from="ColorRect/AttackUpgrade1" to="." method="_on_attack_upgrades_mouse_entered"]
+[connection signal="mouse_exited" from="ColorRect/AttackUpgrade1" to="." method="_on_attack_upgrades_mouse_exited"]
+[connection signal="pressed" from="ColorRect/AttackUpgrade1" to="." method="_on_attack_upgrades_pressed"]
 [connection signal="timeout" from="SkillTimer" to="." method="_on_skill_timer_timeout"]

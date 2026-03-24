@@ -9,7 +9,7 @@ signal stamina_changed(current, max, duration)
 
 @export var MAX_Health := 100
 @export var MAX_Stamina := 100
-var Attack = 1
+var Attack : int = 1
 
 func _ready() -> void:
 	process_mode = PROCESS_MODE_ALWAYS
