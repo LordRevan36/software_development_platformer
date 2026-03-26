@@ -26,15 +26,11 @@ size = Vector2(240, 72)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4n83i"]
 resource_local_to_scene = true
-size = Vector2(200, 56)
+size = Vector2(368, 56)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dlp0c"]
 resource_local_to_scene = true
 size = Vector2(160, 56)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4n83i"]
-resource_local_to_scene = true
-size = Vector2(364, 52)
 
 [node name="Main" unique_id=732509840 instance=ExtResource("1_8aig8")]
 
@@ -60,11 +56,15 @@ shape = SubResource("RectangleShape2D_t2qmn")
 [node name="Player" parent="." index="1" unique_id=688072394]
 position = Vector2(188, -150)
 
+[node name="Polygon2D" parent="Platforms/Platform" parent_id_path=PackedInt32Array(1326313302) index="1" unique_id=1861125354]
+polygon = PackedVector2Array(-82.74954, 11.33639, 62.84427, -55.014534, 82.74954, -11.33639, -62.84427, 55.014534)
+
 [node name="RectangleOutline" parent="Platforms/Platform" parent_id_path=PackedInt32Array(1326313302) index="2" unique_id=1082408081]
 shape = SubResource("RectangleShape2D_wa5j0")
 
 [node name="Platform2" parent="Platforms" parent_id_path=PackedInt32Array(2139959054) index="1" unique_id=73062743]
 position = Vector2(-954, -165)
+size_vector = Vector2(128, 48)
 
 [node name="RectangleOutline" parent="Platforms/Platform2" index="2" unique_id=1082408081]
 shape = SubResource("RectangleShape2D_gtl8g")
@@ -73,10 +73,10 @@ shape = SubResource("RectangleShape2D_gtl8g")
 size_vector = Vector2(376, 80)
 
 [node name="CollisionPolygon2D" parent="Platforms/Platform3" index="0" unique_id=581306703]
-polygon = PackedVector2Array(-188, -40, 188, -40, 188, 40, -188, 40)
+polygon = PackedVector2Array(-188, 8, 188, 8, 188, 88, -188, 88)
 
 [node name="Polygon2D" parent="Platforms/Platform3" index="1" unique_id=1861125354]
-polygon = PackedVector2Array(-180, -32, 180, -32, 180, 32, -180, 32)
+polygon = PackedVector2Array(-180, 16, 180, 16, 180, 80, -180, 80)
 
 [node name="RectangleOutline" parent="Platforms/Platform3" index="2" unique_id=1082408081]
 shape = SubResource("RectangleShape2D_xt5ae")
@@ -98,7 +98,16 @@ shape = SubResource("RectangleShape2D_vuc8t")
 [node name="FallPlatform" parent="Platforms" parent_id_path=PackedInt32Array(2139959054) index="4" unique_id=885156819]
 position = Vector2(-1092, 91)
 
-[node name="RectangleOutline" parent="Platforms/FallPlatform/Platform" parent_id_path=PackedInt32Array(885156819, 1136379276) index="2" unique_id=1082408081]
+[node name="Platform" parent="Platforms/FallPlatform" index="0" unique_id=1136379276]
+size_vector = Vector2(368, 56)
+
+[node name="CollisionPolygon2D" parent="Platforms/FallPlatform/Platform" index="0" unique_id=581306703]
+polygon = PackedVector2Array(-184, -28, 184, -28, 184, 28, -184, 28)
+
+[node name="Polygon2D" parent="Platforms/FallPlatform/Platform" index="1" unique_id=1861125354]
+polygon = PackedVector2Array(-176, -20, 176, -20, 176, 20, -176, 20)
+
+[node name="RectangleOutline" parent="Platforms/FallPlatform/Platform" index="2" unique_id=1082408081]
 shape = SubResource("RectangleShape2D_4n83i")
 
 [node name="RectangleOutline" parent="Platforms/FallPlatform2/Platform" parent_id_path=PackedInt32Array(468827690, 1136379276) index="2" unique_id=1082408081]
@@ -107,10 +116,9 @@ shape = SubResource("RectangleShape2D_dlp0c")
 [node name="MovePlatform" parent="Platforms" parent_id_path=PackedInt32Array(2139959054) index="6" unique_id=1362813319 instance=ExtResource("3_t2qmn")]
 position = Vector2(-40, -223)
 move_speed = 300.0
-loop_backwards = false
 
 [node name="Platform" parent="Platforms/MovePlatform" index="0" unique_id=1136379276]
-position = Vector2(6.2264194, 255.65813)
+position = Vector2(427.9383, 269.37976)
 
 [node name="Rope" parent="Platforms/MovePlatform" index="1" unique_id=399989842]
 points = PackedVector2Array(0, 0, -14, 255, 447, 270, 447, 0, 0, 0)

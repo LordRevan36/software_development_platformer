@@ -90,30 +90,21 @@ func _land() -> void:
 	if state == State.BACKFLIP or state == State.FRONTFLIP: #diff type of land for flips
 		state = State.FLIPLAND
 	else:
-		velocity += get_gravity() * delta
-		
-	# LANDING
-	if is_on_floor() and !was_on_floor:
-		GlobalPlayer.landed.emit(landVelocity, get_last_slide_collision().get_collider())
-		if state == State.BACKFLIP or state == State.FRONTFLIP:
-			state = State.FLIPLAND
-		else:
-			state = State.LAND
-			
-			
-	# ATTACKING
-	if Input.is_action_just_pressed("Attack"):
-		state = State.ATTACK
-		GlobalPlayer.attack_started.emit()
-		AttackTimer.start()
-		
-	
-	#UPDATES FACING WHEN IN APPROPRIATE STATE
-	if state == State.RUN or state == State.IDLE or state == State.FALL or state == State.JUMP:
+		state = State.LAND
+
+#handles signal and updates state when attacking
+func _attack() -> void:
+	state = State.ATTACK
+	GlobalPlayer.attack_started.emit()
+	AttackTimer.start()
+
+#updates direction
+func _update_direction() -> void:
+	if [State.RUN, State.IDLE, State.FALL, State.JUMP].has(state):
 		if Input.is_action_pressed("Right"):
-			facing = 1;
+			facing = 1
 		elif Input.is_action_pressed("Left"):
-			facing = -1;
+			facing = -1
 
 #handles logic for coyote, horizontal velocity, and state update
 func _floor_update() -> void:
