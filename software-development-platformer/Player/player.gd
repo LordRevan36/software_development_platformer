@@ -102,9 +102,9 @@ func _attack() -> void:
 func _update_direction() -> void:
 	if [State.RUN, State.IDLE, State.FALL, State.JUMP].has(state):
 		if Input.is_action_pressed("Right"):
-			facing = 1;
+			facing = 1
 		elif Input.is_action_pressed("Left"):
-			facing = -1;
+			facing = -1
 
 #handles logic for coyote, horizontal velocity, and state update
 func _floor_update() -> void:

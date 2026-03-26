@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://b3jxwclvxcfot"]
+
+[ext_resource type="Script" uid="uid://dt6815uwd288l" path="res://Props/Platform/move_platform.gd" id="1_mbygn"]
+[ext_resource type="PackedScene" uid="uid://c6lcnacw8vw5s" path="res://Props/Platform/platform.tscn" id="1_tap6b"]
+[ext_resource type="Texture2D" uid="uid://d2u8ombnylxop" path="res://Assets/testPlatformBorder.png" id="2_14nk7"]
+
+[node name="MovePlatform" type="Node2D" unique_id=1362813319 groups=["Swing"]]
+script = ExtResource("1_mbygn")
+move_speed = 1.0
+ease_type = 1
+ropeTexture = ExtResource("2_14nk7")
+
+[node name="Platform" parent="." unique_id=1136379276 instance=ExtResource("1_tap6b")]
+
+[node name="Rope" type="Line2D" parent="." unique_id=399989842]
+texture_repeat = 2
+points = PackedVector2Array(0, 0)
+texture = ExtResource("2_14nk7")
+texture_mode = 1
+
+[node name="Path" type="Line2D" parent="." unique_id=523458451]
