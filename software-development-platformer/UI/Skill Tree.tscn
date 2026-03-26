@@ -4,10 +4,16 @@
 [ext_resource type="Texture2D" uid="uid://b2qxmmxby7rnq" path="res://Assets/HUD/PlaceholderIcon.png" id="2_6kcas"]
 [ext_resource type="Texture2D" uid="uid://cp6bf2udljqht" path="res://Assets/HUD/Attack1.png" id="2_53nrm"]
 [ext_resource type="Texture2D" uid="uid://dqqo3f6fyn5lk" path="res://Assets/HUD/Upgrade1.png" id="3_6kcas"]
+[ext_resource type="Texture2D" uid="uid://4uq25r6uuc1o" path="res://Assets/HUD/Attack2.png" id="4_6kcas"]
 
 [node name="SkillTree" type="CanvasLayer" unique_id=56710748]
 process_mode = 3
 script = ExtResource("1_2ah4k")
+
+[node name="SkillTimer" type="Timer" parent="." unique_id=994415787]
+process_mode = 3
+wait_time = 0.05
+one_shot = true
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=869960596]
 process_mode = 3
@@ -43,40 +49,40 @@ offset_bottom = 203.0
 theme_override_font_sizes/font_size = 88
 text = "Attack:"
 
-[node name="Backflip" type="Button" parent="ColorRect" unique_id=1872087870]
+[node name="Backflip" type="Button" parent="ColorRect" unique_id=1872087870 groups=["Buttons"]]
 process_mode = 3
 layout_mode = 0
-offset_left = 207.0
-offset_top = 267.0
-offset_right = 357.0
-offset_bottom = 417.0
+offset_left = 757.0
+offset_top = 195.0
+offset_right = 953.0
+offset_bottom = 247.0
 theme_override_font_sizes/font_size = 64
-icon = ExtResource("2_6kcas")
+text = "Backflip"
 flat = true
 expand_icon = true
 
-[node name="Frontflip" type="Button" parent="ColorRect" unique_id=1699366758]
+[node name="Frontflip" type="Button" parent="ColorRect" unique_id=1699366758 groups=["Buttons"]]
 layout_mode = 0
-offset_left = 606.0
-offset_top = 454.0
-offset_right = 814.0
-offset_bottom = 506.0
+offset_left = 751.0
+offset_top = 272.0
+offset_right = 959.0
+offset_bottom = 324.0
 theme_override_font_sizes/font_size = 64
 text = "Frontflip"
 flat = true
 
-[node name="AttackUpgrade1" type="Button" parent="ColorRect" unique_id=1709746307]
+[node name="AttackUpgrade1" type="Button" parent="ColorRect" unique_id=1709746307 groups=["Buttons"]]
 layout_mode = 0
-offset_left = 657.0
-offset_top = 264.0
-offset_right = 807.0
-offset_bottom = 414.0
+offset_left = 189.0
+offset_top = 228.0
+offset_right = 339.0
+offset_bottom = 378.0
 icon = ExtResource("2_53nrm")
 flat = true
 icon_alignment = 1
 expand_icon = true
 
-[node name="AtkUpgrades" type="TextureRect" parent="ColorRect/AttackUpgrade1" unique_id=46899538]
+[node name="AtkUpgrades1" type="TextureRect" parent="ColorRect/AttackUpgrade1" unique_id=46899538]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -89,18 +95,44 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_6kcas")
 
-[node name="SkillTimer" type="Timer" parent="." unique_id=994415787]
-process_mode = 3
-wait_time = 0.05
-one_shot = true
+[node name="TestStep" type="Button" parent="ColorRect" unique_id=375171838 groups=["Buttons"]]
+layout_mode = 0
+offset_left = 189.0
+offset_top = 396.0
+offset_right = 339.0
+offset_bottom = 546.0
+theme_override_font_sizes/font_size = 64
+icon = ExtResource("2_6kcas")
+flat = true
+icon_alignment = 1
+expand_icon = true
 
-[connection signal="mouse_entered" from="ColorRect/Backflip" to="." method="_on_backflip_mouse_entered"]
-[connection signal="mouse_exited" from="ColorRect/Backflip" to="." method="_on_backflip_mouse_exited"]
-[connection signal="pressed" from="ColorRect/Backflip" to="." method="_on_backflip_pressed"]
-[connection signal="mouse_entered" from="ColorRect/Frontflip" to="." method="_on_frontflip_mouse_entered"]
-[connection signal="mouse_exited" from="ColorRect/Frontflip" to="." method="_on_frontflip_mouse_exited"]
-[connection signal="pressed" from="ColorRect/Frontflip" to="." method="_on_frontflip_pressed"]
-[connection signal="mouse_entered" from="ColorRect/AttackUpgrade1" to="." method="_on_attack_upgrades_mouse_entered"]
-[connection signal="mouse_exited" from="ColorRect/AttackUpgrade1" to="." method="_on_attack_upgrades_mouse_exited"]
-[connection signal="pressed" from="ColorRect/AttackUpgrade1" to="." method="_on_attack_upgrades_pressed"]
+[node name="AttackUpgrade2" type="Button" parent="ColorRect" unique_id=751166477 groups=["Buttons"]]
+layout_mode = 0
+offset_left = 189.0
+offset_top = 562.0
+offset_right = 339.0
+offset_bottom = 712.0
+icon = ExtResource("4_6kcas")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="AtkUpgrades2" type="TextureRect" parent="ColorRect/AttackUpgrade2" unique_id=55939163]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [connection signal="timeout" from="SkillTimer" to="." method="_on_skill_timer_timeout"]
+[connection signal="pressed" from="ColorRect/Backflip" to="." method="_on_backflip_pressed"]
+[connection signal="pressed" from="ColorRect/Frontflip" to="." method="_on_frontflip_pressed"]
+[connection signal="pressed" from="ColorRect/AttackUpgrade1" to="." method="_on_attack_upgrades_pressed"]
+[connection signal="pressed" from="ColorRect/TestStep" to="." method="_on_test_step_pressed"]
+[connection signal="pressed" from="ColorRect/AttackUpgrade2" to="." method="_on_attack_upgrade_2_pressed"]
