@@ -7,15 +7,17 @@
 [node name="MovePlatform" type="Node2D" unique_id=1362813319 groups=["Swing"]]
 script = ExtResource("1_mbygn")
 move_speed = 1.0
-x_range = 10.0
 ease_type = 1
+loop_backwards = null
 ropeTexture = ExtResource("2_14nk7")
 
 [node name="Platform" parent="." unique_id=1136379276 instance=ExtResource("1_tap6b")]
-position = Vector2(2.5429177, 0)
+position = Vector2(0.6274805, 0)
 
-[node name="Path" type="Line2D" parent="." unique_id=399989842]
+[node name="Rope" type="Line2D" parent="." unique_id=399989842]
 texture_repeat = 2
-points = PackedVector2Array(-184, -28, -164, -8)
+points = PackedVector2Array(-10, 0, 10, 0)
 texture = ExtResource("2_14nk7")
 texture_mode = 1
+
+[node name="Path" type="Line2D" parent="." unique_id=523458451]

@@ -2,16 +2,15 @@
 extends Node2D
 class_name move_platform
 
+@onready var rope = $Rope
 @onready var path = $Path
 @onready var child_platform = $Platform
 @onready var collision_polygon_2d: CollisionPolygon2D = $Platform/CollisionPolygon2D
 @onready var polygon_2d: Polygon2D = $Platform/Polygon2D
 
-@export var move_speed : float = 2.0
-@export var x_range : float = 20.0
-@export var y_range : float = 0.0
+@export var move_speed : float = 100
 @export var ease_type = Tween.TRANS_LINEAR #0 > Linear, 1 > Sine, 2 > Quintic, 3 > Quartic, 4 > Quadratic, 5 > Exponential, and so on.
-
+@export var loop_backwards : bool = false
 @export var ropeTexture : Texture
 
 @export var centerNode : bool = false
@@ -70,28 +69,41 @@ func _update_lines() -> void: #Puts the lines of the platform to the path of mov
 	
 	#child_platform._center_node()
 	#
-	path.position = Vector2.ZERO
-	path.points = PackedVector2Array()
+	rope.position = Vector2.ZERO
+	rope.points = PackedVector2Array()
 	##var left_end : Vector2 = child_platform.position + Vector2(-half_plat_size.x, -half_plat_size.y)
-	var start_pos : Vector2 = Vector2(-x_range, -y_range)
-	path.add_point(start_pos)
-	print(start_pos)
-	var end_pos : Vector2 = Vector2(x_range, y_range)
-	print(end_pos)
-	path.add_point(end_pos)
 	for point in path.get_point_count():
-		print(path.get_point_position(point))
+		rope.add_point(path.get_point_position(point))
+	if !loop_backwards:
+		rope.add_point(path.get_point_position(0))
+
 	
 	updateLines = false
 
-func _setup_animation() -> void:
+func _setup_animation() -> void: #Fixes 
 	tween.stop()
 	if tween:
 		tween.kill()
 	tween = create_tween()
 	tween.set_trans(ease_type)
-	tween.tween_property(child_platform, "position", Vector2(x_range,y_range), move_speed)
-	tween.tween_property(child_platform, "position", Vector2(-x_range,-y_range), move_speed)
+	for point in path.get_point_count():
+		var current_point = path.get_point_position(point)
+		print(path.get_point_position(point))
+		if point == 0:
+			if loop_backwards:
+				tween.tween_property(child_platform, "position", current_point, current_point.distance_to(path.get_point_position(point+1))/move_speed)
+			else:
+				print("Current: " + str(current_point))
+				print("Next: " + str(path.get_point_position(path.get_point_count()-1)))
+				print("DIstance: " + str(path.get_point_position(path.get_point_count()-1).distance_to(current_point)))
+				tween.tween_property(child_platform, "position", current_point, path.get_point_position(path.get_point_count()-1).distance_to(current_point)/move_speed)
+		else:
+			tween.tween_property(child_platform, "position", current_point, path.get_point_position(point-1).distance_to(current_point)/move_speed)
+	if loop_backwards:
+		for point in range(path.get_point_count()-2,0,-1): #iterates back through the path, skipping endpoints
+			var current_point = path.get_point_position(point)
+			print(point)
+			tween.tween_property(child_platform, "position", current_point, path.get_point_position(point+1).distance_to(path.get_point_position(point))/move_speed)
 	tween.set_loops()
 
 	tween.play()
