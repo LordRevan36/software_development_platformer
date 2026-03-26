@@ -6,23 +6,24 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g263t"]
 resource_local_to_scene = true
-size = Vector2(364, 52)
+size = Vector2(368, 56)
 
 [node name="Platform" type="AnimatableBody2D" unique_id=1136379276]
 script = ExtResource("1_0v4dy")
-size_vector = Vector2(364, 52)
+size_vector = Vector2(368, 56)
 border_texture = ExtResource("2_rndpj")
 body_texture = ExtResource("3_17he2")
+textureWidth = 16.0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=581306703]
-polygon = PackedVector2Array(-182, -26, 182, -26, 182, 26, -182, 26)
+polygon = PackedVector2Array(-184, -28, 184, -28, 184, 28, -184, 28)
 
 [node name="Polygon2D" type="Polygon2D" parent="." unique_id=1861125354]
 texture_filter = 1
 texture_repeat = 2
 color = Color(1, 0.6627451, 0.2, 1)
 texture = ExtResource("3_17he2")
-polygon = PackedVector2Array(-178, -22, 178, -22, 178, 22, -178, 22)
+polygon = PackedVector2Array(-176, -20, 176, -20, 176, 20, -176, 20)
 
 [node name="RectangleOutline" type="CollisionShape2D" parent="." unique_id=1082408081]
 shape = SubResource("RectangleShape2D_g263t")
