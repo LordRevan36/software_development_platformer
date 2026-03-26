@@ -6,7 +6,7 @@ var stam_tween: Tween
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	max_value = player.MAX_Stamina
+	max_value = GlobalPlayer.MAX_Stamina
 	value = player.stamina
 	GlobalPlayer.stamina_changed.connect(update_stamina)
 

@@ -6,6 +6,7 @@ extends CanvasLayer
 	$BoxContainer/VBoxContainer/Desktop
 ]
 
+
 func _ready() -> void:
 	for button in Buttons:
 		_connect_button_signals(button)
@@ -24,13 +25,12 @@ func _on_button_mouse_exited(button: Button) -> void:
 	button.modulate = Color.WHITE
 	
 func _on_resume_pressed() -> void:
+	get_tree().paused = false
 	hide()
-	
-func _on_settings_pressed() -> void:
-	get_tree().change_scene_to_file("res://Levels/MainMenu/Menus.tscn")
-	
+
 func _on_main_menu_pressed() -> void:
-	get_tree().change_scene_to_file("res://Levels/MainMenu/MainMenu.tscn")
+	get_tree().paused = false
+	get_tree().change_scene_to_file("res://Levels/MainMenu/Menus.tscn")
 	
 func _on_desktop_pressed() -> void:
 	get_tree().quit()

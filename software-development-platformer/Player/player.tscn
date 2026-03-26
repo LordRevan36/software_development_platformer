@@ -11,6 +11,8 @@
 [ext_resource type="Script" uid="uid://rexj3shyfaq6" path="res://UI/HealthBar.gd" id="9_5htga"]
 [ext_resource type="Texture2D" uid="uid://cgw1lcgfkoqap" path="res://Assets/HUD/StaminaBar.png" id="10_apopc"]
 [ext_resource type="Script" uid="uid://cv8mai7sitq67" path="res://Player/stamina_bar.gd" id="10_x3vf3"]
+[ext_resource type="PackedScene" uid="uid://by60jn4wyw65s" path="res://UI/PauseMenu.tscn" id="12_5htga"]
+[ext_resource type="PackedScene" uid="uid://cffyceji6uhit" path="res://UI/Skill Tree.tscn" id="13_p5o4e"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k53q1"]
 atlas = ExtResource("2_gwnis")
@@ -432,9 +434,8 @@ animations = [{
 "speed": 12.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gwnis"]
-radius = 19.0
-height = 122.0
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_5htga"]
+points = PackedVector2Array(-8, 62, 8, 62, 20, 3, 8, -56, -8, -56, -20, 3)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b1ygp"]
 atlas = ExtResource("3_btcbx")
@@ -567,19 +568,20 @@ region = Rect2(0, 0, 0, 128)
 [node name="Player" type="CharacterBody2D" unique_id=359640240 groups=["Player"]]
 position = Vector2(-24, 5)
 floor_snap_length = 10.0
+platform_on_leave = 1
 script = ExtResource("1_onrkg")
 friction = 0.8
 metadata/_edit_group_ = true
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="." unique_id=1583302059]
 sprite_frames = SubResource("SpriteFrames_sh265")
-animation = &"frontflip"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="PlayerHitbox" type="CollisionShape2D" parent="." unique_id=1628864781]
 position = Vector2(0, 42)
 scale = Vector2(1, 1.1200012)
-shape = SubResource("CapsuleShape2D_gwnis")
+shape = SubResource("ConvexPolygonShape2D_5htga")
 
 [node name="Slash" type="AnimatedSprite2D" parent="." unique_id=1497850521]
 visible = false
@@ -696,6 +698,12 @@ texture_under = SubResource("AtlasTexture_qpoj2")
 texture_progress = SubResource("AtlasTexture_3e3ym")
 script = ExtResource("10_x3vf3")
 player_path = NodePath("../..")
+
+[node name="PauseMenu" parent="UI" unique_id=469843484 instance=ExtResource("12_5htga")]
+visible = false
+
+[node name="SkillTree" parent="UI" unique_id=56710748 instance=ExtResource("13_p5o4e")]
+visible = false
 
 [connection signal="animation_finished" from="PlayerSprite" to="." method="_on_player_sprite_animation_finished"]
 [connection signal="animation_finished" from="PlayerSprite" to="." method="_on_player_animation_finished"]

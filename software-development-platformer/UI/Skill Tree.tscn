@@ -1,0 +1,91 @@
+[gd_scene format=3 uid="uid://cffyceji6uhit"]
+
+[ext_resource type="Script" uid="uid://c4l103lvinr0d" path="res://UI/skill_tree.gd" id="1_2ah4k"]
+[ext_resource type="Texture2D" uid="uid://d2wubaqw65gxj" path="res://Assets/HUD/PlaceholderIcon (1).png" id="2_53nrm"]
+[ext_resource type="Texture2D" uid="uid://bwg4dn83h7vsu" path="res://Assets/HUD/Upgrade1.png" id="3_6oij1"]
+
+[node name="SkillTree" type="CanvasLayer" unique_id=56710748]
+process_mode = 3
+script = ExtResource("1_2ah4k")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=869960596]
+process_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -610.0
+offset_top = -480.0
+offset_right = 610.0
+offset_bottom = 480.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.7882353)
+
+[node name="Title" type="Label" parent="ColorRect" unique_id=1710065914]
+process_mode = 3
+layout_mode = 0
+offset_left = 502.0
+offset_top = 40.0
+offset_right = 718.0
+offset_bottom = 115.0
+theme_override_font_sizes/font_size = 108
+text = "Skills"
+
+[node name="Attack" type="Label" parent="ColorRect" unique_id=1326948658]
+layout_mode = 0
+offset_left = 159.0
+offset_top = 142.0
+offset_right = 407.0
+offset_bottom = 203.0
+theme_override_font_sizes/font_size = 88
+text = "Attack:"
+
+[node name="Backflip" type="Button" parent="ColorRect" unique_id=1872087870]
+process_mode = 3
+layout_mode = 0
+offset_left = 207.0
+offset_top = 267.0
+offset_right = 357.0
+offset_bottom = 417.0
+theme_override_font_sizes/font_size = 64
+icon = ExtResource("2_53nrm")
+flat = true
+expand_icon = true
+
+[node name="Frontflip" type="Button" parent="ColorRect" unique_id=1699366758]
+layout_mode = 0
+offset_left = 606.0
+offset_top = 454.0
+offset_right = 814.0
+offset_bottom = 506.0
+theme_override_font_sizes/font_size = 64
+text = "Frontflip"
+flat = true
+
+[node name="AttackUpgrades" type="Button" parent="ColorRect" unique_id=1709746307]
+layout_mode = 0
+offset_left = 657.0
+offset_top = 264.0
+offset_right = 807.0
+offset_bottom = 414.0
+icon = ExtResource("3_6oij1")
+flat = true
+expand_icon = true
+
+[node name="SkillTimer" type="Timer" parent="." unique_id=994415787]
+process_mode = 3
+wait_time = 0.05
+one_shot = true
+
+[connection signal="mouse_entered" from="ColorRect/Backflip" to="." method="_on_backflip_mouse_entered"]
+[connection signal="mouse_exited" from="ColorRect/Backflip" to="." method="_on_backflip_mouse_exited"]
+[connection signal="pressed" from="ColorRect/Backflip" to="." method="_on_backflip_pressed"]
+[connection signal="mouse_entered" from="ColorRect/Frontflip" to="." method="_on_frontflip_mouse_entered"]
+[connection signal="mouse_exited" from="ColorRect/Frontflip" to="." method="_on_frontflip_mouse_exited"]
+[connection signal="pressed" from="ColorRect/Frontflip" to="." method="_on_frontflip_pressed"]
+[connection signal="mouse_entered" from="ColorRect/AttackUpgrades" to="." method="_on_attack_upgrades_mouse_entered"]
+[connection signal="mouse_exited" from="ColorRect/AttackUpgrades" to="." method="_on_attack_upgrades_mouse_exited"]
+[connection signal="pressed" from="ColorRect/AttackUpgrades" to="." method="_on_attack_upgrades_pressed"]
+[connection signal="timeout" from="SkillTimer" to="." method="_on_skill_timer_timeout"]

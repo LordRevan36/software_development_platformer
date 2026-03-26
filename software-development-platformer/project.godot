@@ -23,6 +23,7 @@ config/icon="res://icon.svg"
 
 GlobalUI="*uid://b483sopfst6nc"
 GlobalPlayer="*uid://camvgg7swtyap"
+GlobalControls="*uid://dwpn4gp8817ux"
 
 [display]
 
@@ -50,6 +51,7 @@ folder_colors={
 Player="its the player .ngl idk if this is really necessary but im putting it in anyways"
 AutumnLeafMaterial="Causes leaf particles when player runs/jumps over."
 CurrentEnemies=""
+Swing=""
 
 [gui]
 
