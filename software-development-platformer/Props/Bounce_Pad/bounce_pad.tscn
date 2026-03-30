@@ -7,7 +7,7 @@
 resource_local_to_scene = true
 size = Vector2(80, 20)
 
-[node name="BouncePad" type="Area2D" unique_id=104454850]
+[node name="BouncePad" type="Area2D" unique_id=104454850 groups=["BouncePad"]]
 script = ExtResource("1_1iph4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=219931369]
