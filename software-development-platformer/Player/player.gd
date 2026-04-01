@@ -30,7 +30,6 @@ var jumpVelocity = Vector2(0,0) #stores velocity of player immediately after jum
 var landVelocity = Vector2(0,0) #stores velocity of player immediately before landing
 var slow = 1 #stores slowdown rate during things like attack
 var canJump = true #used to let player jump a little after leaving the platform
-var health = GlobalPlayer.MAX_Health #stores the health for the player
 var stamina = GlobalPlayer.MAX_Stamina #stores the stamina for the player
 #var duration = 0
 
@@ -287,17 +286,17 @@ func _skill_tree_check() -> void:
 #UI FUNCTIONS
 #function for taking damage
 func take_damage(amount: int) -> void:
-	health = max(health - amount, 0)
-	GlobalPlayer.health_changed.emit(health, GlobalPlayer.MAX_Health)
-	if health < 0:
-		health = 0
+	GlobalPlayer.health = max(GlobalPlayer.health - amount, 0)
+	GlobalPlayer.health_changed.emit(GlobalPlayer.health, GlobalPlayer.MAX_Health)
+	if GlobalPlayer.health < 0:
+		GlobalPlayer.health = 0
 
 #function for healing
 func heal(amount: int) -> void:
-	health = max(health + amount, 0)
-	GlobalPlayer.health_changed.emit(health, GlobalPlayer.MAX_Health)
-	if health > GlobalPlayer.MAX_Health:
-		health = GlobalPlayer.MAX_Health
+	GlobalPlayer.health = max(GlobalPlayer.health + amount, 0)
+	GlobalPlayer.health_changed.emit(GlobalPlayer.health, GlobalPlayer.MAX_Health)
+	if GlobalPlayer.health > GlobalPlayer.MAX_Health:
+		GlobalPlayer.health = GlobalPlayer.MAX_Health
 
 #adds/substracts value to stamina
 func stam(amount: int, duration: float) -> void:

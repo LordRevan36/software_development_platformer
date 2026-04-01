@@ -6,7 +6,7 @@ var health_tween: Tween
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	max_value = GlobalPlayer.MAX_Health
-	value = player.health
+	value = GlobalPlayer.health
 	GlobalPlayer.health_changed.connect(update_health)
 
 func update_health(current: float, max_health: float):
