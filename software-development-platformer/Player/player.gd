@@ -88,9 +88,7 @@ func _return_gravity(delta: float) -> Vector2:
 
 #handles signal and updates state when landing
 func _land() -> void:
-	print("just landed bro")
 	GlobalPlayer.landed.emit(landVelocity, get_last_slide_collision().get_collider()) #emit signal for platforms etc.
-	#print(get_last_slide_collision().get_collider())
 	if state == State.BACKFLIP or state == State.FRONTFLIP: #diff type of land for flips
 		state = State.FLIPLAND
 	else:
@@ -174,7 +172,6 @@ func jump(input_velocity : Vector2, use_stamina : bool):
 	if use_stamina:
 		stam(-JUMP_COST*(time-crouchStartTime)*2, 0.3)
 		StaminaTimer.start()
-	print("Player velocity: " + str(velocity))
 
 func backflip():
 	velocity.y = (JUMP_VELOCITY+JUMP_VELOCITY*(time-crouchStartTime)/4)*1.4
@@ -347,13 +344,11 @@ func _on_stamina_timer_timeout() -> void:
 
 #Checks for a bouncepad entered
 func _on_area_hitbox_area_entered(area: Area2D) -> void:
-	print("Area" + str(area))
 	if area.is_in_group("BouncePad"):
 		usingBouncePad = true #prevents _land() from running
 		jump(area._return_new_player_velocity(velocity), false) #forces jump from bouncepad
 
 #checks for a bouncepad exited
 func _on_area_hitbox_area_exited(area: Area2D) -> void:
-	print("Area" + str(area))
 	if area.is_in_group("BouncePad"):
 		usingBouncePad = false #allows landing again

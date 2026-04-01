@@ -85,6 +85,10 @@ shape = SubResource("RectangleShape2D_klfyu")
 [node name="BouncePad" parent="Props" index="0" unique_id=104454850 instance=ExtResource("3_2atqn")]
 position = Vector2(-500, -150)
 
+[node name="BouncePad2" parent="Props" index="1" unique_id=1225811173 instance=ExtResource("3_2atqn")]
+position = Vector2(164, -449.00003)
+rotation = -0.42760566
+
 [editable path="Platforms/Platform"]
 [editable path="Platforms/Platform2"]
 [editable path="Platforms/Platform3"]
