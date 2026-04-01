@@ -14,23 +14,23 @@ size = Vector2(128, 48)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fng7y"]
 resource_local_to_scene = true
-size = Vector2(372, 80)
+size = Vector2(376, 80)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3cbs4"]
 resource_local_to_scene = true
-size = Vector2(316, 132)
+size = Vector2(320, 136)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7l1uc"]
 resource_local_to_scene = true
-size = Vector2(196, 52)
+size = Vector2(200, 56)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ac6nt"]
 resource_local_to_scene = true
-size = Vector2(160, 52)
+size = Vector2(160, 56)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_klfyu"]
 resource_local_to_scene = true
-size = Vector2(364, 52)
+size = Vector2(368, 56)
 
 [node name="Main" unique_id=732509840 instance=ExtResource("1_akn5l")]
 
@@ -43,23 +43,17 @@ shape = SubResource("RectangleShape2D_2atqn")
 [node name="Platform2" parent="Platforms" parent_id_path=PackedInt32Array(2139959054) index="1" unique_id=73062743]
 size_vector = Vector2(128, 48)
 
-[node name="CollisionPolygon2D" parent="Platforms/Platform2" index="0" unique_id=581306703]
-polygon = PackedVector2Array(-64, -24, 64, -24, 64, 24, -64, 24)
-
-[node name="Polygon2D" parent="Platforms/Platform2" index="1" unique_id=1861125354]
-polygon = PackedVector2Array(-56, -16, 56, -16, 56, 16, -56, 16)
-
 [node name="RectangleOutline" parent="Platforms/Platform2" index="2" unique_id=1082408081]
 shape = SubResource("RectangleShape2D_1slax")
 
 [node name="Platform3" parent="Platforms" parent_id_path=PackedInt32Array(2139959054) index="2" unique_id=778821719]
-size_vector = Vector2(372, 80)
+size_vector = Vector2(376, 80)
 
 [node name="CollisionPolygon2D" parent="Platforms/Platform3" index="0" unique_id=581306703]
-polygon = PackedVector2Array(-186, 8, 186, 8, 186, 88, -186, 88)
+polygon = PackedVector2Array(-188, 8, 188, 8, 188, 88, -188, 88)
 
 [node name="Polygon2D" parent="Platforms/Platform3" index="1" unique_id=1861125354]
-polygon = PackedVector2Array(-182, 12, 182, 12, 182, 84, -182, 84)
+polygon = PackedVector2Array(-180, 16, 180, 16, 180, 80, -180, 80)
 
 [node name="RectangleOutline" parent="Platforms/Platform3" index="2" unique_id=1082408081]
 shape = SubResource("RectangleShape2D_fng7y")
@@ -77,7 +71,16 @@ shape = SubResource("RectangleShape2D_ac6nt")
 position = Vector2(10, 28)
 reset_timer_length = 3.0
 
-[node name="RectangleOutline" parent="Platforms/FallPlatform3/Platform" parent_id_path=PackedInt32Array(885156819, 1136379276) index="2" unique_id=1082408081]
+[node name="Platform" parent="Platforms/FallPlatform3" index="0" unique_id=1136379276]
+size_vector = Vector2(368, 56)
+
+[node name="CollisionPolygon2D" parent="Platforms/FallPlatform3/Platform" index="0" unique_id=581306703]
+polygon = PackedVector2Array(-184, -28, 184, -28, 184, 28, -184, 28)
+
+[node name="Polygon2D" parent="Platforms/FallPlatform3/Platform" index="1" unique_id=1861125354]
+polygon = PackedVector2Array(-176, -20, 176, -20, 176, 20, -176, 20)
+
+[node name="RectangleOutline" parent="Platforms/FallPlatform3/Platform" index="2" unique_id=1082408081]
 shape = SubResource("RectangleShape2D_klfyu")
 
 [node name="Props" type="Node2D" parent="." index="3" unique_id=1684861036]
