@@ -16,7 +16,7 @@ const JUMP_COST = 10 #stamina cost of actions, so we can change later
 const FLIP_COST = 30
 const ATTACK_SLOW_RATE = 0.5 #multiplier to slow down player velocity when they attack
 
-@export var friction = 0.9 #value from 0 to 1. 1 means full friction on floor when running, 0 means full icy floor
+@export var default_friction = 0.9 #value from 0 to 1. 1 means full friction on floor when running, 0 means full icy floor
 @export var air_control = 0.5 #value from 0 to 1, lets you control how easily player can control their air movement
 
 #can reference State outside of player as Player.State.IDLE (or other value)
@@ -34,9 +34,12 @@ var canJump = true #used to let player jump a little after leaving the platform
 var usingBouncePad = false #used to prevent _land function if player is using the bounce pad
 var health = GlobalPlayer.MAX_Health #stores the health for the player
 var stamina = GlobalPlayer.MAX_Stamina #stores the stamina for the player
-#var duration = 0
+var friction = 0.9
 
 #signals can be put here but typically should be put in global_player so that they are easier to detect.
+
+func _ready() -> void:
+	friction = default_friction
 
 func _physics_process(delta: float) -> void:
 	#immediate escape if exiting to another scene
@@ -93,6 +96,10 @@ func _land() -> void:
 		state = State.FLIPLAND
 	else:
 		state = State.LAND
+	print(get_last_slide_collision().get_collider())
+	if get_last_slide_collision().get_collider().is_in_group("Platform"):
+		friction = get_last_slide_collision().get_collider().friction
+		print(friction)
 
 #handles signal and updates state when attacking
 func _attack() -> void:
@@ -197,7 +204,7 @@ func frontflip():
 func _not_on_floor_update() -> void:
 	if canJump and CoyoteTimer.is_stopped():
 		CoyoteTimer.start()
-
+	friction = default_friction
 	#SETS FALLING IF IN AIR AND NOT DOING OTHER ACTION
 	if not [State.JUMP, State.BACKFLIP, State.FRONTFLIP, State.ATTACK].has(state) and not (state == State.CROUCH and canJump):
 		state = State.FALL

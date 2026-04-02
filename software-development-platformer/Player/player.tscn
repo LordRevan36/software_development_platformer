@@ -570,7 +570,6 @@ position = Vector2(-24, 5)
 floor_snap_length = 10.0
 platform_on_leave = 1
 script = ExtResource("1_onrkg")
-friction = 0.8
 metadata/_edit_group_ = true
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="." unique_id=1583302059]
@@ -712,8 +711,8 @@ visible = false
 [node name="SkillTree" parent="UI" unique_id=56710748 instance=ExtResource("13_p5o4e")]
 visible = false
 
-[connection signal="animation_finished" from="PlayerSprite" to="." method="_on_player_sprite_animation_finished"]
 [connection signal="animation_finished" from="PlayerSprite" to="." method="_on_player_animation_finished"]
+[connection signal="animation_finished" from="PlayerSprite" to="." method="_on_player_sprite_animation_finished"]
 [connection signal="area_entered" from="AreaHitbox" to="." method="_on_area_hitbox_area_entered"]
 [connection signal="area_exited" from="AreaHitbox" to="." method="_on_area_hitbox_area_exited"]
 [connection signal="animation_finished" from="Slash" to="." method="_on_slash_animation_finished"]
