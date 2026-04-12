@@ -13,7 +13,7 @@ func _on_start_button_mouse_exited() -> void:
 	GlobalUI.shrinkTween(StartButton)
 	
 func _on_start_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://Levels/Forest/main.tscn")
+	get_tree().change_scene_to_file("res://Levels/Forest/mainTesting.tscn")
 
 
 #Settings Button functions

@@ -32,6 +32,8 @@ var slow = 1 #stores slowdown rate during things like attack
 var canJump = true #used to let player jump a little after leaving the platform
 var health = GlobalPlayer.MAX_Health #stores the health for the player
 var stamina = GlobalPlayer.MAX_Stamina #stores the stamina for the player
+var knockback: Vector2 = Vector2.ZERO
+var knockback_timer: float = 0.0
 #var duration = 0
 
 #signals can be put here but typically should be put in global_player so that they are easier to detect.
@@ -73,6 +75,13 @@ func _physics_process(delta: float) -> void:
 	#checking for opening other menus
 	_pause_check()
 	_skill_tree_check()
+	
+	#knockback
+	if knockback_timer > 0.0:
+		velocity = knockback
+		knockback_timer -= delta
+		if knockback_timer <= 0.0:
+			knockback = Vector2.ZERO
 
 #returns gravity vector adjusted based on state
 func _return_gravity(delta: float) -> Vector2:
@@ -314,6 +323,11 @@ func regenStam() -> void:
 	stam(10,0.75)
 	while stamina != GlobalPlayer.MAX_Stamina:
 			stam(10, 0.75)
+
+#apply knockback when hit by an enemy
+func apply_knockback(direction: Vector2, force: float, knockback_duration: float) -> void:
+	knockback = direction * force
+	knockback_timer = knockback_duration
 
 #CONNECTED FUNCTIONS
 func _on_coyote_jump_timer_timeout() -> void:
