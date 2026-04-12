@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://yx1mih4xl3ix"]
+
+[ext_resource type="Script" uid="uid://dgiqdmiuc5eqc" path="res://Props/Bounce_Pad/bounce_pad.gd" id="1_1iph4"]
+[ext_resource type="Texture2D" uid="uid://c6p2td2ijky5v" path="res://Assets/spring_compressed.png" id="2_34yka"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kxxui"]
+resource_local_to_scene = true
+size = Vector2(80, 20)
+
+[node name="BouncePad" type="Area2D" unique_id=104454850 groups=["BouncePad"]]
+script = ExtResource("1_1iph4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=219931369]
+position = Vector2(0, -10)
+shape = SubResource("RectangleShape2D_kxxui")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1553252685]
+position = Vector2(0, -10)
+scale = Vector2(0.14, 0.072)
+texture = ExtResource("2_34yka")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
