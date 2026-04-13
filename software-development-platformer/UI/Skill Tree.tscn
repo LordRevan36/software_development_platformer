@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://4uq25r6uuc1o" path="res://Assets/HUD/Attack2.png" id="4_6kcas"]
 [ext_resource type="Texture2D" uid="uid://216ups0fv8ja" path="res://Assets/HUD/Health1.png" id="6_1dcgw"]
 [ext_resource type="Texture2D" uid="uid://c48fduuwvakuu" path="res://Assets/HUD/Health2.png" id="7_sl1dt"]
+[ext_resource type="Texture2D" uid="uid://dfdg636dpkbew" path="res://Assets/HUD/Mana1.png" id="8_3ecnd"]
+[ext_resource type="Texture2D" uid="uid://cssrain1s4xho" path="res://Assets/HUD/Mana2.png" id="9_stapk"]
 
 [node name="SkillTree" type="CanvasLayer" unique_id=56710748]
 process_mode = 3
@@ -34,9 +36,9 @@ color = Color(0, 0, 0, 0.7882353)
 
 [node name="Health" type="Label" parent="ColorRect" unique_id=820792889]
 layout_mode = 0
-offset_left = 493.0
+offset_left = 491.0
 offset_top = 148.0
-offset_right = 713.0
+offset_right = 711.0
 offset_bottom = 209.0
 theme_override_font_sizes/font_size = 88
 text = "Health:"
@@ -53,20 +55,29 @@ text = "Skills"
 
 [node name="Attack" type="Label" parent="ColorRect" unique_id=1326948658]
 layout_mode = 0
-offset_left = 159.0
+offset_left = 140.0
 offset_top = 142.0
-offset_right = 407.0
+offset_right = 388.0
 offset_bottom = 203.0
 theme_override_font_sizes/font_size = 88
 text = "Attack:"
 
+[node name="Mana" type="Label" parent="ColorRect" unique_id=536669546]
+layout_mode = 0
+offset_left = 847.0
+offset_top = 142.0
+offset_right = 1029.0
+offset_bottom = 203.0
+theme_override_font_sizes/font_size = 88
+text = "Mana:"
+
 [node name="Backflip" type="Button" parent="ColorRect" unique_id=1872087870 groups=["Buttons", "Start"]]
 process_mode = 3
 layout_mode = 0
-offset_left = 757.0
-offset_top = 195.0
-offset_right = 953.0
-offset_bottom = 247.0
+offset_left = 330.0
+offset_top = 796.0
+offset_right = 526.0
+offset_bottom = 848.0
 theme_override_font_sizes/font_size = 64
 text = "Backflip"
 flat = true
@@ -74,10 +85,10 @@ expand_icon = true
 
 [node name="Frontflip" type="Button" parent="ColorRect" unique_id=1699366758 groups=["Buttons", "Start"]]
 layout_mode = 0
-offset_left = 751.0
-offset_top = 272.0
-offset_right = 959.0
-offset_bottom = 324.0
+offset_left = 712.0
+offset_top = 798.0
+offset_right = 920.0
+offset_bottom = 850.0
 theme_override_font_sizes/font_size = 64
 text = "Frontflip"
 flat = true
@@ -206,8 +217,54 @@ grow_vertical = 2
 
 [node name="ManaUpgrades" type="Control" parent="ColorRect" unique_id=1404575121]
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = -350.0
+offset_top = -60.0
+offset_right = -310.0
+offset_bottom = -20.0
+
+[node name="ManaUpgrade1" type="Button" parent="ColorRect/ManaUpgrades" unique_id=187601288 groups=["Buttons", "Start"]]
+layout_mode = 0
+offset_left = 1213.0
+offset_top = 288.0
+offset_right = 1363.0
+offset_bottom = 438.0
+icon = ExtResource("8_3ecnd")
+flat = true
+expand_icon = true
+
+[node name="ManaUp1" type="TextureRect" parent="ColorRect/ManaUpgrades/ManaUpgrade1" unique_id=328364545]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 146.0
+offset_bottom = 146.0
+
+[node name="ManaStep" type="Button" parent="ColorRect/ManaUpgrades" unique_id=28335899 groups=["Buttons"]]
+layout_mode = 0
+offset_left = 1213.0
+offset_top = 456.0
+offset_right = 1363.0
+offset_bottom = 606.0
+icon = ExtResource("2_6kcas")
+flat = true
+expand_icon = true
+
+[node name="ManaUpgrade2" type="Button" parent="ColorRect/ManaUpgrades" unique_id=509502224 groups=["Buttons"]]
+layout_mode = 0
+offset_left = 1213.0
+offset_top = 622.0
+offset_right = 1363.0
+offset_bottom = 772.0
+icon = ExtResource("9_stapk")
+flat = true
+expand_icon = true
+
+[node name="ManaUp2" type="TextureRect" parent="ColorRect/ManaUpgrades/ManaUpgrade2" unique_id=830179276]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 146.0
+offset_bottom = 146.0
 
 [connection signal="timeout" from="SkillTimer" to="." method="_on_skill_timer_timeout"]
 [connection signal="pressed" from="ColorRect/Backflip" to="." method="_on_backflip_pressed"]
