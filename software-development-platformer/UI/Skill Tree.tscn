@@ -204,6 +204,11 @@ offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="ManaUpgrades" type="Control" parent="ColorRect" unique_id=1404575121]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
 [connection signal="timeout" from="SkillTimer" to="." method="_on_skill_timer_timeout"]
 [connection signal="pressed" from="ColorRect/Backflip" to="." method="_on_backflip_pressed"]
 [connection signal="pressed" from="ColorRect/Frontflip" to="." method="_on_frontflip_pressed"]
