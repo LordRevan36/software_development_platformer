@@ -1,19 +1,19 @@
 extends TextureProgressBar
 
 @onready var player := get_tree().get_first_node_in_group("Player")
-var stam_tween: Tween
+var mana_tween: Tween
 @export var player_path: NodePath
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	max_value = GlobalPlayer.MAX_Stamina
-	value = player.stamina
-	GlobalPlayer.stamina_changed.connect(update_stamina)
+	max_value = GlobalPlayer.MAX_Mana
+	value = player.Mana
+	GlobalPlayer.mana_changed.connect(update_mana)
 
-func update_stamina(current: float, max_stam: float, duration: float):
-	max_value = max_stam
-	stam_tween = create_tween()
-	stam_tween.tween_property(
+func update_mana(current: float, max_mana: float, duration: float):
+	max_value = max_mana
+	mana_tween = create_tween()
+	mana_tween.tween_property(
 		self,
 		"value",
 		current,

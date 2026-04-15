@@ -11,6 +11,12 @@ extends CanvasLayer
 @onready var HealthStep: Button = $ColorRect/HealthUpgrades/HealthStep
 @onready var HealthUpgrade2: Button = $ColorRect/HealthUpgrades/HealthUpgrade2
 @onready var HUP2: TextureRect = $ColorRect/HealthUpgrades/HealthUpgrade2/HUP2
+@onready var ManaUpgrade1: Button = $ColorRect/ManaUpgrades/ManaUpgrade1
+@onready var ManaUp1: TextureRect = $ColorRect/ManaUpgrades/ManaUpgrade1/ManaUp1
+@onready var ManaStep: Button = $ColorRect/ManaUpgrades/ManaStep
+@onready var ManaUpgrade2: Button = $ColorRect/ManaUpgrades/ManaUpgrade2
+@onready var ManaUp2: TextureRect = $ColorRect/ManaUpgrades/ManaUpgrade2/ManaUp2
+
 #when true allows you to close the overlay with the same button used to open it
 var can_close = false
 var AttackLevel := GlobalPlayer.Attack
@@ -61,6 +67,17 @@ func _process(_delta: float) -> void:
 		HUP2.texture = load("res://Assets/HUD/Upgrade%d.png" % ((GlobalPlayer.MAX_Health - 150)/10))
 	if GlobalPlayer.MAX_Health == 200:
 		HealthUpgrade2.modulate = Color.GREEN
+		
+	if GlobalPlayer.MAX_Mana > 100 and GlobalPlayer.MAX_Mana <= 150:
+		ManaUp1.texture = load("res://Assets/HUD/Upgrade%d.png" % ((GlobalPlayer.MAX_Mana - 100)/10))
+	if GlobalPlayer.MAX_Mana >= 150:
+		ManaUpgrade1.modulate = Color.GREEN
+	if GlobalPlayer.MAX_Mana > 150:
+		ManaUp2.texture = load("res://Assets/HUD/Upgrade%d.png" % ((GlobalPlayer.MAX_Mana - 150)/10))
+	if GlobalPlayer.MAX_Mana == 200:
+		ManaUpgrade2.modulate = Color.GREEN
+		
+
 func _on_skill_timer_timeout() -> void:
 	can_close = true
 
@@ -120,3 +137,26 @@ func _on_health_upgrade_2_pressed() -> void:
 		GlobalPlayer.health_changed.emit(GlobalPlayer.MAX_Health, GlobalPlayer.MAX_Health)
 		GlobalPlayer.health = GlobalPlayer.MAX_Health
 	print(GlobalPlayer.MAX_Health)
+
+
+func _on_mana_upgrade_1_pressed() -> void:
+	if GlobalPlayer.MAX_Mana < 150:
+		GlobalPlayer.MAX_Mana += 10
+		GlobalPlayer.mana_changed.emit(GlobalPlayer.MAX_Mana, GlobalPlayer.MAX_Mana)
+		GlobalPlayer.mana = GlobalPlayer.MAX_Mana
+	print(GlobalPlayer.MAX_Mana)
+	if GlobalPlayer.MAX_Mana == 150:
+		ManaStep.modulate = Color.WHITE
+
+func _on_mana_step_pressed() -> void:
+	if GlobalPlayer.MAX_Mana >= 150:
+		ManaStep.modulate = Color.GREEN
+		GlobalPlayer.can_continue_mana = true
+		ManaUpgrade2.modulate = Color.WHITE
+
+func _on_mana_upgrade_2_pressed() -> void:
+	if GlobalPlayer.MAX_Mana < 200:
+		GlobalPlayer.MAX_Mana += 10
+		GlobalPlayer.mana_changed.emit(GlobalPlayer.MAX_Mana, GlobalPlayer.MAX_Mana)
+		GlobalPlayer.mana = GlobalPlayer.MAX_Mana
+	print(GlobalPlayer.MAX_Mana)

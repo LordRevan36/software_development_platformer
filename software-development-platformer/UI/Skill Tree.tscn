@@ -275,3 +275,6 @@ offset_bottom = 146.0
 [connection signal="pressed" from="ColorRect/HealthUpgrades/HealthUpgrade1" to="." method="_on_health_upgrade_1_pressed"]
 [connection signal="pressed" from="ColorRect/HealthUpgrades/HealthStep" to="." method="_on_health_step_pressed"]
 [connection signal="pressed" from="ColorRect/HealthUpgrades/HealthUpgrade2" to="." method="_on_health_upgrade_2_pressed"]
+[connection signal="pressed" from="ColorRect/ManaUpgrades/ManaUpgrade1" to="." method="_on_mana_upgrade_1_pressed"]
+[connection signal="pressed" from="ColorRect/ManaUpgrades/ManaStep" to="." method="_on_mana_step_pressed"]
+[connection signal="pressed" from="ColorRect/ManaUpgrades/ManaUpgrade2" to="." method="_on_mana_upgrade_2_pressed"]
