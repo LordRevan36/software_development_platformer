@@ -159,23 +159,20 @@ func _jump_check() -> void:
 		#if player has held down the jump/flip button too long (forces jump without key release):
 		if ((time-crouchStartTime)>0.5):
 			if Input.is_action_pressed("Up"):
-				jump(Vector2.ZERO, true)
+				jump(Vector2.ZERO)
 			elif Input.is_action_pressed("Backflip") and GlobalControls.canBackflip:
 				backflip()
 			elif Input.is_action_pressed("Frontflip") and GlobalControls.canFrontflip:
 				frontflip()
 		#regular jump/flip detection (waits for key release)
 		if Input.is_action_just_released("Up"):
-			jump(Vector2.ZERO, true)
+			jump(Vector2.ZERO)
 		elif Input.is_action_just_released("Backflip") and GlobalControls.canBackflip:
 			backflip()
 		elif Input.is_action_just_released("Frontflip") and GlobalControls.canFrontflip:
 			frontflip()
-		#forces jump if stamina is too low(?)
-		if Input.is_action_pressed("Up") and JUMP_COST*(time-crouchStartTime)*2 >= stamina:
-			jump(Vector2.ZERO, true)
 
-func jump(input_velocity : Vector2, use_stamina : bool):
+func jump(input_velocity : Vector2):
 	if (input_velocity == Vector2.ZERO):
 		velocity.y = (JUMP_VELOCITY+JUMP_VELOCITY*(time-crouchStartTime)/2)
 	else:
@@ -340,7 +337,7 @@ func _on_coyote_jump_timer_timeout() -> void:
 	canJump = false
 	if state == State.CROUCH: #makes player jump instead of just falling off the ledge if they were trying to jump
 		if Input.is_action_pressed("Up"):
-			jump(Vector2.ZERO, true)
+			jump(Vector2.ZERO)
 		elif Input.is_action_pressed("Backflip"):
 			backflip()
 		elif Input.is_action_pressed("Frontflip"):
@@ -360,7 +357,7 @@ func _on_mana_timer_timeout() -> void:
 func _on_area_hitbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("BouncePad"):
 		usingBouncePad = true #prevents _land() from running
-		jump(area._return_new_player_velocity(velocity), false) #forces jump from bouncepad
+		jump(area._return_new_player_velocity(velocity)) #forces jump from bouncepad
 
 #checks for a bouncepad exited
 func _on_area_hitbox_area_exited(area: Area2D) -> void:
