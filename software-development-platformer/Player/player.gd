@@ -2,6 +2,7 @@ extends CharacterBody2D
 class_name Player
 
 @onready var AnimSprite: AnimatedSprite2D = $PlayerSprite #just makes code look better, easier to change later if file paths change
+@onready var AreaHitbox: Area2D = $AreaHitbox #secondary hitbox for checking collisions with Area2D's
 @onready var Slash: AnimatedSprite2D = $Slash
 @onready var CoyoteTimer: Timer = $Timers/CoyoteJumpTimer
 @onready var AttackTimer: Timer = $Timers/AttackTimer #making these timers both for balance tweaking, and not letting animations determinephysics state
@@ -13,7 +14,7 @@ const SPEED = 300.0
 const JUMP_VELOCITY = -510.0
 const ATTACK_SLOW_RATE = 0.5 #multiplier to slow down player velocity when they attack
 
-@export var friction = 0.9 #value from 0 to 1. 1 means full friction on floor when running, 0 means full icy floor
+@export var default_friction = 0.9 #value from 0 to 1. 1 means full friction on floor when running, 0 means full icy floor
 @export var air_control = 0.5 #value from 0 to 1, lets you control how easily player can control their air movement
 
 #can reference State outside of player as Player.State.IDLE (or other value)
@@ -29,9 +30,17 @@ var landVelocity = Vector2(0,0) #stores velocity of player immediately before la
 var slow = 1 #stores slowdown rate during things like attack
 var canJump = true #used to let player jump a little after leaving the platform
 var Mana = GlobalPlayer.MAX_Mana #stores the mana for the player
+var usingBouncePad = false #used to prevent _land function if player is using the bounce pad
+var health = GlobalPlayer.MAX_Health #stores the health for the player
+var friction = 0.9
+var knockback: Vector2 = Vector2.ZERO
+var knockback_timer: float = 0.0
 #var duration = 0
 
 #signals can be put here but typically should be put in global_player so that they are easier to detect.
+
+func _ready() -> void:
+	friction = default_friction
 
 func _physics_process(delta: float) -> void:
 	#immediate escape if exiting to another scene
@@ -47,7 +56,8 @@ func _physics_process(delta: float) -> void:
 	
 	#update signals and states
 	if is_on_floor() and !was_on_floor:
-		_land()
+		if not usingBouncePad:
+			_land()
 	if Input.is_action_just_pressed("Attack"):
 		_attack()
 	_update_direction()
@@ -70,6 +80,13 @@ func _physics_process(delta: float) -> void:
 	#checking for opening other menus
 	_pause_check()
 	_skill_tree_check()
+	
+	#knockback
+	if knockback_timer > 0.0:
+		velocity = knockback
+		knockback_timer -= delta
+		if knockback_timer <= 0.0:
+			knockback = Vector2.ZERO
 
 #returns gravity vector adjusted based on state
 func _return_gravity(delta: float) -> Vector2:
@@ -83,11 +100,14 @@ func _return_gravity(delta: float) -> Vector2:
 #handles signal and updates state when landing
 func _land() -> void:
 	GlobalPlayer.landed.emit(landVelocity, get_last_slide_collision().get_collider()) #emit signal for platforms etc.
-	#print(get_last_slide_collision().get_collider())
 	if state == State.BACKFLIP or state == State.FRONTFLIP: #diff type of land for flips
 		state = State.FLIPLAND
 	else:
 		state = State.LAND
+	print(get_last_slide_collision().get_collider())
+	if get_last_slide_collision().get_collider().is_in_group("Platform"):
+		friction = get_last_slide_collision().get_collider().friction
+		print(friction)
 
 #handles signal and updates state when attacking
 func _attack() -> void:
@@ -139,26 +159,31 @@ func _jump_check() -> void:
 		#if player has held down the jump/flip button too long (forces jump without key release):
 		if ((time-crouchStartTime)>0.5):
 			if Input.is_action_pressed("Up"):
-				jump()
+				jump(Vector2.ZERO, true)
 			elif Input.is_action_pressed("Backflip") and GlobalControls.canBackflip:
 				backflip()
 			elif Input.is_action_pressed("Frontflip") and GlobalControls.canFrontflip:
 				frontflip()
 		#regular jump/flip detection (waits for key release)
 		if Input.is_action_just_released("Up"):
-			jump()
+			jump(Vector2.ZERO, true)
 		elif Input.is_action_just_released("Backflip") and GlobalControls.canBackflip:
 			backflip()
 		elif Input.is_action_just_released("Frontflip") and GlobalControls.canFrontflip:
 			frontflip()
+		#forces jump if stamina is too low(?)
+		if Input.is_action_pressed("Up") and JUMP_COST*(time-crouchStartTime)*2 >= stamina:
+			jump(Vector2.ZERO, true)
 
-func jump():
-	velocity.y = (JUMP_VELOCITY+JUMP_VELOCITY*(time-crouchStartTime)/2)
+func jump(input_velocity : Vector2, use_stamina : bool):
+	if (input_velocity == Vector2.ZERO):
+		velocity.y = (JUMP_VELOCITY+JUMP_VELOCITY*(time-crouchStartTime)/2)
+	else:
+		velocity = input_velocity
 	state = State.JUMP
 	canJump = false
 	GlobalPlayer.jumped.emit()
 	jumpVelocity = velocity
-	ManaTimer.start()
 
 func backflip():
 	velocity.y = (JUMP_VELOCITY+JUMP_VELOCITY*(time-crouchStartTime)/4)*1.4
@@ -181,7 +206,7 @@ func frontflip():
 func _not_on_floor_update() -> void:
 	if canJump and CoyoteTimer.is_stopped():
 		CoyoteTimer.start()
-
+	friction = default_friction
 	#SETS FALLING IF IN AIR AND NOT DOING OTHER ACTION
 	if not [State.JUMP, State.BACKFLIP, State.FRONTFLIP, State.ATTACK].has(state) and not (state == State.CROUCH and canJump):
 		state = State.FALL
@@ -305,12 +330,17 @@ func regenMana() -> void:
 	while Mana != GlobalPlayer.MAX_Mana:
 			update_mana(10, 0.75)
 
+#apply knockback when hit by an enemy
+func apply_knockback(direction: Vector2, force: float, knockback_duration: float) -> void:
+	knockback = direction * force
+	knockback_timer = knockback_duration
+
 #CONNECTED FUNCTIONS
 func _on_coyote_jump_timer_timeout() -> void:
 	canJump = false
 	if state == State.CROUCH: #makes player jump instead of just falling off the ledge if they were trying to jump
 		if Input.is_action_pressed("Up"):
-			jump()
+			jump(Vector2.ZERO, true)
 		elif Input.is_action_pressed("Backflip"):
 			backflip()
 		elif Input.is_action_pressed("Frontflip"):
@@ -325,3 +355,14 @@ func _on_slash_animation_finished() -> void: #used to visually hide slash when i
 
 func _on_mana_timer_timeout() -> void:
 		regenMana()
+
+#Checks for a bouncepad entered
+func _on_area_hitbox_area_entered(area: Area2D) -> void:
+	if area.is_in_group("BouncePad"):
+		usingBouncePad = true #prevents _land() from running
+		jump(area._return_new_player_velocity(velocity), false) #forces jump from bouncepad
+
+#checks for a bouncepad exited
+func _on_area_hitbox_area_exited(area: Area2D) -> void:
+	if area.is_in_group("BouncePad"):
+		usingBouncePad = false #allows landing again
