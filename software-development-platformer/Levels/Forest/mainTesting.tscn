@@ -1,0 +1,1091 @@
+[gd_scene format=3 uid="uid://1ip8dfwaat1p"]
+
+[ext_resource type="Texture2D" uid="uid://ctk8ibr44c642" path="res://Assets/Forest/Bush.png" id="1_arvju"]
+[ext_resource type="Texture2D" uid="uid://bud8q02b7boe8" path="res://Assets/Forest/BackGrass.png" id="2_d6g2o"]
+[ext_resource type="Texture2D" uid="uid://cc5t6dk5qt08y" path="res://Assets/Forest/Tree1.png" id="3_631vg"]
+[ext_resource type="Texture2D" uid="uid://dg6umr23h26yn" path="res://Assets/Forest/Tree2.png" id="4_ya482"]
+[ext_resource type="Texture2D" uid="uid://kcitspqg4mfr" path="res://Assets/Forest/Tree3.png" id="5_lc4l7"]
+[ext_resource type="Texture2D" uid="uid://yci8u2sv0dny" path="res://Assets/Forest/LeafParticle1.png" id="6_nqnja"]
+[ext_resource type="Texture2D" uid="uid://c2fn1ck4bikb1" path="res://Assets/Forest/Grass.png" id="7_l30ab"]
+[ext_resource type="Texture2D" uid="uid://ul3588q4vy3l" path="res://Assets/Forest/LeafParticle2.png" id="8_q5gb5"]
+[ext_resource type="PackedScene" uid="uid://cy1vyx88wgg4v" path="res://Player/player.tscn" id="9_bhfk5"]
+[ext_resource type="Script" uid="uid://do5bugkt41qkv" path="res://camera.gd" id="10_uui1i"]
+[ext_resource type="Script" uid="uid://cuc4a4nkwo6vf" path="res://Props/Platform/platforms.gd" id="11_8fdcq"]
+[ext_resource type="PackedScene" uid="uid://c6lcnacw8vw5s" path="res://Props/Platform/platform.tscn" id="12_d4f7m"]
+[ext_resource type="PackedScene" uid="uid://cikgxfjxyjw3r" path="res://Props/Exit/exit.tscn" id="15_1ar81"]
+[ext_resource type="Texture2D" uid="uid://d15b6nmtxas3j" path="res://Assets/Forest/BushyGrass.png" id="16_1ds8o"]
+[ext_resource type="Texture2D" uid="uid://dok7ls8ld3g3u" path="res://Assets/Forest/FrontGround.png" id="17_ry543"]
+[ext_resource type="AudioStream" uid="uid://buaaxggw78ntj" path="res://Assets/Music/ForestLevel.mp3" id="18_hr4t6"]
+[ext_resource type="PackedScene" uid="uid://bfitipy31q1js" path="res://Enemies/enemy.tscn" id="19_wnxxf"]
+
+[sub_resource type="Gradient" id="Gradient_vtle1"]
+offsets = PackedFloat32Array(0, 0.33490565, 0.8018868, 1)
+colors = PackedColorArray(0.8298393, 0.28756416, 0.31498945, 1, 0.82405865, 0.41192046, 0.21686882, 1, 0.9603854, 0.6462903, 0, 1, 0.95962197, 0.8111548, 3.85046e-07, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_1nvrg"]
+gradient = SubResource("Gradient_vtle1")
+
+[sub_resource type="Curve" id="Curve_w48qg"]
+bake_resolution = 25
+_data = [Vector2(0, 0.7507374), 0.0, 0.0, 0, 0, Vector2(0.5482758, 0.91946894), 0.0, 0.0, 0, 0, Vector2(1, 0.24070787), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_vivmo"]
+curve = SubResource("Curve_w48qg")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vivmo"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1280, 1, 1)
+angle_min = -9.9999895
+angle_max = 15.0000105
+velocity_pivot = Vector3(5, 0, 0)
+direction = Vector3(50, 0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 70.0
+angular_velocity_min = -20.000015
+angular_velocity_max = 14.999984
+gravity = Vector3(0, 300, 0)
+color_initial_ramp = SubResource("GradientTexture1D_1nvrg")
+turbulence_enabled = true
+turbulence_noise_strength = 15.0
+turbulence_noise_scale = 8.0
+turbulence_noise_speed = Vector3(2, 1, 0)
+turbulence_noise_speed_random = 1.0
+turbulence_influence_min = 0.15
+turbulence_influence_max = 0.18
+turbulence_influence_over_life = SubResource("CurveTexture_vivmo")
+
+[sub_resource type="GDScript" id="GDScript_2cqfq"]
+script/source = "extends GPUParticles2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta: float) -> void:
+	pass
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uvfms"]
+resource_local_to_scene = true
+size = Vector2(176, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gy5oh"]
+resource_local_to_scene = true
+size = Vector2(124, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_arvju"]
+resource_local_to_scene = true
+size = Vector2(176, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d6g2o"]
+resource_local_to_scene = true
+size = Vector2(316, 132)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0xm2m"]
+distance = -285.0
+
+[node name="Main" type="Node" unique_id=732509840]
+
+[node name="Parallax <100" type="Node2D" parent="." unique_id=1351633235]
+position = Vector2(1, -295)
+
+[node name="Parallax30" type="Node2D" parent="Parallax <100" unique_id=1329816232]
+position = Vector2(-5, 192)
+
+[node name="Repeating" type="Parallax2D" parent="Parallax <100/Parallax30" unique_id=1755294169]
+scroll_scale = Vector2(0.3, 0.3)
+repeat_size = Vector2(2560, 0)
+repeat_times = 3
+
+[node name="Background" type="ColorRect" parent="Parallax <100/Parallax30/Repeating" unique_id=1743539598]
+offset_left = 1.9460449
+offset_top = 0.2970581
+offset_right = 2.946045
+offset_bottom = 1.2970581
+scale = Vector2(2560, 500)
+color = Color(0.9517366, 0.8742226, 0.3032913, 1)
+
+[node name="Canopy" type="Sprite2D" parent="Parallax <100/Parallax30/Repeating" unique_id=1421731563]
+modulate = Color(2.9472616, 3.058063, 1.896237, 1)
+position = Vector2(-170.77844, -18.679565)
+scale = Vector2(-1, -1)
+texture = ExtResource("1_arvju")
+
+[node name="Canopy2" type="Sprite2D" parent="Parallax <100/Parallax30/Repeating" unique_id=1560371860]
+modulate = Color(2.9472616, 3.058063, 1.896237, 1)
+position = Vector2(207.40076, -233.37012)
+scale = Vector2(-1, 1)
+texture = ExtResource("1_arvju")
+
+[node name="BackGrass" type="Sprite2D" parent="Parallax <100/Parallax30/Repeating" unique_id=1073211698]
+modulate = Color(0.80183625, 0.78237003, 0.35394818, 1)
+position = Vector2(-198.6352, 363.82813)
+texture = ExtResource("2_d6g2o")
+
+[node name="Trees" type="Node2D" parent="Parallax <100/Parallax30/Repeating" unique_id=1661145138]
+position = Vector2(6.2216797, -94.17462)
+
+[node name="Tree" type="Sprite2D" parent="Parallax <100/Parallax30/Repeating/Trees" unique_id=608799709]
+modulate = Color(0.9103884, 0.8025163, 0.35808155, 1)
+position = Vector2(448.97034, 186.31186)
+rotation = 3.1415925
+scale = Vector2(1, -1)
+texture = ExtResource("3_631vg")
+
+[node name="Tree2" type="Sprite2D" parent="Parallax <100/Parallax30/Repeating/Trees" unique_id=1967702153]
+modulate = Color(0.9103884, 0.8025163, 0.35808155, 1)
+position = Vector2(2074.8062, 214.9574)
+rotation = 3.1415925
+scale = Vector2(1, -1)
+texture = ExtResource("4_ya482")
+flip_h = true
+
+[node name="Tree3" type="Sprite2D" parent="Parallax <100/Parallax30/Repeating/Trees" unique_id=992454750]
+modulate = Color(0.9103884, 0.8025163, 0.35808155, 1)
+position = Vector2(2692.9702, 118.31183)
+rotation = 3.1415925
+scale = Vector2(1, -1)
+texture = ExtResource("4_ya482")
+
+[node name="Tree4" type="Sprite2D" parent="Parallax <100/Parallax30/Repeating/Trees" unique_id=1164968352]
+modulate = Color(0.9103884, 0.8025163, 0.35808155, 1)
+position = Vector2(3599.9702, 157.31183)
+rotation = 3.1415925
+scale = Vector2(1, -1)
+texture = ExtResource("3_631vg")
+
+[node name="Tree5" type="Sprite2D" parent="Parallax <100/Parallax30/Repeating/Trees" unique_id=1467338349]
+modulate = Color(0.9103884, 0.8025163, 0.35808155, 1)
+position = Vector2(948.97034, 167.31183)
+rotation = 3.1415925
+scale = Vector2(1, -1)
+texture = ExtResource("5_lc4l7")
+
+[node name="Tree6" type="Sprite2D" parent="Parallax <100/Parallax30/Repeating/Trees" unique_id=172960977]
+modulate = Color(0.9103884, 0.8025163, 0.35808155, 1)
+position = Vector2(2394.9702, 148.31183)
+rotation = 3.1415925
+scale = Vector2(1, -1)
+texture = ExtResource("3_631vg")
+
+[node name="Tree7" type="Sprite2D" parent="Parallax <100/Parallax30/Repeating/Trees" unique_id=1610964667]
+modulate = Color(0.9103884, 0.8025163, 0.35808155, 1)
+position = Vector2(-40.029663, 84.31183)
+rotation = 3.1415925
+scale = Vector2(1, -1)
+texture = ExtResource("4_ya482")
+
+[node name="Tree8" type="Sprite2D" parent="Parallax <100/Parallax30/Repeating/Trees" unique_id=198394296]
+modulate = Color(0.9103884, 0.8025163, 0.35808155, 1)
+position = Vector2(1516.9703, 65.31183)
+rotation = 3.1415925
+scale = Vector2(1, -1)
+texture = ExtResource("4_ya482")
+
+[node name="Tree9" type="Sprite2D" parent="Parallax <100/Parallax30/Repeating/Trees" unique_id=1182978764]
+modulate = Color(0.9103884, 0.8025163, 0.35808155, 1)
+position = Vector2(-281.02966, 193.31186)
+rotation = 3.1415925
+scale = Vector2(1, -1)
+texture = ExtResource("3_631vg")
+
+[node name="Tree10" type="Sprite2D" parent="Parallax <100/Parallax30/Repeating/Trees" unique_id=347705696]
+modulate = Color(0.9103884, 0.8025163, 0.35808155, 1)
+position = Vector2(1164.9703, 125.31183)
+rotation = 3.1415925
+scale = Vector2(1, -1)
+texture = ExtResource("4_ya482")
+
+[node name="Tree11" type="Sprite2D" parent="Parallax <100/Parallax30/Repeating/Trees" unique_id=775660711]
+modulate = Color(0.9103884, 0.8025163, 0.35808155, 1)
+position = Vector2(1962.9703, 125.31183)
+rotation = 3.1415925
+scale = Vector2(1, -1)
+texture = ExtResource("4_ya482")
+
+[node name="Tree12" type="Sprite2D" parent="Parallax <100/Parallax30/Repeating/Trees" unique_id=2018357772]
+modulate = Color(0.9103884, 0.8025163, 0.35808155, 1)
+position = Vector2(2869.9702, 164.31183)
+rotation = 3.1415925
+scale = Vector2(1, -1)
+texture = ExtResource("3_631vg")
+
+[node name="Tree13" type="Sprite2D" parent="Parallax <100/Parallax30/Repeating/Trees" unique_id=878487749]
+modulate = Color(0.9103884, 0.8025163, 0.35808155, 1)
+position = Vector2(218.97058, 174.31189)
+rotation = 3.1415925
+scale = Vector2(1, -1)
+texture = ExtResource("5_lc4l7")
+
+[node name="Tree14" type="Sprite2D" parent="Parallax <100/Parallax30/Repeating/Trees" unique_id=1341576506]
+modulate = Color(0.9103884, 0.8025163, 0.35808155, 1)
+position = Vector2(1664.9703, 155.31183)
+rotation = 3.1415925
+scale = Vector2(1, -1)
+texture = ExtResource("3_631vg")
+
+[node name="Tree15" type="Sprite2D" parent="Parallax <100/Parallax30/Repeating/Trees" unique_id=262128704]
+modulate = Color(0.9103884, 0.8025163, 0.35808155, 1)
+position = Vector2(-770.02966, 91.31183)
+rotation = 3.1415925
+scale = Vector2(1, -1)
+texture = ExtResource("4_ya482")
+
+[node name="Tree16" type="Sprite2D" parent="Parallax <100/Parallax30/Repeating/Trees" unique_id=1851986746]
+modulate = Color(0.9103884, 0.8025163, 0.35808155, 1)
+position = Vector2(786.97034, 72.31183)
+rotation = 3.1415925
+scale = Vector2(1, -1)
+texture = ExtResource("4_ya482")
+
+[node name="Props" type="Parallax2D" parent="Parallax <100/Parallax30" unique_id=455223996]
+scroll_scale = Vector2(0.3, 0.3)
+
+[node name="Parallax40" type="Node2D" parent="Parallax <100" unique_id=216826886]
+position = Vector2(-5, 192)
+
+[node name="Repeating" type="Parallax2D" parent="Parallax <100/Parallax40" unique_id=1808221991]
+scroll_scale = Vector2(0.4, 0.4)
+repeat_size = Vector2(2560, 0)
+repeat_times = 3
+
+[node name="Canopy" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating" unique_id=81087775]
+modulate = Color(3.1915548, 2.999711, 1.2243794, 1)
+position = Vector2(-180.60886, -118.506836)
+scale = Vector2(-1, -1)
+texture = ExtResource("1_arvju")
+
+[node name="Canopy2" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating" unique_id=470890365]
+modulate = Color(3.1915548, 2.999711, 1.2243794, 1)
+position = Vector2(197.57034, -333.1974)
+scale = Vector2(-1, 1)
+texture = ExtResource("1_arvju")
+
+[node name="BackGrass" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating" unique_id=2082437932]
+modulate = Color(0.70319664, 0.719725, 0.29909807, 1)
+position = Vector2(-197.68933, 306.3014)
+texture = ExtResource("2_d6g2o")
+
+[node name="Trees" type="Node2D" parent="Parallax <100/Parallax40/Repeating" unique_id=1463350893]
+position = Vector2(6.2216797, -94.17462)
+
+[node name="Tree" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating/Trees" unique_id=790072429]
+modulate = Color(0.8753016, 0.7071762, 0.296279, 1)
+position = Vector2(351.5039, 175.54797)
+texture = ExtResource("3_631vg")
+
+[node name="Tree2" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating/Trees" unique_id=1062905838]
+modulate = Color(0.8753016, 0.7071762, 0.296279, 1)
+position = Vector2(1977.3398, 204.19348)
+texture = ExtResource("4_ya482")
+flip_h = true
+
+[node name="Tree3" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating/Trees" unique_id=1971322146]
+modulate = Color(0.8753016, 0.7071762, 0.296279, 1)
+position = Vector2(2595.504, 107.54791)
+texture = ExtResource("4_ya482")
+
+[node name="Tree4" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating/Trees" unique_id=1518402478]
+modulate = Color(0.8753016, 0.7071762, 0.296279, 1)
+position = Vector2(3502.504, 146.54791)
+texture = ExtResource("3_631vg")
+
+[node name="Tree5" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating/Trees" unique_id=1838724105]
+modulate = Color(0.8753016, 0.7071762, 0.296279, 1)
+position = Vector2(851.5039, 156.54791)
+texture = ExtResource("5_lc4l7")
+
+[node name="Tree6" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating/Trees" unique_id=1712126317]
+modulate = Color(0.8753016, 0.7071762, 0.296279, 1)
+position = Vector2(2297.504, 137.54791)
+texture = ExtResource("3_631vg")
+
+[node name="Tree7" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating/Trees" unique_id=1325632871]
+modulate = Color(0.8753016, 0.7071762, 0.296279, 1)
+position = Vector2(-137.4961, 73.54791)
+texture = ExtResource("4_ya482")
+
+[node name="Tree8" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating/Trees" unique_id=1128834450]
+modulate = Color(0.8753016, 0.7071762, 0.296279, 1)
+position = Vector2(1419.5039, 54.547913)
+texture = ExtResource("4_ya482")
+
+[node name="Tree9" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating/Trees" unique_id=2011355234]
+modulate = Color(0.8753016, 0.7071762, 0.296279, 1)
+position = Vector2(-378.4961, 182.54797)
+texture = ExtResource("3_631vg")
+
+[node name="Tree10" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating/Trees" unique_id=964521760]
+modulate = Color(0.8753016, 0.7071762, 0.296279, 1)
+position = Vector2(1067.5039, 114.54791)
+texture = ExtResource("4_ya482")
+
+[node name="Tree11" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating/Trees" unique_id=2020409447]
+modulate = Color(0.8753016, 0.7071762, 0.296279, 1)
+position = Vector2(1865.5039, 114.54791)
+texture = ExtResource("4_ya482")
+
+[node name="Tree12" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating/Trees" unique_id=854428221]
+modulate = Color(0.8753016, 0.7071762, 0.296279, 1)
+position = Vector2(2772.504, 153.54791)
+texture = ExtResource("3_631vg")
+
+[node name="Tree13" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating/Trees" unique_id=1957500042]
+modulate = Color(0.8753016, 0.7071762, 0.296279, 1)
+position = Vector2(121.50415, 163.54797)
+texture = ExtResource("5_lc4l7")
+
+[node name="Tree14" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating/Trees" unique_id=1408051985]
+modulate = Color(0.8753016, 0.7071762, 0.296279, 1)
+position = Vector2(1567.5039, 144.54791)
+texture = ExtResource("3_631vg")
+
+[node name="Tree15" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating/Trees" unique_id=1506371776]
+modulate = Color(0.8753016, 0.7071762, 0.296279, 1)
+position = Vector2(-867.4961, 80.54791)
+texture = ExtResource("4_ya482")
+
+[node name="Tree16" type="Sprite2D" parent="Parallax <100/Parallax40/Repeating/Trees" unique_id=1275556613]
+modulate = Color(0.8753016, 0.7071762, 0.296279, 1)
+position = Vector2(689.5039, 61.547913)
+texture = ExtResource("4_ya482")
+
+[node name="Props" type="Parallax2D" parent="Parallax <100/Parallax40" unique_id=1219084621]
+scroll_scale = Vector2(0.4, 0.4)
+
+[node name="Parallax50" type="Node2D" parent="Parallax <100" unique_id=181256735]
+position = Vector2(-5, 192)
+
+[node name="Repeating" type="Parallax2D" parent="Parallax <100/Parallax50" unique_id=1218889636]
+scroll_scale = Vector2(0.5, 0.5)
+repeat_size = Vector2(2560, 0)
+repeat_times = 3
+
+[node name="Canopy" type="Sprite2D" parent="Parallax <100/Parallax50/Repeating" unique_id=348817415]
+modulate = Color(2.4092994, 2.7214386, 1.0234013, 1)
+position = Vector2(-238.92627, -215.44958)
+scale = Vector2(1, -1)
+texture = ExtResource("1_arvju")
+
+[node name="Canopy2" type="Sprite2D" parent="Parallax <100/Parallax50/Repeating" unique_id=22877551]
+modulate = Color(2.4092994, 2.7214386, 1.0234013, 1)
+position = Vector2(139.25293, -430.14014)
+texture = ExtResource("1_arvju")
+
+[node name="BackGrass" type="Sprite2D" parent="Parallax <100/Parallax50/Repeating" unique_id=968894857]
+modulate = Color(0.6524335, 0.64537066, 0.26146618, 1)
+position = Vector2(-191.90771, 248.08453)
+texture = ExtResource("2_d6g2o")
+
+[node name="Trees" type="Node2D" parent="Parallax <100/Parallax50/Repeating" unique_id=1965115239]
+position = Vector2(6.2216797, -94.17462)
+
+[node name="Tree" type="Sprite2D" parent="Parallax <100/Parallax50/Repeating/Trees" unique_id=151031241]
+modulate = Color(0.82316643, 0.6263619, 0.2485514, 1)
+position = Vector2(-1285, 136)
+rotation = 3.1415925
+scale = Vector2(1, -1)
+texture = ExtResource("3_631vg")
+
+[node name="Tree2" type="Sprite2D" parent="Parallax <100/Parallax50/Repeating/Trees" unique_id=1716425252]
+modulate = Color(0.82316643, 0.6263619, 0.2485514, 1)
+position = Vector2(2166, 124)
+rotation = 3.1415925
+scale = Vector2(1, -1)
+texture = ExtResource("4_ya482")
+
+[node name="Tree3" type="Sprite2D" parent="Parallax <100/Parallax50/Repeating/Trees" unique_id=1545870643]
+modulate = Color(0.82316643, 0.6263619, 0.2485514, 1)
+position = Vector2(687, 116)
+texture = ExtResource("4_ya482")
+
+[node name="Tree4" type="Sprite2D" parent="Parallax <100/Parallax50/Repeating/Trees" unique_id=1458503005]
+modulate = Color(0.82316643, 0.6263619, 0.2485514, 1)
+position = Vector2(2527, 98.00003)
+rotation = 3.1415925
+scale = Vector2(1, -1)
+texture = ExtResource("3_631vg")
+
+[node name="Tree5" type="Sprite2D" parent="Parallax <100/Parallax50/Repeating/Trees" unique_id=252717869]
+modulate = Color(0.82316643, 0.6263619, 0.2485514, 1)
+position = Vector2(371, 120)
+rotation = 3.1415925
+scale = Vector2(1, -1)
+texture = ExtResource("5_lc4l7")
+
+[node name="Tree6" type="Sprite2D" parent="Parallax <100/Parallax50/Repeating/Trees" unique_id=663505640]
+modulate = Color(0.82316643, 0.6263619, 0.2485514, 1)
+position = Vector2(-1525, 130)
+texture = ExtResource("3_631vg")
+
+[node name="Tree7" type="Sprite2D" parent="Parallax <100/Parallax50/Repeating/Trees" unique_id=1658316441]
+modulate = Color(0.82316643, 0.6263619, 0.2485514, 1)
+position = Vector2(-916, 46)
+texture = ExtResource("4_ya482")
+
+[node name="Tree8" type="Sprite2D" parent="Parallax <100/Parallax50/Repeating/Trees" unique_id=1048656283]
+modulate = Color(0.87999445, 0.5088788, 0.15556309, 1)
+position = Vector2(-202, 106)
+rotation = 3.1415925
+scale = Vector2(1, -1)
+texture = ExtResource("3_631vg")
+
+[node name="Tree9" type="Sprite2D" parent="Parallax <100/Parallax50/Repeating/Trees" unique_id=85362925]
+modulate = Color(0.87999445, 0.5088788, 0.15556309, 1)
+position = Vector2(1244, 38)
+rotation = 3.1415925
+scale = Vector2(1, -1)
+texture = ExtResource("4_ya482")
+
+[node name="Tree10" type="Sprite2D" parent="Parallax <100/Parallax50/Repeating/Trees" unique_id=782855018]
+modulate = Color(0.87999445, 0.5088788, 0.15556309, 1)
+position = Vector2(2042, 38)
+texture = ExtResource("4_ya482")
+
+[node name="Tree11" type="Sprite2D" parent="Parallax <100/Parallax50/Repeating/Trees" unique_id=731632505]
+modulate = Color(0.87999445, 0.5088788, 0.15556309, 1)
+position = Vector2(2949, 77)
+rotation = 3.1415925
+scale = Vector2(1, -1)
+texture = ExtResource("3_631vg")
+
+[node name="Tree12" type="Sprite2D" parent="Parallax <100/Parallax50/Repeating/Trees" unique_id=934573057]
+modulate = Color(0.87999445, 0.5088788, 0.15556309, 1)
+position = Vector2(298, 87)
+rotation = 3.1415925
+scale = Vector2(1, -1)
+texture = ExtResource("5_lc4l7")
+
+[node name="Tree13" type="Sprite2D" parent="Parallax <100/Parallax50/Repeating/Trees" unique_id=1192196741]
+modulate = Color(0.87999445, 0.5088788, 0.15556309, 1)
+position = Vector2(1744, 68)
+texture = ExtResource("3_631vg")
+
+[node name="Tree14" type="Sprite2D" parent="Parallax <100/Parallax50/Repeating/Trees" unique_id=1198854942]
+modulate = Color(0.87999445, 0.5088788, 0.15556309, 1)
+position = Vector2(-691, 4)
+texture = ExtResource("4_ya482")
+
+[node name="Tree15" type="Sprite2D" parent="Parallax <100/Parallax50/Repeating/Trees" unique_id=1196413139]
+modulate = Color(0.87999445, 0.5088788, 0.15556309, 1)
+position = Vector2(866, -15)
+texture = ExtResource("4_ya482")
+
+[node name="Props" type="Parallax2D" parent="Parallax <100/Parallax50" unique_id=1365790298]
+scroll_scale = Vector2(0.5, 0.5)
+
+[node name="Parallax60" type="Node2D" parent="Parallax <100" unique_id=682483662]
+position = Vector2(-5, 192)
+
+[node name="Repeating" type="Parallax2D" parent="Parallax <100/Parallax60" unique_id=76545703]
+scroll_scale = Vector2(0.6, 0.6)
+repeat_size = Vector2(2560, 0)
+repeat_times = 3
+
+[node name="Canopy" type="Sprite2D" parent="Parallax <100/Parallax60/Repeating" unique_id=1536301588]
+modulate = Color(2.0418396, 2.1792493, 1.3619889, 1)
+position = Vector2(-77.24365, -326.39233)
+scale = Vector2(-1, -1)
+texture = ExtResource("1_arvju")
+
+[node name="Canopy2" type="Sprite2D" parent="Parallax <100/Parallax60/Repeating" unique_id=868570761]
+modulate = Color(2.0418396, 2.1792493, 1.3619889, 1)
+position = Vector2(300.93555, -541.0829)
+scale = Vector2(-1, 1)
+texture = ExtResource("1_arvju")
+
+[node name="BackGrass" type="Sprite2D" parent="Parallax <100/Parallax60/Repeating" unique_id=1918487807]
+modulate = Color(0.6510758, 0.59142375, 0.2707859, 1)
+position = Vector2(-234.12622, 199.86761)
+texture = ExtResource("2_d6g2o")
+
+[node name="Trees" type="Node2D" parent="Parallax <100/Parallax60/Repeating" unique_id=1935250202]
+position = Vector2(6.2216797, -94.17462)
+
+[node name="Tree" type="Sprite2D" parent="Parallax <100/Parallax60/Repeating/Trees" unique_id=163695185]
+modulate = Color(0.6988536, 0.35679176, 0.04551585, 1)
+position = Vector2(1529, -34)
+rotation = 3.1415925
+scale = Vector2(1, -1)
+texture = ExtResource("3_631vg")
+
+[node name="Tree2" type="Sprite2D" parent="Parallax <100/Parallax60/Repeating/Trees" unique_id=1178589258]
+modulate = Color(0.6988536, 0.35679176, 0.04551585, 1)
+position = Vector2(479.00012, 29.000061)
+rotation = 3.1415925
+scale = Vector2(1, -1)
+texture = ExtResource("4_ya482")
+
+[node name="Tree3" type="Sprite2D" parent="Parallax <100/Parallax60/Repeating/Trees" unique_id=207770868]
+modulate = Color(0.6988536, 0.35679176, 0.04551585, 1)
+position = Vector2(117.00011, -38.99997)
+texture = ExtResource("4_ya482")
+
+[node name="Tree4" type="Sprite2D" parent="Parallax <100/Parallax60/Repeating/Trees" unique_id=1698320269]
+modulate = Color(0.6988536, 0.35679176, 0.04551585, 1)
+position = Vector2(-3, -23)
+rotation = 3.1415925
+scale = Vector2(1, -1)
+texture = ExtResource("3_631vg")
+
+[node name="Tree5" type="Sprite2D" parent="Parallax <100/Parallax60/Repeating/Trees" unique_id=2118141399]
+modulate = Color(0.6988536, 0.35679176, 0.04551585, 1)
+position = Vector2(1229, 89.00003)
+rotation = 3.1415925
+scale = Vector2(1, -1)
+texture = ExtResource("5_lc4l7")
+
+[node name="Tree6" type="Sprite2D" parent="Parallax <100/Parallax60/Repeating/Trees" unique_id=1215574826]
+modulate = Color(0.6988536, 0.35679176, 0.04551585, 1)
+position = Vector2(-643.9999, 47.00003)
+texture = ExtResource("3_631vg")
+
+[node name="Tree7" type="Sprite2D" parent="Parallax <100/Parallax60/Repeating/Trees" unique_id=1226190838]
+modulate = Color(0.6988536, 0.35679176, 0.04551585, 1)
+position = Vector2(-950.9999, 6.000061)
+texture = ExtResource("4_ya482")
+
+[node name="Tree8" type="Sprite2D" parent="Parallax <100/Parallax60/Repeating/Trees" unique_id=1120605678]
+modulate = Color(0.6988536, 0.35679176, 0.04551585, 1)
+position = Vector2(911, -3)
+texture = ExtResource("4_ya482")
+
+[node name="Props" type="Parallax2D" parent="Parallax <100/Parallax60" unique_id=880551806]
+scroll_scale = Vector2(0.6, 0.6)
+
+[node name="Parallax70" type="Node2D" parent="Parallax <100" unique_id=363200192]
+
+[node name="Repeating" type="Parallax2D" parent="Parallax <100/Parallax70" unique_id=1464710429]
+scroll_scale = Vector2(0.7, 0.7)
+scroll_offset = Vector2(-5, 192)
+repeat_size = Vector2(2560, 0)
+repeat_times = 3
+
+[node name="LeafParticle" type="GPUParticles2D" parent="Parallax <100/Parallax70/Repeating" unique_id=95460907]
+position = Vector2(241.16597, -363.35278)
+amount = 60
+amount_ratio = 0.9
+texture = ExtResource("6_nqnja")
+lifetime = 25.0
+explosiveness = 0.1
+randomness = 0.3
+fixed_fps = 24
+visibility_rect = Rect2(-200, -250, 400, 500)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_vivmo")
+script = SubResource("GDScript_2cqfq")
+
+[node name="Canopy" type="Sprite2D" parent="Parallax <100/Parallax70/Repeating" unique_id=1325764796]
+modulate = Color(1.8427947, 1.8695909, 1.2912447, 1)
+position = Vector2(-236.56104, -435.33508)
+scale = Vector2(1, -1)
+texture = ExtResource("1_arvju")
+
+[node name="Canopy2" type="Sprite2D" parent="Parallax <100/Parallax70/Repeating" unique_id=741609270]
+modulate = Color(1.8427947, 1.8695909, 1.2912447, 1)
+position = Vector2(141.61816, -650.02563)
+texture = ExtResource("1_arvju")
+
+[node name="BackGrass" type="Sprite2D" parent="Parallax <100/Parallax70/Repeating" unique_id=1826752312]
+modulate = Color(0.5946943, 0.5273346, 0.18915975, 1)
+position = Vector2(-242.76978, 151.06207)
+texture = ExtResource("2_d6g2o")
+
+[node name="Trees" type="Node2D" parent="Parallax <100/Parallax70/Repeating" unique_id=1877037643]
+position = Vector2(6.2216797, -94.17462)
+
+[node name="Tree" type="Sprite2D" parent="Parallax <100/Parallax70/Repeating/Trees" unique_id=1360159193]
+modulate = Color(0.39798617, 0.24573389, 0.07925556, 1)
+position = Vector2(1414.0002, -65.99997)
+rotation = 3.1415925
+scale = Vector2(1, -1)
+texture = ExtResource("3_631vg")
+
+[node name="Tree2" type="Sprite2D" parent="Parallax <100/Parallax70/Repeating/Trees" unique_id=741938196]
+modulate = Color(0.39798617, 0.24573389, 0.07925556, 1)
+position = Vector2(3726, -76)
+rotation = 3.1415925
+scale = Vector2(1, -1)
+texture = ExtResource("4_ya482")
+
+[node name="Tree3" type="Sprite2D" parent="Parallax <100/Parallax70/Repeating/Trees" unique_id=877009622]
+modulate = Color(0.39798617, 0.24573389, 0.07925556, 1)
+position = Vector2(2345, -123)
+texture = ExtResource("4_ya482")
+
+[node name="Tree4" type="Sprite2D" parent="Parallax <100/Parallax70/Repeating/Trees" unique_id=418757086]
+modulate = Color(0.39798617, 0.24573389, 0.07925556, 1)
+position = Vector2(4565, -94.99997)
+rotation = 3.1415925
+scale = Vector2(1, -1)
+texture = ExtResource("3_631vg")
+
+[node name="Tree5" type="Sprite2D" parent="Parallax <100/Parallax70/Repeating/Trees" unique_id=89757756]
+modulate = Color(0.39798617, 0.24573389, 0.07925556, 1)
+position = Vector2(3105, -85)
+rotation = 3.1415925
+scale = Vector2(1, -1)
+texture = ExtResource("5_lc4l7")
+
+[node name="Tree6" type="Sprite2D" parent="Parallax <100/Parallax70/Repeating/Trees" unique_id=681289408]
+modulate = Color(0.39798617, 0.24573389, 0.07925556, 1)
+position = Vector2(1232.0001, -127)
+texture = ExtResource("3_631vg")
+
+[node name="Tree7" type="Sprite2D" parent="Parallax <100/Parallax70/Repeating/Trees" unique_id=793529733]
+modulate = Color(0.39798617, 0.24573389, 0.07925556, 1)
+position = Vector2(925.0001, -167.99997)
+texture = ExtResource("4_ya482")
+
+[node name="Tree8" type="Sprite2D" parent="Parallax <100/Parallax70/Repeating/Trees" unique_id=107664706]
+modulate = Color(0.39798617, 0.24573389, 0.07925556, 1)
+position = Vector2(1716.5431, -67.69379)
+texture = ExtResource("4_ya482")
+
+[node name="Props" type="Parallax2D" parent="Parallax <100/Parallax70" unique_id=1378942096]
+scroll_scale = Vector2(0.7, 0.7)
+
+[node name="Parallax80" type="Node2D" parent="Parallax <100" unique_id=444495089]
+
+[node name="Repeating" type="Parallax2D" parent="Parallax <100/Parallax80" unique_id=2013029096]
+scroll_scale = Vector2(0.8, 0.8)
+scroll_offset = Vector2(-800, 192)
+repeat_size = Vector2(2560, 0)
+repeat_times = 3
+
+[node name="Canopy" type="Sprite2D" parent="Parallax <100/Parallax80/Repeating" unique_id=1739750912]
+modulate = Color(1.7919996, 1.6732408, 1.1290661, 1)
+position = Vector2(-136.87842, -521.27783)
+scale = Vector2(-1, -1)
+texture = ExtResource("1_arvju")
+
+[node name="Canopy2" type="Sprite2D" parent="Parallax <100/Parallax80/Repeating" unique_id=1127674274]
+modulate = Color(1.7919996, 1.6732408, 1.1290661, 1)
+position = Vector2(241.30078, -735.9684)
+scale = Vector2(-1, 1)
+texture = ExtResource("1_arvju")
+
+[node name="Trees" type="Node2D" parent="Parallax <100/Parallax80/Repeating" unique_id=463263963]
+position = Vector2(6.2216797, -94.17462)
+
+[node name="Tree" type="Sprite2D" parent="Parallax <100/Parallax80/Repeating/Trees" unique_id=1847864117]
+modulate = Color(0.1661033, 0.12316645, 0.019261891, 1)
+position = Vector2(-639.32886, -31.22763)
+texture = ExtResource("3_631vg")
+
+[node name="Tree2" type="Sprite2D" parent="Parallax <100/Parallax80/Repeating/Trees" unique_id=1329342241]
+modulate = Color(0.1661033, 0.12316645, 0.019261891, 1)
+position = Vector2(807.7899, -102.353516)
+texture = ExtResource("4_ya482")
+
+[node name="Tree3" type="Sprite2D" parent="Parallax <100/Parallax80/Repeating/Trees" unique_id=648963439]
+modulate = Color(0.1661033, 0.12316645, 0.019261891, 1)
+position = Vector2(1604.6711, -99.22763)
+texture = ExtResource("4_ya482")
+
+[node name="Tree4" type="Sprite2D" parent="Parallax <100/Parallax80/Repeating/Trees" unique_id=1649709180]
+modulate = Color(0.1661033, 0.12316645, 0.019261891, 1)
+position = Vector2(2511.6711, -60.22763)
+texture = ExtResource("3_631vg")
+
+[node name="Tree5" type="Sprite2D" parent="Parallax <100/Parallax80/Repeating/Trees" unique_id=1635875008]
+modulate = Color(0.1661033, 0.12316645, 0.019261891, 1)
+position = Vector2(-242.39844, -60.517883)
+texture = ExtResource("5_lc4l7")
+
+[node name="Tree6" type="Sprite2D" parent="Parallax <100/Parallax80/Repeating/Trees" unique_id=1856620848]
+modulate = Color(0.1661033, 0.12316645, 0.019261891, 1)
+position = Vector2(1262.7899, -64.353516)
+texture = ExtResource("3_631vg")
+flip_h = true
+
+[node name="Tree8" type="Sprite2D" parent="Parallax <100/Parallax80/Repeating/Trees" unique_id=1574804446]
+modulate = Color(0.1661033, 0.12316645, 0.019261891, 1)
+position = Vector2(428.67114, -152.22763)
+texture = ExtResource("4_ya482")
+
+[node name="Props" type="Parallax2D" parent="Parallax <100/Parallax80" unique_id=1769717662]
+scroll_scale = Vector2(0.8, 0.8)
+
+[node name="Parallax90" type="Node2D" parent="Parallax <100" unique_id=103224247]
+
+[node name="Repeating" type="Parallax2D" parent="Parallax <100/Parallax90" unique_id=1847229170]
+scroll_scale = Vector2(0.9, 0.9)
+scroll_offset = Vector2(-5, 192)
+repeat_size = Vector2(2560, 0)
+repeat_times = 3
+
+[node name="Bushes" type="Sprite2D" parent="Parallax <100/Parallax90/Repeating" unique_id=1609072070]
+position = Vector2(-1142, 111)
+texture = ExtResource("1_arvju")
+
+[node name="BushBottom" type="ColorRect" parent="Parallax <100/Parallax90/Repeating" unique_id=1483407530]
+offset_left = -1305.0
+offset_top = 233.00002
+offset_right = 1238.0
+offset_bottom = 292.0
+scale = Vector2(1.6800048, 9.080003)
+color = Color(0.33333334, 0.18431373, 0.16862746, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Canopy" type="Sprite2D" parent="Parallax <100/Parallax90/Repeating" unique_id=1058047820]
+modulate = Color(1.7289262, 1.5196562, 0.7654416, 1)
+position = Vector2(-300.1958, -630.2206)
+scale = Vector2(1, -1)
+texture = ExtResource("1_arvju")
+
+[node name="Canopy2" type="Sprite2D" parent="Parallax <100/Parallax90/Repeating" unique_id=419650476]
+modulate = Color(1.7289262, 1.5196562, 0.7654416, 1)
+position = Vector2(77.9834, -844.91113)
+texture = ExtResource("1_arvju")
+
+[node name="Props" type="Parallax2D" parent="Parallax <100/Parallax90" unique_id=827768400]
+scroll_scale = Vector2(1.1, 1.1)
+
+[node name="Parallax95" type="Node2D" parent="Parallax <100" unique_id=259636247]
+position = Vector2(-6, 10)
+
+[node name="Repeating" type="Parallax2D" parent="Parallax <100/Parallax95" unique_id=2060496610]
+scroll_scale = Vector2(0.95, 0.95)
+scroll_offset = Vector2(0, 14)
+repeat_size = Vector2(2560, 0)
+repeat_times = 3
+
+[node name="Grass" type="Sprite2D" parent="Parallax <100/Parallax95/Repeating" unique_id=210775978]
+modulate = Color(3.6413581, 2.464391, 0.89682823, 1)
+position = Vector2(-1140, -104)
+scale = Vector2(-1, 1)
+texture = ExtResource("7_l30ab")
+
+[node name="GrassBottom" type="ColorRect" parent="Parallax <100/Parallax95/Repeating" unique_id=1527664728]
+offset_left = -1321.0
+offset_top = 306.0
+offset_right = 1222.0
+offset_bottom = 365.0
+scale = Vector2(1.6800048, 9.080003)
+color = Color(1, 1, 0.33333334, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Canopy" type="Sprite2D" parent="Parallax <100/Parallax95/Repeating" unique_id=56158143]
+modulate = Color(1.7210789, 1.3615835, 0.7426006, 1)
+position = Vector2(-447.26953, -546.3002)
+scale = Vector2(-1, -1)
+texture = ExtResource("1_arvju")
+
+[node name="Canopy2" type="Sprite2D" parent="Parallax <100/Parallax95/Repeating" unique_id=1195176667]
+modulate = Color(1.7210789, 1.3615835, 0.7426006, 1)
+position = Vector2(-69.09033, -760.9907)
+scale = Vector2(-1, 1)
+texture = ExtResource("1_arvju")
+
+[node name="LeafParticle" type="GPUParticles2D" parent="Parallax <100/Parallax95/Repeating" unique_id=1092411548]
+position = Vector2(225.77925, -440.87744)
+amount = 80
+amount_ratio = 0.9
+texture = ExtResource("8_q5gb5")
+lifetime = 25.0
+explosiveness = 0.1
+randomness = 0.3
+fixed_fps = 24
+visibility_rect = Rect2(-100, 0, 200, 300)
+process_material = SubResource("ParticleProcessMaterial_vivmo")
+script = SubResource("GDScript_2cqfq")
+
+[node name="Player" parent="." unique_id=688072394 instance=ExtResource("9_bhfk5")]
+position = Vector2(-20, -124)
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=657713782]
+offset = Vector2(0, -100)
+zoom = Vector2(1.3, 1.3)
+limit_top = -800
+limit_right = 1200
+limit_smoothed = true
+position_smoothing_enabled = true
+script = ExtResource("10_uui1i")
+
+[node name="Platforms" type="Node2D" parent="." unique_id=2139959054]
+position = Vector2(-9, -323)
+script = ExtResource("11_8fdcq")
+
+[node name="Platform" parent="Platforms" unique_id=1326313302 instance=ExtResource("12_d4f7m")]
+position = Vector2(184, -96)
+collision_mask = 3
+size_vector = Vector2(176, 64)
+
+[node name="CollisionPolygon2D" parent="Platforms/Platform" index="0" unique_id=581306703]
+polygon = PackedVector2Array(-93.34677, 7.374243, 66.80641, -65.61176, 93.34677, -7.374243, -66.80641, 65.61176)
+
+[node name="Polygon2D" parent="Platforms/Platform" index="1" unique_id=1861125354]
+color = Color(0.9999997, 0.6637959, 0.2018961, 1)
+texture_rotation = 0.45727625
+polygon = PackedVector2Array(-82.74954, 11.33639, 62.84427, -55.014534, 82.74954, -11.33639, -62.84427, 55.014534)
+
+[node name="RectangleOutline" parent="Platforms/Platform" index="2" unique_id=1082408081]
+rotation = -0.42760566
+shape = SubResource("RectangleShape2D_uvfms")
+
+[node name="Platform2" parent="Platforms" unique_id=73062743 instance=ExtResource("12_d4f7m")]
+position = Vector2(-276, -44)
+size_vector = Vector2(124, 48)
+textureWidth = 8.0
+
+[node name="CollisionPolygon2D" parent="Platforms/Platform2" index="0" unique_id=581306703]
+polygon = PackedVector2Array(-62, -24, 62, -24, 62, 24, -62, 24)
+
+[node name="Polygon2D" parent="Platforms/Platform2" index="1" unique_id=1861125354]
+polygon = PackedVector2Array(-58, -20, 58, -20, 58, 20, -58, 20)
+
+[node name="RectangleOutline" parent="Platforms/Platform2" index="2" unique_id=1082408081]
+shape = SubResource("RectangleShape2D_gy5oh")
+
+[node name="Platform3" parent="Platforms" unique_id=778821719 instance=ExtResource("12_d4f7m")]
+position = Vector2(872, -152)
+size_vector = Vector2(176, 64)
+textureWidth = 8.0
+
+[node name="CollisionPolygon2D" parent="Platforms/Platform3" index="0" unique_id=581306703]
+polygon = PackedVector2Array(-88, 16, 88, 16, 88, 80, -88, 80)
+
+[node name="Polygon2D" parent="Platforms/Platform3" index="1" unique_id=1861125354]
+polygon = PackedVector2Array(-84, 20, 84, 20, 84, 76, -84, 76)
+
+[node name="RectangleOutline" parent="Platforms/Platform3" index="2" unique_id=1082408081]
+position = Vector2(0, 48)
+shape = SubResource("RectangleShape2D_arvju")
+
+[node name="Platform4" parent="Platforms" unique_id=780874561 instance=ExtResource("12_d4f7m")]
+position = Vector2(-499, 240)
+size_vector = Vector2(316, 132)
+textureWidth = 8.0
+
+[node name="CollisionPolygon2D" parent="Platforms/Platform4" index="0" unique_id=581306703]
+polygon = PackedVector2Array(-158, -54, 158, -54, 158, 78, -158, 78)
+
+[node name="Polygon2D" parent="Platforms/Platform4" index="1" unique_id=1861125354]
+polygon = PackedVector2Array(-154, -50, 154, -50, 154, 74, -154, 74)
+
+[node name="RectangleOutline" parent="Platforms/Platform4" index="2" unique_id=1082408081]
+position = Vector2(0, 12)
+shape = SubResource("RectangleShape2D_d6g2o")
+
+[node name="LevelExit" parent="." unique_id=659289399 instance=ExtResource("15_1ar81")]
+position = Vector2(1078, -259)
+exit = "uid://b1iavla5jso1x"
+
+[node name="CollisionShape2D" parent="LevelExit" index="0"]
+position = Vector2(4, -166)
+
+[node name="Parallax100" type="Node2D" parent="." unique_id=1405720013]
+position = Vector2(1, -295)
+
+[node name="Repeating" type="Parallax2D" parent="Parallax100" unique_id=1808773907]
+scroll_offset = Vector2(-2156, 23)
+repeat_size = Vector2(2560, 0)
+repeat_times = 3
+
+[node name="Grass" type="Sprite2D" parent="Parallax100/Repeating" unique_id=1047452284]
+modulate = Color(1.3285676, 0.9534372, 0.4952448, 1)
+position = Vector2(-1140, -116)
+texture = ExtResource("7_l30ab")
+
+[node name="BottomGrass" type="ColorRect" parent="Parallax100/Repeating" unique_id=1594815921]
+offset_left = -1321.0
+offset_top = 294.0
+offset_right = 1222.0
+offset_bottom = 353.0
+scale = Vector2(1.6800048, 9.080003)
+color = Color(1, 0.8784314, 0.1882353, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Canopy" type="Sprite2D" parent="Parallax100/Repeating" unique_id=1286776595]
+modulate = Color(1.4957577, 1.1363391, 0.7985637, 1)
+position = Vector2(-520.26953, -590.3002)
+scale = Vector2(1, -1)
+texture = ExtResource("1_arvju")
+
+[node name="Canopy2" type="Sprite2D" parent="Parallax100/Repeating" unique_id=1471839138]
+modulate = Color(1.4957577, 1.1363391, 0.7985637, 1)
+position = Vector2(-142.09033, -804.9907)
+texture = ExtResource("1_arvju")
+
+[node name="Props" type="Parallax2D" parent="Parallax100" unique_id=1293276228]
+scroll_scale = Vector2(1.1, 1.1)
+
+[node name="Parallax >100" type="Node2D" parent="." unique_id=895030580]
+position = Vector2(1, -295)
+
+[node name="Parallax110" type="Node2D" parent="Parallax >100" unique_id=1897633241]
+position = Vector2(1825, 26)
+
+[node name="Repeating" type="Parallax2D" parent="Parallax >100/Parallax110" unique_id=1685819254]
+scale = Vector2(-1, 1)
+scroll_scale = Vector2(1.1, 1.1)
+repeat_size = Vector2(2560, 0)
+repeat_times = 3
+
+[node name="Grass" type="Sprite2D" parent="Parallax >100/Parallax110/Repeating" unique_id=365913799]
+modulate = Color(1.114582, 0.7333345, 0.10142933, 1)
+position = Vector2(-1133.603, -165.09674)
+texture = ExtResource("7_l30ab")
+
+[node name="BottomGrass" type="ColorRect" parent="Parallax >100/Parallax110/Repeating" unique_id=438704501]
+offset_left = -1314.603
+offset_top = 244.90326
+offset_right = 1228.397
+offset_bottom = 303.90326
+scale = Vector2(1.6800048, 9.080003)
+color = Color(1, 0.6745098, 0.039215688, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Canopy" type="Sprite2D" parent="Parallax >100/Parallax110/Repeating" unique_id=45360214]
+modulate = Color(1.1958618, 0.9512316, 0.80435854, 1)
+position = Vector2(-210.72217, -696.6558)
+scale = Vector2(1, -1)
+texture = ExtResource("1_arvju")
+
+[node name="Canopy2" type="Sprite2D" parent="Parallax >100/Parallax110/Repeating" unique_id=947417855]
+modulate = Color(1.1958618, 0.9512316, 0.80435854, 1)
+position = Vector2(-588.90137, -911.3464)
+texture = ExtResource("1_arvju")
+
+[node name="Props" type="Parallax2D" parent="Parallax >100/Parallax110" unique_id=1694561157]
+scroll_scale = Vector2(1.1, 1.1)
+
+[node name="Parallax120" type="Node2D" parent="Parallax >100" unique_id=468219130]
+position = Vector2(1600, 31)
+
+[node name="Repeating" type="Parallax2D" parent="Parallax >100/Parallax120" unique_id=582227610]
+scroll_scale = Vector2(1.2, 1.2)
+repeat_size = Vector2(2560, 0)
+repeat_times = 3
+
+[node name="Grass" type="Sprite2D" parent="Parallax >100/Parallax120/Repeating" unique_id=355031358]
+modulate = Color(0.9705997, 0.49511433, 0.33469236, 1)
+position = Vector2(-1129.4058, -218.81543)
+texture = ExtResource("7_l30ab")
+
+[node name="BottomGrass" type="ColorRect" parent="Parallax >100/Parallax120/Repeating" unique_id=822339364]
+offset_left = -1310.4058
+offset_top = 191.18457
+offset_right = 1232.5942
+offset_bottom = 250.18457
+scale = Vector2(1.6800048, 9.080003)
+color = Color(0.9529412, 0.45490196, 0.1254902, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Canopy" type="Sprite2D" parent="Parallax >100/Parallax120/Repeating" unique_id=888109078]
+modulate = Color(0.9679722, 0.80613583, 0.67854196, 1)
+position = Vector2(-691.6151, -795.3163)
+scale = Vector2(1, -1)
+texture = ExtResource("1_arvju")
+
+[node name="Canopy2" type="Sprite2D" parent="Parallax >100/Parallax120/Repeating" unique_id=792602595]
+modulate = Color(0.9679722, 0.80613583, 0.67854196, 1)
+position = Vector2(-313.4359, -1010.00684)
+texture = ExtResource("1_arvju")
+
+[node name="Props" type="Parallax2D" parent="Parallax >100/Parallax120" unique_id=1303067730]
+scroll_scale = Vector2(1.2, 1.2)
+
+[node name="Parallax130" type="Node2D" parent="Parallax >100" unique_id=1690821768]
+position = Vector2(0, 25)
+
+[node name="Repeating" type="Parallax2D" parent="Parallax >100/Parallax130" unique_id=1222329230]
+scroll_scale = Vector2(1.3, 1.3)
+repeat_size = Vector2(2560, 0)
+repeat_times = 3
+
+[node name="BushyGrass" type="Sprite2D" parent="Parallax >100/Parallax130/Repeating" unique_id=266099673]
+modulate = Color(6.7469997, 2.50044, 0.5246181, 1)
+position = Vector2(-1123.6084, 127.27698)
+texture = ExtResource("16_1ds8o")
+
+[node name="BottomGrass" type="ColorRect" parent="Parallax >100/Parallax130/Repeating" unique_id=1212876249]
+offset_left = -1318.6084
+offset_top = 183.27698
+offset_right = 1224.3916
+offset_bottom = 242.27698
+scale = Vector2(1.6800048, 9.080003)
+color = Color(0.5019608, 0.19607843, 0.08235294, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Canopy" type="Sprite2D" parent="Parallax >100/Parallax130/Repeating" unique_id=707284338]
+modulate = Color(0.78426254, 0.55712736, 0.61496365, 1)
+position = Vector2(-297.62106, -926.36804)
+scale = Vector2(-1, -1)
+texture = ExtResource("1_arvju")
+
+[node name="Canopy2" type="Sprite2D" parent="Parallax >100/Parallax130/Repeating" unique_id=531506249]
+modulate = Color(0.78426254, 0.55712736, 0.61496365, 1)
+position = Vector2(80.558136, -1141.0586)
+scale = Vector2(-1, 1)
+texture = ExtResource("1_arvju")
+
+[node name="Props" type="Parallax2D" parent="Parallax >100/Parallax130" unique_id=1925303875]
+scroll_scale = Vector2(1.3, 1.3)
+
+[node name="Parallax150" type="Node2D" parent="Parallax >100" unique_id=111344862]
+position = Vector2(-2, -50)
+
+[node name="Props" type="Parallax2D" parent="Parallax >100/Parallax150" unique_id=442257906]
+scroll_scale = Vector2(1.5, 1.5)
+
+[node name="Repeating" type="Parallax2D" parent="Parallax >100/Parallax150" unique_id=1475846296]
+scroll_scale = Vector2(1.5, 1.5)
+repeat_size = Vector2(2560, 0)
+repeat_times = 3
+
+[node name="ColorRect" type="ColorRect" parent="Parallax >100/Parallax150/Repeating" unique_id=1633454990]
+offset_left = 3.9855957
+offset_top = 144.47174
+offset_right = 2567.9856
+offset_bottom = 677.47174
+color = Color(0.07450981, 0.078431375, 0.16470589, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Ground" type="Sprite2D" parent="Parallax >100/Parallax150/Repeating" unique_id=1896628365]
+position = Vector2(16.503143, -921.53845)
+texture = ExtResource("17_ry543")
+centered = false
+
+[node name="Canopy" type="Sprite2D" parent="Parallax >100/Parallax150/Repeating" unique_id=286869650]
+modulate = Color(0.23154116, 0.52167636, 1.1873763, 1)
+position = Vector2(-487.98004, -1121.7139)
+scale = Vector2(1, -1)
+texture = ExtResource("1_arvju")
+
+[node name="Canopy2" type="Sprite2D" parent="Parallax >100/Parallax150/Repeating" unique_id=1902094572]
+modulate = Color(0.23154116, 0.52167636, 1.1873763, 1)
+position = Vector2(-109.80084, -1336.4044)
+scale = Vector2(-1, 1)
+texture = ExtResource("1_arvju")
+
+[node name="Floor" type="StaticBody2D" parent="." unique_id=1862045980 groups=["AutumnLeafMaterial"]]
+position = Vector2(1, -283)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=68231649]
+shape = SubResource("WorldBoundaryShape2D_0xm2m")
+
+[node name="ForestMusic" type="AudioStreamPlayer" parent="." unique_id=608094418]
+stream = ExtResource("18_hr4t6")
+autoplay = true
+bus = &"Music"
+parameters/looping = true
+
+[node name="Ladybug" parent="." unique_id=1526640072 groups=["CurrentEnemies"] instance=ExtResource("19_wnxxf")]
+position = Vector2(515, -378)
+gravity_scale = 0.0
+enemy_num = 1
+
+[connection signal="body_entered" from="Ladybug" to="Parallax <100/Parallax70/Repeating/LeafParticle" method="_on_ladybug_body_entered_player"]
+
+[editable path="Platforms/Platform"]
+[editable path="Platforms/Platform2"]
+[editable path="Platforms/Platform3"]
+[editable path="Platforms/Platform4"]
+[editable path="LevelExit"]

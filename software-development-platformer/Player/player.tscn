@@ -567,6 +567,8 @@ region = Rect2(0, 0, 0, 128)
 
 [node name="Player" type="CharacterBody2D" unique_id=359640240 groups=["Player"]]
 position = Vector2(-24, 5)
+collision_layer = 2
+collision_mask = 5
 floor_snap_length = 10.0
 platform_on_leave = 1
 script = ExtResource("1_onrkg")
