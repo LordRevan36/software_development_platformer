@@ -189,7 +189,6 @@ func backflip():
 	canJump = false
 	GlobalPlayer.jumped.emit()
 	jumpVelocity = velocity
-	ManaTimer.start()
 
 func frontflip():
 	velocity.y = (JUMP_VELOCITY+JUMP_VELOCITY*(time-crouchStartTime)/4)*0.7
@@ -322,10 +321,10 @@ func update_mana(amount: int, duration: float) -> void:
 
 #triggers full regen of mana
 func regenMana() -> void:
-	#adds mana back in increments of 10 over 0.75sec until at max
-	update_mana(10,0.75)
+	#adds mana back in increments of 10 over 0.15sec until at max
+	update_mana(10, 0.75)
 	while Mana != GlobalPlayer.MAX_Mana:
-			update_mana(10, 0.75)
+		update_mana(10, 0.75)
 
 #apply knockback when hit by an enemy
 func apply_knockback(direction: Vector2, force: float, knockback_duration: float) -> void:
@@ -351,7 +350,8 @@ func _on_slash_animation_finished() -> void: #used to visually hide slash when i
 	Slash.hide()
 
 func _on_mana_timer_timeout() -> void:
-		regenMana()
+	regenMana()
+	print("timeout")
 
 #Checks for a bouncepad entered
 func _on_area_hitbox_area_entered(area: Area2D) -> void:
@@ -363,3 +363,13 @@ func _on_area_hitbox_area_entered(area: Area2D) -> void:
 func _on_area_hitbox_area_exited(area: Area2D) -> void:
 	if area.is_in_group("BouncePad"):
 		usingBouncePad = false #allows landing again
+
+
+func _on_damage_button_pressed() -> void:
+	take_damage(10)
+	update_mana(-10, 0.15)
+	ManaTimer.start()
+
+func _on_heal_button_pressed() -> void:
+	heal(10)
+	update_mana(10,0.15)

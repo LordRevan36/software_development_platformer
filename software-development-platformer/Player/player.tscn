@@ -5,8 +5,6 @@
 [ext_resource type="Texture2D" uid="uid://rnawpuddimk" path="res://Assets/Player/Slash.png" id="3_btcbx"]
 [ext_resource type="Script" uid="uid://m70ma2rafm6p" path="res://Player/movement_particles.gd" id="4_k53q1"]
 [ext_resource type="Texture2D" uid="uid://ul3588q4vy3l" path="res://Assets/Forest/LeafParticle2.png" id="5_fhl08"]
-[ext_resource type="Script" uid="uid://dhqon0kvpcrte" path="res://UI/DamageButton.gd" id="6_00tjw"]
-[ext_resource type="Script" uid="uid://qy3w7jrwih6c" path="res://UI/heal_button.gd" id="7_x3vf3"]
 [ext_resource type="Texture2D" uid="uid://bji8fl8xxt73f" path="res://Assets/HUD/GenericBar.png" id="8_p5o4e"]
 [ext_resource type="Script" uid="uid://rexj3shyfaq6" path="res://UI/HealthBar.gd" id="9_5htga"]
 [ext_resource type="Script" uid="uid://cv8mai7sitq67" path="res://Player/mana_bar.gd" id="10_x3vf3"]
@@ -672,7 +670,6 @@ offset_top = 20.0
 offset_right = 745.0
 offset_bottom = 78.0
 text = "Take Damage"
-script = ExtResource("6_00tjw")
 metadata/_edit_use_anchors_ = true
 
 [node name="HealButton" type="Button" parent="UI" unique_id=1848162511]
@@ -681,7 +678,6 @@ offset_top = 88.0
 offset_right = 745.0
 offset_bottom = 146.0
 text = "Heal Damage"
-script = ExtResource("7_x3vf3")
 
 [node name="HealthBar" type="TextureProgressBar" parent="UI" unique_id=489409292]
 modulate = Color(1, 0, 0, 1)
@@ -714,11 +710,13 @@ visible = false
 [node name="SkillTree" parent="UI" unique_id=56710748 instance=ExtResource("13_p5o4e")]
 visible = false
 
-[connection signal="animation_finished" from="PlayerSprite" to="." method="_on_player_animation_finished"]
 [connection signal="animation_finished" from="PlayerSprite" to="." method="_on_player_sprite_animation_finished"]
+[connection signal="animation_finished" from="PlayerSprite" to="." method="_on_player_animation_finished"]
 [connection signal="area_entered" from="AreaHitbox" to="." method="_on_area_hitbox_area_entered"]
 [connection signal="area_exited" from="AreaHitbox" to="." method="_on_area_hitbox_area_exited"]
 [connection signal="animation_finished" from="Slash" to="." method="_on_slash_animation_finished"]
 [connection signal="timeout" from="Timers/CoyoteJumpTimer" to="." method="_on_coyote_jump_timer_timeout"]
 [connection signal="timeout" from="Timers/AttackTimer" to="." method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="Timers/ManaTimer" to="." method="_on_stamina_timer_timeout"]
+[connection signal="pressed" from="UI/DamageButton" to="." method="_on_damage_button_pressed"]
+[connection signal="pressed" from="UI/HealButton" to="." method="_on_heal_button_pressed"]

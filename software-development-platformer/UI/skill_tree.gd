@@ -142,7 +142,7 @@ func _on_health_upgrade_2_pressed() -> void:
 func _on_mana_upgrade_1_pressed() -> void:
 	if GlobalPlayer.MAX_Mana < 150:
 		GlobalPlayer.MAX_Mana += 10
-		GlobalPlayer.mana_changed.emit(GlobalPlayer.MAX_Mana, GlobalPlayer.MAX_Mana)
+		GlobalPlayer.mana_changed.emit(GlobalPlayer.MAX_Mana, GlobalPlayer.MAX_Mana, 0.15)
 		GlobalPlayer.mana = GlobalPlayer.MAX_Mana
 	print(GlobalPlayer.MAX_Mana)
 	if GlobalPlayer.MAX_Mana == 150:
@@ -157,6 +157,6 @@ func _on_mana_step_pressed() -> void:
 func _on_mana_upgrade_2_pressed() -> void:
 	if GlobalPlayer.MAX_Mana < 200:
 		GlobalPlayer.MAX_Mana += 10
-		GlobalPlayer.mana_changed.emit(GlobalPlayer.MAX_Mana, GlobalPlayer.MAX_Mana)
+		GlobalPlayer.mana_changed.emit(GlobalPlayer.MAX_Mana, GlobalPlayer.MAX_Mana, 0.15)
 		GlobalPlayer.mana = GlobalPlayer.MAX_Mana
 	print(GlobalPlayer.MAX_Mana)

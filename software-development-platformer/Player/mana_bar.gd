@@ -10,7 +10,7 @@ func _ready():
 	value = player.Mana
 	GlobalPlayer.mana_changed.connect(update_mana)
 
-func update_mana(current: float, max_mana: float, duration: float):
+func update_mana(current: float, max_mana: float, duration):
 	max_value = max_mana
 	mana_tween = create_tween()
 	mana_tween.tween_property(
