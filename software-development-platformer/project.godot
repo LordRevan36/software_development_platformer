@@ -52,6 +52,7 @@ Player="its the player .ngl idk if this is really necessary but im putting it in
 AutumnLeafMaterial="Causes leaf particles when player runs/jumps over."
 BouncePad="it da bounce pad"
 Platform=""
+Hazard="For the hazard object"
 
 [gui]
 

@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://c5hy6ijjidaqe"]
+
+[ext_resource type="Script" uid="uid://b7u5me12ues2c" path="res://Props/Hazard/hazard.gd" id="1_ngr8s"]
+[ext_resource type="Texture2D" uid="uid://c8aos0nvrefvx" path="res://Assets/test_spike_texture.png" id="2_63olp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_63olp"]
+resource_local_to_scene = true
+size = Vector2(70, 10)
+
+[node name="Hazard" type="Area2D" unique_id=1871379372 groups=["Hazard"]]
+script = ExtResource("1_ngr8s")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="." unique_id=916186076]
+shape = SubResource("RectangleShape2D_63olp")
+
+[node name="Line2D" type="Line2D" parent="." unique_id=490359227]
+texture_repeat = 2
+points = PackedVector2Array(-35, 0, 35, 0)
+texture = ExtResource("2_63olp")
+texture_mode = 1

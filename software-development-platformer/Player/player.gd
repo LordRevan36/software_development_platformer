@@ -354,6 +354,8 @@ func _on_area_hitbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("BouncePad"):
 		usingBouncePad = true #prevents _land() from running
 		jump(area._return_new_player_velocity(velocity), false) #forces jump from bouncepad
+	if area.is_in_group("Hazard"):
+		pass
 
 #checks for a bouncepad exited
 func _on_area_hitbox_area_exited(area: Area2D) -> void:
