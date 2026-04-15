@@ -299,7 +299,7 @@ func update_mana(amount: int, duration: float) -> void:
 		Mana = 0
 
 #triggers full regen of mana
-func regenStam() -> void:
+func regenMana() -> void:
 	#adds mana back in increments of 10 over 0.75sec until at max
 	update_mana(10,0.75)
 	while Mana != GlobalPlayer.MAX_Mana:
@@ -324,4 +324,4 @@ func _on_slash_animation_finished() -> void: #used to visually hide slash when i
 	Slash.hide()
 
 func _on_mana_timer_timeout() -> void:
-		regenStam()
+		regenMana()
