@@ -3,7 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://ctk8ibr44c642" path="res://Assets/Forest/Bush.png" id="1_5vw27"]
 [ext_resource type="PackedScene" uid="uid://cy1vyx88wgg4v" path="res://Player/player.tscn" id="1_bo1nx"]
 [ext_resource type="Texture2D" uid="uid://bud8q02b7boe8" path="res://Assets/Forest/BackGrass.png" id="2_efxa6"]
-[ext_resource type="Script" uid="uid://do5bugkt41qkv" path="res://camera.gd" id="2_jjvhh"]
 [ext_resource type="Texture2D" uid="uid://cc5t6dk5qt08y" path="res://Assets/Forest/Tree1.png" id="3_4c57u"]
 [ext_resource type="Texture2D" uid="uid://c2fn1ck4bikb1" path="res://Assets/Forest/Grass.png" id="4_272bh"]
 [ext_resource type="Texture2D" uid="uid://dg6umr23h26yn" path="res://Assets/Forest/Tree2.png" id="4_efxa6"]
@@ -12,8 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://yci8u2sv0dny" path="res://Assets/Forest/LeafParticle1.png" id="6_w48qg"]
 [ext_resource type="Texture2D" uid="uid://d15b6nmtxas3j" path="res://Assets/Forest/BushyGrass.png" id="7_5vw27"]
 [ext_resource type="Texture2D" uid="uid://ul3588q4vy3l" path="res://Assets/Forest/LeafParticle2.png" id="7_ycdy4"]
+[ext_resource type="PackedScene" uid="uid://br00fhmkdb1us" path="res://camera_2d.tscn" id="10_86kmy"]
 [ext_resource type="Script" uid="uid://cuc4a4nkwo6vf" path="res://Props/Platform/platforms.gd" id="11_byont"]
-[ext_resource type="PackedScene" uid="uid://ba2t04uypgd12" path="res://treetest.tscn" id="11_py8ao"]
 [ext_resource type="PackedScene" uid="uid://c6lcnacw8vw5s" path="res://Props/Platform/platform.tscn" id="12_074og"]
 [ext_resource type="PackedScene" uid="uid://cikgxfjxyjw3r" path="res://Props/Exit/exit.tscn" id="12_86kmy"]
 [ext_resource type="PackedScene" uid="uid://bgnpnvakyrgs0" path="res://Props/Platform/fall_platform.tscn" id="15_llrqw"]
@@ -74,25 +73,14 @@ func _process(_delta: float) -> void:
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_86kmy"]
 resource_local_to_scene = true
 size = Vector2(176, 64)
-[sub_resource type="Gradient" id="Gradient_llrqw"]
-interpolation_mode = 2
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_py8ao"]
-gradient = SubResource("Gradient_llrqw")
-width = 256
-height = 256
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(1, 0.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_llrqw"]
 resource_local_to_scene = true
-size = Vector2(128, 48)
+size = Vector2(176, 64)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_py8ao"]
 resource_local_to_scene = true
-size = Vector2(176, 64)
+size = Vector2(320, 136)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5008v"]
 resource_local_to_scene = true
@@ -819,14 +807,7 @@ script = SubResource("GDScript_2cqfq")
 [node name="Player" parent="." unique_id=688072394 instance=ExtResource("1_bo1nx")]
 position = Vector2(-20, -124)
 
-[node name="Camera2D" type="Camera2D" parent="Player" unique_id=657713782]
-offset = Vector2(0, -100)
-zoom = Vector2(1.3, 1.3)
-limit_top = -800
-limit_right = 1200
-limit_smoothed = true
-position_smoothing_enabled = true
-script = ExtResource("2_jjvhh")
+[node name="Camera2D" parent="Player" unique_id=1342542082 instance=ExtResource("10_86kmy")]
 
 [node name="Platforms" type="Node2D" parent="." unique_id=2139959054]
 position = Vector2(-9, -323)
@@ -842,7 +823,7 @@ polygon = PackedVector2Array(-93.34677, 7.374243, 66.80641, -65.61176, 93.34677,
 [node name="Polygon2D" parent="Platforms/Platform" index="1" unique_id=1861125354]
 color = Color(0.9999997, 0.6637959, 0.2018961, 1)
 texture_rotation = 0.45727625
-polygon = PackedVector2Array(-57.592926, 8.66344, 44.32274, -37.7822, 57.592926, -8.66344, -44.32274, 37.7822)
+polygon = PackedVector2Array(-82.74954, 11.33639, 62.84427, -55.014534, 82.74954, -11.33639, -62.84427, 55.014534)
 
 [node name="RectangleOutline" parent="Platforms/Platform" index="2" unique_id=1082408081]
 rotation = -0.42760566
@@ -851,30 +832,29 @@ shape = SubResource("RectangleShape2D_86kmy")
 [node name="Platform2" parent="Platforms" unique_id=73062743 instance=ExtResource("12_074og")]
 position = Vector2(-276, -44)
 size_vector = Vector2(176, 64)
-textureWidth = 16.0
 
 [node name="CollisionPolygon2D" parent="Platforms/Platform2" index="0" unique_id=581306703]
-polygon = PackedVector2Array(-64, -24, 64, -24, 64, 24, -64, 24)
+polygon = PackedVector2Array(-88, -32, 88, -32, 88, 32, -88, 32)
 
 [node name="Polygon2D" parent="Platforms/Platform2" index="1" unique_id=1861125354]
-polygon = PackedVector2Array(-56, -16, 56, -16, 56, 16, -56, 16)
+polygon = PackedVector2Array(-80, -24, 80, -24, 80, 24, -80, 24)
 
 [node name="RectangleOutline" parent="Platforms/Platform2" index="2" unique_id=1082408081]
-shape = SubResource("RectangleShape2D_py8ao")
+shape = SubResource("RectangleShape2D_llrqw")
 
 [node name="Platform3" parent="Platforms" unique_id=778821719 instance=ExtResource("12_074og")]
 position = Vector2(872, -152)
-size_vector = Vector2(176, 64)
+size_vector = Vector2(320, 136)
 
 [node name="CollisionPolygon2D" parent="Platforms/Platform3" index="0" unique_id=581306703]
-polygon = PackedVector2Array(-88, -32, 88, -32, 88, 32, -88, 32)
+polygon = PackedVector2Array(-160, -20, 160, -20, 160, 116, -160, 116)
 
 [node name="Polygon2D" parent="Platforms/Platform3" index="1" unique_id=1861125354]
-polygon = PackedVector2Array(-80, -24, 80, -24, 80, 24, -80, 24)
+polygon = PackedVector2Array(-152, -12, 152, -12, 152, 108, -152, 108)
 
 [node name="RectangleOutline" parent="Platforms/Platform3" index="2" unique_id=1082408081]
 position = Vector2(0, 48)
-shape = SubResource("RectangleShape2D_5008v")
+shape = SubResource("RectangleShape2D_py8ao")
 
 [node name="Platform4" parent="Platforms" unique_id=780874561 instance=ExtResource("12_074og")]
 position = Vector2(-499, 240)

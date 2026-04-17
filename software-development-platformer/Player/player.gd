@@ -8,6 +8,7 @@ class_name Player
 @onready var AttackTimer: Timer = $Timers/AttackTimer #making these timers both for balance tweaking, and not letting animations determinephysics state
 @onready var StaminaTimer: Timer = $Timers/StaminaTimer
 @onready var SkillTimer: Timer = $UI/SkillTree/SkillTimer
+@onready var RespawnTimer: Timer = $Timers/Respawn_Timer
 #if you ever want to do this, drag in the node you're referencing, then hold command/ctrl while releasing
 
 const SPEED = 300.0
@@ -338,12 +339,28 @@ func regenStam() -> void:
 	while stamina != GlobalPlayer.MAX_Stamina:
 			stam(10, 0.75)
 
+#finds camera if it is a child of the player
+func _get_camera() -> Node2D:
+	var children = get_children()
+	for child in children:
+		if child is Camera2D:
+			return child
+	return null
+
 #apply knockback when hit by an enemy
 func apply_knockback(direction: Vector2, force: float, knockback_duration: float) -> void:
 	knockback = direction * force
 	knockback_timer = knockback_duration
 
+#when player hits hazard, respawns them at checkpoint
+func _hazard_respawn(the_hazard: Area2D) -> void:
+	RespawnTimer.start()
+
+
 #CONNECTED FUNCTIONS
+func _on_respawn_timer_timeout() -> void:
+	pass # Replace with function body.
+
 func _on_coyote_jump_timer_timeout() -> void:
 	canJump = false
 	if state == State.CROUCH: #makes player jump instead of just falling off the ledge if they were trying to jump
@@ -370,7 +387,9 @@ func _on_area_hitbox_area_entered(area: Area2D) -> void:
 		usingBouncePad = true #prevents _land() from running
 		jump(area._return_new_player_velocity(velocity), false) #forces jump from bouncepad
 	if area.is_in_group("Hazard"):
-		pass
+		take_damage(area.damage)
+		if health > 0:
+			_hazard_respawn(area)
 
 #checks for a bouncepad exited
 func _on_area_hitbox_area_exited(area: Area2D) -> void:

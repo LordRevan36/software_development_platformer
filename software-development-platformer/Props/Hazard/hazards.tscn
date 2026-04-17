@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://cmb14itvypwxh"]
+
+[ext_resource type="Script" uid="uid://dawrqoewsb217" path="res://Props/Hazard/hazards.gd" id="1_cd1eg"]
+
+[node name="Hazards" type="Node2D" unique_id=2146442833]
+script = ExtResource("1_cd1eg")
+
+[node name="Respawn" type="Marker2D" parent="." unique_id=1294215730]
+gizmo_extents = 40.0

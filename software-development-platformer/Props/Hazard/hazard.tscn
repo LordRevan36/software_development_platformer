@@ -5,16 +5,19 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_63olp"]
 resource_local_to_scene = true
-size = Vector2(70, 10)
+size = Vector2(280, 40)
 
 [node name="Hazard" type="Area2D" unique_id=1871379372 groups=["Hazard"]]
 script = ExtResource("1_ngr8s")
+parent_respawn = null
+alt_respawn = null
 
 [node name="CollisionShape" type="CollisionShape2D" parent="." unique_id=916186076]
 shape = SubResource("RectangleShape2D_63olp")
 
 [node name="Line2D" type="Line2D" parent="." unique_id=490359227]
 texture_repeat = 2
-points = PackedVector2Array(-35, 0, 35, 0)
+points = PackedVector2Array(-140, 0, 140, 0)
+width = 40.0
 texture = ExtResource("2_63olp")
 texture_mode = 1

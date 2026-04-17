@@ -6,6 +6,9 @@ class_name hazard
 @onready var line = $Line2D
 
 @export var update_line : bool = false #allows editor to choose to ask the line to update to the correct width
+@export var damage : int = 20
+@export var parent_respawn : bool = true
+@export var alt_respawn : Vector2 = Vector2.ZERO
 
 
 # Called when the node enters the scene tree for the first time.
@@ -27,3 +30,9 @@ func set_line_to_correct_width() -> void:
 	the_points.push_back(Vector2(half_width, 0))
 	line.points = the_points
 	update_line = false
+
+func _get_respawn() -> Vector2:
+	if parent_respawn:
+		return get_parent()._get_respawn()
+	else:
+		return global_position + alt_respawn
