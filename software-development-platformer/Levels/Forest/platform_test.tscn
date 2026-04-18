@@ -118,7 +118,7 @@ position = Vector2(-40, -223)
 move_speed = 300.0
 
 [node name="Platform" parent="Platforms/MovePlatform" index="0" unique_id=1136379276]
-position = Vector2(427.9383, 269.37976)
+position = Vector2(-12.257227, 255.0567)
 
 [node name="Rope" parent="Platforms/MovePlatform" index="1" unique_id=399989842]
 points = PackedVector2Array(0, 0, -14, 255, 447, 270, 447, 0, 0, 0)

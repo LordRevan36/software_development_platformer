@@ -14,8 +14,9 @@ ropeTexture = ExtResource("2_14nk7")
 
 [node name="Rope" type="Line2D" parent="." unique_id=399989842]
 texture_repeat = 2
-points = PackedVector2Array(0, 0)
+points = PackedVector2Array(0, 0, 50, 0, 0, 0)
 texture = ExtResource("2_14nk7")
 texture_mode = 1
 
 [node name="Path" type="Line2D" parent="." unique_id=523458451]
+points = PackedVector2Array(0, 0, 50, 0)
