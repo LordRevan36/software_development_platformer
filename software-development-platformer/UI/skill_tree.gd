@@ -128,10 +128,12 @@ func _on_health_upgrade_1_pressed() -> void:
 	if GlobalPlayer.MAX_Health < 150:
 		GlobalPlayer.MAX_Health += 10
 		GlobalPlayer.health_changed.emit(GlobalPlayer.MAX_Health, GlobalPlayer.MAX_Health)
-	GlobalPlayer.health = GlobalPlayer.MAX_Health
 	print(GlobalPlayer.MAX_Health)
 	if GlobalPlayer.MAX_Health == 150:
 		HealthStep.modulate = Color.WHITE
+	GlobalPlayer.health = GlobalPlayer.MAX_Health
+	if HealthUpgrade1.modulate != Color.GREEN:
+		GlobalPlayer.health = GlobalPlayer.MAX_Health
 
 func _on_health_step_pressed() -> void:
 	if GlobalPlayer.MAX_Health >= 150:
@@ -143,18 +145,21 @@ func _on_health_upgrade_2_pressed() -> void:
 	if GlobalPlayer.MAX_Health < 200:
 		GlobalPlayer.MAX_Health += 10
 		GlobalPlayer.health_changed.emit(GlobalPlayer.MAX_Health, GlobalPlayer.MAX_Health)
-	GlobalPlayer.health = GlobalPlayer.MAX_Health
 	print(GlobalPlayer.MAX_Health)
-
+	if HealthUpgrade2.modulate != Color.GREEN:
+		GlobalPlayer.health = GlobalPlayer.MAX_Health
 
 func _on_mana_upgrade_1_pressed() -> void:
 	if GlobalPlayer.MAX_Mana < 150:
 		GlobalPlayer.MAX_Mana += 10
-		GlobalPlayer.mana_changed.emit(GlobalPlayer.MAX_Mana, GlobalPlayer.MAX_Mana, 0.15)
+		GlobalPlayer.mana = GlobalPlayer.MAX_Mana
+		GlobalPlayer.mana_changed.emit(GlobalPlayer.MAX_Mana, GlobalPlayer.MAX_Mana, 0)
 	GlobalPlayer.mana = GlobalPlayer.MAX_Mana
 	print(GlobalPlayer.MAX_Mana)
 	if GlobalPlayer.MAX_Mana == 150:
 		ManaStep.modulate = Color.WHITE
+	if ManaUpgrade1.modulate != Color.GREEN:
+		GlobalPlayer.mana = GlobalPlayer.MAX_Mana
 
 func _on_mana_step_pressed() -> void:
 	if GlobalPlayer.MAX_Mana >= 150:
@@ -165,6 +170,7 @@ func _on_mana_step_pressed() -> void:
 func _on_mana_upgrade_2_pressed() -> void:
 	if GlobalPlayer.MAX_Mana < 200:
 		GlobalPlayer.MAX_Mana += 10
-		GlobalPlayer.mana_changed.emit(GlobalPlayer.MAX_Mana, GlobalPlayer.MAX_Mana, 0.15)
-	GlobalPlayer.mana = GlobalPlayer.MAX_Mana
-	print(GlobalPlayer.mana)	
+		GlobalPlayer.mana = GlobalPlayer.MAX_Mana
+		GlobalPlayer.mana_changed.emit(GlobalPlayer.MAX_Mana, GlobalPlayer.MAX_Mana, 0)
+	if ManaUpgrade2.modulate != Color.GREEN:
+		GlobalPlayer.mana = GlobalPlayer.MAX_Mana

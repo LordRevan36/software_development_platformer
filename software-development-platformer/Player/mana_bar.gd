@@ -1,5 +1,4 @@
 extends TextureProgressBar
-
 @onready var player := get_tree().get_first_node_in_group("Player")
 var mana_tween: Tween
 @export var player_path: NodePath
