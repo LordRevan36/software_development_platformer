@@ -28,15 +28,23 @@ func _ready() -> void:
 		if button not in get_tree().get_nodes_in_group("Start"):
 			button.modulate = Color.DARK_GRAY
 	
-	if AttackLevel >= 5:
-		AttackStep.modulate = Color.WHITE
-	if GlobalPlayer.can_continue_atk:
-		AttackStep.modulate = Color.GREEN
-		AttackUpgrade2.modulate = Color.WHITE
-	if GlobalControls.canBackflip:
-		Backflip.modulate = Color.GREEN
-	if GlobalControls.canFrontflip:
-		Frontflip.modulate = Color.GREEN
+	#saves the states of the buttons so they stay the same when changing menus
+	sync_button(Backflip, GlobalControls.canBackflip)
+	sync_button(Frontflip, GlobalControls.canFrontflip)
+	# Logic for tiered upgrades
+	update_tier(AttackStep, AttackUpgrade2, AttackLevel >= 5, GlobalPlayer.can_continue_atk)
+	update_tier(HealthStep, HealthUpgrade2, GlobalPlayer.MAX_Health >= 150, GlobalPlayer.can_continue_hp)
+	update_tier(ManaStep, ManaUpgrade2, GlobalPlayer.MAX_Mana >= 150, GlobalPlayer.can_continue_mana)
+
+func sync_button(btn: CanvasItem, condition: bool):
+	btn.modulate = Color.GREEN if condition else Color.WHITE
+
+func update_tier(step_btn, upgrade_btn, is_unlocked, is_complete):
+	if is_unlocked: step_btn.modulate = Color.WHITE
+	if is_complete:
+		step_btn.modulate = Color.GREEN
+		upgrade_btn.modulate = Color.WHITE
+
 
 func _connect_button_signals(button: Button):
 	button.mouse_entered.connect(_on_button_mouse_entered.bind(button))
@@ -120,7 +128,7 @@ func _on_health_upgrade_1_pressed() -> void:
 	if GlobalPlayer.MAX_Health < 150:
 		GlobalPlayer.MAX_Health += 10
 		GlobalPlayer.health_changed.emit(GlobalPlayer.MAX_Health, GlobalPlayer.MAX_Health)
-		GlobalPlayer.health = GlobalPlayer.MAX_Health
+	GlobalPlayer.health = GlobalPlayer.MAX_Health
 	print(GlobalPlayer.MAX_Health)
 	if GlobalPlayer.MAX_Health == 150:
 		HealthStep.modulate = Color.WHITE
@@ -135,7 +143,7 @@ func _on_health_upgrade_2_pressed() -> void:
 	if GlobalPlayer.MAX_Health < 200:
 		GlobalPlayer.MAX_Health += 10
 		GlobalPlayer.health_changed.emit(GlobalPlayer.MAX_Health, GlobalPlayer.MAX_Health)
-		GlobalPlayer.health = GlobalPlayer.MAX_Health
+	GlobalPlayer.health = GlobalPlayer.MAX_Health
 	print(GlobalPlayer.MAX_Health)
 
 
@@ -143,7 +151,7 @@ func _on_mana_upgrade_1_pressed() -> void:
 	if GlobalPlayer.MAX_Mana < 150:
 		GlobalPlayer.MAX_Mana += 10
 		GlobalPlayer.mana_changed.emit(GlobalPlayer.MAX_Mana, GlobalPlayer.MAX_Mana, 0.15)
-		GlobalPlayer.mana = GlobalPlayer.MAX_Mana
+	GlobalPlayer.mana = GlobalPlayer.MAX_Mana
 	print(GlobalPlayer.MAX_Mana)
 	if GlobalPlayer.MAX_Mana == 150:
 		ManaStep.modulate = Color.WHITE
@@ -158,5 +166,5 @@ func _on_mana_upgrade_2_pressed() -> void:
 	if GlobalPlayer.MAX_Mana < 200:
 		GlobalPlayer.MAX_Mana += 10
 		GlobalPlayer.mana_changed.emit(GlobalPlayer.MAX_Mana, GlobalPlayer.MAX_Mana, 0.15)
-		GlobalPlayer.mana = GlobalPlayer.MAX_Mana
-	print(GlobalPlayer.MAX_Mana)
+	GlobalPlayer.mana = GlobalPlayer.MAX_Mana
+	print(GlobalPlayer.mana)	
