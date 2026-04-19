@@ -6,19 +6,20 @@
 
 [node name="Level_Tutorial_1" type="Node2D" unique_id=1473395753]
 
-[node name="80" type="Parallax2D" parent="." unique_id=1999386806]
-modulate = Color(0.5532687, 0.5532687, 0.5532687, 1)
-scale = Vector2(0.8, 0.8)
-scroll_scale = Vector2(0.8, 0.8)
-scroll_offset = Vector2(349, 97.999985)
-screen_offset = Vector2(-484.3441, -780.2626)
+[node name="Parallax_Less100" type="Node2D" parent="." unique_id=332859451]
 
-[node name="Polygon2D" type="Polygon2D" parent="80" unique_id=1914789001]
+[node name="70" type="Parallax2D" parent="Parallax_Less100" unique_id=1691638674]
+modulate = Color(0.42523298, 0.32400835, 0.24873875, 1)
+scale = Vector2(0.7, 0.7)
+scroll_scale = Vector2(0.7, 0.7)
+scroll_offset = Vector2(391, 142.99997)
+
+[node name="Polygon2D" type="Polygon2D" parent="Parallax_Less100/70" unique_id=944318040]
 position = Vector2(-68, -8)
 color = Color(0.98039216, 0.77254903, 0.23529412, 1)
 polygon = PackedVector2Array(-2, 18, 370, -12, 696, -56, 934, -61, 1124, -57, 1253, -50, 1459, -18, 1860, 17, 2172, 7, 2865, 11, 2865, 89, -4, 108)
 
-[node name="Line2D" type="Line2D" parent="80" unique_id=1701679248]
+[node name="Line2D" type="Line2D" parent="Parallax_Less100/70" unique_id=1687260790]
 texture_repeat = 2
 position = Vector2(52, -316)
 scale = Vector2(4, 4)
@@ -26,19 +27,37 @@ points = PackedVector2Array(-32.25, 76.5, 58.5, 71.75, 104.5, 65.25, 145.5, 59, 
 texture = ExtResource("2_dhomk")
 texture_mode = 1
 
-[node name="90" type="Parallax2D" parent="." unique_id=564486971]
-modulate = Color(0.79729044, 0.79729044, 0.79729044, 1)
+[node name="80" type="Parallax2D" parent="Parallax_Less100" unique_id=1999386806]
+modulate = Color(0.6278242, 0.532983, 0.45817608, 1)
+scale = Vector2(0.8, 0.8)
+scroll_scale = Vector2(0.8, 0.8)
+scroll_offset = Vector2(219.99998, 87.99997)
+
+[node name="Polygon2D" type="Polygon2D" parent="Parallax_Less100/80" unique_id=1914789001]
+position = Vector2(-68, -8)
+color = Color(0.98039216, 0.77254903, 0.23529412, 1)
+polygon = PackedVector2Array(-2, 18, 370, -12, 696, -56, 934, -61, 1124, -57, 1253, -50, 1459, -18, 1860, 17, 2172, 7, 2865, 11, 2865, 89, -4, 108)
+
+[node name="Line2D" type="Line2D" parent="Parallax_Less100/80" unique_id=1701679248]
+texture_repeat = 2
+position = Vector2(52, -316)
+scale = Vector2(4, 4)
+points = PackedVector2Array(-32.25, 76.5, 58.5, 71.75, 104.5, 65.25, 145.5, 59, 203.5, 57.75, 253.75, 58.25, 293.75, 62.25, 334.25, 70, 387.75, 74, 433.25, 79, 513.25, 74.25, 541.75, 74.5, 613.25, 76, 687.25, 75.75)
+texture = ExtResource("2_dhomk")
+texture_mode = 1
+
+[node name="90" type="Parallax2D" parent="Parallax_Less100" unique_id=564486971]
+modulate = Color(0.8565291, 0.78047967, 0.72724766, 1)
 scale = Vector2(0.9, 0.9)
 scroll_scale = Vector2(0.9, 0.9)
 scroll_offset = Vector2(211.00002, 39)
-screen_offset = Vector2(-484.3441, -780.2626)
 
-[node name="Polygon2D" type="Polygon2D" parent="90" unique_id=330364488]
+[node name="Polygon2D" type="Polygon2D" parent="Parallax_Less100/90" unique_id=330364488]
 position = Vector2(-68, -8)
 color = Color(0.98039216, 0.77254903, 0.23529412, 1)
 polygon = PackedVector2Array(-2, 18, 370, -12, 696, -56, 934, -61, 1124, -57, 1253, -50, 1459, -18, 1860, 17, 2172, 7, 2865, 11, 2865, 89, -4, 108)
 
-[node name="Line2D" type="Line2D" parent="90" unique_id=2144365501]
+[node name="Line2D" type="Line2D" parent="Parallax_Less100/90" unique_id=2144365501]
 texture_repeat = 2
 position = Vector2(52, -316)
 scale = Vector2(4, 4)
@@ -46,17 +65,17 @@ points = PackedVector2Array(-32.25, 76.5, 58.5, 71.75, 104.5, 65.25, 145.5, 59, 
 texture = ExtResource("2_dhomk")
 texture_mode = 1
 
-[node name="95" type="Parallax2D" parent="." unique_id=720152951]
-modulate = Color(0.9313419, 0.9313419, 0.9313419, 1)
+[node name="95" type="Parallax2D" parent="Parallax_Less100" unique_id=720152951]
+modulate = Color(0.9452775, 0.9257267, 0.91114485, 1)
 scroll_scale = Vector2(0.95, 0.95)
 scroll_offset = Vector2(143, 24)
 
-[node name="Polygon2D" type="Polygon2D" parent="95" unique_id=1793568252]
+[node name="Polygon2D" type="Polygon2D" parent="Parallax_Less100/95" unique_id=1793568252]
 position = Vector2(-68, -8)
 color = Color(0.98039216, 0.77254903, 0.23529412, 1)
 polygon = PackedVector2Array(-2, 18, 370, -12, 696, -56, 934, -61, 1124, -57, 1253, -50, 1459, -18, 1860, 17, 2172, 7, 2865, 11, 2865, 89, -4, 108)
 
-[node name="Line2D" type="Line2D" parent="95" unique_id=1940110507]
+[node name="Line2D" type="Line2D" parent="Parallax_Less100/95" unique_id=1940110507]
 texture_repeat = 2
 position = Vector2(52, -316)
 scale = Vector2(4, 4)
@@ -64,11 +83,15 @@ points = PackedVector2Array(-32.25, 76.5, 58.5, 71.75, 104.5, 65.25, 145.5, 59, 
 texture = ExtResource("2_dhomk")
 texture_mode = 1
 
-[node name="99" type="Parallax2D" parent="." unique_id=354941501]
+[node name="99" type="Parallax2D" parent="Parallax_Less100" unique_id=354941501]
 modulate = Color(0.9313419, 0.9313419, 0.9313419, 1)
-scroll_scale = Vector2(0.99, 0.99)
+scroll_scale = Vector2(0.98, 0.98)
 scroll_offset = Vector2(143, 24)
-screen_offset = Vector2(-725.188, -789.5404)
+
+[node name="IntroAreaTree" type="Sprite2D" parent="Parallax_Less100/99" unique_id=1428599874]
+position = Vector2(877.4236, -390.8734)
+scale = Vector2(4, 4)
+texture = ExtResource("1_h574v")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1904089857]
 
@@ -90,12 +113,12 @@ visible = false
 polygon = PackedVector2Array(2, -1, 344, -17, 700, -69, 1129, -75, 1493, -28, 1852, 5, 2179, -8, 2556, -6, 2873, -9, 2876, 108, -1, 125)
 
 [node name="IntroAreaTree" type="Sprite2D" parent="." unique_id=497467660]
-position = Vector2(120, -308)
+position = Vector2(1020, -384)
 scale = Vector2(4, 4)
 texture = ExtResource("1_h574v")
 
 [node name="Player" parent="." unique_id=359640240 instance=ExtResource("2_r0rco")]
-position = Vector2(145, -131)
+position = Vector2(1079, -187)
 
 [node name="HealthBar" parent="Player/UI" parent_id_path=PackedInt32Array(359640240, 1340181654) index="2" unique_id=489409292]
 player_path = NodePath("../..")
@@ -103,17 +126,95 @@ player_path = NodePath("../..")
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1475739247]
 zoom = Vector2(1.3, 1.3)
 
-[node name="Parallax2D2" type="Parallax2D" parent="." unique_id=285626331]
+[node name="Parallax_Above100" type="Node2D" parent="." unique_id=1462886642]
+
+[node name="105" type="Parallax2D" parent="Parallax_Above100" unique_id=285626331]
 modulate = Color(1.1261977, 1.1261977, 1.1261977, 1)
 scroll_scale = Vector2(1.05, 1.05)
 scroll_offset = Vector2(141, -31)
 
-[node name="Polygon2D" type="Polygon2D" parent="Parallax2D2" unique_id=1085953114]
+[node name="Polygon2D" type="Polygon2D" parent="Parallax_Above100/105" unique_id=1085953114]
 position = Vector2(-68, -8)
 color = Color(0.98039216, 0.77254903, 0.23529412, 1)
 polygon = PackedVector2Array(-2, 18, 370, -12, 696, -56, 934, -61, 1124, -57, 1253, -50, 1459, -18, 1860, 17, 2172, 7, 2865, 11, 2865, 89, -4, 108)
 
-[node name="Line2D" type="Line2D" parent="Parallax2D2" unique_id=947031305]
+[node name="Line2D" type="Line2D" parent="Parallax_Above100/105" unique_id=947031305]
+texture_repeat = 2
+position = Vector2(52, -316)
+scale = Vector2(4, 4)
+points = PackedVector2Array(-32.25, 76.5, 58.5, 71.75, 104.5, 65.25, 145.5, 59, 203.5, 57.75, 253.75, 58.25, 293.75, 62.25, 334.25, 70, 387.75, 74, 433.25, 79, 513.25, 74.25, 541.75, 74.5, 613.25, 76, 687.25, 75.75)
+texture = ExtResource("2_dhomk")
+texture_mode = 1
+
+[node name="110" type="Parallax2D" parent="Parallax_Above100" unique_id=193225144]
+modulate = Color(1.3119808, 1.3119808, 1.3119808, 1)
+scale = Vector2(1.1, 1.1)
+scroll_scale = Vector2(1.1, 1.1)
+scroll_offset = Vector2(-45, -53)
+
+[node name="Polygon2D" type="Polygon2D" parent="Parallax_Above100/110" unique_id=1679974931]
+position = Vector2(-68, -8)
+color = Color(0.98039216, 0.77254903, 0.23529412, 1)
+polygon = PackedVector2Array(-2, 18, 370, -12, 696, -56, 934, -61, 1124, -57, 1253, -50, 1459, -18, 1860, 17, 2172, 7, 2865, 11, 2865, 89, -4, 108)
+
+[node name="Line2D" type="Line2D" parent="Parallax_Above100/110" unique_id=997123117]
+texture_repeat = 2
+position = Vector2(52, -316)
+scale = Vector2(4, 4)
+points = PackedVector2Array(-32.25, 76.5, 58.5, 71.75, 104.5, 65.25, 145.5, 59, 203.5, 57.75, 253.75, 58.25, 293.75, 62.25, 334.25, 70, 387.75, 74, 433.25, 79, 513.25, 74.25, 541.75, 74.5, 613.25, 76, 687.25, 75.75)
+texture = ExtResource("2_dhomk")
+texture_mode = 1
+
+[node name="115" type="Parallax2D" parent="Parallax_Above100" unique_id=1603896548]
+modulate = Color(1.2356308, 1.1780615, 0.9957589, 1)
+scale = Vector2(1.15, 1.15)
+scroll_scale = Vector2(1.15, 1.15)
+scroll_offset = Vector2(5, -44)
+
+[node name="Polygon2D" type="Polygon2D" parent="Parallax_Above100/115" unique_id=2025668956]
+position = Vector2(-68, -8)
+color = Color(0.98039216, 0.77254903, 0.23529412, 1)
+polygon = PackedVector2Array(-2, 18, 370, -12, 696, -56, 934, -61, 1124, -57, 1253, -50, 1459, -18, 1860, 17, 2172, 7, 2865, 11, 2865, 89, -4, 108)
+
+[node name="Line2D" type="Line2D" parent="Parallax_Above100/115" unique_id=1672194949]
+texture_repeat = 2
+position = Vector2(52, -316)
+scale = Vector2(4, 4)
+points = PackedVector2Array(-32.25, 76.5, 58.5, 71.75, 104.5, 65.25, 145.5, 59, 203.5, 57.75, 253.75, 58.25, 293.75, 62.25, 334.25, 70, 387.75, 74, 433.25, 79, 513.25, 74.25, 541.75, 74.5, 613.25, 76, 687.25, 75.75)
+texture = ExtResource("2_dhomk")
+texture_mode = 1
+
+[node name="130" type="Parallax2D" parent="Parallax_Above100" unique_id=310991993]
+modulate = Color(1.236, 1.0898157, 0.98713464, 1)
+scale = Vector2(1.3, 1.3)
+scroll_scale = Vector2(1.3, 1.3)
+scroll_offset = Vector2(-100, -98)
+
+[node name="Polygon2D" type="Polygon2D" parent="Parallax_Above100/130" unique_id=1367834853]
+position = Vector2(-68, -8)
+color = Color(0.98039216, 0.77254903, 0.23529412, 1)
+polygon = PackedVector2Array(-2, 18, 370, -12, 696, -56, 934, -61, 1124, -57, 1253, -50, 1459, -18, 1860, 17, 2172, 7, 2865, 11, 2865, 89, -4, 108)
+
+[node name="Line2D" type="Line2D" parent="Parallax_Above100/130" unique_id=1820520453]
+texture_repeat = 2
+position = Vector2(52, -316)
+scale = Vector2(4, 4)
+points = PackedVector2Array(-32.25, 76.5, 58.5, 71.75, 104.5, 65.25, 145.5, 59, 203.5, 57.75, 253.75, 58.25, 293.75, 62.25, 334.25, 70, 387.75, 74, 433.25, 79, 513.25, 74.25, 541.75, 74.5, 613.25, 76, 687.25, 75.75)
+texture = ExtResource("2_dhomk")
+texture_mode = 1
+
+[node name="150" type="Parallax2D" parent="Parallax_Above100" unique_id=1609833071]
+modulate = Color(1.236, 1.0053076, 0.83956873, 1)
+scale = Vector2(1.5, 1.5)
+scroll_scale = Vector2(1.5, 1.5)
+scroll_offset = Vector2(-377.00003, -192)
+
+[node name="Polygon2D" type="Polygon2D" parent="Parallax_Above100/150" unique_id=1779451721]
+position = Vector2(-68, -8)
+color = Color(0.98039216, 0.77254903, 0.23529412, 1)
+polygon = PackedVector2Array(-2, 18, 370, -12, 696, -56, 934, -61, 1124, -57, 1253, -50, 1459, -18, 1860, 17, 2172, 7, 2865, 11, 2865, 89, -4, 108)
+
+[node name="Line2D" type="Line2D" parent="Parallax_Above100/150" unique_id=488306540]
 texture_repeat = 2
 position = Vector2(52, -316)
 scale = Vector2(4, 4)
