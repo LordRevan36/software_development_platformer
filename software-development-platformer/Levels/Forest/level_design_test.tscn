@@ -36,7 +36,7 @@ size = Vector2(144, 128)
 [node name="LevelDesignTest" type="Node2D" unique_id=1860334114]
 
 [node name="Player" parent="." unique_id=359640240 instance=ExtResource("1_nnuib")]
-position = Vector2(-1, -51)
+position = Vector2(1, -51)
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=2134495065]
 
@@ -140,9 +140,6 @@ shape = SubResource("RectangleShape2D_a7t7g")
 [node name="MovePlatform" parent="Platforms" unique_id=1362813319 instance=ExtResource("4_2ap7l")]
 position = Vector2(1853, 174)
 move_speed = 100.0
-
-[node name="Platform" parent="Platforms/MovePlatform" index="0" unique_id=1136379276]
-position = Vector2(201.71075, 0.42826056)
 
 [node name="Rope" parent="Platforms/MovePlatform" index="1" unique_id=399989842]
 points = PackedVector2Array(0, 0, 942, 2, 0, 0)

@@ -2,9 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://ctk8ibr44c642" path="res://Assets/Forest/Bush.png" id="1_arvju"]
 [ext_resource type="Texture2D" uid="uid://bud8q02b7boe8" path="res://Assets/Forest/BackGrass.png" id="2_d6g2o"]
-[ext_resource type="Texture2D" uid="uid://cc5t6dk5qt08y" path="res://Assets/Forest/Tree1.png" id="3_631vg"]
-[ext_resource type="Texture2D" uid="uid://dg6umr23h26yn" path="res://Assets/Forest/Tree2.png" id="4_ya482"]
-[ext_resource type="Texture2D" uid="uid://kcitspqg4mfr" path="res://Assets/Forest/Tree3.png" id="5_lc4l7"]
+[ext_resource type="Texture2D" uid="uid://cc5t6dk5qt08y" path="res://Assets/Forest/Trees/Tree1.png" id="3_631vg"]
+[ext_resource type="Texture2D" uid="uid://dg6umr23h26yn" path="res://Assets/Forest/Trees/Tree2.png" id="4_ya482"]
+[ext_resource type="Texture2D" uid="uid://kcitspqg4mfr" path="res://Assets/Forest/Trees/Tree3.png" id="5_lc4l7"]
 [ext_resource type="Texture2D" uid="uid://yci8u2sv0dny" path="res://Assets/Forest/LeafParticle1.png" id="6_nqnja"]
 [ext_resource type="Texture2D" uid="uid://c2fn1ck4bikb1" path="res://Assets/Forest/Grass.png" id="7_l30ab"]
 [ext_resource type="Texture2D" uid="uid://ul3588q4vy3l" path="res://Assets/Forest/LeafParticle2.png" id="8_q5gb5"]
