@@ -102,7 +102,7 @@ func change_direction() -> void:
 	if state == State.CHASE:
 		#follow player
 		#does it need to be position or global_position?
-		var direction = (player_char.position - position).normalized()
+		direction = (player_char.position - position).normalized()
 		direction = sign(direction)
 		if direction.x == 1:
 			#flip right
@@ -112,6 +112,7 @@ func change_direction() -> void:
 			#flip left
 			EnSprite.flip_h = false
 			player_cast.target_position = left_bound
+
 
 
 func _update_enemy_animation() -> void:
