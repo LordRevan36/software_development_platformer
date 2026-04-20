@@ -141,6 +141,9 @@ shape = SubResource("RectangleShape2D_a7t7g")
 position = Vector2(1853, 174)
 move_speed = 100.0
 
+[node name="Platform" parent="Platforms/MovePlatform" index="0" unique_id=1136379276]
+position = Vector2(142.46074, 0.30246443)
+
 [node name="Rope" parent="Platforms/MovePlatform" index="1" unique_id=399989842]
 points = PackedVector2Array(0, 0, 942, 2, 0, 0)
 
