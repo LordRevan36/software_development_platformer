@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://yci8u2sv0dny"
-path="res://.godot/imported/LeafParticle1.png-8fa78065fae70e37c1d5c92f1b7ef24c.ctex"
+uid="uid://b4ildk8pcwwe7"
+path="res://.godot/imported/Run.png-200e90939182d91e4303c0f0d6d17f41.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Forest/LeafParticle1.png"
-dest_files=["res://.godot/imported/LeafParticle1.png-8fa78065fae70e37c1d5c92f1b7ef24c.ctex"]
+source_file="res://Assets/Player/NewSprites/Run.png"
+dest_files=["res://.godot/imported/Run.png-200e90939182d91e4303c0f0d6d17f41.ctex"]
 
 [params]
 

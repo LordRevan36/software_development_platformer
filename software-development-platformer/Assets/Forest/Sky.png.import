@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b24l3053ht7vp"
-path="res://.godot/imported/IvyRun.png-2fed0fcdd623e12237bdb9921a1fe42f.ctex"
+uid="uid://dusr0q3dfkmcn"
+path="res://.godot/imported/Sky.png-a1bc3c7087703af4adcce9682b8beffd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Player/IvyRun.png"
-dest_files=["res://.godot/imported/IvyRun.png-2fed0fcdd623e12237bdb9921a1fe42f.ctex"]
+source_file="res://Assets/Forest/Sky.png"
+dest_files=["res://.godot/imported/Sky.png-a1bc3c7087703af4adcce9682b8beffd.ctex"]
 
 [params]
 

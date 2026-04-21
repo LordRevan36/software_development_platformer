@@ -33,7 +33,6 @@ func _process(delta: float) -> void:
 		if parent_node == null:
 			parent_node = get_parent()
 		if assign_variables:
-			print("Hey")
 			assign_variables = false
 			assignVariables()
 		if sync_shapes:
@@ -60,15 +59,14 @@ func assignVariables():
 
 func syncShapes():
 	polygon_node.polygon = self.points
-	print("SyncShapes")
+
 	
 	#polygon_node.append()
 	if collision_node:
 		collision_node.polygon = polygon_node.polygon
 		collision_node.position.y = position.y + texture.get_height()
 	polygon_node.position.y = position.y + texture.get_height()
-	print(texture.get_height())
-		
+
 
 func createCollision():
 	if !parent_node.has_node("CollisionPolygon2D"):

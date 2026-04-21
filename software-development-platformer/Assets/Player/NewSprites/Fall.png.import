@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gmc7gpf4hjkd"
-path="res://.godot/imported/IvyIdle.png-5a4b38fb67e93f48ea0f5a4ea23c5c1d.ctex"
+uid="uid://q0ku8mj6gnug"
+path="res://.godot/imported/Fall.png-71a64d93a8dabe3a2174892354e626c0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Player/IvyIdle.png"
-dest_files=["res://.godot/imported/IvyIdle.png-5a4b38fb67e93f48ea0f5a4ea23c5c1d.ctex"]
+source_file="res://Assets/Player/NewSprites/Fall.png"
+dest_files=["res://.godot/imported/Fall.png-71a64d93a8dabe3a2174892354e626c0.ctex"]
 
 [params]
 

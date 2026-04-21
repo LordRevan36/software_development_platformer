@@ -104,7 +104,6 @@ func _land() -> void:
 		state = State.FLIPLAND
 	else:
 		state = State.LAND
-	print(get_last_slide_collision().get_collider())
 	if get_last_slide_collision().get_collider().is_in_group("Platform"):
 		friction = get_last_slide_collision().get_collider().friction
 		print(friction)

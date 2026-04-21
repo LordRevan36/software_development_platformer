@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://krejddknw6xy"
-path="res://.godot/imported/IvyRunStart.png-e798cdc45c609dae3f16e14a4cff696e.ctex"
+uid="uid://bbvmyegj3nc2k"
+path="res://.godot/imported/RockThingy.png-d61569ed79ed5351350d0a625a166b99.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Player/IvyRunStart.png"
-dest_files=["res://.godot/imported/IvyRunStart.png-e798cdc45c609dae3f16e14a4cff696e.ctex"]
+source_file="res://Assets/Forest/RockThingy.png"
+dest_files=["res://.godot/imported/RockThingy.png-d61569ed79ed5351350d0a625a166b99.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dy3a63mmbs5y4"
-path="res://.godot/imported/BackflipLand.png-3e404aa68385cf8a5798df1b6a5418ea.ctex"
+uid="uid://cmaj0sxsi4jsk"
+path="res://.godot/imported/Jump.png-b9f9412e2e047275f2896279b4fb60a6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://NewSprites/BackflipLand.png"
-dest_files=["res://.godot/imported/BackflipLand.png-3e404aa68385cf8a5798df1b6a5418ea.ctex"]
+source_file="res://Assets/Player/NewSprites/Jump.png"
+dest_files=["res://.godot/imported/Jump.png-b9f9412e2e047275f2896279b4fb60a6.ctex"]
 
 [params]
 

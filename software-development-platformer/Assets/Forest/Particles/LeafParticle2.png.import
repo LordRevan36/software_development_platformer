@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b1d7ndc646410"
-path="res://.godot/imported/Idle.png-b13691b10752a1797396114bf130af0a.ctex"
+uid="uid://ul3588q4vy3l"
+path="res://.godot/imported/LeafParticle2.png-13e40be09370d0fa3ae8f9e3c7abb80c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://NewSprites/Idle.png"
-dest_files=["res://.godot/imported/Idle.png-b13691b10752a1797396114bf130af0a.ctex"]
+source_file="res://Assets/Forest/Particles/LeafParticle2.png"
+dest_files=["res://.godot/imported/LeafParticle2.png-13e40be09370d0fa3ae8f9e3c7abb80c.ctex"]
 
 [params]
 

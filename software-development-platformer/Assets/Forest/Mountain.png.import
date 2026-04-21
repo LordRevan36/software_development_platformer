@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://btdwqyc5rbo5o"
-path="res://.godot/imported/JumpStart.png-6746fd1759b1605250bee178e90d7aca.ctex"
+uid="uid://b8woe0wxq5u0s"
+path="res://.godot/imported/Mountain.png-72f43eb437cd4feebe4a934931f9a930.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://NewSprites/JumpStart.png"
-dest_files=["res://.godot/imported/JumpStart.png-6746fd1759b1605250bee178e90d7aca.ctex"]
+source_file="res://Assets/Forest/Mountain.png"
+dest_files=["res://.godot/imported/Mountain.png-72f43eb437cd4feebe4a934931f9a930.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dj57c7qfcncpj"
-path="res://.godot/imported/Fall.png-030a2419defac9a24c456c4d4167bee7.ctex"
+uid="uid://bq88f7es40bsw"
+path="res://.godot/imported/RoundBush1.png-b994b88270ffaf7709dd595d8de47879.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Player/Fall.png"
-dest_files=["res://.godot/imported/Fall.png-030a2419defac9a24c456c4d4167bee7.ctex"]
+source_file="res://Assets/Forest/RoundBush1.png"
+dest_files=["res://.godot/imported/RoundBush1.png-b994b88270ffaf7709dd595d8de47879.ctex"]
 
 [params]
 

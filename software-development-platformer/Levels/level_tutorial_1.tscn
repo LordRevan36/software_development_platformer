@@ -1,10 +1,23 @@
 [gd_scene format=3 uid="uid://cwqrc1n2i42kw"]
 
+[ext_resource type="Texture2D" uid="uid://dusr0q3dfkmcn" path="res://Assets/Forest/Sky.png" id="1_bsl1a"]
 [ext_resource type="Texture2D" uid="uid://xuwvxj62xo4y" path="res://Assets/Forest/Trees/IntroAreaTree.png" id="1_h574v"]
+[ext_resource type="Texture2D" uid="uid://b8woe0wxq5u0s" path="res://Assets/Forest/Mountain.png" id="1_i4smi"]
 [ext_resource type="PackedScene" uid="uid://cy1vyx88wgg4v" path="res://Player/player.tscn" id="2_r0rco"]
 [ext_resource type="Script" uid="uid://ciarlfus3o4an" path="res://Levels/ground_tool.gd" id="4_dfgi1"]
 [ext_resource type="Texture2D" uid="uid://b8i7ug1xlb4ip" path="res://Assets/Forest/Particles/Rain.png" id="4_dhomk"]
+[ext_resource type="Texture2D" uid="uid://bq88f7es40bsw" path="res://Assets/Forest/RoundBush1.png" id="4_gxogp"]
 [ext_resource type="Texture2D" uid="uid://dk5n8be51afhn" path="res://Assets/Forest/Grounds/ShortGrass1.png" id="5_gxogp"]
+[ext_resource type="Texture2D" uid="uid://bbvmyegj3nc2k" path="res://Assets/Forest/RockThingy.png" id="7_gcxo0"]
+
+[sub_resource type="Gradient" id="Gradient_gcxo0"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_i4smi"]
+gradient = SubResource("Gradient_gcxo0")
+width = 256
+height = 256
+fill_from = Vector2(0.40137616, 0.06880734)
+fill_to = Vector2(0.8325688, 1)
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dfgi1"]
 particle_flag_disable_z = true
@@ -14,25 +27,150 @@ angle_min = 15.0000105
 angle_max = 17.000011
 velocity_pivot = Vector3(10, 0, 0)
 direction = Vector3(2, 10, 0)
-spread = 1.0
-initial_velocity_min = 90.0
-initial_velocity_max = 180.0
-gravity = Vector3(0, 150, 0)
+spread = 0.5
+initial_velocity_min = 300.0
+initial_velocity_max = 310.0
+gravity = Vector3(0, 10, 0)
 
 [node name="Level_Tutorial_1" type="Node2D" unique_id=1473395753]
 
 [node name="Parallax_Less100" type="Node2D" parent="." unique_id=332859451]
 
-[node name="50" type="Parallax2D" parent="Parallax_Less100" unique_id=720361938]
-scale = Vector2(0.5, 0.5)
-scroll_scale = Vector2(0.5, 0.5)
-scroll_offset = Vector2(650, -39)
+[node name="0" type="Parallax2D" parent="Parallax_Less100" unique_id=1630526433]
+scroll_scale = Vector2(0, 0)
+scroll_offset = Vector2(835, -79.00006)
 
-[node name="Node2D" type="Node2D" parent="Parallax_Less100/50" unique_id=754417841]
-modulate = Color(0.6566151, 0.22710484, 0.09401458, 1)
-position = Vector2(-244.8605, 382.15283)
+[node name="Polygon2D" type="Polygon2D" parent="Parallax_Less100/0" unique_id=1874394254]
+position = Vector2(11522, 1407.0001)
+texture = SubResource("GradientTexture2D_i4smi")
+texture_rotation = 1.5707964
+polygon = PackedVector2Array(-13350, -7925, -13397, -834, -2037, -888, -2294, -8019)
 
-[node name="Line2D" type="Line2D" parent="Parallax_Less100/50/Node2D" unique_id=585800694]
+[node name="Sky" type="Sprite2D" parent="Parallax_Less100/0" unique_id=1769706429]
+position = Vector2(147.93848, 284.50983)
+scale = Vector2(2, 0.5)
+texture = ExtResource("1_bsl1a")
+
+[node name="3" type="Parallax2D" parent="Parallax_Less100" unique_id=209176421]
+scroll_scale = Vector2(0.03, 0.03)
+scroll_offset = Vector2(835, -79.00006)
+
+[node name="Mountain" type="Sprite2D" parent="Parallax_Less100/3" unique_id=718909982]
+position = Vector2(389.54126, 425.08398)
+texture = ExtResource("1_i4smi")
+
+[node name="10" type="Parallax2D" parent="Parallax_Less100" unique_id=525025473]
+scale = Vector2(0.15, 0.15)
+scroll_scale = Vector2(0.1, 0.1)
+scroll_offset = Vector2(835, -79.00006)
+
+[node name="Grass" type="Node2D" parent="Parallax_Less100/10" unique_id=1621690103]
+modulate = Color(0.36762995, 0.47849894, 0.52668655, 1)
+position = Vector2(553.1134, 2522.9385)
+
+[node name="Line2D" type="Line2D" parent="Parallax_Less100/10/Grass" unique_id=1061603404]
+texture_repeat = 2
+scale = Vector2(4, 4)
+points = PackedVector2Array(-225.1897, -3.0175781, 32.499996, -3, 54.749996, -5.25, 82.75, -13.25, 114, -25.5, 147.5, -38.25, 178.5, -44.5, 221.25, -48.25, 253.5, -47, 295.75, -51.25, 323.5, -52.5, 347.47974, -55.31787, 378.3908, -46.246017, 388, -40.25, 401, -34.5, 434, -28.75, 464, -24.5, 513.75, -27.75, 549.5, -19.5, 570.5, -7, 590.5, 1.75, 616, 7.5, 641.5, 8.5, 686.5, 6, 714.5, 0.75, 757, -1, 777, 3.75, 819.75, 4, 877.75, -0.5, 881, 0.5, 948.75, -6.5, 1018.75, -14.5, 1051, -14.25, 1062.75, -15.5, 1073.25, -18.5, 1087.5, -25, 1097.75, -32, 1110.25, -41.25, 1121, -49.5, 1135.25, -56.5, 1156.75, -57.5, 1169.25, -54.5, 1185, -49, 1200.5, -47.25, 1215.25, -51.75, 1235.5, -54, 1256.5, -52, 1263, -49.5, 1280.9038, 216.16125, -356.85645, 218.64905, -296.85645, 1.9824219)
+texture = ExtResource("5_gxogp")
+texture_mode = 1
+script = ExtResource("4_dfgi1")
+
+[node name="Polygon2D" type="Polygon2D" parent="Parallax_Less100/10/Grass" unique_id=466611827]
+position = Vector2(0, 10)
+scale = Vector2(4, 4)
+polygon = PackedVector2Array(-225.1897, -3.0175781, 32.499996, -3, 54.749996, -5.25, 82.75, -13.25, 114, -25.5, 147.5, -38.25, 178.5, -44.5, 221.25, -48.25, 253.5, -47, 295.75, -51.25, 323.5, -52.5, 360.25, -50.75, 378.3908, -46.246017, 388, -40.25, 401, -34.5, 434, -28.75, 464, -24.5, 513.75, -27.75, 549.5, -19.5, 570.5, -7, 590.5, 1.75, 616, 7.5, 641.5, 8.5, 686.5, 6, 714.5, 0.75, 757, -1, 777, 3.75, 819.75, 4, 877.75, -0.5, 881, 0.5, 948.75, -6.5, 1018.75, -14.5, 1051, -14.25, 1062.75, -15.5, 1073.25, -18.5, 1087.5, -25, 1097.75, -32, 1110.25, -41.25, 1121, -49.5, 1135.25, -56.5, 1156.75, -57.5, 1169.25, -54.5, 1185, -49, 1200.5, -47.25, 1215.25, -51.75, 1235.5, -54, 1256.5, -52, 1263, -49.5, 1280.9038, 216.16125, -356.85645, 218.64905, -296.85645, 1.9824219)
+
+[node name="Rain" type="GPUParticles2D" parent="Parallax_Less100/10/Grass" unique_id=1974259202]
+modulate = Color(1, 1, 1, 0.34901962)
+position = Vector2(1731.4502, -1307.7544)
+scale = Vector2(4, 4)
+amount = 2000
+texture = ExtResource("4_dhomk")
+lifetime = 2.0
+fixed_fps = 24
+visibility_rect = Rect2(-200, -250, 400, 500)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_dfgi1")
+
+[node name="15" type="Parallax2D" parent="Parallax_Less100" unique_id=764646928]
+scale = Vector2(0.15, 0.15)
+scroll_scale = Vector2(0.15, 0.15)
+scroll_offset = Vector2(835, -79.00006)
+
+[node name="Grass" type="Node2D" parent="Parallax_Less100/15" unique_id=1448594189]
+modulate = Color(0.45434105, 0.51714045, 0.46704298, 1)
+position = Vector2(1274.5293, 2458.8506)
+
+[node name="Line2D" type="Line2D" parent="Parallax_Less100/15/Grass" unique_id=1092149452]
+texture_repeat = 2
+scale = Vector2(4, 4)
+points = PackedVector2Array(-225.1897, -3.0175781, 32.499996, -3, 54.749996, -5.25, 82.75, -13.25, 114, -25.5, 147.5, -38.25, 178.5, -44.5, 221.25, -48.25, 253.5, -47, 295.75, -51.25, 323.5, -52.5, 347.47974, -55.31787, 378.3908, -46.246017, 388, -40.25, 401, -34.5, 434, -28.75, 464, -24.5, 513.75, -27.75, 549.5, -19.5, 570.5, -7, 590.5, 1.75, 616, 7.5, 641.5, 8.5, 686.5, 6, 714.5, 0.75, 757, -1, 777, 3.75, 819.75, 4, 877.75, -0.5, 881, 0.5, 948.75, -6.5, 1018.75, -14.5, 1051, -14.25, 1062.75, -15.5, 1073.25, -18.5, 1087.5, -25, 1097.75, -32, 1110.25, -41.25, 1121, -49.5, 1135.25, -56.5, 1156.75, -57.5, 1169.25, -54.5, 1185, -49, 1200.5, -47.25, 1215.25, -51.75, 1235.5, -54, 1256.5, -52, 1263, -49.5, 1280.9038, 216.16125, -356.85645, 218.64905, -296.85645, 1.9824219)
+texture = ExtResource("5_gxogp")
+texture_mode = 1
+script = ExtResource("4_dfgi1")
+
+[node name="Polygon2D" type="Polygon2D" parent="Parallax_Less100/15/Grass" unique_id=1368226626]
+position = Vector2(0, 10)
+scale = Vector2(4, 4)
+polygon = PackedVector2Array(-225.1897, -3.0175781, 32.499996, -3, 54.749996, -5.25, 82.75, -13.25, 114, -25.5, 147.5, -38.25, 178.5, -44.5, 221.25, -48.25, 253.5, -47, 295.75, -51.25, 323.5, -52.5, 360.25, -50.75, 378.3908, -46.246017, 388, -40.25, 401, -34.5, 434, -28.75, 464, -24.5, 513.75, -27.75, 549.5, -19.5, 570.5, -7, 590.5, 1.75, 616, 7.5, 641.5, 8.5, 686.5, 6, 714.5, 0.75, 757, -1, 777, 3.75, 819.75, 4, 877.75, -0.5, 881, 0.5, 948.75, -6.5, 1018.75, -14.5, 1051, -14.25, 1062.75, -15.5, 1073.25, -18.5, 1087.5, -25, 1097.75, -32, 1110.25, -41.25, 1121, -49.5, 1135.25, -56.5, 1156.75, -57.5, 1169.25, -54.5, 1185, -49, 1200.5, -47.25, 1215.25, -51.75, 1235.5, -54, 1256.5, -52, 1263, -49.5, 1280.9038, 216.16125, -356.85645, 218.64905, -296.85645, 1.9824219)
+
+[node name="Rain" type="GPUParticles2D" parent="Parallax_Less100/15/Grass" unique_id=765405759]
+modulate = Color(1, 1, 1, 0.34901962)
+position = Vector2(1731.4502, -1307.7544)
+scale = Vector2(4, 4)
+amount = 2000
+texture = ExtResource("4_dhomk")
+lifetime = 2.0
+fixed_fps = 24
+visibility_rect = Rect2(-200, -250, 400, 500)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_dfgi1")
+
+[node name="25" type="Parallax2D" parent="Parallax_Less100" unique_id=777201394]
+scale = Vector2(0.25, 0.25)
+scroll_scale = Vector2(0.25, 0.25)
+scroll_offset = Vector2(835, -79.00006)
+
+[node name="Grass" type="Node2D" parent="Parallax_Less100/25" unique_id=1043668468]
+modulate = Color(0.50046396, 0.54323137, 0.42974347, 1)
+position = Vector2(-102.28821, 1240.79)
+
+[node name="Line2D" type="Line2D" parent="Parallax_Less100/25/Grass" unique_id=374023106]
+texture_repeat = 2
+scale = Vector2(4, 4)
+points = PackedVector2Array(-86.1521, -3.1185303, 32.499996, -3, 54.749996, -5.25, 82.75, -13.25, 114, -25.5, 147.5, -38.25, 178.5, -44.5, 221.25, -48.25, 253.5, -47, 295.75, -51.25, 323.5, -52.5, 360.25, -50.75, 378.3908, -46.246017, 388, -40.25, 401, -34.5, 434, -28.75, 464, -24.5, 513.75, -27.75, 549.5, -19.5, 570.5, -7, 590.5, 1.75, 616, 7.5, 641.5, 8.5, 686.5, 6, 714.5, 0.75, 757, -1, 777, 3.75, 819.75, 4, 877.75, -0.5, 881, 0.5, 948.75, -6.5, 1018.75, -14.5, 1051, -14.25, 1062.75, -15.5, 1073.25, -18.5, 1087.5, -25, 1097.75, -32, 1110.25, -41.25, 1121, -49.5, 1135.25, -56.5, 1156.75, -57.5, 1169.25, -54.5, 1185, -49, 1200.5, -47.25, 1215.25, -51.75, 1235.5, -54, 1256.5, -52, 1475.8479, -47.11853, 1529.8479, 110.88147, -18.1521, 128.88147, -126.1521, 8.88147)
+texture = ExtResource("5_gxogp")
+texture_mode = 1
+script = ExtResource("4_dfgi1")
+
+[node name="Polygon2D" type="Polygon2D" parent="Parallax_Less100/25/Grass" unique_id=750061598]
+position = Vector2(0, 10)
+scale = Vector2(4, 4)
+polygon = PackedVector2Array(-86.1521, -3.1185303, 32.499996, -3, 54.749996, -5.25, 82.75, -13.25, 114, -25.5, 147.5, -38.25, 178.5, -44.5, 221.25, -48.25, 253.5, -47, 295.75, -51.25, 323.5, -52.5, 360.25, -50.75, 378.3908, -46.246017, 388, -40.25, 401, -34.5, 434, -28.75, 464, -24.5, 513.75, -27.75, 549.5, -19.5, 570.5, -7, 590.5, 1.75, 616, 7.5, 641.5, 8.5, 686.5, 6, 714.5, 0.75, 757, -1, 777, 3.75, 819.75, 4, 877.75, -0.5, 881, 0.5, 948.75, -6.5, 1018.75, -14.5, 1051, -14.25, 1062.75, -15.5, 1073.25, -18.5, 1087.5, -25, 1097.75, -32, 1110.25, -41.25, 1121, -49.5, 1135.25, -56.5, 1156.75, -57.5, 1169.25, -54.5, 1185, -49, 1200.5, -47.25, 1215.25, -51.75, 1235.5, -54, 1256.5, -52, 1475.8479, -47.11853, 1529.8479, 110.88147, -18.1521, 128.88147, -126.1521, 8.88147)
+
+[node name="Rain" type="GPUParticles2D" parent="Parallax_Less100/25/Grass" unique_id=1746695267]
+modulate = Color(1, 1, 1, 0.34901962)
+position = Vector2(1731.4502, -1307.7544)
+scale = Vector2(4, 4)
+amount = 2000
+texture = ExtResource("4_dhomk")
+lifetime = 2.0
+fixed_fps = 24
+visibility_rect = Rect2(-200, -250, 400, 500)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_dfgi1")
+
+[node name="35" type="Parallax2D" parent="Parallax_Less100" unique_id=1201456932]
+scale = Vector2(0.35, 0.35)
+scroll_scale = Vector2(0.35, 0.35)
+scroll_offset = Vector2(835, -79.00006)
+
+[node name="Grass" type="Node2D" parent="Parallax_Less100/35" unique_id=584868497]
+modulate = Color(0.52939725, 0.5870475, 0.40960723, 1)
+position = Vector2(-434.57678, 743.6604)
+
+[node name="Line2D" type="Line2D" parent="Parallax_Less100/35/Grass" unique_id=1682774707]
 texture_repeat = 2
 scale = Vector2(4, 4)
 points = PackedVector2Array(0, 0, 32.499996, -3, 54.749996, -5.25, 82.75, -13.25, 114, -25.5, 147.5, -38.25, 178.5, -44.5, 221.25, -48.25, 253.5, -47, 295.75, -51.25, 323.5, -52.5, 360.25, -50.75, 378.3908, -46.246017, 388, -40.25, 401, -34.5, 434, -28.75, 464, -24.5, 513.75, -27.75, 549.5, -19.5, 570.5, -7, 590.5, 1.75, 616, 7.5, 641.5, 8.5, 686.5, 6, 714.5, 0.75, 757, -1, 777, 3.75, 819.75, 4, 877.75, -0.5, 881, 0.5, 948.75, -6.5, 1018.75, -14.5, 1051, -14.25, 1062.75, -15.5, 1073.25, -18.5, 1087.5, -25, 1097.75, -32, 1110.25, -41.25, 1121, -49.5, 1135.25, -56.5, 1156.75, -57.5, 1169.25, -54.5, 1185, -49, 1200.5, -47.25, 1215.25, -51.75, 1235.5, -54, 1256.5, -52, 1263, -49.5, 1271, 54.5, -1.0000038, 47.75, -2.7500038, 1.75)
@@ -40,22 +178,99 @@ texture = ExtResource("5_gxogp")
 texture_mode = 1
 script = ExtResource("4_dfgi1")
 
-[node name="Polygon2D" type="Polygon2D" parent="Parallax_Less100/50/Node2D" unique_id=668076123]
+[node name="Polygon2D" type="Polygon2D" parent="Parallax_Less100/35/Grass" unique_id=1065371291]
+position = Vector2(0, 10)
+scale = Vector2(4, 4)
+polygon = PackedVector2Array(0, 0, 32.499996, -3, 54.749996, -5.25, 82.75, -13.25, 114, -25.5, 147.5, -38.25, 178.5, -44.5, 221.25, -48.25, 253.5, -47, 295.75, -51.25, 323.5, -52.5, 360.25, -50.75, 378.3908, -46.246017, 388, -40.25, 401, -34.5, 434, -28.75, 464, -24.5, 513.75, -27.75, 549.5, -19.5, 570.5, -7, 590.5, 1.75, 616, 7.5, 641.5, 8.5, 686.5, 6, 714.5, 0.75, 757, -1, 777, 3.75, 819.75, 4, 877.75, -0.5, 881, 0.5, 948.75, -6.5, 1018.75, -14.5, 1051, -14.25, 1062.75, -15.5, 1073.25, -18.5, 1087.5, -25, 1097.75, -32, 1110.25, -41.25, 1121, -49.5, 1135.25, -56.5, 1156.75, -57.5, 1169.25, -54.5, 1185, -49, 1200.5, -47.25, 1215.25, -51.75, 1235.5, -54, 1256.5, -52, 1263, -49.5, 1271, 54.5, -1.0000038, 47.75, -2.7500038, 1.75)
+
+[node name="Rain" type="GPUParticles2D" parent="Parallax_Less100/35/Grass" unique_id=528881534]
+modulate = Color(1, 1, 1, 0.34901962)
+position = Vector2(1731.4502, -1307.7544)
+scale = Vector2(4, 4)
+amount = 2000
+texture = ExtResource("4_dhomk")
+lifetime = 2.0
+fixed_fps = 24
+visibility_rect = Rect2(-200, -250, 400, 500)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_dfgi1")
+
+[node name="40" type="Parallax2D" parent="Parallax_Less100" unique_id=950021770]
+scale = Vector2(0.4, 0.4)
+scroll_scale = Vector2(0.4, 0.4)
+scroll_offset = Vector2(732.00006, 55.99997)
+
+[node name="Grass" type="Node2D" parent="Parallax_Less100/40" unique_id=759143579]
+modulate = Color(0.55260944, 0.6166401, 0.37495235, 1)
+position = Vector2(-225.3024, 308.83917)
+
+[node name="Line2D" type="Line2D" parent="Parallax_Less100/40/Grass" unique_id=1975645049]
+texture_repeat = 2
+scale = Vector2(4, 4)
+points = PackedVector2Array(0, 0, 32.499996, -3, 54.749996, -5.25, 82.75, -13.25, 114, -25.5, 147.5, -38.25, 178.5, -44.5, 221.25, -48.25, 253.5, -47, 295.75, -51.25, 323.5, -52.5, 360.25, -50.75, 378.3908, -46.246017, 388, -40.25, 401, -34.5, 434, -28.75, 464, -24.5, 513.75, -27.75, 549.5, -19.5, 570.5, -7, 590.5, 1.75, 616, 7.5, 641.5, 8.5, 686.5, 6, 714.5, 0.75, 757, -1, 777, 3.75, 819.75, 4, 877.75, -0.5, 881, 0.5, 948.75, -6.5, 1018.75, -14.5, 1051, -14.25, 1062.75, -15.5, 1073.25, -18.5, 1087.5, -25, 1097.75, -32, 1110.25, -41.25, 1121, -49.5, 1135.25, -56.5, 1156.75, -57.5, 1169.25, -54.5, 1185, -49, 1200.5, -47.25, 1215.25, -51.75, 1235.5, -54, 1256.5, -52, 1263, -49.5, 1271, 54.5, -1.0000038, 47.75, -2.7500038, 1.75)
+texture = ExtResource("5_gxogp")
+texture_mode = 1
+script = ExtResource("4_dfgi1")
+
+[node name="Polygon2D" type="Polygon2D" parent="Parallax_Less100/40/Grass" unique_id=1266605352]
+position = Vector2(0, 10)
+scale = Vector2(4, 4)
+polygon = PackedVector2Array(0, 0, 32.499996, -3, 54.749996, -5.25, 82.75, -13.25, 114, -25.5, 147.5, -38.25, 178.5, -44.5, 221.25, -48.25, 253.5, -47, 295.75, -51.25, 323.5, -52.5, 360.25, -50.75, 378.3908, -46.246017, 388, -40.25, 401, -34.5, 434, -28.75, 464, -24.5, 513.75, -27.75, 549.5, -19.5, 570.5, -7, 590.5, 1.75, 616, 7.5, 641.5, 8.5, 686.5, 6, 714.5, 0.75, 757, -1, 777, 3.75, 819.75, 4, 877.75, -0.5, 881, 0.5, 948.75, -6.5, 1018.75, -14.5, 1051, -14.25, 1062.75, -15.5, 1073.25, -18.5, 1087.5, -25, 1097.75, -32, 1110.25, -41.25, 1121, -49.5, 1135.25, -56.5, 1156.75, -57.5, 1169.25, -54.5, 1185, -49, 1200.5, -47.25, 1215.25, -51.75, 1235.5, -54, 1256.5, -52, 1263, -49.5, 1271, 54.5, -1.0000038, 47.75, -2.7500038, 1.75)
+
+[node name="45" type="Parallax2D" parent="Parallax_Less100" unique_id=342339240]
+scale = Vector2(0.45, 0.45)
+scroll_scale = Vector2(0.45, 0.45)
+scroll_offset = Vector2(735, -389.00003)
+
+[node name="Grass" type="Node2D" parent="Parallax_Less100/45" unique_id=166027032]
+modulate = Color(0.5718983, 0.6148564, 0.30034974, 1)
+position = Vector2(-304.04398, 1231.1417)
+
+[node name="Line2D" type="Line2D" parent="Parallax_Less100/45/Grass" unique_id=231817810]
+texture_repeat = 2
+scale = Vector2(4, 4)
+points = PackedVector2Array(0, 0, 32.499996, -3, 54.749996, -5.25, 82.75, -13.25, 114, -25.5, 147.5, -38.25, 178.5, -44.5, 221.25, -48.25, 253.5, -47, 295.75, -51.25, 323.5, -52.5, 360.25, -50.75, 378.3908, -46.246017, 388, -40.25, 401, -34.5, 434, -28.75, 464, -24.5, 513.75, -27.75, 549.5, -19.5, 570.5, -7, 590.5, 1.75, 616, 7.5, 641.5, 8.5, 686.5, 6, 714.5, 0.75, 757, -1, 777, 3.75, 819.75, 4, 877.75, -0.5, 881, 0.5, 948.75, -6.5, 1018.75, -14.5, 1051, -14.25, 1062.75, -15.5, 1073.25, -18.5, 1087.5, -25, 1097.75, -32, 1110.25, -41.25, 1121, -49.5, 1135.25, -56.5, 1156.75, -57.5, 1169.25, -54.5, 1185, -49, 1200.5, -47.25, 1215.25, -51.75, 1235.5, -54, 1256.5, -52, 1263, -49.5, 1271, 54.5, -1.0000038, 47.75, -2.7500038, 1.75)
+texture = ExtResource("5_gxogp")
+texture_mode = 1
+script = ExtResource("4_dfgi1")
+
+[node name="Polygon2D" type="Polygon2D" parent="Parallax_Less100/45/Grass" unique_id=1244337216]
+position = Vector2(0, 10)
+scale = Vector2(4, 4)
+polygon = PackedVector2Array(0, 0, 32.499996, -3, 54.749996, -5.25, 82.75, -13.25, 114, -25.5, 147.5, -38.25, 178.5, -44.5, 221.25, -48.25, 253.5, -47, 295.75, -51.25, 323.5, -52.5, 360.25, -50.75, 378.3908, -46.246017, 388, -40.25, 401, -34.5, 434, -28.75, 464, -24.5, 513.75, -27.75, 549.5, -19.5, 570.5, -7, 590.5, 1.75, 616, 7.5, 641.5, 8.5, 686.5, 6, 714.5, 0.75, 757, -1, 777, 3.75, 819.75, 4, 877.75, -0.5, 881, 0.5, 948.75, -6.5, 1018.75, -14.5, 1051, -14.25, 1062.75, -15.5, 1073.25, -18.5, 1087.5, -25, 1097.75, -32, 1110.25, -41.25, 1121, -49.5, 1135.25, -56.5, 1156.75, -57.5, 1169.25, -54.5, 1185, -49, 1200.5, -47.25, 1215.25, -51.75, 1235.5, -54, 1256.5, -52, 1263, -49.5, 1271, 54.5, -1.0000038, 47.75, -2.7500038, 1.75)
+
+[node name="50" type="Parallax2D" parent="Parallax_Less100" unique_id=720361938]
+scale = Vector2(0.5, 0.5)
+scroll_scale = Vector2(0.5, 0.5)
+scroll_offset = Vector2(656, -41)
+
+[node name="Grass" type="Node2D" parent="Parallax_Less100/50" unique_id=754417841]
+modulate = Color(0.585809, 0.62159663, 0.24042803, 1)
+position = Vector2(-244.8605, 382.15283)
+
+[node name="Line2D" type="Line2D" parent="Parallax_Less100/50/Grass" unique_id=585800694]
+texture_repeat = 2
+scale = Vector2(4, 4)
+points = PackedVector2Array(0, 0, 32.499996, -3, 54.749996, -5.25, 82.75, -13.25, 114, -25.5, 147.5, -38.25, 178.5, -44.5, 221.25, -48.25, 253.5, -47, 295.75, -51.25, 323.5, -52.5, 360.25, -50.75, 378.3908, -46.246017, 388, -40.25, 401, -34.5, 434, -28.75, 464, -24.5, 513.75, -27.75, 549.5, -19.5, 570.5, -7, 590.5, 1.75, 616, 7.5, 641.5, 8.5, 686.5, 6, 714.5, 0.75, 757, -1, 777, 3.75, 819.75, 4, 877.75, -0.5, 881, 0.5, 948.75, -6.5, 1018.75, -14.5, 1051, -14.25, 1062.75, -15.5, 1073.25, -18.5, 1087.5, -25, 1097.75, -32, 1110.25, -41.25, 1121, -49.5, 1135.25, -56.5, 1156.75, -57.5, 1169.25, -54.5, 1185, -49, 1200.5, -47.25, 1215.25, -51.75, 1235.5, -54, 1256.5, -52, 1263, -49.5, 1271, 54.5, -1.0000038, 47.75, -2.7500038, 1.75)
+texture = ExtResource("5_gxogp")
+texture_mode = 1
+script = ExtResource("4_dfgi1")
+
+[node name="Polygon2D" type="Polygon2D" parent="Parallax_Less100/50/Grass" unique_id=668076123]
 position = Vector2(0, 10)
 scale = Vector2(4, 4)
 polygon = PackedVector2Array(0, 0, 32.499996, -3, 54.749996, -5.25, 82.75, -13.25, 114, -25.5, 147.5, -38.25, 178.5, -44.5, 221.25, -48.25, 253.5, -47, 295.75, -51.25, 323.5, -52.5, 360.25, -50.75, 378.3908, -46.246017, 388, -40.25, 401, -34.5, 434, -28.75, 464, -24.5, 513.75, -27.75, 549.5, -19.5, 570.5, -7, 590.5, 1.75, 616, 7.5, 641.5, 8.5, 686.5, 6, 714.5, 0.75, 757, -1, 777, 3.75, 819.75, 4, 877.75, -0.5, 881, 0.5, 948.75, -6.5, 1018.75, -14.5, 1051, -14.25, 1062.75, -15.5, 1073.25, -18.5, 1087.5, -25, 1097.75, -32, 1110.25, -41.25, 1121, -49.5, 1135.25, -56.5, 1156.75, -57.5, 1169.25, -54.5, 1185, -49, 1200.5, -47.25, 1215.25, -51.75, 1235.5, -54, 1256.5, -52, 1263, -49.5, 1271, 54.5, -1.0000038, 47.75, -2.7500038, 1.75)
 
 [node name="60" type="Parallax2D" parent="Parallax_Less100" unique_id=964244231]
-modulate = Color(0.91855025, 0.73808426, 0.58080935, 1)
 scale = Vector2(0.6, 0.6)
 scroll_scale = Vector2(0.6, 0.6)
 scroll_offset = Vector2(482, 100)
 
-[node name="Node2D" type="Node2D" parent="Parallax_Less100/60" unique_id=1765895812]
-modulate = Color(0.7194992, 0.3857156, 0.15975022, 1)
+[node name="Grass" type="Node2D" parent="Parallax_Less100/60" unique_id=1765895812]
+modulate = Color(0.57464457, 0.635119, 0.21632493, 1)
 position = Vector2(12.426323, 19.101845)
 
-[node name="Line2D" type="Line2D" parent="Parallax_Less100/60/Node2D" unique_id=2057894988]
+[node name="Line2D" type="Line2D" parent="Parallax_Less100/60/Grass" unique_id=2057894988]
 texture_repeat = 2
 scale = Vector2(4, 4)
 points = PackedVector2Array(0, 0, 32.499996, -3, 54.749996, -5.25, 82.75, -13.25, 114, -25.5, 147.5, -38.25, 178.5, -44.5, 221.25, -48.25, 253.5, -47, 295.75, -51.25, 323.5, -52.5, 360.25, -50.75, 378.3908, -46.246017, 388, -40.25, 401, -34.5, 434, -28.75, 464, -24.5, 513.75, -27.75, 549.5, -19.5, 570.5, -7, 590.5, 1.75, 616, 7.5, 641.5, 8.5, 686.5, 6, 714.5, 0.75, 757, -1, 777, 3.75, 819.75, 4, 877.75, -0.5, 881, 0.5, 948.75, -6.5, 1018.75, -14.5, 1051, -14.25, 1062.75, -15.5, 1073.25, -18.5, 1087.5, -25, 1097.75, -32, 1110.25, -41.25, 1121, -49.5, 1135.25, -56.5, 1156.75, -57.5, 1169.25, -54.5, 1185, -49, 1200.5, -47.25, 1215.25, -51.75, 1235.5, -54, 1256.5, -52, 1263, -49.5, 1271, 54.5, -1.0000038, 47.75, -2.7500038, 1.75)
@@ -63,7 +278,7 @@ texture = ExtResource("5_gxogp")
 texture_mode = 1
 script = ExtResource("4_dfgi1")
 
-[node name="Polygon2D" type="Polygon2D" parent="Parallax_Less100/60/Node2D" unique_id=1618436948]
+[node name="Polygon2D" type="Polygon2D" parent="Parallax_Less100/60/Grass" unique_id=1618436948]
 position = Vector2(0, 10)
 scale = Vector2(4, 4)
 polygon = PackedVector2Array(0, 0, 32.499996, -3, 54.749996, -5.25, 82.75, -13.25, 114, -25.5, 147.5, -38.25, 178.5, -44.5, 221.25, -48.25, 253.5, -47, 295.75, -51.25, 323.5, -52.5, 360.25, -50.75, 378.3908, -46.246017, 388, -40.25, 401, -34.5, 434, -28.75, 464, -24.5, 513.75, -27.75, 549.5, -19.5, 570.5, -7, 590.5, 1.75, 616, 7.5, 641.5, 8.5, 686.5, 6, 714.5, 0.75, 757, -1, 777, 3.75, 819.75, 4, 877.75, -0.5, 881, 0.5, 948.75, -6.5, 1018.75, -14.5, 1051, -14.25, 1062.75, -15.5, 1073.25, -18.5, 1087.5, -25, 1097.75, -32, 1110.25, -41.25, 1121, -49.5, 1135.25, -56.5, 1156.75, -57.5, 1169.25, -54.5, 1185, -49, 1200.5, -47.25, 1215.25, -51.75, 1235.5, -54, 1256.5, -52, 1263, -49.5, 1271, 54.5, -1.0000038, 47.75, -2.7500038, 1.75)
@@ -73,11 +288,23 @@ scale = Vector2(0.7, 0.7)
 scroll_scale = Vector2(0.7, 0.7)
 scroll_offset = Vector2(390.00003, 160.99998)
 
-[node name="Node2D" type="Node2D" parent="Parallax_Less100/70" unique_id=835030827]
-modulate = Color(0.73788404, 0.37331107, 0.11462774, 1)
+[node name="Rain" type="GPUParticles2D" parent="Parallax_Less100/70" unique_id=1373689796]
+modulate = Color(1, 1, 1, 0.65882355)
+position = Vector2(1582.0002, -954)
+scale = Vector2(3.9999998, 3.9999998)
+amount = 1500
+texture = ExtResource("4_dhomk")
+lifetime = 2.0
+fixed_fps = 24
+visibility_rect = Rect2(-200, -250, 400, 500)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_dfgi1")
+
+[node name="Grass" type="Node2D" parent="Parallax_Less100/70" unique_id=835030827]
+modulate = Color(0.5721129, 0.6535256, 0.20178813, 1)
 position = Vector2(-19.157385, -108.63661)
 
-[node name="Line2D" type="Line2D" parent="Parallax_Less100/70/Node2D" unique_id=841510504]
+[node name="Line2D" type="Line2D" parent="Parallax_Less100/70/Grass" unique_id=841510504]
 texture_repeat = 2
 scale = Vector2(4, 4)
 points = PackedVector2Array(0, 0, 32.499996, -3, 54.749996, -5.25, 82.75, -13.25, 114, -25.5, 147.5, -38.25, 178.5, -44.5, 221.25, -48.25, 253.5, -47, 295.75, -51.25, 323.5, -52.5, 360.25, -50.75, 378.3908, -46.246017, 388, -40.25, 401, -34.5, 434, -28.75, 464, -24.5, 513.75, -27.75, 549.5, -19.5, 570.5, -7, 590.5, 1.75, 616, 7.5, 641.5, 8.5, 686.5, 6, 714.5, 0.75, 757, -1, 777, 3.75, 819.75, 4, 877.75, -0.5, 881, 0.5, 948.75, -6.5, 1018.75, -14.5, 1051, -14.25, 1062.75, -15.5, 1073.25, -18.5, 1087.5, -25, 1097.75, -32, 1110.25, -41.25, 1121, -49.5, 1135.25, -56.5, 1156.75, -57.5, 1169.25, -54.5, 1185, -49, 1200.5, -47.25, 1215.25, -51.75, 1235.5, -54, 1256.5, -52, 1263, -49.5, 1271, 54.5, -1.0000038, 47.75, -2.7500038, 1.75)
@@ -85,21 +312,25 @@ texture = ExtResource("5_gxogp")
 texture_mode = 1
 script = ExtResource("4_dfgi1")
 
-[node name="Polygon2D" type="Polygon2D" parent="Parallax_Less100/70/Node2D" unique_id=1908097574]
+[node name="Polygon2D" type="Polygon2D" parent="Parallax_Less100/70/Grass" unique_id=1908097574]
 position = Vector2(0, 10)
 scale = Vector2(4, 4)
 polygon = PackedVector2Array(0, 0, 32.499996, -3, 54.749996, -5.25, 82.75, -13.25, 114, -25.5, 147.5, -38.25, 178.5, -44.5, 221.25, -48.25, 253.5, -47, 295.75, -51.25, 323.5, -52.5, 360.25, -50.75, 378.3908, -46.246017, 388, -40.25, 401, -34.5, 434, -28.75, 464, -24.5, 513.75, -27.75, 549.5, -19.5, 570.5, -7, 590.5, 1.75, 616, 7.5, 641.5, 8.5, 686.5, 6, 714.5, 0.75, 757, -1, 777, 3.75, 819.75, 4, 877.75, -0.5, 881, 0.5, 948.75, -6.5, 1018.75, -14.5, 1051, -14.25, 1062.75, -15.5, 1073.25, -18.5, 1087.5, -25, 1097.75, -32, 1110.25, -41.25, 1121, -49.5, 1135.25, -56.5, 1156.75, -57.5, 1169.25, -54.5, 1185, -49, 1200.5, -47.25, 1215.25, -51.75, 1235.5, -54, 1256.5, -52, 1263, -49.5, 1271, 54.5, -1.0000038, 47.75, -2.7500038, 1.75)
+
+[node name="75" type="Parallax2D" parent="Parallax_Less100" unique_id=596851936]
+scale = Vector2(0.75, 0.75)
+scroll_scale = Vector2(0.75, 0.75)
 
 [node name="80" type="Parallax2D" parent="Parallax_Less100" unique_id=1999386806]
 scale = Vector2(0.8, 0.8)
 scroll_scale = Vector2(0.8, 0.8)
 scroll_offset = Vector2(219.99998, 87.99997)
 
-[node name="Node2D" type="Node2D" parent="Parallax_Less100/80" unique_id=62563562]
-modulate = Color(0.80784315, 0.4509804, 0, 1)
+[node name="Grass" type="Node2D" parent="Parallax_Less100/80" unique_id=62563562]
+modulate = Color(0.6037229, 0.69794476, 0.1724833, 1)
 position = Vector2(39.658203, -34.204643)
 
-[node name="Line2D" type="Line2D" parent="Parallax_Less100/80/Node2D" unique_id=1006043166]
+[node name="Line2D" type="Line2D" parent="Parallax_Less100/80/Grass" unique_id=1006043166]
 texture_repeat = 2
 scale = Vector2(4, 4)
 points = PackedVector2Array(0, 0, 32.499996, -3, 54.749996, -5.25, 82.75, -13.25, 114, -25.5, 147.5, -38.25, 178.5, -44.5, 221.25, -48.25, 253.5, -47, 295.75, -51.25, 323.5, -52.5, 360.25, -50.75, 378.3908, -46.246017, 388, -40.25, 401, -34.5, 434, -28.75, 464, -24.5, 513.75, -27.75, 549.5, -19.5, 570.5, -7, 590.5, 1.75, 616, 7.5, 641.5, 8.5, 686.5, 6, 714.5, 0.75, 757, -1, 777, 3.75, 819.75, 4, 877.75, -0.5, 881, 0.5, 948.75, -6.5, 1018.75, -14.5, 1051, -14.25, 1062.75, -15.5, 1073.25, -18.5, 1087.5, -25, 1097.75, -32, 1110.25, -41.25, 1121, -49.5, 1135.25, -56.5, 1156.75, -57.5, 1169.25, -54.5, 1185, -49, 1200.5, -47.25, 1215.25, -51.75, 1235.5, -54, 1256.5, -52, 1263, -49.5, 1271, 54.5, -1.0000038, 47.75, -2.7500038, 1.75)
@@ -107,7 +338,7 @@ texture = ExtResource("5_gxogp")
 texture_mode = 1
 script = ExtResource("4_dfgi1")
 
-[node name="Polygon2D" type="Polygon2D" parent="Parallax_Less100/80/Node2D" unique_id=438583597]
+[node name="Polygon2D" type="Polygon2D" parent="Parallax_Less100/80/Grass" unique_id=438583597]
 position = Vector2(0, 10)
 scale = Vector2(4, 4)
 polygon = PackedVector2Array(0, 0, 32.499996, -3, 54.749996, -5.25, 82.75, -13.25, 114, -25.5, 147.5, -38.25, 178.5, -44.5, 221.25, -48.25, 253.5, -47, 295.75, -51.25, 323.5, -52.5, 360.25, -50.75, 378.3908, -46.246017, 388, -40.25, 401, -34.5, 434, -28.75, 464, -24.5, 513.75, -27.75, 549.5, -19.5, 570.5, -7, 590.5, 1.75, 616, 7.5, 641.5, 8.5, 686.5, 6, 714.5, 0.75, 757, -1, 777, 3.75, 819.75, 4, 877.75, -0.5, 881, 0.5, 948.75, -6.5, 1018.75, -14.5, 1051, -14.25, 1062.75, -15.5, 1073.25, -18.5, 1087.5, -25, 1097.75, -32, 1110.25, -41.25, 1121, -49.5, 1135.25, -56.5, 1156.75, -57.5, 1169.25, -54.5, 1185, -49, 1200.5, -47.25, 1215.25, -51.75, 1235.5, -54, 1256.5, -52, 1263, -49.5, 1271, 54.5, -1.0000038, 47.75, -2.7500038, 1.75)
@@ -117,11 +348,11 @@ scale = Vector2(0.9, 0.9)
 scroll_scale = Vector2(0.9, 0.9)
 scroll_offset = Vector2(211.00002, 39)
 
-[node name="Node2D" type="Node2D" parent="Parallax_Less100/90" unique_id=2073172998]
-modulate = Color(0.8703547, 0.579026, 0.092106916, 1)
+[node name="Grass" type="Node2D" parent="Parallax_Less100/90" unique_id=2073172998]
+modulate = Color(0.6840948, 0.7725128, 0.1566661, 1)
 position = Vector2(-29.040806, 7.0201263)
 
-[node name="Line2D" type="Line2D" parent="Parallax_Less100/90/Node2D" unique_id=589100284]
+[node name="Line2D" type="Line2D" parent="Parallax_Less100/90/Grass" unique_id=589100284]
 texture_repeat = 2
 scale = Vector2(4, 4)
 points = PackedVector2Array(0, 0, 32.499996, -3, 54.749996, -5.25, 82.75, -13.25, 114, -25.5, 147.5, -38.25, 178.5, -44.5, 221.25, -48.25, 253.5, -47, 295.75, -51.25, 323.5, -52.5, 360.25, -50.75, 378.3908, -46.246017, 388, -40.25, 401, -34.5, 434, -28.75, 464, -24.5, 513.75, -27.75, 549.5, -19.5, 570.5, -7, 590.5, 1.75, 616, 7.5, 641.5, 8.5, 686.5, 6, 714.5, 0.75, 757, -1, 777, 3.75, 819.75, 4, 877.75, -0.5, 881, 0.5, 948.75, -6.5, 1018.75, -14.5, 1051, -14.25, 1062.75, -15.5, 1073.25, -18.5, 1087.5, -25, 1097.75, -32, 1110.25, -41.25, 1121, -49.5, 1135.25, -56.5, 1156.75, -57.5, 1169.25, -54.5, 1185, -49, 1200.5, -47.25, 1215.25, -51.75, 1235.5, -54, 1256.5, -52, 1263, -49.5, 1271, 54.5, -1.0000038, 47.75, -2.7500038, 1.75)
@@ -129,20 +360,21 @@ texture = ExtResource("5_gxogp")
 texture_mode = 1
 script = ExtResource("4_dfgi1")
 
-[node name="Polygon2D" type="Polygon2D" parent="Parallax_Less100/90/Node2D" unique_id=222309349]
+[node name="Polygon2D" type="Polygon2D" parent="Parallax_Less100/90/Grass" unique_id=222309349]
 position = Vector2(0, 10)
 scale = Vector2(4, 4)
 polygon = PackedVector2Array(0, 0, 32.499996, -3, 54.749996, -5.25, 82.75, -13.25, 114, -25.5, 147.5, -38.25, 178.5, -44.5, 221.25, -48.25, 253.5, -47, 295.75, -51.25, 323.5, -52.5, 360.25, -50.75, 378.3908, -46.246017, 388, -40.25, 401, -34.5, 434, -28.75, 464, -24.5, 513.75, -27.75, 549.5, -19.5, 570.5, -7, 590.5, 1.75, 616, 7.5, 641.5, 8.5, 686.5, 6, 714.5, 0.75, 757, -1, 777, 3.75, 819.75, 4, 877.75, -0.5, 881, 0.5, 948.75, -6.5, 1018.75, -14.5, 1051, -14.25, 1062.75, -15.5, 1073.25, -18.5, 1087.5, -25, 1097.75, -32, 1110.25, -41.25, 1121, -49.5, 1135.25, -56.5, 1156.75, -57.5, 1169.25, -54.5, 1185, -49, 1200.5, -47.25, 1215.25, -51.75, 1235.5, -54, 1256.5, -52, 1263, -49.5, 1271, 54.5, -1.0000038, 47.75, -2.7500038, 1.75)
 
 [node name="95" type="Parallax2D" parent="Parallax_Less100" unique_id=720152951]
+scale = Vector2(0.95, 0.95)
 scroll_scale = Vector2(0.95, 0.95)
-scroll_offset = Vector2(143, 24)
+scroll_offset = Vector2(311.00003, 50)
 
-[node name="Node2D" type="Node2D" parent="Parallax_Less100/95" unique_id=699412098]
-modulate = Color(1, 0.73333335, 0.1882353, 1)
-position = Vector2(-188.89844, 41.32251)
+[node name="Grass" type="Node2D" parent="Parallax_Less100/95" unique_id=699412098]
+modulate = Color(0.71734166, 0.8226953, 0.16039735, 1)
+position = Vector2(-126.956055, 9.658142)
 
-[node name="Line2D" type="Line2D" parent="Parallax_Less100/95/Node2D" unique_id=303533622]
+[node name="Line2D" type="Line2D" parent="Parallax_Less100/95/Grass" unique_id=303533622]
 texture_repeat = 2
 scale = Vector2(4, 4)
 points = PackedVector2Array(0, 0, 32.499996, -3, 54.749996, -5.25, 82.75, -13.25, 114, -25.5, 147.5, -38.25, 178.5, -44.5, 221.25, -48.25, 253.5, -47, 295.75, -51.25, 323.5, -52.5, 360.25, -50.75, 378.3908, -46.246017, 388, -40.25, 401, -34.5, 434, -28.75, 464, -24.5, 513.75, -27.75, 549.5, -19.5, 570.5, -7, 590.5, 1.75, 616, 7.5, 641.5, 8.5, 686.5, 6, 714.5, 0.75, 757, -1, 777, 3.75, 819.75, 4, 877.75, -0.5, 881, 0.5, 948.75, -6.5, 1018.75, -14.5, 1051, -14.25, 1062.75, -15.5, 1073.25, -18.5, 1087.5, -25, 1097.75, -32, 1110.25, -41.25, 1121, -49.5, 1135.25, -56.5, 1156.75, -57.5, 1169.25, -54.5, 1185, -49, 1200.5, -47.25, 1215.25, -51.75, 1235.5, -54, 1256.5, -52, 1263, -49.5, 1271, 54.5, -1.0000038, 47.75, -2.7500038, 1.75)
@@ -150,26 +382,26 @@ texture = ExtResource("5_gxogp")
 texture_mode = 1
 script = ExtResource("4_dfgi1")
 
-[node name="Polygon2D" type="Polygon2D" parent="Parallax_Less100/95/Node2D" unique_id=1830006673]
+[node name="Polygon2D" type="Polygon2D" parent="Parallax_Less100/95/Grass" unique_id=1830006673]
 position = Vector2(0, 10)
 scale = Vector2(4, 4)
 polygon = PackedVector2Array(0, 0, 32.499996, -3, 54.749996, -5.25, 82.75, -13.25, 114, -25.5, 147.5, -38.25, 178.5, -44.5, 221.25, -48.25, 253.5, -47, 295.75, -51.25, 323.5, -52.5, 360.25, -50.75, 378.3908, -46.246017, 388, -40.25, 401, -34.5, 434, -28.75, 464, -24.5, 513.75, -27.75, 549.5, -19.5, 570.5, -7, 590.5, 1.75, 616, 7.5, 641.5, 8.5, 686.5, 6, 714.5, 0.75, 757, -1, 777, 3.75, 819.75, 4, 877.75, -0.5, 881, 0.5, 948.75, -6.5, 1018.75, -14.5, 1051, -14.25, 1062.75, -15.5, 1073.25, -18.5, 1087.5, -25, 1097.75, -32, 1110.25, -41.25, 1121, -49.5, 1135.25, -56.5, 1156.75, -57.5, 1169.25, -54.5, 1185, -49, 1200.5, -47.25, 1215.25, -51.75, 1235.5, -54, 1256.5, -52, 1263, -49.5, 1271, 54.5, -1.0000038, 47.75, -2.7500038, 1.75)
 
 [node name="99" type="Parallax2D" parent="Parallax_Less100" unique_id=354941501]
-modulate = Color(0.9313419, 0.9313419, 0.9313419, 1)
 scroll_scale = Vector2(0.98, 0.98)
 scroll_offset = Vector2(143, 24)
 
 [node name="IntroAreaTree" type="Sprite2D" parent="Parallax_Less100/99" unique_id=1428599874]
-position = Vector2(877.4236, -390.8734)
+modulate = Color(0.8073884, 0.8073884, 0.8073884, 1)
+position = Vector2(877.80145, -390.7052)
 scale = Vector2(4, 4)
 texture = ExtResource("1_h574v")
 
-[node name="LeafParticle" type="GPUParticles2D" parent="." unique_id=1401765450]
+[node name="Rain" type="GPUParticles2D" parent="." unique_id=1401765450]
 modulate = Color(1, 1, 1, 0.65882355)
 position = Vector2(1582, -954)
 scale = Vector2(4, 4)
-amount = 1000
+amount = 1200
 texture = ExtResource("4_dhomk")
 lifetime = 2.0
 fixed_fps = 24
@@ -183,7 +415,7 @@ scale = Vector2(4, 4)
 texture = ExtResource("1_h574v")
 
 [node name="Player" parent="." unique_id=359640240 instance=ExtResource("2_r0rco")]
-position = Vector2(1079, -187)
+position = Vector2(1057, -291)
 
 [node name="HealthBar" parent="Player/UI" parent_id_path=PackedInt32Array(359640240, 1340181654) index="2" unique_id=489409292]
 player_path = NodePath("../..")
@@ -191,11 +423,11 @@ player_path = NodePath("../..")
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1475739247]
 zoom = Vector2(1.3, 1.3)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1008514511]
-modulate = Color(0.9999998, 0.84413385, 0.24142715, 1)
+[node name="Grass" type="StaticBody2D" parent="." unique_id=1008514511]
+modulate = Color(0.64318925, 0.7406593, 0.1089508, 1)
 position = Vector2(163, 63)
 
-[node name="Line2D" type="Line2D" parent="StaticBody2D" unique_id=390042177]
+[node name="Line2D" type="Line2D" parent="Grass" unique_id=390042177]
 texture_repeat = 2
 scale = Vector2(4, 4)
 points = PackedVector2Array(0, 0, 32.499996, -3, 54.749996, -5.25, 82.75, -13.25, 114, -25.5, 147.5, -38.25, 178.5, -44.5, 221.25, -48.25, 253.5, -47, 295.75, -51.25, 323.5, -52.5, 360.25, -50.75, 378.3908, -46.246017, 388, -40.25, 401, -34.5, 434, -28.75, 464, -24.5, 513.75, -27.75, 549.5, -19.5, 570.5, -7, 590.5, 1.75, 616, 7.5, 641.5, 8.5, 686.5, 6, 714.5, 0.75, 757, -1, 777, 3.75, 819.75, 4, 877.75, -0.5, 881, 0.5, 948.75, -6.5, 1018.75, -14.5, 1051, -14.25, 1062.75, -15.5, 1073.25, -18.5, 1087.5, -25, 1097.75, -32, 1110.25, -41.25, 1121, -49.5, 1135.25, -56.5, 1156.75, -57.5, 1169.25, -54.5, 1185, -49, 1200.5, -47.25, 1215.25, -51.75, 1235.5, -54, 1256.5, -52, 1263, -49.5, 1271, 54.5, -1.0000038, 47.75, -2.7500038, 1.75)
@@ -203,12 +435,12 @@ texture = ExtResource("5_gxogp")
 texture_mode = 1
 script = ExtResource("4_dfgi1")
 
-[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D" unique_id=495871091]
+[node name="Polygon2D" type="Polygon2D" parent="Grass" unique_id=495871091]
 position = Vector2(0, 10)
 scale = Vector2(4, 4)
 polygon = PackedVector2Array(0, 0, 32.499996, -3, 54.749996, -5.25, 82.75, -13.25, 114, -25.5, 147.5, -38.25, 178.5, -44.5, 221.25, -48.25, 253.5, -47, 295.75, -51.25, 323.5, -52.5, 360.25, -50.75, 378.3908, -46.246017, 388, -40.25, 401, -34.5, 434, -28.75, 464, -24.5, 513.75, -27.75, 549.5, -19.5, 570.5, -7, 590.5, 1.75, 616, 7.5, 641.5, 8.5, 686.5, 6, 714.5, 0.75, 757, -1, 777, 3.75, 819.75, 4, 877.75, -0.5, 881, 0.5, 948.75, -6.5, 1018.75, -14.5, 1051, -14.25, 1062.75, -15.5, 1073.25, -18.5, 1087.5, -25, 1097.75, -32, 1110.25, -41.25, 1121, -49.5, 1135.25, -56.5, 1156.75, -57.5, 1169.25, -54.5, 1185, -49, 1200.5, -47.25, 1215.25, -51.75, 1235.5, -54, 1256.5, -52, 1263, -49.5, 1271, 54.5, -1.0000038, 47.75, -2.7500038, 1.75)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=208526726]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Grass" unique_id=208526726]
 visible = false
 position = Vector2(0, 10)
 scale = Vector2(4, 4)
@@ -217,15 +449,14 @@ polygon = PackedVector2Array(0, 0, 32.499996, -3, 54.749996, -5.25, 82.75, -13.2
 [node name="Parallax_Above100" type="Node2D" parent="." unique_id=1462886642]
 
 [node name="105" type="Parallax2D" parent="Parallax_Above100" unique_id=285626331]
-modulate = Color(1.1261977, 1.1261977, 1.1261977, 1)
 scroll_scale = Vector2(1.05, 1.05)
 scroll_offset = Vector2(141, -31)
 
-[node name="Node2D" type="Node2D" parent="Parallax_Above100/105" unique_id=2004269445]
-modulate = Color(0.98586816, 0.66745836, 0.13060161, 1)
+[node name="Grass" type="Node2D" parent="Parallax_Above100/105" unique_id=2004269445]
+modulate = Color(0.61166906, 0.70969313, 0.16860184, 1)
 position = Vector2(185.42871, 99.95746)
 
-[node name="Line2D" type="Line2D" parent="Parallax_Above100/105/Node2D" unique_id=63098106]
+[node name="Line2D" type="Line2D" parent="Parallax_Above100/105/Grass" unique_id=63098106]
 texture_repeat = 2
 scale = Vector2(4, 4)
 points = PackedVector2Array(0, 0, 32.499996, -3, 54.749996, -5.25, 82.75, -13.25, 114, -25.5, 147.5, -38.25, 178.5, -44.5, 221.25, -48.25, 253.5, -47, 295.75, -51.25, 323.5, -52.5, 360.25, -50.75, 378.3908, -46.246017, 388, -40.25, 401, -34.5, 434, -28.75, 464, -24.5, 513.75, -27.75, 549.5, -19.5, 570.5, -7, 590.5, 1.75, 616, 7.5, 641.5, 8.5, 686.5, 6, 714.5, 0.75, 757, -1, 777, 3.75, 819.75, 4, 877.75, -0.5, 881, 0.5, 948.75, -6.5, 1018.75, -14.5, 1051, -14.25, 1062.75, -15.5, 1073.25, -18.5, 1087.5, -25, 1097.75, -32, 1110.25, -41.25, 1121, -49.5, 1135.25, -56.5, 1156.75, -57.5, 1169.25, -54.5, 1185, -49, 1200.5, -47.25, 1215.25, -51.75, 1235.5, -54, 1256.5, -52, 1263, -49.5, 1271, 54.5, -1.0000038, 47.75, -2.7500038, 1.75)
@@ -233,7 +464,7 @@ texture = ExtResource("5_gxogp")
 texture_mode = 1
 script = ExtResource("4_dfgi1")
 
-[node name="Polygon2D" type="Polygon2D" parent="Parallax_Above100/105/Node2D" unique_id=2142654360]
+[node name="Polygon2D" type="Polygon2D" parent="Parallax_Above100/105/Grass" unique_id=2142654360]
 position = Vector2(0, 10)
 scale = Vector2(4, 4)
 polygon = PackedVector2Array(0, 0, 32.499996, -3, 54.749996, -5.25, 82.75, -13.25, 114, -25.5, 147.5, -38.25, 178.5, -44.5, 221.25, -48.25, 253.5, -47, 295.75, -51.25, 323.5, -52.5, 360.25, -50.75, 378.3908, -46.246017, 388, -40.25, 401, -34.5, 434, -28.75, 464, -24.5, 513.75, -27.75, 549.5, -19.5, 570.5, -7, 590.5, 1.75, 616, 7.5, 641.5, 8.5, 686.5, 6, 714.5, 0.75, 757, -1, 777, 3.75, 819.75, 4, 877.75, -0.5, 881, 0.5, 948.75, -6.5, 1018.75, -14.5, 1051, -14.25, 1062.75, -15.5, 1073.25, -18.5, 1087.5, -25, 1097.75, -32, 1110.25, -41.25, 1121, -49.5, 1135.25, -56.5, 1156.75, -57.5, 1169.25, -54.5, 1185, -49, 1200.5, -47.25, 1215.25, -51.75, 1235.5, -54, 1256.5, -52, 1263, -49.5, 1271, 54.5, -1.0000038, 47.75, -2.7500038, 1.75)
@@ -244,7 +475,7 @@ scroll_scale = Vector2(1.1, 1.1)
 scroll_offset = Vector2(-45, -53)
 
 [node name="Node2D" type="Node2D" parent="Parallax_Above100/110" unique_id=1620471896]
-modulate = Color(0.9403823, 0.6240783, 0.22857988, 1)
+modulate = Color(0.55390793, 0.66839963, 0.18105125, 1)
 position = Vector2(168.96173, 119.92265)
 
 [node name="Line2D" type="Line2D" parent="Parallax_Above100/110/Node2D" unique_id=850584371]
@@ -260,16 +491,16 @@ position = Vector2(0, 10)
 scale = Vector2(4, 4)
 polygon = PackedVector2Array(0, 0, 32.499996, -3, 54.749996, -5.25, 82.75, -13.25, 114, -25.5, 147.5, -38.25, 178.5, -44.5, 221.25, -48.25, 253.5, -47, 295.75, -51.25, 323.5, -52.5, 360.25, -50.75, 378.3908, -46.246017, 388, -40.25, 401, -34.5, 434, -28.75, 464, -24.5, 513.75, -27.75, 549.5, -19.5, 570.5, -7, 590.5, 1.75, 616, 7.5, 641.5, 8.5, 686.5, 6, 714.5, 0.75, 757, -1, 777, 3.75, 819.75, 4, 877.75, -0.5, 881, 0.5, 948.75, -6.5, 1018.75, -14.5, 1051, -14.25, 1062.75, -15.5, 1073.25, -18.5, 1087.5, -25, 1097.75, -32, 1110.25, -41.25, 1121, -49.5, 1135.25, -56.5, 1156.75, -57.5, 1169.25, -54.5, 1185, -49, 1200.5, -47.25, 1215.25, -51.75, 1235.5, -54, 1256.5, -52, 1263, -49.5, 1271, 54.5, -1.0000038, 47.75, -2.7500038, 1.75)
 
-[node name="115" type="Parallax2D" parent="Parallax_Above100" unique_id=1603896548]
-scale = Vector2(1.15, 1.15)
-scroll_scale = Vector2(1.15, 1.15)
+[node name="120" type="Parallax2D" parent="Parallax_Above100" unique_id=1603896548]
+scale = Vector2(1.2, 1.2)
+scroll_scale = Vector2(1.2, 1.2)
 scroll_offset = Vector2(5, -44)
 
-[node name="Node2D" type="Node2D" parent="Parallax_Above100/115" unique_id=89475962]
-modulate = Color(0.82085115, 0.5187723, 0.17649323, 1)
-position = Vector2(127.05822, 120.0888)
+[node name="Grass" type="Node2D" parent="Parallax_Above100/120" unique_id=89475962]
+modulate = Color(0.48201472, 0.6240616, 0.16783622, 1)
+position = Vector2(127.32239, 99.53114)
 
-[node name="Line2D" type="Line2D" parent="Parallax_Above100/115/Node2D" unique_id=795409245]
+[node name="Line2D" type="Line2D" parent="Parallax_Above100/120/Grass" unique_id=795409245]
 texture_repeat = 2
 scale = Vector2(4, 4)
 points = PackedVector2Array(0, 0, 32.499996, -3, 54.749996, -5.25, 82.75, -13.25, 114, -25.5, 147.5, -38.25, 178.5, -44.5, 221.25, -48.25, 253.5, -47, 295.75, -51.25, 323.5, -52.5, 360.25, -50.75, 378.3908, -46.246017, 388, -40.25, 401, -34.5, 434, -28.75, 464, -24.5, 513.75, -27.75, 549.5, -19.5, 570.5, -7, 590.5, 1.75, 616, 7.5, 641.5, 8.5, 686.5, 6, 714.5, 0.75, 757, -1, 777, 3.75, 819.75, 4, 877.75, -0.5, 881, 0.5, 948.75, -6.5, 1018.75, -14.5, 1051, -14.25, 1062.75, -15.5, 1073.25, -18.5, 1087.5, -25, 1097.75, -32, 1110.25, -41.25, 1121, -49.5, 1135.25, -56.5, 1156.75, -57.5, 1169.25, -54.5, 1185, -49, 1200.5, -47.25, 1215.25, -51.75, 1235.5, -54, 1256.5, -52, 1263, -49.5, 1271, 54.5, -1.0000038, 47.75, -2.7500038, 1.75)
@@ -277,21 +508,42 @@ texture = ExtResource("5_gxogp")
 texture_mode = 1
 script = ExtResource("4_dfgi1")
 
-[node name="Polygon2D" type="Polygon2D" parent="Parallax_Above100/115/Node2D" unique_id=1143257995]
+[node name="Polygon2D" type="Polygon2D" parent="Parallax_Above100/120/Grass" unique_id=1143257995]
 position = Vector2(0, 10)
 scale = Vector2(4, 4)
 polygon = PackedVector2Array(0, 0, 32.499996, -3, 54.749996, -5.25, 82.75, -13.25, 114, -25.5, 147.5, -38.25, 178.5, -44.5, 221.25, -48.25, 253.5, -47, 295.75, -51.25, 323.5, -52.5, 360.25, -50.75, 378.3908, -46.246017, 388, -40.25, 401, -34.5, 434, -28.75, 464, -24.5, 513.75, -27.75, 549.5, -19.5, 570.5, -7, 590.5, 1.75, 616, 7.5, 641.5, 8.5, 686.5, 6, 714.5, 0.75, 757, -1, 777, 3.75, 819.75, 4, 877.75, -0.5, 881, 0.5, 948.75, -6.5, 1018.75, -14.5, 1051, -14.25, 1062.75, -15.5, 1073.25, -18.5, 1087.5, -25, 1097.75, -32, 1110.25, -41.25, 1121, -49.5, 1135.25, -56.5, 1156.75, -57.5, 1169.25, -54.5, 1185, -49, 1200.5, -47.25, 1215.25, -51.75, 1235.5, -54, 1256.5, -52, 1263, -49.5, 1271, 54.5, -1.0000038, 47.75, -2.7500038, 1.75)
+
+[node name="125" type="Parallax2D" parent="Parallax_Above100" unique_id=1080187749]
+scale = Vector2(1.25, 1.25)
+scroll_scale = Vector2(1.25, 1.25)
+
+[node name="RoundBush1" type="Sprite2D" parent="Parallax_Above100/125" unique_id=1077518075]
+modulate = Color(0.67998755, 0.55103636, 0.4217508, 1)
+position = Vector2(3309.6345, 33.35408)
+scale = Vector2(3.7333333, 3.7333333)
+texture = ExtResource("4_gxogp")
+
+[node name="RoundBush2" type="Sprite2D" parent="Parallax_Above100/125" unique_id=166281372]
+modulate = Color(0.67998755, 0.55103636, 0.4217508, 1)
+position = Vector2(3309.6345, 33.35408)
+scale = Vector2(3.7333333, 3.7333333)
+texture = ExtResource("4_gxogp")
+
+[node name="RockThingy" type="Sprite2D" parent="Parallax_Above100/125" unique_id=1996614844]
+position = Vector2(3076.0176, -14.523827)
+scale = Vector2(3.7333329, 3.7333329)
+texture = ExtResource("7_gcxo0")
 
 [node name="130" type="Parallax2D" parent="Parallax_Above100" unique_id=310991993]
 scale = Vector2(1.3, 1.3)
 scroll_scale = Vector2(1.3, 1.3)
 scroll_offset = Vector2(-100, -98)
 
-[node name="Node2D" type="Node2D" parent="Parallax_Above100/130" unique_id=2066970933]
-modulate = Color(0.7704312, 0.38972437, 0.11629271, 1)
-position = Vector2(200.17975, 149.38788)
+[node name="Grass" type="Node2D" parent="Parallax_Above100/130" unique_id=2066970933]
+modulate = Color(0.40427786, 0.5972861, 0.1427027, 1)
+position = Vector2(199.75398, 134.35088)
 
-[node name="Line2D" type="Line2D" parent="Parallax_Above100/130/Node2D" unique_id=1203624623]
+[node name="Line2D" type="Line2D" parent="Parallax_Above100/130/Grass" unique_id=1203624623]
 texture_repeat = 2
 scale = Vector2(4, 4)
 points = PackedVector2Array(0, 0, 32.499996, -3, 54.749996, -5.25, 82.75, -13.25, 114, -25.5, 147.5, -38.25, 178.5, -44.5, 221.25, -48.25, 253.5, -47, 295.75, -51.25, 323.5, -52.5, 360.25, -50.75, 378.3908, -46.246017, 388, -40.25, 401, -34.5, 434, -28.75, 464, -24.5, 513.75, -27.75, 549.5, -19.5, 570.5, -7, 590.5, 1.75, 616, 7.5, 641.5, 8.5, 686.5, 6, 714.5, 0.75, 757, -1, 777, 3.75, 819.75, 4, 877.75, -0.5, 881, 0.5, 948.75, -6.5, 1018.75, -14.5, 1051, -14.25, 1062.75, -15.5, 1073.25, -18.5, 1087.5, -25, 1097.75, -32, 1110.25, -41.25, 1121, -49.5, 1135.25, -56.5, 1156.75, -57.5, 1169.25, -54.5, 1185, -49, 1200.5, -47.25, 1215.25, -51.75, 1235.5, -54, 1256.5, -52, 1263, -49.5, 1271, 54.5, -1.0000038, 47.75, -2.7500038, 1.75)
@@ -299,21 +551,33 @@ texture = ExtResource("5_gxogp")
 texture_mode = 1
 script = ExtResource("4_dfgi1")
 
-[node name="Polygon2D" type="Polygon2D" parent="Parallax_Above100/130/Node2D" unique_id=757051674]
+[node name="Polygon2D" type="Polygon2D" parent="Parallax_Above100/130/Grass" unique_id=757051674]
 position = Vector2(0, 10)
 scale = Vector2(4, 4)
 polygon = PackedVector2Array(0, 0, 32.499996, -3, 54.749996, -5.25, 82.75, -13.25, 114, -25.5, 147.5, -38.25, 178.5, -44.5, 221.25, -48.25, 253.5, -47, 295.75, -51.25, 323.5, -52.5, 360.25, -50.75, 378.3908, -46.246017, 388, -40.25, 401, -34.5, 434, -28.75, 464, -24.5, 513.75, -27.75, 549.5, -19.5, 570.5, -7, 590.5, 1.75, 616, 7.5, 641.5, 8.5, 686.5, 6, 714.5, 0.75, 757, -1, 777, 3.75, 819.75, 4, 877.75, -0.5, 881, 0.5, 948.75, -6.5, 1018.75, -14.5, 1051, -14.25, 1062.75, -15.5, 1073.25, -18.5, 1087.5, -25, 1097.75, -32, 1110.25, -41.25, 1121, -49.5, 1135.25, -56.5, 1156.75, -57.5, 1169.25, -54.5, 1185, -49, 1200.5, -47.25, 1215.25, -51.75, 1235.5, -54, 1256.5, -52, 1263, -49.5, 1271, 54.5, -1.0000038, 47.75, -2.7500038, 1.75)
+
+[node name="Rain" type="GPUParticles2D" parent="Parallax_Above100/130" unique_id=86654346]
+modulate = Color(1, 1, 1, 0.65882355)
+position = Vector2(1718.0259, -885.5926)
+scale = Vector2(3.6923082, 3.6923082)
+amount = 800
+texture = ExtResource("4_dhomk")
+lifetime = 2.0
+fixed_fps = 24
+visibility_rect = Rect2(-200, -250, 400, 500)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_dfgi1")
 
 [node name="150" type="Parallax2D" parent="Parallax_Above100" unique_id=1609833071]
 scale = Vector2(1.5, 1.5)
 scroll_scale = Vector2(1.5, 1.5)
 scroll_offset = Vector2(-377.00003, -192)
 
-[node name="Node2D" type="Node2D" parent="Parallax_Above100/150" unique_id=1326804539]
-modulate = Color(0.5631552, 0.21545121, 0.010075451, 1)
-position = Vector2(363.59323, 189.11581)
+[node name="Grass" type="Node2D" parent="Parallax_Above100/150" unique_id=1326804539]
+modulate = Color(0.32509148, 0.57833135, 0.18038514, 1)
+position = Vector2(341.34003, 141.44917)
 
-[node name="Line2D" type="Line2D" parent="Parallax_Above100/150/Node2D" unique_id=1731647397]
+[node name="Line2D" type="Line2D" parent="Parallax_Above100/150/Grass" unique_id=1731647397]
 texture_repeat = 2
 scale = Vector2(4, 4)
 points = PackedVector2Array(0, 0, 32.499996, -3, 54.749996, -5.25, 82.75, -13.25, 114, -25.5, 147.5, -38.25, 178.5, -44.5, 221.25, -48.25, 253.5, -47, 295.75, -51.25, 323.5, -52.5, 360.25, -50.75, 378.3908, -46.246017, 388, -40.25, 401, -34.5, 434, -28.75, 464, -24.5, 513.75, -27.75, 549.5, -19.5, 570.5, -7, 590.5, 1.75, 616, 7.5, 641.5, 8.5, 686.5, 6, 714.5, 0.75, 757, -1, 777, 3.75, 819.75, 4, 877.75, -0.5, 881, 0.5, 948.75, -6.5, 1018.75, -14.5, 1051, -14.25, 1062.75, -15.5, 1073.25, -18.5, 1087.5, -25, 1097.75, -32, 1110.25, -41.25, 1121, -49.5, 1135.25, -56.5, 1156.75, -57.5, 1169.25, -54.5, 1185, -49, 1200.5, -47.25, 1215.25, -51.75, 1235.5, -54, 1256.5, -52, 1263, -49.5, 1271, 54.5, -1.0000038, 47.75, -2.7500038, 1.75)
@@ -321,7 +585,7 @@ texture = ExtResource("5_gxogp")
 texture_mode = 1
 script = ExtResource("4_dfgi1")
 
-[node name="Polygon2D" type="Polygon2D" parent="Parallax_Above100/150/Node2D" unique_id=1807860368]
+[node name="Polygon2D" type="Polygon2D" parent="Parallax_Above100/150/Grass" unique_id=1807860368]
 position = Vector2(0, 10)
 scale = Vector2(4, 4)
 polygon = PackedVector2Array(0, 0, 32.499996, -3, 54.749996, -5.25, 82.75, -13.25, 114, -25.5, 147.5, -38.25, 178.5, -44.5, 221.25, -48.25, 253.5, -47, 295.75, -51.25, 323.5, -52.5, 360.25, -50.75, 378.3908, -46.246017, 388, -40.25, 401, -34.5, 434, -28.75, 464, -24.5, 513.75, -27.75, 549.5, -19.5, 570.5, -7, 590.5, 1.75, 616, 7.5, 641.5, 8.5, 686.5, 6, 714.5, 0.75, 757, -1, 777, 3.75, 819.75, 4, 877.75, -0.5, 881, 0.5, 948.75, -6.5, 1018.75, -14.5, 1051, -14.25, 1062.75, -15.5, 1073.25, -18.5, 1087.5, -25, 1097.75, -32, 1110.25, -41.25, 1121, -49.5, 1135.25, -56.5, 1156.75, -57.5, 1169.25, -54.5, 1185, -49, 1200.5, -47.25, 1215.25, -51.75, 1235.5, -54, 1256.5, -52, 1263, -49.5, 1271, 54.5, -1.0000038, 47.75, -2.7500038, 1.75)
@@ -331,11 +595,11 @@ scale = Vector2(1.75, 1.75)
 scroll_scale = Vector2(1.75, 1.75)
 scroll_offset = Vector2(-531.0001, -292.99994)
 
-[node name="Node2D" type="Node2D" parent="Parallax_Above100/175" unique_id=1554127819]
-modulate = Color(0.45749462, 0.147661, 0.050551526, 1)
-position = Vector2(411.76285, 200.29167)
+[node name="Grass" type="Node2D" parent="Parallax_Above100/175" unique_id=1554127819]
+modulate = Color(0.24301144, 0.52055424, 0.22428757, 1)
+position = Vector2(320.86575, 153.29175)
 
-[node name="Line2D" type="Line2D" parent="Parallax_Above100/175/Node2D" unique_id=970891324]
+[node name="Line2D" type="Line2D" parent="Parallax_Above100/175/Grass" unique_id=970891324]
 texture_repeat = 2
 scale = Vector2(4, 4)
 points = PackedVector2Array(0, 0, 32.499996, -3, 54.749996, -5.25, 82.75, -13.25, 114, -25.5, 147.5, -38.25, 178.5, -44.5, 221.25, -48.25, 253.5, -47, 295.75, -51.25, 323.5, -52.5, 360.25, -50.75, 378.3908, -46.246017, 388, -40.25, 401, -34.5, 434, -28.75, 464, -24.5, 513.75, -27.75, 549.5, -19.5, 570.5, -7, 590.5, 1.75, 616, 7.5, 641.5, 8.5, 686.5, 6, 714.5, 0.75, 757, -1, 777, 3.75, 819.75, 4, 877.75, -0.5, 881, 0.5, 948.75, -6.5, 1018.75, -14.5, 1051, -14.25, 1062.75, -15.5, 1073.25, -18.5, 1087.5, -25, 1097.75, -32, 1110.25, -41.25, 1121, -49.5, 1135.25, -56.5, 1156.75, -57.5, 1169.25, -54.5, 1185, -49, 1200.5, -47.25, 1215.25, -51.75, 1235.5, -54, 1256.5, -52, 1263, -49.5, 1271, 54.5, -1.0000038, 47.75, -2.7500038, 1.75)
@@ -343,15 +607,43 @@ texture = ExtResource("5_gxogp")
 texture_mode = 1
 script = ExtResource("4_dfgi1")
 
-[node name="Polygon2D" type="Polygon2D" parent="Parallax_Above100/175/Node2D" unique_id=666677094]
+[node name="Polygon2D" type="Polygon2D" parent="Parallax_Above100/175/Grass" unique_id=666677094]
 position = Vector2(0, 10)
 scale = Vector2(4, 4)
 polygon = PackedVector2Array(0, 0, 32.499996, -3, 54.749996, -5.25, 82.75, -13.25, 114, -25.5, 147.5, -38.25, 178.5, -44.5, 221.25, -48.25, 253.5, -47, 295.75, -51.25, 323.5, -52.5, 360.25, -50.75, 378.3908, -46.246017, 388, -40.25, 401, -34.5, 434, -28.75, 464, -24.5, 513.75, -27.75, 549.5, -19.5, 570.5, -7, 590.5, 1.75, 616, 7.5, 641.5, 8.5, 686.5, 6, 714.5, 0.75, 757, -1, 777, 3.75, 819.75, 4, 877.75, -0.5, 881, 0.5, 948.75, -6.5, 1018.75, -14.5, 1051, -14.25, 1062.75, -15.5, 1073.25, -18.5, 1087.5, -25, 1097.75, -32, 1110.25, -41.25, 1121, -49.5, 1135.25, -56.5, 1156.75, -57.5, 1169.25, -54.5, 1185, -49, 1200.5, -47.25, 1215.25, -51.75, 1235.5, -54, 1256.5, -52, 1263, -49.5, 1271, 54.5, -1.0000038, 47.75, -2.7500038, 1.75)
 
 [node name="200" type="Parallax2D" parent="Parallax_Above100" unique_id=1613573323]
-modulate = Color(1.010103, 0.8081877, 0.7606783, 1)
 scale = Vector2(2, 2)
 scroll_scale = Vector2(2, 2)
-scroll_offset = Vector2(-894, -410)
+scroll_offset = Vector2(-786, -444)
+
+[node name="Grass" type="Node2D" parent="Parallax_Above100/200" unique_id=1036618324]
+modulate = Color(0.12638512, 0.4153815, 0.23172891, 1)
+position = Vector2(367.51004, 192.67374)
+
+[node name="Line2D" type="Line2D" parent="Parallax_Above100/200/Grass" unique_id=691113314]
+texture_repeat = 2
+scale = Vector2(4, 4)
+points = PackedVector2Array(0, 0, 32.499996, -3, 54.749996, -5.25, 82.75, -13.25, 114, -25.5, 147.5, -38.25, 178.5, -44.5, 221.25, -48.25, 253.5, -47, 295.75, -51.25, 323.5, -52.5, 360.25, -50.75, 378.3908, -46.246017, 388, -40.25, 401, -34.5, 434, -28.75, 464, -24.5, 513.75, -27.75, 549.5, -19.5, 570.5, -7, 590.5, 1.75, 616, 7.5, 641.5, 8.5, 686.5, 6, 714.5, 0.75, 757, -1, 777, 3.75, 819.75, 4, 877.75, -0.5, 881, 0.5, 948.75, -6.5, 1018.75, -14.5, 1051, -14.25, 1062.75, -15.5, 1073.25, -18.5, 1087.5, -25, 1097.75, -32, 1110.25, -41.25, 1121, -49.5, 1135.25, -56.5, 1156.75, -57.5, 1169.25, -54.5, 1185, -49, 1200.5, -47.25, 1215.25, -51.75, 1235.5, -54, 1256.5, -52, 1263, -49.5, 1271, 54.5, -1.0000038, 47.75, -2.7500038, 1.75)
+texture = ExtResource("5_gxogp")
+texture_mode = 1
+script = ExtResource("4_dfgi1")
+
+[node name="Polygon2D" type="Polygon2D" parent="Parallax_Above100/200/Grass" unique_id=897165303]
+position = Vector2(0, 10)
+scale = Vector2(4, 4)
+polygon = PackedVector2Array(0, 0, 32.499996, -3, 54.749996, -5.25, 82.75, -13.25, 114, -25.5, 147.5, -38.25, 178.5, -44.5, 221.25, -48.25, 253.5, -47, 295.75, -51.25, 323.5, -52.5, 360.25, -50.75, 378.3908, -46.246017, 388, -40.25, 401, -34.5, 434, -28.75, 464, -24.5, 513.75, -27.75, 549.5, -19.5, 570.5, -7, 590.5, 1.75, 616, 7.5, 641.5, 8.5, 686.5, 6, 714.5, 0.75, 757, -1, 777, 3.75, 819.75, 4, 877.75, -0.5, 881, 0.5, 948.75, -6.5, 1018.75, -14.5, 1051, -14.25, 1062.75, -15.5, 1073.25, -18.5, 1087.5, -25, 1097.75, -32, 1110.25, -41.25, 1121, -49.5, 1135.25, -56.5, 1156.75, -57.5, 1169.25, -54.5, 1185, -49, 1200.5, -47.25, 1215.25, -51.75, 1235.5, -54, 1256.5, -52, 1263, -49.5, 1271, 54.5, -1.0000038, 47.75, -2.7500038, 1.75)
+
+[node name="Rain" type="GPUParticles2D" parent="Parallax_Above100/200" unique_id=1191204859]
+modulate = Color(1, 1, 1, 0.65882355)
+position = Vector2(1942.2607, -723.17554)
+scale = Vector2(4, 4)
+amount = 500
+texture = ExtResource("4_dhomk")
+lifetime = 2.0
+fixed_fps = 24
+visibility_rect = Rect2(-200, -250, 400, 500)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_dfgi1")
 
 [editable path="Player"]

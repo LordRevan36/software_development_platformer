@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cu63qngmpu3fa"
-path="res://.godot/imported/JumpStart.png-f1042a1de4099f6dc8899514f4575ff3.ctex"
+uid="uid://yci8u2sv0dny"
+path="res://.godot/imported/LeafParticle1.png-f693c55bce16d18b4aa87ea764a7156b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Player/JumpStart.png"
-dest_files=["res://.godot/imported/JumpStart.png-f1042a1de4099f6dc8899514f4575ff3.ctex"]
+source_file="res://Assets/Forest/Particles/LeafParticle1.png"
+dest_files=["res://.godot/imported/LeafParticle1.png-f693c55bce16d18b4aa87ea764a7156b.ctex"]
 
 [params]
 

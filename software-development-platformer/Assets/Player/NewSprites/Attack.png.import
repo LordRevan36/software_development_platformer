@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://btjdmquq8wkgc"
-path="res://.godot/imported/IvyBackflipStart.png-cf013ca7fbcef413fb6c7576a246fc25.ctex"
+uid="uid://cumqbqdbc7k5x"
+path="res://.godot/imported/Attack.png-ce76ccb31c7efe2c54e8551214a6371c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Player/IvyBackflipStart.png"
-dest_files=["res://.godot/imported/IvyBackflipStart.png-cf013ca7fbcef413fb6c7576a246fc25.ctex"]
+source_file="res://Assets/Player/NewSprites/Attack.png"
+dest_files=["res://.godot/imported/Attack.png-ce76ccb31c7efe2c54e8551214a6371c.ctex"]
 
 [params]
 

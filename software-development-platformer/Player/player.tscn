@@ -1,19 +1,19 @@
 [gd_scene format=3 uid="uid://cy1vyx88wgg4v"]
 
 [ext_resource type="Script" uid="uid://bangw8dvmuyod" path="res://Player/player.gd" id="1_onrkg"]
-[ext_resource type="Texture2D" uid="uid://cumqbqdbc7k5x" path="res://NewSprites/Attack.png" id="2_pisgm"]
-[ext_resource type="Texture2D" uid="uid://cmbqhtfy5kqd3" path="res://NewSprites/Backflip.png" id="3_b1ygp"]
+[ext_resource type="Texture2D" uid="uid://cumqbqdbc7k5x" path="res://Assets/Player/NewSprites/Attack.png" id="2_pisgm"]
+[ext_resource type="Texture2D" uid="uid://cmbqhtfy5kqd3" path="res://Assets/Player/NewSprites/Backflip.png" id="3_b1ygp"]
 [ext_resource type="Texture2D" uid="uid://rnawpuddimk" path="res://Assets/Player/Slash.png" id="3_btcbx"]
 [ext_resource type="Script" uid="uid://m70ma2rafm6p" path="res://Player/movement_particles.gd" id="4_k53q1"]
-[ext_resource type="Texture2D" uid="uid://btdwqyc5rbo5o" path="res://NewSprites/JumpStart.png" id="4_o28un"]
-[ext_resource type="Texture2D" uid="uid://ul3588q4vy3l" path="res://Assets/Forest/LeafParticle2.png" id="5_fhl08"]
-[ext_resource type="Texture2D" uid="uid://q0ku8mj6gnug" path="res://NewSprites/Fall.png" id="5_n471f"]
-[ext_resource type="Texture2D" uid="uid://dy3a63mmbs5y4" path="res://NewSprites/BackflipLand.png" id="6_pisgm"]
-[ext_resource type="Texture2D" uid="uid://b1d7ndc646410" path="res://NewSprites/Idle.png" id="7_b1ygp"]
-[ext_resource type="Texture2D" uid="uid://cmaj0sxsi4jsk" path="res://NewSprites/Jump.png" id="8_o28un"]
+[ext_resource type="Texture2D" uid="uid://btdwqyc5rbo5o" path="res://Assets/Player/NewSprites/JumpStart.png" id="4_o28un"]
+[ext_resource type="Texture2D" uid="uid://ul3588q4vy3l" path="res://Assets/Forest/Particles/LeafParticle2.png" id="5_fhl08"]
+[ext_resource type="Texture2D" uid="uid://q0ku8mj6gnug" path="res://Assets/Player/NewSprites/Fall.png" id="5_n471f"]
+[ext_resource type="Texture2D" uid="uid://dy3a63mmbs5y4" path="res://Assets/Player/NewSprites/BackflipLand.png" id="6_pisgm"]
+[ext_resource type="Texture2D" uid="uid://b1d7ndc646410" path="res://Assets/Player/NewSprites/Idle.png" id="7_b1ygp"]
+[ext_resource type="Texture2D" uid="uid://cmaj0sxsi4jsk" path="res://Assets/Player/NewSprites/Jump.png" id="8_o28un"]
 [ext_resource type="Texture2D" uid="uid://bji8fl8xxt73f" path="res://Assets/HUD/GenericBar.png" id="8_p5o4e"]
 [ext_resource type="Script" uid="uid://rexj3shyfaq6" path="res://UI/HealthBar.gd" id="9_5htga"]
-[ext_resource type="Texture2D" uid="uid://b4ildk8pcwwe7" path="res://NewSprites/Run.png" id="9_n471f"]
+[ext_resource type="Texture2D" uid="uid://b4ildk8pcwwe7" path="res://Assets/Player/NewSprites/Run.png" id="9_n471f"]
 [ext_resource type="Script" uid="uid://cv8mai7sitq67" path="res://Player/mana_bar.gd" id="10_x3vf3"]
 [ext_resource type="PackedScene" uid="uid://by60jn4wyw65s" path="res://UI/PauseMenu.tscn" id="12_5htga"]
 [ext_resource type="PackedScene" uid="uid://cffyceji6uhit" path="res://UI/Skill Tree.tscn" id="13_p5o4e"]
@@ -295,7 +295,7 @@ animations = [{
 "speed": 3.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_68syb")
 }, {
 "duration": 2.0,
@@ -369,7 +369,7 @@ animations = [{
 "speed": 12.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_1kmt7")
 }, {
 "duration": 2.0,

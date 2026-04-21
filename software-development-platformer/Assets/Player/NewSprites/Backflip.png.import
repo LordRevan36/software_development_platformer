@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://clvqp7ocmoruv"
-path="res://.godot/imported/IvyBackflipLand.png-23ac83c93d9efd226c165fdabda64c43.ctex"
+uid="uid://cmbqhtfy5kqd3"
+path="res://.godot/imported/Backflip.png-6000c1bede4b133737bababa1516c841.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Player/IvyBackflipLand.png"
-dest_files=["res://.godot/imported/IvyBackflipLand.png-23ac83c93d9efd226c165fdabda64c43.ctex"]
+source_file="res://Assets/Player/NewSprites/Backflip.png"
+dest_files=["res://.godot/imported/Backflip.png-6000c1bede4b133737bababa1516c841.ctex"]
 
 [params]
 
