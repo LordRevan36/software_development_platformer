@@ -20,8 +20,8 @@ extends CanvasLayer
 #when true allows you to close the overlay with the same button used to open it
 var can_close = false
 var AttackLevel := GlobalPlayer.Attack
-var HpLevel := (GlobalPlayer.MAX_Health - 100)/10
-var ManaLevel := (GlobalPlayer.MAX_Mana - 100)/10
+var HpLevel = 0
+var ManaLevel = 0
 
 func _ready() -> void:
 	#iterates through the button group to connect the mouse entered and exited signals
@@ -155,12 +155,13 @@ func _on_mana_upgrade_2_pressed() -> void:
 		GlobalPlayer.mana = GlobalPlayer.MAX_Mana
 
 func _level_up(button1, button2, level, upgrade1, upgrade2) -> void:
-	if level <= 5:
-		upgrade1.texture = load("res://Assets/HUD/Upgrade%d.png" %level)
-	if level >= 5:
-		button1.modulate = Color.GREEN
-		upgrade1.texture = load("res://Assets/HUD/Upgrade5.png")
-	if level > 5:
-		upgrade2.texture = load("res://Assets/HUD/Upgrade%d.png" % (level-5))
-	if level == 10:
-		button2.modulate = Color.GREEN
+	if level > 0:
+		if level <= 5:
+			upgrade1.texture = load("res://Assets/HUD/Upgrade%d.png" %level)
+		if level >= 5:
+			button1.modulate = Color.GREEN
+			upgrade1.texture = load("res://Assets/HUD/Upgrade5.png")
+		if level > 5:
+			upgrade2.texture = load("res://Assets/HUD/Upgrade%d.png" % (level-5))
+		if level == 10:
+			button2.modulate = Color.GREEN

@@ -79,8 +79,6 @@ func _physics_process(delta: float) -> void:
 	
 	#checking for opening other menus
 	_menu_checks()
-	#_pause_check()
-	#_skill_tree_check()
 	
 	#knockback
 	if knockback_timer > 0.0:
@@ -88,6 +86,8 @@ func _physics_process(delta: float) -> void:
 		knockback_timer -= delta
 		if knockback_timer <= 0.0:
 			knockback = Vector2.ZERO
+			
+	Mana
 
 #returns gravity vector adjusted based on state
 func _return_gravity(delta: float) -> Vector2:
