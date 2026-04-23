@@ -6,7 +6,6 @@ var mana_tween: Tween
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	max_value = GlobalPlayer.MAX_Mana
-	value = player.Mana
 	GlobalPlayer.mana_changed.connect(update_mana)
 
 func update_mana(current: float, max_mana: float, duration):

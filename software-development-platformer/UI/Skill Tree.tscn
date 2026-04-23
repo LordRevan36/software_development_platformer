@@ -9,18 +9,18 @@
 [ext_resource type="Texture2D" uid="uid://c48fduuwvakuu" path="res://Assets/HUD/Health2.png" id="7_sl1dt"]
 [ext_resource type="Texture2D" uid="uid://dfdg636dpkbew" path="res://Assets/HUD/Mana1.png" id="8_3ecnd"]
 [ext_resource type="Texture2D" uid="uid://cssrain1s4xho" path="res://Assets/HUD/Mana2.png" id="9_stapk"]
+[ext_resource type="PackedScene" uid="uid://by60jn4wyw65s" path="res://UI/PauseMenu.tscn" id="10_stapk"]
 
 [node name="SkillTree" type="CanvasLayer" unique_id=56710748]
-process_mode = 3
+process_mode = 2
+layer = 2
 script = ExtResource("1_2ah4k")
 
 [node name="SkillTimer" type="Timer" parent="." unique_id=994415787]
-process_mode = 3
 wait_time = 0.05
 one_shot = true
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=869960596]
-process_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -44,7 +44,6 @@ theme_override_font_sizes/font_size = 88
 text = "Health:"
 
 [node name="Title" type="Label" parent="ColorRect" unique_id=1710065914]
-process_mode = 3
 layout_mode = 0
 offset_left = 502.0
 offset_top = 40.0
@@ -72,7 +71,6 @@ theme_override_font_sizes/font_size = 88
 text = "Mana:"
 
 [node name="Backflip" type="Button" parent="ColorRect" unique_id=1872087870 groups=["Buttons", "Start"]]
-process_mode = 3
 layout_mode = 0
 offset_left = 330.0
 offset_top = 796.0
@@ -265,6 +263,9 @@ offset_left = 4.0
 offset_top = 4.0
 offset_right = 146.0
 offset_bottom = 146.0
+
+[node name="PauseMenu" parent="." unique_id=469843484 instance=ExtResource("10_stapk")]
+visible = false
 
 [connection signal="timeout" from="SkillTimer" to="." method="_on_skill_timer_timeout"]
 [connection signal="pressed" from="ColorRect/Backflip" to="." method="_on_backflip_pressed"]
