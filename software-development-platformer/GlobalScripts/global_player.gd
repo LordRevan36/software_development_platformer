@@ -15,6 +15,7 @@ var Attack : int = 1
 var can_continue_atk
 var can_continue_hp
 var can_continue_mana
+var skill_points = 32
 
 func _ready() -> void:
 	process_mode = PROCESS_MODE_ALWAYS

@@ -69,7 +69,9 @@ func _process(_delta: float) -> void:
 	_level_up(AttackUpgrade1, AttackUpgrade2, AttackLevel, AtkUpgrades1, AtkUpgrades2)
 	_level_up(HealthUpgrade1, HealthUpgrade2, HpLevel, HUP1, HUP2)
 	_level_up(ManaUpgrade1, ManaUpgrade2, ManaLevel, ManaUp1, ManaUp2)
-
+	
+	$ColorRect/Title.text = ("Skill Points: " + str(GlobalPlayer.skill_points))
+	$ColorRect/Title.position = Vector2(1220/2 - $ColorRect/Title.size.x/2, 40)
 func _on_skill_timer_timeout() -> void:
 	can_close = true
 
@@ -83,16 +85,17 @@ func _on_frontflip_pressed() -> void:
 
 #levels up the attack by increasing the player attack variable
 func _on_attack_upgrades_pressed() -> void:
-	if GlobalPlayer.Attack < 5:
+	if GlobalPlayer.Attack < 5 and GlobalPlayer.skill_points > 0:
 		GlobalPlayer.Attack += 1
-	print(GlobalPlayer.Attack)
+		GlobalPlayer.skill_points -= 1
 	if GlobalPlayer.Attack == 5:
 		AttackStep.modulate = Color.WHITE
+
 func _on_attack_upgrade_2_pressed() -> void:
 	if GlobalPlayer.can_continue_atk:
-		if GlobalPlayer.Attack < 10:
+		if GlobalPlayer.Attack < 10 and GlobalPlayer.skill_points > 0:
 			GlobalPlayer.Attack += 1
-		print(GlobalPlayer.Attack)
+			GlobalPlayer.skill_points -= 1
 
 #makes all the buttons grow and shrink with the respective tweens
 func _on_button_mouse_entered(button: Button) -> void:
@@ -102,16 +105,18 @@ func _on_button_mouse_exited(button: Button) -> void:
 
 #temp button for working tree, prevents getting upgrades before unlocking the previous ones
 func _on_attack_step_pressed() -> void:
-	if GlobalPlayer.Attack >= 5:
+	if GlobalPlayer.Attack >= 5 and not GlobalPlayer.can_continue_atk and GlobalPlayer.skill_points > 0:
 		AttackStep.modulate = Color.GREEN
 		GlobalPlayer.can_continue_atk = true
 		AttackUpgrade2.modulate = Color.WHITE
+		GlobalPlayer.skill_points -= 1
 
 
 func _on_health_upgrade_1_pressed() -> void:
-	if GlobalPlayer.MAX_Health < 150:
+	if GlobalPlayer.MAX_Health < 150 and GlobalPlayer.skill_points > 0:
 		GlobalPlayer.MAX_Health += 10
 		GlobalPlayer.health_changed.emit(GlobalPlayer.MAX_Health, GlobalPlayer.MAX_Health)
+		GlobalPlayer.skill_points -= 1
 	if GlobalPlayer.MAX_Health == 150:
 		HealthStep.modulate = Color.WHITE
 	GlobalPlayer.health = GlobalPlayer.MAX_Health
@@ -119,22 +124,25 @@ func _on_health_upgrade_1_pressed() -> void:
 		GlobalPlayer.health = GlobalPlayer.MAX_Health
 
 func _on_health_step_pressed() -> void:
-	if GlobalPlayer.MAX_Health >= 150:
+	if GlobalPlayer.MAX_Health >= 150 and not GlobalPlayer.can_continue_hp and GlobalPlayer.skill_points > 0:
 		HealthStep.modulate = Color.GREEN
 		GlobalPlayer.can_continue_hp = true
 		HealthUpgrade2.modulate = Color.WHITE
+		GlobalPlayer.skill_points -= 1
 
 func _on_health_upgrade_2_pressed() -> void:
-	if GlobalPlayer.MAX_Health < 200 and GlobalPlayer.can_continue_hp:
+	if GlobalPlayer.MAX_Health < 200 and GlobalPlayer.can_continue_hp and GlobalPlayer.skill_points > 0:
 		GlobalPlayer.MAX_Health += 10
 		GlobalPlayer.health_changed.emit(GlobalPlayer.MAX_Health, GlobalPlayer.MAX_Health)
+		GlobalPlayer.skill_points -= 1
 	if HealthUpgrade2.modulate != Color.GREEN:
 		GlobalPlayer.health = GlobalPlayer.MAX_Health
 
 func _on_mana_upgrade_1_pressed() -> void:
-	if GlobalPlayer.MAX_Mana < 150:
+	if GlobalPlayer.MAX_Mana < 150 and GlobalPlayer.skill_points > 0:
 		GlobalPlayer.MAX_Mana += 10
 		GlobalPlayer.mana_changed.emit(GlobalPlayer.MAX_Mana, GlobalPlayer.MAX_Mana, 0.15)
+		GlobalPlayer.skill_points -= 1
 	GlobalPlayer.mana = GlobalPlayer.MAX_Mana
 	if GlobalPlayer.MAX_Mana == 150:
 		ManaStep.modulate = Color.WHITE
@@ -142,14 +150,16 @@ func _on_mana_upgrade_1_pressed() -> void:
 		GlobalPlayer.mana = GlobalPlayer.MAX_Mana
 
 func _on_mana_step_pressed() -> void:
-	if GlobalPlayer.MAX_Mana >= 150:
+	if GlobalPlayer.MAX_Mana >= 150 and not GlobalPlayer.can_continue_mana and GlobalPlayer.skill_points > 0:
 		ManaStep.modulate = Color.GREEN
 		GlobalPlayer.can_continue_mana = true
 		ManaUpgrade2.modulate = Color.WHITE
+		GlobalPlayer.skill_points -= 1
 
 func _on_mana_upgrade_2_pressed() -> void:
-	if GlobalPlayer.MAX_Mana < 200 and GlobalPlayer.can_continue_mana:
+	if GlobalPlayer.MAX_Mana < 200 and GlobalPlayer.can_continue_mana and GlobalPlayer.skill_points > 0:
 		GlobalPlayer.MAX_Mana += 10
+		GlobalPlayer.skill_points -= 1
 		GlobalPlayer.mana_changed.emit(GlobalPlayer.MAX_Mana, GlobalPlayer.MAX_Mana, 0.15)
 	if ManaUpgrade2.modulate != Color.GREEN:
 		GlobalPlayer.mana = GlobalPlayer.MAX_Mana
