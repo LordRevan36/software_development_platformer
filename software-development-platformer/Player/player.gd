@@ -29,9 +29,9 @@ var jumpVelocity = Vector2(0,0) #stores velocity of player immediately after jum
 var landVelocity = Vector2(0,0) #stores velocity of player immediately before landing
 var slow = 1 #stores slowdown rate during things like attack
 var canJump = true #used to let player jump a little after leaving the platform
-var Mana = GlobalPlayer.MAX_Mana #stores the mana for the player
+var Mana = GlobalPlayer.mana #stores the mana for the player
 var usingBouncePad = false #used to prevent _land function if player is using the bounce pad
-var health = GlobalPlayer.MAX_Health #stores the health for the player
+var health = GlobalPlayer.health #stores the health for the player
 var friction = 0.9
 var knockback: Vector2 = Vector2.ZERO
 var knockback_timer: float = 0.0
@@ -78,8 +78,7 @@ func _physics_process(delta: float) -> void:
 	updateAnimations()
 	
 	#checking for opening other menus
-	_pause_check()
-	_skill_tree_check()
+	_menu_checks()
 	
 	#knockback
 	if knockback_timer > 0.0:
@@ -87,6 +86,8 @@ func _physics_process(delta: float) -> void:
 		knockback_timer -= delta
 		if knockback_timer <= 0.0:
 			knockback = Vector2.ZERO
+			
+	Mana
 
 #returns gravity vector adjusted based on state
 func _return_gravity(delta: float) -> Vector2:
@@ -273,23 +274,19 @@ func updateAnimations():
 	elif state == State.EXIT:
 		AnimSprite.play("run")
 
-#checks for pause input then updates level tree
-func _pause_check() -> void:
+
+func _menu_checks() -> void:
+	#checks for pause input then updates level tree
 	if Input.is_action_just_released("Pause"):
 		$UI/PauseMenu.show()
 		
-	if $UI/PauseMenu.visible:
-		get_tree().paused = true
-	else:
-		get_tree().paused = false
-
-#checks for opening the skill tree tab, then updates level tree
-func _skill_tree_check() -> void:
+	#checks for opening the skill tree tab, then updates level tree
 	if Input.is_action_just_released("Skills"):
 		$UI/SkillTree.show()
 		SkillTimer.start()
 	
-	if $UI/SkillTree.visible:
+	#pauses the game when either menu is visible
+	if $UI/PauseMenu.visible or $UI/SkillTree.visible:
 		get_tree().paused = true
 	else:
 		get_tree().paused = false

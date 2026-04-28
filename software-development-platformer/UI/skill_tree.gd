@@ -20,6 +20,8 @@ extends CanvasLayer
 #when true allows you to close the overlay with the same button used to open it
 var can_close = false
 var AttackLevel := GlobalPlayer.Attack
+var HpLevel = 0
+var ManaLevel = 0
 
 func _ready() -> void:
 	#iterates through the button group to connect the mouse entered and exited signals
@@ -28,15 +30,23 @@ func _ready() -> void:
 		if button not in get_tree().get_nodes_in_group("Start"):
 			button.modulate = Color.DARK_GRAY
 	
-	if AttackLevel >= 5:
-		AttackStep.modulate = Color.WHITE
-	if GlobalPlayer.can_continue_atk:
-		AttackStep.modulate = Color.GREEN
-		AttackUpgrade2.modulate = Color.WHITE
-	if GlobalControls.canBackflip:
-		Backflip.modulate = Color.GREEN
-	if GlobalControls.canFrontflip:
-		Frontflip.modulate = Color.GREEN
+	#saves the states of the buttons so they stay the same when changing menus
+	sync_button(Backflip, GlobalControls.canBackflip)
+	sync_button(Frontflip, GlobalControls.canFrontflip)
+	# Logic for tiered upgrades
+	update_tier(AttackStep, AttackUpgrade2, AttackLevel >= 5, GlobalPlayer.can_continue_atk)
+	update_tier(HealthStep, HealthUpgrade2, GlobalPlayer.MAX_Health >= 150, GlobalPlayer.can_continue_hp)
+	update_tier(ManaStep, ManaUpgrade2, GlobalPlayer.MAX_Mana >= 150, GlobalPlayer.can_continue_mana)
+
+func sync_button(btn: CanvasItem, condition: bool):
+	btn.modulate = Color.GREEN if condition else Color.WHITE
+
+func update_tier(step_btn, upgrade_btn, is_unlocked, is_complete):
+	if is_unlocked: step_btn.modulate = Color.WHITE
+	if is_complete:
+		step_btn.modulate = Color.GREEN
+		upgrade_btn.modulate = Color.WHITE
+
 
 func _connect_button_signals(button: Button):
 	button.mouse_entered.connect(_on_button_mouse_entered.bind(button))
@@ -44,40 +54,24 @@ func _connect_button_signals(button: Button):
 
 func _process(_delta: float) -> void:
 	AttackLevel = GlobalPlayer.Attack
-	if Input.is_action_just_released("Skills") and can_close:
+	HpLevel = (GlobalPlayer.MAX_Health - 100)/10
+	ManaLevel = (GlobalPlayer.MAX_Mana - 100)/10
+	if Input.is_action_just_released("Skills") and can_close and not $PauseMenu.visible:
 		get_tree().paused = false
 		can_close = false
 		hide()
-		
-	#checks the attack level and changes the color based on the button level
-	if AttackLevel <= 5:
-		AtkUpgrades1.texture = load("res://Assets/HUD/Upgrade%d.png" % AttackLevel)
-	if AttackLevel >= 5:
-		AttackUpgrade1.modulate = Color.GREEN
-	if AttackLevel > 5:
-		AtkUpgrades2.texture = load("res://Assets/HUD/Upgrade%d.png" % (AttackLevel-5))
-	if AttackLevel == 10:
-		AttackUpgrade2.modulate = Color.GREEN
-		
-	if GlobalPlayer.MAX_Health > 100 and GlobalPlayer.MAX_Health <= 150:
-		HUP1.texture = load("res://Assets/HUD/Upgrade%d.png" % ((GlobalPlayer.MAX_Health - 100)/10))
-	if GlobalPlayer.MAX_Health >= 150:
-		HealthUpgrade1.modulate = Color.GREEN
-	if GlobalPlayer.MAX_Health > 150:
-		HUP2.texture = load("res://Assets/HUD/Upgrade%d.png" % ((GlobalPlayer.MAX_Health - 150)/10))
-	if GlobalPlayer.MAX_Health == 200:
-		HealthUpgrade2.modulate = Color.GREEN
-		
-	if GlobalPlayer.MAX_Mana > 100 and GlobalPlayer.MAX_Mana <= 150:
-		ManaUp1.texture = load("res://Assets/HUD/Upgrade%d.png" % ((GlobalPlayer.MAX_Mana - 100)/10))
-	if GlobalPlayer.MAX_Mana >= 150:
-		ManaUpgrade1.modulate = Color.GREEN
-	if GlobalPlayer.MAX_Mana > 150:
-		ManaUp2.texture = load("res://Assets/HUD/Upgrade%d.png" % ((GlobalPlayer.MAX_Mana - 150)/10))
-	if GlobalPlayer.MAX_Mana == 200:
-		ManaUpgrade2.modulate = Color.GREEN
-		
-
+	
+	#can pause if in the skill tree
+	if Input.is_action_just_released("Pause") and can_close:
+		$PauseMenu.show()
+	
+	#checks the levels and changes the color based on the button level
+	_level_up(AttackUpgrade1, AttackUpgrade2, AttackLevel, AtkUpgrades1, AtkUpgrades2)
+	_level_up(HealthUpgrade1, HealthUpgrade2, HpLevel, HUP1, HUP2)
+	_level_up(ManaUpgrade1, ManaUpgrade2, ManaLevel, ManaUp1, ManaUp2)
+	
+	$ColorRect/Title.text = ("Skill Points: " + str(GlobalPlayer.skill_points))
+	$ColorRect/Title.position = Vector2(1220/2 - $ColorRect/Title.size.x/2, 40)
 func _on_skill_timer_timeout() -> void:
 	can_close = true
 
@@ -91,16 +85,17 @@ func _on_frontflip_pressed() -> void:
 
 #levels up the attack by increasing the player attack variable
 func _on_attack_upgrades_pressed() -> void:
-	if GlobalPlayer.Attack < 5:
+	if GlobalPlayer.Attack < 5 and GlobalPlayer.skill_points > 0:
 		GlobalPlayer.Attack += 1
-	print(GlobalPlayer.Attack)
+		GlobalPlayer.skill_points -= 1
 	if GlobalPlayer.Attack == 5:
 		AttackStep.modulate = Color.WHITE
+
 func _on_attack_upgrade_2_pressed() -> void:
 	if GlobalPlayer.can_continue_atk:
-		if GlobalPlayer.Attack < 10:
+		if GlobalPlayer.Attack < 10 and GlobalPlayer.skill_points > 0:
 			GlobalPlayer.Attack += 1
-		print(GlobalPlayer.Attack)
+			GlobalPlayer.skill_points -= 1
 
 #makes all the buttons grow and shrink with the respective tweens
 func _on_button_mouse_entered(button: Button) -> void:
@@ -110,53 +105,73 @@ func _on_button_mouse_exited(button: Button) -> void:
 
 #temp button for working tree, prevents getting upgrades before unlocking the previous ones
 func _on_attack_step_pressed() -> void:
-	if GlobalPlayer.Attack >= 5:
+	if GlobalPlayer.Attack >= 5 and not GlobalPlayer.can_continue_atk and GlobalPlayer.skill_points > 0:
 		AttackStep.modulate = Color.GREEN
 		GlobalPlayer.can_continue_atk = true
 		AttackUpgrade2.modulate = Color.WHITE
+		GlobalPlayer.skill_points -= 1
 
 
 func _on_health_upgrade_1_pressed() -> void:
-	if GlobalPlayer.MAX_Health < 150:
+	if GlobalPlayer.MAX_Health < 150 and GlobalPlayer.skill_points > 0:
 		GlobalPlayer.MAX_Health += 10
 		GlobalPlayer.health_changed.emit(GlobalPlayer.MAX_Health, GlobalPlayer.MAX_Health)
-		GlobalPlayer.health = GlobalPlayer.MAX_Health
-	print(GlobalPlayer.MAX_Health)
+		GlobalPlayer.skill_points -= 1
 	if GlobalPlayer.MAX_Health == 150:
 		HealthStep.modulate = Color.WHITE
+	GlobalPlayer.health = GlobalPlayer.MAX_Health
+	if HealthUpgrade1.modulate != Color.GREEN:
+		GlobalPlayer.health = GlobalPlayer.MAX_Health
 
 func _on_health_step_pressed() -> void:
-	if GlobalPlayer.MAX_Health >= 150:
+	if GlobalPlayer.MAX_Health >= 150 and not GlobalPlayer.can_continue_hp and GlobalPlayer.skill_points > 0:
 		HealthStep.modulate = Color.GREEN
 		GlobalPlayer.can_continue_hp = true
 		HealthUpgrade2.modulate = Color.WHITE
+		GlobalPlayer.skill_points -= 1
 
 func _on_health_upgrade_2_pressed() -> void:
-	if GlobalPlayer.MAX_Health < 200:
+	if GlobalPlayer.MAX_Health < 200 and GlobalPlayer.can_continue_hp and GlobalPlayer.skill_points > 0:
 		GlobalPlayer.MAX_Health += 10
 		GlobalPlayer.health_changed.emit(GlobalPlayer.MAX_Health, GlobalPlayer.MAX_Health)
+		GlobalPlayer.skill_points -= 1
+	if HealthUpgrade2.modulate != Color.GREEN:
 		GlobalPlayer.health = GlobalPlayer.MAX_Health
-	print(GlobalPlayer.MAX_Health)
-
 
 func _on_mana_upgrade_1_pressed() -> void:
-	if GlobalPlayer.MAX_Mana < 150:
+	if GlobalPlayer.MAX_Mana < 150 and GlobalPlayer.skill_points > 0:
 		GlobalPlayer.MAX_Mana += 10
 		GlobalPlayer.mana_changed.emit(GlobalPlayer.MAX_Mana, GlobalPlayer.MAX_Mana, 0.15)
-		GlobalPlayer.mana = GlobalPlayer.MAX_Mana
-	print(GlobalPlayer.MAX_Mana)
+		GlobalPlayer.skill_points -= 1
+	GlobalPlayer.mana = GlobalPlayer.MAX_Mana
 	if GlobalPlayer.MAX_Mana == 150:
 		ManaStep.modulate = Color.WHITE
+	if ManaUpgrade1.modulate != Color.GREEN:
+		GlobalPlayer.mana = GlobalPlayer.MAX_Mana
 
 func _on_mana_step_pressed() -> void:
-	if GlobalPlayer.MAX_Mana >= 150:
+	if GlobalPlayer.MAX_Mana >= 150 and not GlobalPlayer.can_continue_mana and GlobalPlayer.skill_points > 0:
 		ManaStep.modulate = Color.GREEN
 		GlobalPlayer.can_continue_mana = true
 		ManaUpgrade2.modulate = Color.WHITE
+		GlobalPlayer.skill_points -= 1
 
 func _on_mana_upgrade_2_pressed() -> void:
-	if GlobalPlayer.MAX_Mana < 200:
+	if GlobalPlayer.MAX_Mana < 200 and GlobalPlayer.can_continue_mana and GlobalPlayer.skill_points > 0:
 		GlobalPlayer.MAX_Mana += 10
+		GlobalPlayer.skill_points -= 1
 		GlobalPlayer.mana_changed.emit(GlobalPlayer.MAX_Mana, GlobalPlayer.MAX_Mana, 0.15)
+	if ManaUpgrade2.modulate != Color.GREEN:
 		GlobalPlayer.mana = GlobalPlayer.MAX_Mana
-	print(GlobalPlayer.MAX_Mana)
+
+func _level_up(button1, button2, level, upgrade1, upgrade2) -> void:
+	if level > 0:
+		if level <= 5:
+			upgrade1.texture = load("res://Assets/HUD/Upgrade%d.png" %level)
+		if level >= 5:
+			button1.modulate = Color.GREEN
+			upgrade1.texture = load("res://Assets/HUD/Upgrade5.png")
+		if level > 5:
+			upgrade2.texture = load("res://Assets/HUD/Upgrade%d.png" % (level-5))
+		if level == 10:
+			button2.modulate = Color.GREEN

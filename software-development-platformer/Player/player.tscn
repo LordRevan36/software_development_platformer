@@ -671,6 +671,7 @@ offset = Vector2(15, 15)
 transform = Transform2D(1, 0, 0, 1, 15, 15)
 
 [node name="DamageButton" type="Button" parent="UI" unique_id=63594304]
+process_mode = 3
 offset_left = 527.0
 offset_top = 20.0
 offset_right = 745.0
@@ -679,6 +680,7 @@ text = "Take Damage"
 metadata/_edit_use_anchors_ = true
 
 [node name="HealButton" type="Button" parent="UI" unique_id=1848162511]
+process_mode = 3
 offset_left = 527.0
 offset_top = 88.0
 offset_right = 745.0
@@ -686,6 +688,7 @@ offset_bottom = 146.0
 text = "Heal Damage"
 
 [node name="HealthBar" type="TextureProgressBar" parent="UI" unique_id=489409292]
+process_mode = 3
 modulate = Color(1, 0, 0, 1)
 offset_left = 12.0
 offset_top = -43.0
@@ -699,6 +702,7 @@ script = ExtResource("9_5htga")
 player_path = NodePath("../../Player")
 
 [node name="ManaBar" type="TextureProgressBar" parent="UI" unique_id=1142485887]
+process_mode = 3
 modulate = Color(0, 0.64705884, 1, 1)
 offset_left = 12.0
 offset_right = 396.0
