@@ -8,11 +8,13 @@ class_name Player
 @onready var AttackTimer: Timer = $Timers/AttackTimer #making these timers both for balance tweaking, and not letting animations determinephysics state
 @onready var ManaTimer: Timer = $Timers/ManaTimer
 @onready var SkillTimer: Timer = $UI/SkillTree/SkillTimer
+@onready var ManaAttackTimer: Timer = $Timers/ManaAttackTimer
 #if you ever want to do this, drag in the node you're referencing, then hold command/ctrl while releasing
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -510.0
 const ATTACK_SLOW_RATE = 0.5 #multiplier to slow down player velocity when they attack
+const Dodgeball = preload("res://Player/dodgeball.tscn") #scene for the fireball attack
 
 @export var default_friction = 0.9 #value from 0 to 1. 1 means full friction on floor when running, 0 means full icy floor
 @export var air_control = 0.5 #value from 0 to 1, lets you control how easily player can control their air movement
@@ -87,7 +89,8 @@ func _physics_process(delta: float) -> void:
 		if knockback_timer <= 0.0:
 			knockback = Vector2.ZERO
 			
-	Mana
+	if Input.is_action_just_pressed("Dodgeball") and ManaAttackTimer.is_stopped():
+		_mana_attack_1()
 
 #returns gravity vector adjusted based on state
 func _return_gravity(delta: float) -> Vector2:
@@ -314,6 +317,7 @@ func update_mana(amount: int, duration: float) -> void:
 		Mana = GlobalPlayer.MAX_Mana
 	if Mana < 0:
 		Mana = 0
+	ManaTimer.start()
 
 #triggers full regen of mana
 func regenMana() -> void:
@@ -347,7 +351,6 @@ func _on_slash_animation_finished() -> void: #used to visually hide slash when i
 
 func _on_mana_timer_timeout() -> void:
 	regenMana()
-	print("timeout")
 
 #Checks for a bouncepad entered
 func _on_area_hitbox_area_entered(area: Area2D) -> void:
@@ -369,3 +372,13 @@ func _on_damage_button_pressed() -> void:
 func _on_heal_button_pressed() -> void:
 	heal(10)
 	update_mana(10,0.15)
+
+func _mana_attack_1() -> void:
+	if Mana >= 50:
+		if ManaAttackTimer.is_stopped():
+			var projectile = Dodgeball.instantiate()
+			projectile.direction = facing
+			projectile.position = position
+			get_parent().add_child(projectile)
+			update_mana(-50, 0.25)
+			ManaAttackTimer.start()
