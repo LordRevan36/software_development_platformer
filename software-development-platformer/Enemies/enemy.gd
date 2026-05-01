@@ -7,7 +7,7 @@ class_name enemy
 	#name,  gravity, attack_dmg, kb_amt, kb_time, speed
 var enemy_types = [
 	["test", 1.0, 10, 500.0, 0.025, 35], 
-	["ladybug", 1.0, 20, 600, 0.0025, 150]
+	["ladybug", 1.0, 20, 600, 0.0025, 0]
 	]
 
 @export var enemy_num := 0

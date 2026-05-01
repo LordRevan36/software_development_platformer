@@ -109,12 +109,9 @@ autoplay = "test_IDLE"
 target_position = Vector2(-225, 0)
 collision_mask = 2
 
-[node name="CloseCast" type="RayCast2D" parent="EnemySprite" unique_id=159021372]
-target_position = Vector2(-75, 0)
+[node name="BehindCast" type="RayCast2D" parent="EnemySprite" unique_id=159021372]
+target_position = Vector2(100, 0)
 collision_mask = 3
-
-[node name="GroundCast" type="RayCast2D" parent="EnemySprite" unique_id=396132214]
-position = Vector2(-75, 0)
 
 [node name="RightMarker" type="Marker2D" parent="EnemySprite" unique_id=956567291]
 position = Vector2(-200, 0)
@@ -139,6 +136,8 @@ scale = Vector2(1.2, 1.1)
 shape = SubResource("RectangleShape2D_qnm5v")
 
 [node name="Timer" type="Timer" parent="." unique_id=519184320]
+wait_time = 10.0
+one_shot = true
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
