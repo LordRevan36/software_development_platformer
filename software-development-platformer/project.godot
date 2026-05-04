@@ -53,6 +53,7 @@ AutumnLeafMaterial="Causes leaf particles when player runs/jumps over."
 CurrentEnemies=""
 Swing=""
 BouncePad="it da bounce pad"
+Platform=""
 
 [gui]
 

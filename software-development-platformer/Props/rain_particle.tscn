@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://dkuxilhaiwlly"]
+
+[ext_resource type="Texture2D" uid="uid://b8i7ug1xlb4ip" path="res://Assets/Forest/Particles/Rain.png" id="1_n1b8b"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dfgi1"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1000, 20, 1)
+angle_min = 15.0000105
+angle_max = 17.000011
+velocity_pivot = Vector3(10, 0, 0)
+direction = Vector3(2, 10, 0)
+spread = 0.5
+initial_velocity_min = 300.0
+initial_velocity_max = 340.0
+gravity = Vector3(0, 10, 0)
+
+[node name="Rain" type="GPUParticles2D" unique_id=1358876249]
+modulate = Color(1, 1, 1, 0.65882355)
+scale = Vector2(4, 4)
+amount = 1200
+texture = ExtResource("1_n1b8b")
+lifetime = 2.0
+fixed_fps = 24
+visibility_rect = Rect2(-200, -250, 400, 500)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_dfgi1")

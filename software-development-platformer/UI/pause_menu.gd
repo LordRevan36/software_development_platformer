@@ -25,8 +25,8 @@ func _on_button_mouse_exited(button: Button) -> void:
 	button.modulate = Color.WHITE
 	
 func _on_resume_pressed() -> void:
-	get_tree().paused = false
 	hide()
+	get_tree().paused = false
 
 func _on_main_menu_pressed() -> void:
 	get_tree().paused = false

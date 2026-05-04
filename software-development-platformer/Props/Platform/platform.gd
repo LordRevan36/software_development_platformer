@@ -29,6 +29,7 @@ enum EditMode {RECTANGLE, POLYGON}
 #used only for polygon
 @export var saved_polygon_points : PackedVector2Array
 
+@export var friction : float = 0.9 #the friction value given to the player while they are on the platform
 @export var size_vector : Vector2 = Vector2(400,40)
 @export var border_texture : Texture
 @export var body_texture : Texture
