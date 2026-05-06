@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://cexgmxlxknun8"]
+
+[ext_resource type="Script" uid="uid://cl6r43y76vcqt" path="res://Player/dodgeball.gd" id="1_2e8b0"]
+[ext_resource type="Texture2D" uid="uid://cn4phhwmwge73" path="res://Assets/Player/Dodgeball.png" id="2_0crgj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gn4yj"]
+radius = 11.0
+
+[node name="Dodgeball" type="Area2D" unique_id=1950658234]
+scale = Vector2(4, 4)
+script = ExtResource("1_2e8b0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=791522643]
+shape = SubResource("CircleShape2D_gn4yj")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1413003829]
+texture = ExtResource("2_0crgj")

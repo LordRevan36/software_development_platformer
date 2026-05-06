@@ -626,6 +626,10 @@ one_shot = true
 wait_time = 3.0
 one_shot = true
 
+[node name="ManaAttackTimer" type="Timer" parent="Timers" unique_id=841435850]
+wait_time = 0.75
+one_shot = true
+
 [node name="MovementParticles" type="Node2D" parent="." unique_id=1737745883]
 show_behind_parent = true
 script = ExtResource("4_k53q1")
@@ -727,6 +731,7 @@ visible = false
 [connection signal="animation_finished" from="Slash" to="." method="_on_slash_animation_finished"]
 [connection signal="timeout" from="Timers/CoyoteJumpTimer" to="." method="_on_coyote_jump_timer_timeout"]
 [connection signal="timeout" from="Timers/AttackTimer" to="." method="_on_attack_timer_timeout"]
-[connection signal="timeout" from="Timers/ManaTimer" to="." method="_on_stamina_timer_timeout"]
+[connection signal="timeout" from="Timers/ManaTimer" to="." method="_on_mana_timer_timeout"]
+[connection signal="timeout" from="Timers/ManaAttackTimer" to="." method="_on_mana_attack_timer_timeout"]
 [connection signal="pressed" from="UI/DamageButton" to="." method="_on_damage_button_pressed"]
 [connection signal="pressed" from="UI/HealButton" to="." method="_on_heal_button_pressed"]
