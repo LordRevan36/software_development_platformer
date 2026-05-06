@@ -1,7 +1,7 @@
 extends Area2D
 @onready var Sprite: Sprite2D = $Sprite2D
 
-var speed = 800
+var speed = 1200
 var direction = Vector2.ZERO
 
 func _physics_process(delta: float) -> void:
