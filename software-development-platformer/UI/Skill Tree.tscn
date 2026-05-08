@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://c4l103lvinr0d" path="res://UI/skill_tree.gd" id="1_2ah4k"]
 [ext_resource type="Texture2D" uid="uid://b2qxmmxby7rnq" path="res://Assets/HUD/PlaceholderIcon.png" id="2_6kcas"]
 [ext_resource type="Texture2D" uid="uid://cp6bf2udljqht" path="res://Assets/HUD/Attack1.png" id="2_53nrm"]
-[ext_resource type="Texture2D" uid="uid://dqqo3f6fyn5lk" path="res://Assets/HUD/Upgrade1.png" id="3_6kcas"]
 [ext_resource type="Texture2D" uid="uid://4uq25r6uuc1o" path="res://Assets/HUD/Attack2.png" id="4_6kcas"]
 [ext_resource type="Texture2D" uid="uid://216ups0fv8ja" path="res://Assets/HUD/Health1.png" id="6_1dcgw"]
 [ext_resource type="Texture2D" uid="uid://c48fduuwvakuu" path="res://Assets/HUD/Health2.png" id="7_sl1dt"]
@@ -121,7 +120,6 @@ offset_right = -4.0
 offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_6kcas")
 
 [node name="AttackStep" type="Button" parent="ColorRect/AttackUpgrades" unique_id=375171838 groups=["Buttons"]]
 layout_mode = 0

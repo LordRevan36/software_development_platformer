@@ -45,10 +45,13 @@ func _ready() -> void:
 	friction = default_friction
 
 func _physics_process(delta: float) -> void:
+	GlobalPlayer.damage = 5 + GlobalPlayer.Attack	
+	GlobalPlayer.fireball_damage = GlobalPlayer.damage * (GlobalPlayer.MAX_Mana * 0.01)
+	
 	#immediate escape if exiting to another scene
 	if state == State.EXIT:
 		move_and_slide()
-		return
+		return	
 	
 	#update variables
 	direction = Input.get_axis("Left", "Right") # =-1 when holding left, 1 when holding right, 0 when neither
@@ -89,7 +92,7 @@ func _physics_process(delta: float) -> void:
 		if knockback_timer <= 0.0:
 			knockback = Vector2.ZERO
 			
-	if Input.is_action_just_pressed("Dodgeball") and ManaAttackTimer.is_stopped():
+	if Input.is_action_just_pressed("Dodgeball") and ManaAttackTimer.is_stopped() and AttackTimer.is_stopped():
 		_mana_attack_1()
 
 #returns gravity vector adjusted based on state

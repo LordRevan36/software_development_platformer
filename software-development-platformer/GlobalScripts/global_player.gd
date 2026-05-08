@@ -11,11 +11,13 @@ signal mana_changed(current, max, duration)
 @export var MAX_Mana := 100
 var health = MAX_Health
 var mana = MAX_Mana
-var Attack : int = 1
+var Attack : int = 0
 var can_continue_atk
 var can_continue_hp
 var can_continue_mana
-var skill_points = 32
+var skill_points = 33
+var damage
+var fireball_damage
 
 func _ready() -> void:
 	process_mode = PROCESS_MODE_ALWAYS
