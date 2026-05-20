@@ -34,6 +34,7 @@ enum EditMode {RECTANGLE, POLYGON}
 @export var border_texture : Texture
 @export var body_texture : Texture
 @export var textureWidth : float = 8 #width of texture imported
+##enables snapping to multiples of 0.5 texture width to ensure texture doesn't warp
 @export var enableSnap : bool = true #enables snapping to multiples of 0.5 texture width to ensure texture doesn't warp
 @export var centerRectangle: bool = false #click true in editor to force the platform to center itself on the rectangle handler
 
