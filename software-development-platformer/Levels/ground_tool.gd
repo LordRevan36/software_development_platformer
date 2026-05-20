@@ -80,4 +80,3 @@ func createCollision():
 	collision_node.name = "CollisionPolygon2D"
 	collision_node.visible = false
 	collision_node.scale = Vector2(4,4)
-	

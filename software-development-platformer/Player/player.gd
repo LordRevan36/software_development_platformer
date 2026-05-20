@@ -385,3 +385,4 @@ func _mana_attack_1() -> void:
 			get_parent().add_child(projectile)
 			update_mana(-50, 0.25)
 			ManaAttackTimer.start()
+			
