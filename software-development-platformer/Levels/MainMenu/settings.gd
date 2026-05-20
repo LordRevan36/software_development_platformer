@@ -17,7 +17,7 @@ extends Node2D
 	$ControlContainer/ControlsGrid/Backflip,
 	$"ControlContainer/ControlsGrid/Skill Tree",
 	$ControlContainer/ControlsGrid/Pause,
-	$ControlContainer/ControlsGrid/Dodgeball
+	$ControlContainer/ControlsGrid/Fireball
 ]
 @onready var uiActions: Array
 
