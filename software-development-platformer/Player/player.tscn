@@ -14,7 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://bji8fl8xxt73f" path="res://Assets/HUD/GenericBar.png" id="8_p5o4e"]
 [ext_resource type="Script" uid="uid://rexj3shyfaq6" path="res://UI/HealthBar.gd" id="9_5htga"]
 [ext_resource type="Texture2D" uid="uid://b4ildk8pcwwe7" path="res://Assets/Player/NewSprites/Run.png" id="9_n471f"]
-[ext_resource type="Script" uid="uid://cv8mai7sitq67" path="res://Player/mana_bar.gd" id="10_x3vf3"]
+[ext_resource type="Script" path="res://Player/mana_bar.gd" id="10_x3vf3"]
 [ext_resource type="PackedScene" uid="uid://by60jn4wyw65s" path="res://UI/PauseMenu.tscn" id="12_5htga"]
 [ext_resource type="PackedScene" uid="uid://cffyceji6uhit" path="res://UI/Skill Tree.tscn" id="13_p5o4e"]
 

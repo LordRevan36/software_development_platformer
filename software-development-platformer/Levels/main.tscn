@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://df343pqhy0xem"]
+
+[ext_resource type="Script" uid="uid://cu4ka6nslc8f1" path="res://Levels/main_manager.gd" id="1_gnif3"]
+[ext_resource type="PackedScene" uid="uid://cwqrc1n2i42kw" path="res://Levels/level_tutorial_1.tscn" id="1_oj8hd"]
+
+[sub_resource type="Animation" id="Animation_gnif3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasModulate:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_lwy2l"]
+resource_name = "switch_level"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasModulate:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.7, 1),
+"transitions": PackedFloat32Array(1, 1.4142135, 0.70710677, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nj2yk"]
+_data = {
+&"RESET": SubResource("Animation_gnif3"),
+&"switch_level": SubResource("Animation_lwy2l")
+}
+
+[node name="main" type="Node2D" unique_id=576688513]
+script = ExtResource("1_gnif3")
+
+[node name="audio" type="Node2D" parent="." unique_id=1335019873]
+
+[node name="level" type="Node2D" parent="." unique_id=913876585]
+
+[node name="Level_Tutorial_1" parent="level" unique_id=1473395753 instance=ExtResource("1_oj8hd")]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=92291491]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1135360837]
+libraries/ = SubResource("AnimationLibrary_nj2yk")
+
+[node name="SwitchTimer" type="Timer" parent="." unique_id=690950574]
+wait_time = 0.4
+one_shot = true
+
+[connection signal="timeout" from="SwitchTimer" to="." method="_on_switch_timer_timeout"]

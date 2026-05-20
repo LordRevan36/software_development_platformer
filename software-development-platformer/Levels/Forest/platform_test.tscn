@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://uj00xc6umauc"]
 
-[ext_resource type="PackedScene" uid="uid://0innvfg1noyr" path="res://Levels/Forest/main.tscn" id="1_8aig8"]
+[ext_resource type="PackedScene" uid="uid://0innvfg1noyr" path="res://Levels/Forest/mainTesting2.tscn" id="1_8aig8"]
 [ext_resource type="PackedScene" uid="uid://bgnpnvakyrgs0" path="res://Props/Platform/fall_platform.tscn" id="2_tyk8v"]
 [ext_resource type="PackedScene" uid="uid://b3jxwclvxcfot" path="res://Props/Platform/move_platform.tscn" id="3_t2qmn"]
 
@@ -56,15 +56,18 @@ shape = SubResource("RectangleShape2D_t2qmn")
 [node name="Player" parent="." index="1" unique_id=688072394]
 position = Vector2(188, -150)
 
-[node name="Polygon2D" parent="Platforms/Platform" parent_id_path=PackedInt32Array(1326313302) index="1" unique_id=1861125354]
-polygon = PackedVector2Array(-82.74954, 11.33639, 62.84427, -55.014534, 82.74954, -11.33639, -62.84427, 55.014534)
-
 [node name="RectangleOutline" parent="Platforms/Platform" parent_id_path=PackedInt32Array(1326313302) index="2" unique_id=1082408081]
 shape = SubResource("RectangleShape2D_wa5j0")
 
 [node name="Platform2" parent="Platforms" parent_id_path=PackedInt32Array(2139959054) index="1" unique_id=73062743]
 position = Vector2(-954, -165)
 size_vector = Vector2(128, 48)
+
+[node name="CollisionPolygon2D" parent="Platforms/Platform2" index="0" unique_id=581306703]
+polygon = PackedVector2Array(-64, -24, 64, -24, 64, 24, -64, 24)
+
+[node name="Polygon2D" parent="Platforms/Platform2" index="1" unique_id=1861125354]
+polygon = PackedVector2Array(-56, -16, 56, -16, 56, 16, -56, 16)
 
 [node name="RectangleOutline" parent="Platforms/Platform2" index="2" unique_id=1082408081]
 shape = SubResource("RectangleShape2D_gtl8g")
@@ -116,9 +119,6 @@ shape = SubResource("RectangleShape2D_dlp0c")
 [node name="MovePlatform" parent="Platforms" parent_id_path=PackedInt32Array(2139959054) index="6" unique_id=1362813319 instance=ExtResource("3_t2qmn")]
 position = Vector2(-40, -223)
 move_speed = 300.0
-
-[node name="Platform" parent="Platforms/MovePlatform" index="0" unique_id=1136379276]
-position = Vector2(-12.257227, 255.0567)
 
 [node name="Rope" parent="Platforms/MovePlatform" index="1" unique_id=399989842]
 points = PackedVector2Array(0, 0, -14, 255, 447, 270, 447, 0, 0, 0)

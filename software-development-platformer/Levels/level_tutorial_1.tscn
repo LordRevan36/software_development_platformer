@@ -7,9 +7,10 @@
 [ext_resource type="Script" uid="uid://ciarlfus3o4an" path="res://Levels/ground_tool.gd" id="4_dfgi1"]
 [ext_resource type="Texture2D" uid="uid://b8i7ug1xlb4ip" path="res://Assets/Forest/Particles/Rain.png" id="4_dhomk"]
 [ext_resource type="Texture2D" uid="uid://dk5n8be51afhn" path="res://Assets/Forest/Grounds/ShortGrass1.png" id="5_gxogp"]
-[ext_resource type="PackedScene" uid="uid://bfitipy31q1js" path="res://Enemies/enemy.tscn" id="8_cqq5b"]
 [ext_resource type="PackedScene" uid="uid://c6lcnacw8vw5s" path="res://Props/Platform/platform.tscn" id="8_e0kg5"]
 [ext_resource type="AudioStream" uid="uid://cqjc4dlugqado" path="res://Assets/Music/Arena.mp3" id="11_3cp6d"]
+[ext_resource type="Script" uid="uid://dcym5lvojo0k0" path="res://Levels/exit.gd" id="11_cqq5b"]
+[ext_resource type="PackedScene" uid="uid://dxormpvkyktyp" path="res://Enemies/enemy_2.tscn" id="11_gjl5l"]
 
 [sub_resource type="Gradient" id="Gradient_gcxo0"]
 
@@ -33,81 +34,84 @@ initial_velocity_min = 200.0
 initial_velocity_max = 210.0
 gravity = Vector3(0, 10, 0)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_e0kg5"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3cp6d"]
 resource_local_to_scene = true
 size = Vector2(144, 520)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_uro74"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cqq5b"]
 resource_local_to_scene = true
 size = Vector2(264, 312)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_r81sa"]
-resource_local_to_scene = true
-size = Vector2(264, 328)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fisxi"]
-resource_local_to_scene = true
-size = Vector2(264, 328)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_eewkl"]
-resource_local_to_scene = true
-size = Vector2(552, 256)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3cp6d"]
-resource_local_to_scene = true
-size = Vector2(320, 328)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cqq5b"]
-resource_local_to_scene = true
-size = Vector2(216, 272)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gjl5l"]
 resource_local_to_scene = true
-size = Vector2(224, 392)
+size = Vector2(264, 328)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2atdg"]
 resource_local_to_scene = true
-size = Vector2(424, 112)
+size = Vector2(264, 328)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w2nmd"]
 resource_local_to_scene = true
-size = Vector2(344, 72)
+size = Vector2(552, 256)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u0rdj"]
 resource_local_to_scene = true
-size = Vector2(200, 80)
+size = Vector2(320, 328)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_awu00"]
 resource_local_to_scene = true
-size = Vector2(392, 592)
+size = Vector2(216, 272)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8uw4p"]
 resource_local_to_scene = true
-size = Vector2(720, 576)
+size = Vector2(224, 392)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4ly5o"]
 resource_local_to_scene = true
-size = Vector2(1312, 592)
+size = Vector2(424, 112)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t4ibi"]
 resource_local_to_scene = true
-size = Vector2(360, 576)
+size = Vector2(344, 72)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vaogy"]
 resource_local_to_scene = true
-size = Vector2(208, 64)
+size = Vector2(200, 80)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8xq4p"]
 resource_local_to_scene = true
-size = Vector2(232, 64)
+size = Vector2(392, 592)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h1kqv"]
 resource_local_to_scene = true
-size = Vector2(112, 64)
+size = Vector2(720, 576)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fq5qp"]
 resource_local_to_scene = true
+size = Vector2(1312, 592)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uro74"]
+resource_local_to_scene = true
+size = Vector2(360, 576)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r81sa"]
+resource_local_to_scene = true
+size = Vector2(208, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fisxi"]
+resource_local_to_scene = true
+size = Vector2(232, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eewkl"]
+resource_local_to_scene = true
+size = Vector2(112, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ehgsp"]
+resource_local_to_scene = true
 size = Vector2(104, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jsjl1"]
+size = Vector2(334, 145)
 
 [node name="Level_Tutorial_1" type="Node2D" unique_id=1473395753]
 
@@ -467,19 +471,13 @@ scale = Vector2(4, 4)
 texture = ExtResource("1_h574v")
 
 [node name="Player" parent="." unique_id=359640240 instance=ExtResource("2_r0rco")]
-position = Vector2(1273, -411)
+position = Vector2(2057, -328)
 
 [node name="HealthBar" parent="Player/UI" parent_id_path=PackedInt32Array(359640240, 1340181654) index="2" unique_id=489409292]
 player_path = NodePath("../..")
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1475739247]
 zoom = Vector2(1.3, 1.3)
-
-[node name="Enemy" parent="." unique_id=1526640072 instance=ExtResource("8_cqq5b")]
-position = Vector2(13143, -468)
-
-[node name="Enemy2" parent="." unique_id=825038162 instance=ExtResource("8_cqq5b")]
-position = Vector2(8789, 218)
 
 [node name="Platform" type="Node2D" parent="." unique_id=114306196]
 position = Vector2(1057, -291)
@@ -495,7 +493,7 @@ polygon = PackedVector2Array(-72, -260, 72, -260, 72, 260, -72, 260)
 polygon = PackedVector2Array(-64, -252, 64, -252, 64, 252, -64, 252)
 
 [node name="RectangleOutline" parent="Platform/Platform" index="2" unique_id=1082408081]
-shape = SubResource("RectangleShape2D_e0kg5")
+shape = SubResource("RectangleShape2D_3cp6d")
 
 [node name="Platform16" parent="Platform" unique_id=1709011140 instance=ExtResource("8_e0kg5")]
 position = Vector2(3755, 109)
@@ -508,7 +506,7 @@ polygon = PackedVector2Array(-132, -156, 132, -156, 132, 156, -132, 156)
 polygon = PackedVector2Array(-124, -148, 124, -148, 124, 148, -124, 148)
 
 [node name="RectangleOutline" parent="Platform/Platform16" index="2" unique_id=1082408081]
-shape = SubResource("RectangleShape2D_uro74")
+shape = SubResource("RectangleShape2D_cqq5b")
 
 [node name="Platform17" parent="Platform" unique_id=1661286684 instance=ExtResource("8_e0kg5")]
 position = Vector2(3314, 244)
@@ -521,7 +519,7 @@ polygon = PackedVector2Array(-132, -164, 132, -164, 132, 164, -132, 164)
 polygon = PackedVector2Array(-124, -156, 124, -156, 124, 156, -124, 156)
 
 [node name="RectangleOutline" parent="Platform/Platform17" index="2" unique_id=1082408081]
-shape = SubResource("RectangleShape2D_r81sa")
+shape = SubResource("RectangleShape2D_gjl5l")
 
 [node name="Platform18" parent="Platform" unique_id=1542771404 instance=ExtResource("8_e0kg5")]
 position = Vector2(2868, 337)
@@ -534,7 +532,7 @@ polygon = PackedVector2Array(-132, -164, 132, -164, 132, 164, -132, 164)
 polygon = PackedVector2Array(-124, -156, 124, -156, 124, 156, -124, 156)
 
 [node name="RectangleOutline" parent="Platform/Platform18" index="2" unique_id=1082408081]
-shape = SubResource("RectangleShape2D_fisxi")
+shape = SubResource("RectangleShape2D_2atdg")
 
 [node name="Platform19" parent="Platform" unique_id=625400207 instance=ExtResource("8_e0kg5")]
 position = Vector2(2282, 425)
@@ -547,7 +545,7 @@ polygon = PackedVector2Array(-276, -128, 276, -128, 276, 128, -276, 128)
 polygon = PackedVector2Array(-268, -120, 268, -120, 268, 120, -268, 120)
 
 [node name="RectangleOutline" parent="Platform/Platform19" index="2" unique_id=1082408081]
-shape = SubResource("RectangleShape2D_eewkl")
+shape = SubResource("RectangleShape2D_w2nmd")
 
 [node name="Platform2" parent="Platform" unique_id=1446641310 instance=ExtResource("8_e0kg5")]
 position = Vector2(9978, 368)
@@ -560,7 +558,7 @@ polygon = PackedVector2Array(-160, -164, 160, -164, 160, 164, -160, 164)
 polygon = PackedVector2Array(-152, -156, 152, -156, 152, 156, -152, 156)
 
 [node name="RectangleOutline" parent="Platform/Platform2" index="2" unique_id=1082408081]
-shape = SubResource("RectangleShape2D_3cp6d")
+shape = SubResource("RectangleShape2D_u0rdj")
 
 [node name="Platform11" parent="Platform" unique_id=359793756 instance=ExtResource("8_e0kg5")]
 position = Vector2(10361, 294)
@@ -573,7 +571,7 @@ polygon = PackedVector2Array(-108, -136, 108, -136, 108, 136, -108, 136)
 polygon = PackedVector2Array(-100, -128, 100, -128, 100, 128, -100, 128)
 
 [node name="RectangleOutline" parent="Platform/Platform11" index="2" unique_id=1082408081]
-shape = SubResource("RectangleShape2D_cqq5b")
+shape = SubResource("RectangleShape2D_awu00")
 
 [node name="Platform7" parent="Platform" unique_id=750183405 instance=ExtResource("8_e0kg5")]
 position = Vector2(10177, 315)
@@ -586,7 +584,7 @@ polygon = PackedVector2Array(-112, -196, 112, -196, 112, 196, -112, 196)
 polygon = PackedVector2Array(-104, -188, 104, -188, 104, 188, -104, 188)
 
 [node name="RectangleOutline" parent="Platform/Platform7" index="2" unique_id=1082408081]
-shape = SubResource("RectangleShape2D_gjl5l")
+shape = SubResource("RectangleShape2D_8uw4p")
 
 [node name="Platform3" parent="Platform" unique_id=408054542 instance=ExtResource("8_e0kg5")]
 position = Vector2(9608, 589)
@@ -599,7 +597,7 @@ polygon = PackedVector2Array(-212, -56, 212, -56, 212, 56, -212, 56)
 polygon = PackedVector2Array(-204, -48, 204, -48, 204, 48, -204, 48)
 
 [node name="RectangleOutline" parent="Platform/Platform3" index="2" unique_id=1082408081]
-shape = SubResource("RectangleShape2D_2atdg")
+shape = SubResource("RectangleShape2D_4ly5o")
 
 [node name="Platform4" parent="Platform" unique_id=1622181722 instance=ExtResource("8_e0kg5")]
 position = Vector2(9038, 434)
@@ -612,7 +610,7 @@ polygon = PackedVector2Array(-172, -36, 172, -36, 172, 36, -172, 36)
 polygon = PackedVector2Array(-164, -28, 164, -28, 164, 28, -164, 28)
 
 [node name="RectangleOutline" parent="Platform/Platform4" index="2" unique_id=1082408081]
-shape = SubResource("RectangleShape2D_w2nmd")
+shape = SubResource("RectangleShape2D_t4ibi")
 
 [node name="Platform5" parent="Platform" unique_id=253092888 instance=ExtResource("8_e0kg5")]
 position = Vector2(9499, 295)
@@ -625,7 +623,7 @@ polygon = PackedVector2Array(-100, -40, 100, -40, 100, 40, -100, 40)
 polygon = PackedVector2Array(-92, -32, 92, -32, 92, 32, -92, 32)
 
 [node name="RectangleOutline" parent="Platform/Platform5" index="2" unique_id=1082408081]
-shape = SubResource("RectangleShape2D_u0rdj")
+shape = SubResource("RectangleShape2D_vaogy")
 
 [node name="Platform14" parent="Platform" unique_id=671924889 instance=ExtResource("8_e0kg5")]
 position = Vector2(12473, -185)
@@ -639,7 +637,7 @@ polygon = PackedVector2Array(-132, -80, 244, -80, 244, 496, -132, 496)
 
 [node name="RectangleOutline" parent="Platform/Platform14" index="2" unique_id=1082408081]
 position = Vector2(56, 208)
-shape = SubResource("RectangleShape2D_awu00")
+shape = SubResource("RectangleShape2D_8xq4p")
 
 [node name="Platform6" parent="Platform" unique_id=1542597747 instance=ExtResource("8_e0kg5")]
 position = Vector2(11936, -13)
@@ -653,7 +651,7 @@ polygon = PackedVector2Array(-144, -80, 560, -80, 560, 480, -144, 480)
 
 [node name="RectangleOutline" parent="Platform/Platform6" index="2" unique_id=1082408081]
 position = Vector2(208, 200)
-shape = SubResource("RectangleShape2D_8uw4p")
+shape = SubResource("RectangleShape2D_h1kqv")
 
 [node name="Platform15" parent="Platform" unique_id=103548939 instance=ExtResource("8_e0kg5")]
 position = Vector2(12292, 134)
@@ -667,7 +665,7 @@ polygon = PackedVector2Array(-536, -80, 760, -80, 760, 496, -536, 496)
 
 [node name="RectangleOutline" parent="Platform/Platform15" index="2" unique_id=1082408081]
 position = Vector2(112, 208)
-shape = SubResource("RectangleShape2D_4ly5o")
+shape = SubResource("RectangleShape2D_fq5qp")
 
 [node name="Platform13" parent="Platform" unique_id=1313771908 instance=ExtResource("8_e0kg5")]
 position = Vector2(11672, 62)
@@ -680,7 +678,7 @@ polygon = PackedVector2Array(-180, -288, 180, -288, 180, 288, -180, 288)
 polygon = PackedVector2Array(-172, -280, 172, -280, 172, 280, -172, 280)
 
 [node name="RectangleOutline" parent="Platform/Platform13" index="2" unique_id=1082408081]
-shape = SubResource("RectangleShape2D_t4ibi")
+shape = SubResource("RectangleShape2D_uro74")
 
 [node name="Platform8" parent="Platform" unique_id=1281003138 instance=ExtResource("8_e0kg5")]
 position = Vector2(10697, -186)
@@ -694,7 +692,7 @@ polygon = PackedVector2Array(-104, 0, 88, 0, 88, 48, -104, 48)
 
 [node name="RectangleOutline" parent="Platform/Platform8" index="2" unique_id=1082408081]
 position = Vector2(-8, 24)
-shape = SubResource("RectangleShape2D_vaogy")
+shape = SubResource("RectangleShape2D_r81sa")
 
 [node name="Platform12" parent="Platform" unique_id=429175367 instance=ExtResource("8_e0kg5")]
 position = Vector2(11116, -226)
@@ -707,7 +705,7 @@ polygon = PackedVector2Array(-116, -32, 116, -32, 116, 32, -116, 32)
 polygon = PackedVector2Array(-108, -24, 108, -24, 108, 24, -108, 24)
 
 [node name="RectangleOutline" parent="Platform/Platform12" index="2" unique_id=1082408081]
-shape = SubResource("RectangleShape2D_8xq4p")
+shape = SubResource("RectangleShape2D_fisxi")
 
 [node name="Platform9" parent="Platform" unique_id=1991700266 instance=ExtResource("8_e0kg5")]
 position = Vector2(10930, 25)
@@ -720,7 +718,7 @@ polygon = PackedVector2Array(-56, -32, 56, -32, 56, 32, -56, 32)
 polygon = PackedVector2Array(-48, -24, 48, -24, 48, 24, -48, 24)
 
 [node name="RectangleOutline" parent="Platform/Platform9" index="2" unique_id=1082408081]
-shape = SubResource("RectangleShape2D_h1kqv")
+shape = SubResource("RectangleShape2D_eewkl")
 
 [node name="Platform10" parent="Platform" unique_id=339944812 instance=ExtResource("8_e0kg5")]
 position = Vector2(10681, 104)
@@ -734,7 +732,7 @@ polygon = PackedVector2Array(-44, -8, 44, -8, 44, 40, -44, 40)
 
 [node name="RectangleOutline" parent="Platform/Platform10" index="2" unique_id=1082408081]
 position = Vector2(0, 16)
-shape = SubResource("RectangleShape2D_fq5qp")
+shape = SubResource("RectangleShape2D_ehgsp")
 
 [node name="Repeat" type="Parallax2D" parent="." unique_id=1751197142]
 repeat_size = Vector2(2000, 0)
@@ -972,6 +970,27 @@ stream = ExtResource("11_3cp6d")
 autoplay = true
 bus = &"Music"
 parameters/looping = true
+
+[node name="Enemies" type="Node2D" parent="." unique_id=198681882]
+
+[node name="Exits" type="Node2D" parent="." unique_id=22546307]
+
+[node name="Area2D2" type="Area2D" parent="Exits" unique_id=1219252783]
+position = Vector2(12807, -504)
+collision_mask = 3
+script = ExtResource("11_cqq5b")
+level_path = "res://Levels/Forest/testing_scene_2.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exits/Area2D2" unique_id=1436055000]
+position = Vector2(-83.5, -139)
+rotation = -1.5707964
+shape = SubResource("RectangleShape2D_jsjl1")
+
+[node name="Enemy2" parent="." unique_id=1365951180 instance=ExtResource("11_gjl5l")]
+position = Vector2(8691, 108)
+
+[node name="Enemy3" parent="." unique_id=820335511 instance=ExtResource("11_gjl5l")]
+position = Vector2(13305, -462)
 
 [editable path="Player"]
 [editable path="Platform/Platform"]

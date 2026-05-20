@@ -88,14 +88,10 @@ func _setup_animation() -> void: #Fixes
 	tween.set_trans(ease_type)
 	for point in path.get_point_count():
 		var current_point = path.get_point_position(point)
-		print(path.get_point_position(point))
 		if point == 0:
 			if loop_backwards:
 				tween.tween_property(child_platform, "position", current_point, current_point.distance_to(path.get_point_position(point+1))/move_speed)
 			else:
-				print("Current: " + str(current_point))
-				print("Next: " + str(path.get_point_position(path.get_point_count()-1)))
-				print("DIstance: " + str(path.get_point_position(path.get_point_count()-1).distance_to(current_point)))
 				tween.tween_property(child_platform, "position", current_point, path.get_point_position(path.get_point_count()-1).distance_to(current_point)/move_speed)
 		else:
 			tween.tween_property(child_platform, "position", current_point, path.get_point_position(point-1).distance_to(current_point)/move_speed)

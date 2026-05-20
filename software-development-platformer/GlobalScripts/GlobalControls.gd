@@ -10,7 +10,9 @@ extends Node
 @onready var Pause = InputMap.action_get_events("Pause")
 var canBackflip = false
 var canFrontflip = false
+signal switch_scene(jkjk)
 
 func _ready() -> void:
 	process_mode = PROCESS_MODE_ALWAYS
+	
 	
