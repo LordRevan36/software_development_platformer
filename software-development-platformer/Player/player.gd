@@ -8,7 +8,7 @@ class_name Player
 @onready var AttackTimer: Timer = $Timers/AttackTimer #making these timers both for balance tweaking, and not letting animations determinephysics state
 @onready var StaminaTimer: Timer = $Timers/StaminaTimer
 @onready var SkillTimer: Timer = $UI/SkillTree/SkillTimer
-@onready var RespawnTimer: Timer = $Timers/Respawn_Timer
+@onready var RespawnTimer: Timer = $Timers/RespawnTimer
 #if you ever want to do this, drag in the node you're referencing, then hold command/ctrl while releasing
 
 const SPEED = 300.0
