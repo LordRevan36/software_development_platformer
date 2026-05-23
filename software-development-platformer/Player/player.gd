@@ -113,7 +113,6 @@ func _land() -> void:
 		state = State.LAND
 	if get_last_slide_collision().get_collider().is_in_group("Platform"):
 		friction = get_last_slide_collision().get_collider().friction
-		print(friction)
 
 #handles signal and updates state when attacking
 func _attack() -> void:
