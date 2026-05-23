@@ -16,15 +16,35 @@ region = Rect2(0, 128, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_47qgu"]
 atlas = ExtResource("3_47qgu")
-region = Rect2(128, 128, 128, 128)
+region = Rect2(0, 128, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_572h1"]
 atlas = ExtResource("3_47qgu")
-region = Rect2(0, 256, 128, 128)
+region = Rect2(128, 128, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rt1x0"]
 atlas = ExtResource("3_47qgu")
 region = Rect2(256, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8wvsg"]
+atlas = ExtResource("3_47qgu")
+region = Rect2(0, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gk8ng"]
+atlas = ExtResource("3_47qgu")
+region = Rect2(0, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4o6mh"]
+atlas = ExtResource("3_47qgu")
+region = Rect2(256, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_koi6q"]
+atlas = ExtResource("3_47qgu")
+region = Rect2(128, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jlnat"]
+atlas = ExtResource("3_47qgu")
+region = Rect2(0, 128, 128, 128)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_iifgy"]
 animations = [{
@@ -36,7 +56,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_qi2p4")
 }],
 "loop": true,
-"name": &"ladybug_idle",
+"name": &"ladybug_IDLE",
 "speed": 5.0
 }, {
 "frames": [{
@@ -48,10 +68,25 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_rt1x0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8wvsg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gk8ng")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4o6mh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_koi6q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jlnat")
 }],
 "loop": true,
-"name": &"test_idle",
-"speed": 5.0
+"name": &"test_IDLE",
+"speed": 18.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bxkaj"]
@@ -60,13 +95,14 @@ size = Vector2(60, 100)
 [node name="Enemy" type="RigidBody2D" unique_id=1526640072]
 collision_layer = 4
 collision_mask = 3
+lock_rotation = true
 script = ExtResource("1_bxkaj")
 
 [node name="EnemySprite" type="AnimatedSprite2D" parent="." unique_id=1690707412]
 material = SubResource("ShaderMaterial_7k104")
 sprite_frames = SubResource("SpriteFrames_iifgy")
-animation = &"test_idle"
-autoplay = "test_idle"
+animation = &"test_IDLE"
+autoplay = "test_IDLE"
 
 [node name="EnemyHitbox" type="CollisionShape2D" parent="." unique_id=1719450440]
 position = Vector2(1, 12.999998)
@@ -74,6 +110,7 @@ rotation = 1.5707964
 shape = SubResource("RectangleShape2D_bxkaj")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1827896988]
+collision_layer = 4
 collision_mask = 2
 
 [node name="EnemyHitbox2" type="CollisionShape2D" parent="Area2D" unique_id=160350218]

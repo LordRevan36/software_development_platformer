@@ -72,6 +72,7 @@ func _process(_delta: float) -> void:
 	
 	$ColorRect/Title.text = ("Skill Points: " + str(GlobalPlayer.skill_points))
 	$ColorRect/Title.position = Vector2(1220/2 - $ColorRect/Title.size.x/2, 40)
+
 func _on_skill_timer_timeout() -> void:
 	can_close = true
 
